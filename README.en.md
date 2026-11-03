@@ -22,6 +22,12 @@ The replay has **no score cutoff by default**. It shows the recorded Top-K after
 
 This small qualitative showcase does not establish general accuracy or the benefit of fine-tuning. Category routing can reduce recall; raw inputs can still contain conditions that the embedding does not rank correctly. [Pure embedding results](docs/demo/baseline-embeddinggemma2/results.json) and [historical results](docs/demo/baseline-taiyi-clip/results.json) are preserved.
 
+## Why filter categories before ranking?
+
+Vector similarity does not guarantee a category match. In the recorded pure-embedding baseline, an ornate-cup query returned a chair in its Top-3; Qwen category filtering excluded that result. The project uses hard examples of confusable categories for Qwen supervised fine-tuning, aiming to strengthen category discrimination. This showcase demonstrates the filter's effect, not the isolated gain from hard-negative training, which still needs an ablation.
+
+Direct embedding fine-tuning is another option: [Google's guide](https://ai.google.dev/gemma/docs/embeddinggemma/fine-tuning-multimodal-embeddinggemma-with-sentence-transformers) trains EmbeddingGemma 2 on query/positive-image/negative-image triplets. Category labels can supply coarse supervision; finer requirements need query-level relevance labels. This training branch is not implemented here. Whether category filtering remains useful should be decided by held-out retrieval quality, missed matches and latency. Retrieval intent routing remains a separate task.
+
 ## Use your own images
 
 ```bash

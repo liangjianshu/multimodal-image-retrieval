@@ -130,7 +130,14 @@ def main():
         model_note = "已加载作者原 LoRA；小图库定性演示，不代表规模化准确率或历史 F1 收益。" if adapted else "公开基座的小图库定性演示；未加载 LoRA，不代表规模化准确率或历史 F1 收益。"
     page = page.replace("__MODEL_BADGE__", badge).replace("__METHOD_BADGE__", method)
     page = page.replace("__INTRO__", intro)
-    page = page.replace("__INTENT_TAB__", '<button role="tab" data-kind="intent">意图识别</button>' if hybrid else '')
+    page = page.replace("__INTENT_TAB__", '<button role="tab" data-kind="intent">非检索请求</button>' if hybrid else '')
+    nonretrieval_examples = (
+        '<section class="example-group" aria-labelledby="nonretrieval-examples-title">'
+        '<h2 id="nonretrieval-examples-title">非检索示例</h2>'
+        '<p>识别问答、图片描述等请求，不启动图片搜索。</p>'
+        '<div class="presets" id="nonretrieval-presets"></div></section>'
+    ) if any(q.get("status") == "not_retrieval" for q in report["queries"]) else ''
+    page = page.replace("__NONRETRIEVAL_EXAMPLES__", nonretrieval_examples)
     controls = '' if min_score is None else (
         '<div class="filter-controls" aria-label="结果相似度过滤">'
         '<label for="min-score">最低相似度</label>'
