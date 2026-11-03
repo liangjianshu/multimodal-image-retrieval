@@ -55,6 +55,14 @@ python examples/showcase/build_page.py \
 
 脚本只渲染结果，不执行检索或改变排名。它将图库图片和结果打包进 HTML，分享时只需要发送生成的 HTML 文件。
 
+网站托管采用单独的轻量版本，避免等待全部图片下载后才能切换查询：
+
+```bash
+python examples/showcase/build_page.py --image-mode external --output docs/index.html
+```
+
+此模式会把图片复制到输出目录的 `images/`，发布时需要一起上传。仓库的 GitHub Pages 从 `main` 分支的 `/docs` 目录发布；离线单文件仍是 `docs/demo/index.html`。
+
 如果模型已下载到本地，可用 `--model-root /path/to/models`，目录应包含 `taiyi/`、`clip/`、`qwen-vl-3b/`。这三个目录必须分别对应配置中的 Taiyi、CLIP 与 Qwen2.5-VL-3B 模型，不能随意替换为不同模型后继续沿用名称。
 
 ## 本次环境

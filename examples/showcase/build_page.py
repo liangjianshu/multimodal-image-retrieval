@@ -4,6 +4,7 @@ import base64
 import html
 import json
 from pathlib import Path
+import shutil
 
 ROOT = Path(__file__).resolve().parents[2]
 GUIDE_URL = "https://github.com/liangjianshu/multimodal-image-retrieval/blob/main/docs/DEMO.md"
@@ -51,20 +52,29 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", default="docs/demo/results.json")
     parser.add_argument("--output", default="docs/demo/index.html")
+    parser.add_argument("--image-mode", choices=("embedded", "external"), default="embedded",
+                        help="Embed images for a portable file, or copy assets for fast web loading")
     args = parser.parse_args()
     report = json.loads(Path(args.results).read_text(encoding="utf-8"))
     sources = json.loads((ROOT / "examples/showcase/sources.json").read_text(encoding="utf-8"))
     template = (Path(__file__).parent / "page.html").read_text(encoding="utf-8")
+    output = Path(args.output)
+    output.parent.mkdir(parents=True, exist_ok=True)
     image_root = ROOT / "examples/showcase"
     images = {}
     for source in sources:
         image_path = (image_root / source["file_path"]).resolve()
         if not image_path.is_relative_to(image_root.resolve()):
             raise ValueError("Image path must stay inside the showcase directory")
-        images[source["file_path"]] = "data:image/jpeg;base64," + base64.b64encode(image_path.read_bytes()).decode("ascii")
+        if args.image_mode == "embedded":
+            images[source["file_path"]] = "data:image/jpeg;base64," + base64.b64encode(image_path.read_bytes()).decode("ascii")
+        else:
+            target = output.parent / "images" / image_path.name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if target.resolve() != image_path:
+                shutil.copyfile(image_path, target)
+            images[source["file_path"]] = "images/" + image_path.name
     data = json.dumps({"report": report, "sources": sources, "images": images}, ensure_ascii=False).replace("<", "\\u003c")
-    output = Path(args.output)
-    output.parent.mkdir(parents=True, exist_ok=True)
     page = template.replace("/*__RECORDED_DATA__*/", data)
     page = page.replace("__GUIDE_PATH__", GUIDE_URL)
     raw = base64.b64encode(json.dumps(report, ensure_ascii=False, indent=2).encode("utf-8")).decode("ascii")

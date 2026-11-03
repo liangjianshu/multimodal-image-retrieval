@@ -42,7 +42,7 @@ function show(q){
 }
 report.queries.forEach(q=>{const b=el('button',null,q.text||({image:(q.mode==='clip'?'CLIP · ':'语义对照 · ')+(q.id.includes('chair')?'椅子':q.id==='ornate-cup-clip'?'花纹杯':'杯子')})[q.kind]);b.dataset.query=q.id;b.onclick=()=>show(q);$('presets').append(b)});
 document.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>show(report.queries.find(q=>q.kind===b.dataset.kind)));
-DATA.sources.forEach(s=>{const a=el('a');a.href=s.source;const im=el('img');im.src=imageURL(s.file_path);im.alt=s.title;a.append(im,el('span',null,s.id+' · '+s.author));$('gallery').append(a)});
+DATA.sources.forEach(s=>{const a=el('a');a.href=s.source;const im=el('img');im.loading='lazy';im.src=imageURL(s.file_path);im.alt=s.title;a.append(im,el('span',null,s.id+' · '+s.author));$('gallery').append(a)});
 $('close').onclick=()=>$('detail').close();
 show(report.queries.find(q=>q.id===location.hash.slice(1))||report.queries[0]);
 </script></body></html>
