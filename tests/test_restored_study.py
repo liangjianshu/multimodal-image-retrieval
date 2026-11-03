@@ -71,3 +71,19 @@ def test_published_historical_manifest_preserves_frozen_composition():
         assert kind in ('normal','fine')
         assert count==(20 if label in ('chair','cup','bicycle','skateboard','oven') else 90)
     assert all('file_path' not in r for r in rows)
+
+def test_old_training_audit_uses_only_prefix_verified_repairs(tmp_path,monkeypatch):
+    monkeypatch.syspath_prepend(str(ROOT))
+    m=module('audit_legacy_overlap');source=module('build_restored_study')
+    raw=picture('JPEG');old=tmp_path/'images/a.jpg';old.parent.mkdir();old.write_bytes(raw[:-40])
+    restored=tmp_path/'restored.jpg';restored.write_bytes(raw)
+    catalog=tmp_path/'test.jsonl';catalog.write_text(json.dumps({'id':'original-1',**source.metadata(raw)})+'\n')
+    legacy=tmp_path/'old.json';legacy.write_text(json.dumps([{'id':'coco_pos_1','conversations':[{'value':'<|vision_start|>./images/a.jpg<|vision_end|>'}]}]))
+    repairs=tmp_path/'repairs.json';repairs.write_text(json.dumps({str(old):{'file_path':str(restored),'source_url':'https://example.invalid/1.jpg'}}))
+    args=types.SimpleNamespace(test_catalog=str(catalog),legacy_manifest=str(legacy),legacy_root=str(tmp_path),
+                               output=str(tmp_path/'audit.json'),repairs=str(repairs))
+    m.run(args);result=json.loads(Path(args.output).read_text())
+    assert result['read_failures']==[]
+    assert len(result['recovered_truncated_images'])==1
+    assert result['exact_test_ids']==['original-1']
+    assert old.read_bytes()==raw[:-40]

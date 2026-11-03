@@ -33,7 +33,8 @@ def predict(model,processor,rows,root,device,batch_size=8):
         texts=[processor.apply_chat_template(m,tokenize=False,add_generation_prompt=True) for m in messages]
         images,_=process_vision_info(messages)
         inputs=processor(text=texts,images=images,padding=True,return_tensors='pt').to(device)
-        with torch.inference_mode():output=model.generate(**inputs,max_new_tokens=48,do_sample=False,use_cache=True)
+        with torch.inference_mode(),torch.autocast(device_type=device.split(':')[0],dtype=torch.bfloat16):
+            output=model.generate(**inputs,max_new_tokens=48,do_sample=False,use_cache=True)
         responses=processor.batch_decode(output[:,inputs['input_ids'].shape[1]:],skip_special_tokens=True)
         for row,response in zip(batch,responses):
             valid=True
@@ -84,6 +85,7 @@ def run(args):
             'train_manifest_sha256':hashlib.sha256(Path(args.train).read_bytes()).hexdigest(),
             'val_manifest_sha256':hashlib.sha256(Path(args.val_catalog).read_bytes()).hexdigest(),
             'trainable_parameters':sum(trainable.values()),'trainable_names':trainable,
+            'precision':'fp32 trainable master parameters; bf16 base and autocast',
             'selection_metric':'primary_five_macro_f1','checkpoints':[],'steps':[]}
     def save():(out/'trial.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     started=time.monotonic();save();batches=[]

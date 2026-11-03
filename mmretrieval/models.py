@@ -1,5 +1,6 @@
 """Lazy model loading: data tools and the smoke demo never download weights."""
 import json
+from contextlib import nullcontext
 
 import numpy as np
 
@@ -85,6 +86,7 @@ class Qwen:
         dtype = (torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16) if use_cuda else torch.float32
         if self.device.startswith("npu"):
             dtype = torch.bfloat16
+        self.inference_dtype=dtype
         model_id = config["vl_model"] if vision else config["text_model"]
         cls = Qwen2_5_VLForConditionalGeneration if vision else AutoModelForCausalLM
         self.model = cls.from_pretrained(model_id, torch_dtype=dtype, attn_implementation="sdpa").to(self.device)
@@ -111,7 +113,9 @@ class Qwen:
             messages = [{"role": "user", "content": prompt}]
             text = self.processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
             inputs = self.processor(text, return_tensors="pt").to(self.device)
-        with self.torch.inference_mode():
+        autocast=(self.torch.autocast(device_type=self.device.split(':')[0],dtype=self.inference_dtype)
+                  if self.inference_dtype in (self.torch.bfloat16,self.torch.float16) else nullcontext())
+        with self.torch.inference_mode(),autocast:
             output = self.model.generate(**inputs, max_new_tokens=self.config["max_new_tokens"], do_sample=False)
         return self.processor.batch_decode(output[:, inputs["input_ids"].shape[1]:], skip_special_tokens=True)[0]
 

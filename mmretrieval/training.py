@@ -26,6 +26,11 @@ def configure_training(model, mode, rank=64, alpha=128):
                 parameter.requires_grad = True
     else:
         raise ValueError(f"Unknown training mode: {mode}")
+    # Low-rate updates need FP32 master parameters, including modules_to_save.
+    # Autocast still performs eligible training operations in BF16.
+    for parameter in model.parameters():
+        if parameter.requires_grad:
+            parameter.data=parameter.data.float()
     trainable = {name: p.numel() for name, p in model.named_parameters() if p.requires_grad}
     if not trainable:
         raise ValueError("No trainable parameters matched this model")

@@ -99,3 +99,25 @@ def test_batched_collator_masks_each_prompt_and_padding(tmp_path,monkeypatch):
     assert (result['labels'][0,8:]==-100).all()
     assert result['labels'][1,:14].tolist()==[-100]*14
     assert result['labels'][1,14:].tolist()==[ord('B'),ord('!')]
+
+
+@pytest.mark.parametrize('mode',['llm-lora','mlp-llm','mlp-vision'])
+def test_bf16_base_keeps_trainable_master_parameters_in_fp32(mode):
+    model,_=configure_training(tiny_model().bfloat16(),mode,rank=2,alpha=4)
+    assert all(p.dtype==torch.float32 for p in model.parameters() if p.requires_grad)
+    assert any(p.dtype==torch.bfloat16 for p in model.parameters() if not p.requires_grad)
+
+
+def test_mixed_precision_merger_receives_a_small_real_update():
+    torch.manual_seed(7)
+    model,_=configure_training(tiny_model().bfloat16(),'mlp-llm',rank=2,alpha=4)
+    model.train()
+    before={n:p.detach().clone() for n,p in model.named_parameters() if p.requires_grad and 'merger' in n}
+    optimizer=torch.optim.AdamW([p for p in model.parameters() if p.requires_grad],lr=1e-5)
+    ids=torch.tensor([[10,5,6,6,6,6,7,11,12]]);labels=ids.clone();labels[:,:7]=-100
+    with torch.autocast('cpu',dtype=torch.bfloat16):
+        loss=model(input_ids=ids,attention_mask=torch.ones_like(ids),labels=labels,
+                   pixel_values=torch.randn(16,3*2*14*14),image_grid_thw=torch.tensor([[1,4,4]])).loss
+    assert torch.isfinite(loss)
+    loss.backward();optimizer.step()
+    assert any(not torch.equal(before[n],p) for n,p in model.named_parameters() if n in before)
