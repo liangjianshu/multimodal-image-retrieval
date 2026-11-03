@@ -85,4 +85,8 @@ python examples/training/restore_original_gallery.py \
 - `evaluation/*/test-results.json`：完整测试结果及逐查询记录。
 - `study-status.json` 和 `logs/`：运行状态、命令、耗时和失败记录。
 
+报告入口：`examples/training/report_restored_study.py --study-root /path/to/study --output /path/to/report`。它要求 8 组完整实验及 24 个检查点、5 组最终评测全部完成，核对选择记录、数据清单、权重哈希和验证集阈值后，输出 HTML、JSON 和 CSV。逐查询差值保留退化案例，不只展示改善。
+
+本基准用固定 15 类别名映射粗筛，以及不混入生成描述的纯参考图查询。网页使用开放类别的语义粗筛及图文融合，因此网页案例单独验收；基准指标不能直接当作整个网页自由查询的准确率。
+
 测试图片、训练图片及权重不作为代码仓库附件上传。最终结果尚未完成时，不以准备阶段试跑分数作为正式效果指标。
