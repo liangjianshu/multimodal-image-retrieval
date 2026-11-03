@@ -21,7 +21,7 @@ from mmretrieval.study_metrics import class_contrastive_loss,evaluate_vectors
 def queries(rows):
     names={r['label']:r['label_cn'] for r in rows}
     return [{'id':label+'-'+str(i),'label':label,'text':text} for label,cn in sorted(names.items())
-            for i,text in enumerate([cn,f'给我看看{cn}',f'a photo of a {label}'])]
+            for i,text in enumerate([cn,f'给我看看{cn}',f'这是一张{cn}的照片'])]
 
 
 def assess(encoder,rows,root,output):
