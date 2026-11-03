@@ -4,9 +4,11 @@
 
 ## 直接看效果
 
-下载仓库后，用浏览器打开 [`demo/index.html`](demo/index.html)。点击查询方式或示例按钮可以切换已记录结果，点击结果图片可以查看完整的模型描述。页面可离线浏览，不需要下载模型。
+直接打开 **[在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/)**。点击查询方式或示例按钮可以切换已记录结果，点击结果图片可以查看完整的模型描述。不需要下载仓库或模型。
 
-**这是已记录结果的交互回放，不是在线推理服务。** 所有展示排名来自 [results.json](demo/results.json)，没有手工调整图片顺序。无法在 GitHub 文件预览中执行 HTML 时，请下载仓库后打开。
+离线使用时，用浏览器打开 [`demo/index.html`](demo/index.html)。图片已经内嵌在 HTML 中，单独复制该文件即可查看，不依赖旁边的图片目录。首屏结果预先写入 HTML，即使预览器没有执行 JavaScript 也能显示；切换示例和图片详情需要启用 JavaScript。
+
+**这是已记录结果的交互回放，不是在线推理服务。** 所有展示排名来自 [results.json](demo/results.json)，没有手工调整图片顺序。GitHub 仓库首页通过 README 展示截图和在线链接，交互 HTML 由 GitHub Pages 发布；直接点仓库里的 HTML 文件属于代码浏览。
 
 ![中文文搜图](demo/text-search.png)
 
@@ -51,7 +53,7 @@ python examples/showcase/build_page.py \
   --output artifacts/showcase/index.html
 ```
 
-脚本只渲染结果，不执行检索或改变排名。页面会引用仓库中的图片；分享时需要一并保留图片目录及相对路径。
+脚本只渲染结果，不执行检索或改变排名。它将图库图片和结果打包进 HTML，分享时只需要发送生成的 HTML 文件。
 
 如果模型已下载到本地，可用 `--model-root /path/to/models`，目录应包含 `taiyi/`、`clip/`、`qwen-vl-3b/`。这三个目录必须分别对应配置中的 Taiyi、CLIP 与 Qwen2.5-VL-3B 模型，不能随意替换为不同模型后继续沿用名称。
 

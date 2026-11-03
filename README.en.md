@@ -2,7 +2,7 @@
 
 **Search your own image library with Chinese text, a reference image, or both.**
 
-[中文文档](README.md) · [Issues](https://github.com/liangjianshu/multimodal-image-retrieval/issues) · [Contributing](CONTRIBUTING.md)
+[Online demo](https://liangjianshu.github.io/multimodal-image-retrieval/) · [中文文档](README.md) · [Issues](https://github.com/liangjianshu/multimodal-image-retrieval/issues) · [Contributing](CONTRIBUTING.md)
 
 A learning and prototyping project for visual product search, image assets and private image libraries. It combines Taiyi-CLIP embeddings, Qwen2.5-VL semantic indexing, category filtering and description-vector ranking, with optional domain adaptation using LoRA / SFT.
 
@@ -25,7 +25,7 @@ The index is an in-memory NumPy matrix. External vector databases, a live infere
 
 Nine recorded result sets cover Chinese text search, reference-image search and fused queries, including CLIP/semantic comparisons and imperfect results. Qwen2.5-VL-3B generates the gallery metadata; Taiyi-CLIP produces real embeddings. No manual category labels or synthetic vectors are used for indexing. Reference images are excluded from their own results.
 
-Open `docs/demo/index.html` after downloading the repository to browse the recorded outputs offline. This is a replay, not browser-side model inference. See the [reproduction guide](docs/DEMO.md), [raw outputs](docs/demo/results.json) and [CC0 image credits](examples/showcase/SOURCES.md).
+Try the [online demo](https://liangjianshu.github.io/multimodal-image-retrieval/), or open `docs/demo/index.html` offline. Images are embedded, so the HTML works as a standalone file; its initial results also render without JavaScript. This is a replay, not browser-side model inference. See the [reproduction guide](docs/DEMO.md), [raw outputs](docs/demo/results.json) and [CC0 image credits](examples/showcase/SOURCES.md).
 
 This small-gallery qualitative demo uses base models without a domain adapter. It is not a benchmark, a fine-tuning comparison or a reproduction of historical F1 gains.
 

@@ -3,7 +3,7 @@
 [![Tests](https://github.com/liangjianshu/multimodal-image-retrieval/actions/workflows/tests.yml/badge.svg)](https://github.com/liangjianshu/multimodal-image-retrieval/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[English overview](README.en.md) · [使用反馈 / Issues](https://github.com/liangjianshu/multimodal-image-retrieval/issues) · [参与贡献](CONTRIBUTING.md)
+[在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/) · [English overview](README.en.md) · [使用反馈 / Issues](https://github.com/liangjianshu/multimodal-image-retrieval/issues) · [参与贡献](CONTRIBUTING.md)
 
 **给一张图，找相似商品；写一句话，搜自己的图片库。**
 
@@ -19,12 +19,12 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 ## 先看真实检索效果
 
-[![中文文搜图：真实模型在 12 张图片中检索白色自行车](docs/demo/text-search.png)](docs/DEMO.md)
+[![中文文搜图：真实模型在 12 张图片中检索白色自行车](docs/demo/text-search.png)](https://liangjianshu.github.io/multimodal-image-retrieval/)
 
 演示图库包含 **12 张可公开分享的 CC0 图片**，覆盖椅凳、杯子和自行车。Qwen2.5-VL-3B 从图片生成类别与描述，Taiyi-CLIP 编码并执行检索，**没有用人工类别或预设向量代替模型输出**。提供 9 组文搜图、图搜图、图文融合结果，包括 CLIP / 语义方法对照和未命中首位的困难案例。
 
-- **浏览效果**：[图搜图](docs/demo/image-search.png) · [图文融合](docs/demo/fusion-search.png)。
-- **本地交互查看**：下载仓库后打开 `docs/demo/index.html`，切换查询、查看图片描述与来源；页面回放已记录结果，不在浏览器里运行模型。
+- **直接体验**：[打开在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/)，无需下载仓库或模型。也可查看 [图搜图截图](docs/demo/image-search.png) · [图文融合截图](docs/demo/fusion-search.png)。
+- **本地交互查看**：用浏览器打开 `docs/demo/index.html`，切换查询、查看图片描述与来源。图片已内嵌，单独复制这个 HTML 也能显示；禁用脚本的预览可查看首组结果。页面回放已记录结果，不在浏览器里运行模型。
 - **自己复跑**：按 [演示与复现指南](docs/DEMO.md) 执行；图片、查询、模型配置、生成描述和原始结果均已附上。
 
 这是公开基座模型在小图库上的定性演示，未加载领域 LoRA，不代表规模化准确率，也不是历史 F1 提升的复现实验。
