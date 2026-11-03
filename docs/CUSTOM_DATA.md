@@ -3,7 +3,7 @@
 ## 路线 A：只做素材检索
 
 1. 图片保留在运行机器上，准备 `file_path` 相对同一个 `image-root` 的清单。
-2. 默认 EmbeddingGemma 2 直接 `index` 原图，类别和描述可以为空，不必先 `describe`。
+2. 默认 `qwen-gemma2` 的 `index` 会调用 Qwen 生成类别、归并类别名称，再用 EmbeddingGemma 2 编码原图；原始类别和描述可以为空。
 3. 建立新索引，使用 `search`。这条路线不需要训练模型。
 
 建议目录：
@@ -48,7 +48,7 @@ data/
 
 ## 字段说明
 
-默认 EmbeddingGemma 2 只使用 ID、路径和图片像素建库；下表中类别、描述对检索的作用仅针对历史 `taiyi-clip` 分支。
+默认混合链路使用 Qwen 生成的 `retrieval_categories` 和 `retrieval_category_groups` 进行粗筛，EmbeddingGemma 2 直接编码原图。纯原图基线不使用类别，历史 `taiyi-clip` 还使用描述向量排序。
 
 | 字段 | 来源 | 用途 |
 | --- | --- | --- |
@@ -56,15 +56,16 @@ data/
 | `file_path` | 用户 | 相对 image-root 的文件位置 |
 | `categories` | 人工标签 / 分类目录 | SFT 真值；无模型元数据时也可用于素材检索 |
 | `description` | 人工描述，可为空 | 无生成描述时用于索引 |
-| `retrieval_categories` | `describe` 预测 | 语义检索粗筛 |
-| `retrieval_description` | `describe` 预测 | 描述向量排序 |
+| `retrieval_categories` | Qwen 预测 | 原类别与类别归并的来源 |
+| `retrieval_category_groups` | Qwen 归并结果 | 当前混合检索的类别粗筛 |
+| `retrieval_description` | Qwen 预测 | 当前仅供展示；历史分支用于描述向量排序 |
 | `retrieval_source` | `describe` 自动记录 | 模型和适配器来源追踪 |
 
 `examples/catalog.jsonl` 是格式示例，其中图片不随仓库分发。不能直接对示例文件执行真实建库，必须将它替换成现有图片对应的清单。
 
 ## 已有 COCO 格式标注
 
-无需重新下载图片。以下示例导入本地 `instances` 标注，产生相对路径清单。请根据任务人工处理多物体/背景标签；默认原图检索忽略标注类别；评测历史语义流程时，先 `describe` 生成预测字段，以免把标注类别当作模型预测能力。
+无需重新下载图片。以下示例导入本地 `instances` 标注，产生相对路径清单。请根据任务人工处理多物体/背景标签；默认混合检索使用 Qwen 预测类别，不使用标注类别；评测历史语义流程时，先 `describe` 生成预测字段，以免把标注类别当作模型预测能力。
 
 ```python
 import json

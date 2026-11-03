@@ -1,83 +1,95 @@
-# EmbeddingGemma 2 原图检索演示
+# 微调 Qwen 意图识别、类别粗筛与原图检索
 
-[打开在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/) · [原始结果](demo/results.json) · [旧 Qwen LoRA / Taiyi-CLIP 流程](DEMO_TAIYI_CLIP.md)
+[在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/) · [完整结果](demo/results.json) · [Qwen 意图输出](demo/intents.json) · [类别归并](demo/category-groups.json)
 
-当前展示在 12 张 CC0 图片上运行 7 组固定查询：文字 3 组、参考图 3 组、图文联合 1 组。结果由模型实际计算，没有人工重排。在线页面和离线 `docs/demo/index.html` 都是结果回放，不是实时推理服务；离线文件已内嵌图片。
+当前展示在 12 张 CC0 图片上重新运行 10 条请求：原来的 7 组检索、2 条非检索请求，以及 1 条明确要求返回两张的请求。结果由实际模型运行生成，没有手工调整排名。线上与离线 HTML 都是交互回放，不是实时模型服务。
 
-![文字检索](demo/text-search.png)
-![参考图检索](demo/image-search.png)
+![图片检索](demo/image-search.png)
 ![图文联合检索](demo/fusion-search.png)
+![非检索意图](demo/intent-routing.png)
 
-## 展示阈值
+## 模型各自负责什么
 
-演示默认统一使用 **最低余弦相似度 0.66**，在每组原始 Top-3 中保留达到阈值的结果，不足三张就少展示。滑块可调整，点击“查看未过滤结果”恢复原始前三名。所有示例共用同一个设置，没有按图片 ID 或类别删除特定结果。
-
-花纹杯查询原始分数为 0.802449、0.721974、0.653903：前两张杯子保留，第三张椅子被阈值过滤。白色自行车查询也会从三张减少到一张；这说明阈值确实对所有示例生效。阈值在当前小图库示例上选定，未经过独立验证；提高阈值也可能漏掉相关结果，不能将它表述为模型准确率提高或通用最优阈值。
-
-[原始 JSON](demo/results.json) 与下方对照表保留未过滤的模型排名和分数。网页设置只影响展示，CLI 默认仍返回未设阈值的 Top-K；使用 `--min-score 0.66` 可应用同一规则。页面构建可用 `build_page.py --min-score 0.66` 改变默认值。
-
-## 编码流程
-
-1. 校验 [图库来源清单](../examples/showcase/sources.json) 的图片 SHA-256，直接将原图输入 EmbeddingGemma 2，生成归一化的 768 维向量。
-2. 文字查询保留用户原文，添加官方搜索前缀 `task: search result | query: ` 后编码；图片查询直接编码像素。
-3. 图文查询把完整文字、`<|image|>` 标记和参考图作为一个多模态输入，单次前向生成查询向量。没有 Qwen 摘要覆盖，也没有 50/50 向量平均。
-4. 在全部图库图像向量上做余弦排序，排除参考图自身，取前三名。没有类别粗筛或描述向量排序。
-5. 页面图片说明沿用原微调 Qwen 生成的元数据，仅为阅读提供上下文，不参与查询编码、建库或排序。
-
-当前编码器使用公开预训练权重，未进行本项目领域微调；原 Qwen LoRA 不是这个编码器的适配器。两条流程分别保存，不能混用向量或把旧微调的收益算到新编码器上。
-
-## 实测配置
-
-| 项目 | 值 |
+| 阶段 | 执行者与作用 |
 | --- | --- |
-| 模型 | `google/embeddinggemma-2` |
-| 固定版本 | `f9972ac22e696a105c482202646979e33e4b5a1e` |
-| 权重 SHA-256 | `197a32965d4b1105faf060417baa899e193fb73cd401f42ec9295234d5553d79` |
-| 加载模块 | 文字 + 视觉，关闭音频；438,760,448 参数 |
-| 维度 / 图像预算 / 批量 | 768 / 280 tokens / 4 |
-| 设备与精度 | 单张 Ascend 910B2，`npu:0`，BF16，eager attention |
-| PyTorch / torch_npu | 2.7.1 / 2.7.1 |
-| Transformers / Sentence Transformers | 5.22.1 / 6.2.0 |
+| 图库类别与描述 | Qwen2.5-VL-7B + 作者原 LoRA，使用原类别/描述提示词 |
+| 类别名称归并 | 同一 Qwen 把原类别映射到代表类别，完整映射落盘 |
+| 是否需要检索、目标类别、条件、数量 | 每条请求调用同一微调 Qwen，包括纯图片和非检索请求 |
+| 类别粗筛 | 代码根据 Qwen 识别/选择的类别和其生成的归并关系筛选候选 |
+| 原图排序 | EmbeddingGemma 2 编码完整用户文字、参考图及图库原图，比较余弦相似度 |
+| 展示阈值 | 所有示例统一使用 0.66，可调节或关闭，不修改原始分数 |
 
-官方模型及多模态输入方式见 [Google 模型卡](https://huggingface.co/google/embeddinggemma-2) 与 [官方 Sentence Transformers 指南](https://ai.google.dev/gemma/docs/embeddinggemma/multimodal-embeddinggemma-with-sentence-transformers)。运行时验证官方固定版本的权重哈希。首次使用需下载完整 checkpoint；本次只加载文字和视觉模块。
+Qwen 的类别判断实际影响候选，原训练模型不再只提供图片说明。详细描述仅供阅读，不能覆盖用户原文；图文联合编码不使用 50/50 向量平均。只有图片时仍编码原图像素，不把它转换成描述来替代。
 
-## 耗时与旧结果对照
+旧版采用类别向量相对阈值粗筛；本版采用显式类别组过滤，再进行原图排序。两种粗筛实现不同，旧的 `category_ratio` 只用于历史 `taiyi-clip` 分支。
 
-| 查询 | 旧 Taiyi/CLIP Top-3 | EmbeddingGemma 2 Top-3 | 编码中位数 |
-| --- | --- | --- | --- |
-| 白色自行车 | image-09, image-12, image-10 | image-09, image-12, image-10 | 90.0 ms |
-| 红色的椅子 | image-01, image-04, image-02 | image-01, image-03, image-04 | 90.0 ms |
-| 咖啡杯 | image-08, image-06, image-07 | image-07, image-08, image-06 | 90.7 ms |
-| 一张参考图，找到更多杯子 | image-08, image-06, image-05 | image-08, image-06, image-02 | 173.2 ms |
-| 给一张椅子图，找相似素材 | image-04, image-03, image-01 | image-03, image-01, image-04 | 187.1 ms |
-| 用咖啡杯照片找相似图片 | image-05, image-07, image-08 | image-07, image-08, image-05 | 175.3 ms |
-| 草地上的自行车 | image-10, image-12, image-11 | image-10, image-12, image-11 | 174.6 ms |
+## 路由与类别处理
 
-图库 12 张图片批量编码：**1.45 秒**。首次模型初始化（含权重哈希校验）：28.59 秒；首次单图预热：10.18 秒。这两个启动数字各测一次，不作为稳定启动延迟。
+- `needs_retrieval=false` 时，直接返回 `status=not_retrieval`；该请求不做 Gemma 查询编码或索引搜索。CLI 中 Gemma 按需加载，已有服务实例也不会为这条请求执行编码。
+- 类别明确时选择对应候选；名称粒度不同先按 Qwen 生成的映射归并。本次把“茶杯”归为“杯子”，把“椅子”与“凳子”保留为不同类别。没有人工按图片编号过滤结果。
+- 类别不明确、需要跨品类时允许 `all`；明确目标但图库无相关类别时返回空结果。
+- 若模型省略额外的路由字段，但它识别的目标类别或其已知别名能精确匹配图库，则代码补全相应类别筛选。非检索请求的类别选择字段统一清空。无法补全的字段或不存在的候选类别会报错，不默认启动无条件检索。
+- 无文字参考图的可见属性不作为用户明确约束；`constraints` 置空。原始模型字段保存在 `raw_response`，可以区分模型输出与代码补全。
+- 数量由 Qwen 识别，`top_k=2` 时原始检索最多返回两张；展示分数阈值仍可能进一步减少数量。
 
-每个查询先预热，再测 5 次，表中为中位数。编码耗时包含预处理、设备传输、模型前向、归一化和返回 CPU 向量；不含加载、预热、网络与索引扫描。12 张图的 NumPy 扫描中位数均低于 0.15 ms。没有测并发、网络服务或大图库吞吐，不能线性外推生产速度。当前 CLI 每次调用都会重新加载模型；服务集成时应复用 `GemmaEncoder` 实例。
+提示词见 [intent.py](../mmretrieval/intent.py)，公共执行逻辑见 [hybrid.py](../mmretrieval/hybrid.py)。
 
-**不能宣称新模型全面胜出。** 黄色杂草自行车 `image-10` 在新旧两版都排第一，新版与第二名分差很小。花纹杯查询中，新版第三名为椅子 `image-02`，原类别粗筛版本则保留了杯子类结果。新方案取消了类别粗筛，因此比较的是完整流程变化，不是仅替换一个编码器的严格消融。跨模型余弦分数不能直接比较大小来判断优劣。
+## 实测记录
 
-图库只有 12 张，查询未建立完整的独立相关性标注；此处只报告排名与耗时，不报告准确率提升。严格同款、材质、否定要求和背景修改仍需专门评测。
+| 请求 | Qwen 结果 / 类别范围 | 候选数 | 原始返回 ID | 含意图处理耗时 |
+| --- | --- | ---: | --- | ---: |
+| 白色自行车 | 自行车 | 4 | image-09, image-12, image-10 | 3.11 s |
+| 红色的椅子 | 椅子 | 3 | image-03, image-04, image-02 | 2.78 s |
+| 咖啡杯 | 杯子 | 4 | image-07, image-08, image-06 | 2.59 s |
+| 一张参考图，找到更多杯子 | 杯子 | 3 | image-08, image-06, image-05 | 2.73 s |
+| 给一张椅子图，找相似素材 | 椅子 | 2 | image-03, image-04 | 4.52 s |
+| 用咖啡杯照片找相似图片 | 杯子 | 3 | image-07, image-08, image-05 | 2.67 s |
+| 草地上的自行车 | 自行车 | 3 | image-10, image-12, image-11 | 2.50 s |
+| 请问中国的首都是哪里？ | 不需要检索 | 0 | — | 1.37 s |
+| 只描述一下这张图片，不要帮我找其他图片。 | 不需要检索 | 0 | — | 3.40 s |
+| 请帮我找两张杯子的图片。 | 杯子 | 4 | image-07, image-08 | 2.54 s |
 
-## 复跑与换图库
+知识问答“请问中国的首都是哪里？”以及带图的“只描述一下这张图片，不要帮我找其他图片”均判为无需检索。明确的“两张”要求被识别为 `top_k=2`。这三条固定检查通过，不等同于通用意图分类准确率。
 
-在独立环境按 [README](../README.md) 安装 `.[gemma]`，然后：
+本次检索请求耗时约 **2.50–4.52 秒**，包含 Qwen 生成、查询编码与候选排序，不含模型初始化；每条只测一次，不是重复性能基准。此前约 90–187 ms 是纯 Embedding 编码耗时，不能当作当前完整链路延迟。
+
+最终运行 Qwen 初始化 19.21 秒，Gemma 初始化 13.55 秒，类别归并 7.46 秒，12 张原图批量编码 1.62 秒。首次本轮运行重新生成了 12 张图库的类别/描述；修正路由后复用了这次同模型、同提示词的描述产物，再执行类别归并、全部查询和原图建库。最终 JSON 中 `descriptions_reused=true`，`description_seconds` 是缓存读取时间，不是描述生成速度。
+
+## 结果与边界
+
+花纹杯查询原始三张结果为银色花纹杯、咖啡杯、保温杯；先前纯 Embedding 的第三张椅子已被类别筛选排除。因此即使关闭展示分数阈值，也不会在这一组返回椅子。
+
+类别筛选并非只有收益。“红色椅子”查询排除了红色凳子，剩余候选虽然属于椅子类，但不满足红色要求；当前没有逐条颜色硬校验。更严格的类目范围可能漏掉用户愿意接受的相似物品，需要按业务定义类别边界。
+
+默认 0.66 展示阈值沿用前一版。自然语言请求“请帮我找两张杯子的图片。”的原始两个分数低于 0.66，因此默认展示可能为空；关闭分数阈值可看到两个实际结果。这也说明短词与完整自然语言的分数分布不同，展示阈值尚未独立校准，不应直接用于生产。
+
+本次未重新训练任何模型，没有证明“微调相比同一基座带来多少收益”。[纯 Embedding 基线](demo/baseline-embeddinggemma2/results.json) 与 [历史 Taiyi/CLIP 结果](demo/baseline-taiyi-clip/results.json) 均保留。严格衡量微调贡献仍需固定同一基座、数据和流程，只切换适配器进行对照。
+
+## 权重与环境
+
+- Qwen2.5-VL-7B-Instruct + 原 `output_lora_llm`：rank 64、alpha 128、语言注意力 LoRA；224 个保存张量逐项校验，112 个 LoRA B 非零且适配器启用。[校验记录](demo/adapter-verification.json)
+- LoRA SHA-256：`c3c463ca6f394ab4cc7e936bcc39cc14ec09f0b5afbc9ffb635e7a37fcb6738a`。没有单独保存 merger，不能把它描述为加载了完整 MLP+LLM 产物。
+- EmbeddingGemma 2 固定版本 `f9972ac22e696a105c482202646979e33e4b5a1e`，权重 SHA-256：`197a32965d4b1105faf060417baa899e193fb73cd401f42ec9295234d5553d79`。
+- 单张 Ascend 910B2；BF16；PyTorch / torch_npu 2.7.1；Transformers 5.22.1；Sentence Transformers 6.2.0；PEFT 0.20.0；qwen-vl-utils 0.0.14。
+- Gemma 仅加载文字与视觉模块；768 维，视觉预算 280，图库 batch 4。Qwen 最大图片像素 262144、生成上限 384，贪心生成。
+
+## 复跑
+
+在独立环境按 [README](../README.md) 安装 `.[hybrid]`。Ascend 保留匹配 CANN 的厂商 PyTorch/torch_npu，单独安装其余依赖。
 
 ```bash
-python examples/showcase/run_gemma.py \
-  --config configs/embeddinggemma2.json --output artifacts/showcase-gemma2 --repeats 5
+python examples/showcase/run_hybrid.py \
+  --config configs/showcase-hybrid.json \
+  --adapter-path /path/to/output_lora_llm \
+  --output artifacts/showcase-hybrid
 python examples/showcase/build_page.py \
-  --results artifacts/showcase-gemma2/results.json --output artifacts/showcase-gemma2/index.html
+  --results artifacts/showcase-hybrid/results.json --output artifacts/showcase-hybrid/index.html
 python examples/showcase/build_page.py \
-  --results artifacts/showcase-gemma2/results.json --image-mode external --output docs/index.html
+  --results artifacts/showcase-hybrid/results.json --image-mode external --output docs/index.html
 ```
 
-本地已有权重可传 `--model-path /path/to/embeddinggemma-2`；Ascend 需传 `--device npu:0`。运行脚本输出持久化索引和含环境、每次耗时、排名的结果 JSON；HTML 生成器只渲染，不改变排序。
+本地权重可用 `--qwen-path` 和 `--gemma-path` 指定，Ascend 追加 `--device npu:0`。`--reuse-descriptions` 只用于同一图库、模型和描述提示词的已完成缓存。提示词修正后应重新执行全部查询。
 
-Ascend 请先安装厂商匹配的 torch / torch_npu / torchvision 和 CANN，再在独立环境安装 `transformers==5.22.1 sentence-transformers==6.2.0` 及本项目基础依赖，检查 pip 解析结果不要替换已有 torch。不要在原 Qwen 的 Transformers 4.57.1 环境中直接升级。
+公开配置 `configs/qwen-gemma2.json` 的 adapter 为空，可运行同样结构的基座流程；`configs/showcase-hybrid.json` 引用作者原 LoRA，权重未随仓库分发。自己的图库直接使用默认 `index`、`search`、`evaluate`，无需额外的 `--intent` 开关。
 
-自己的图库只需图片文件和包含 `id`、`file_path` 的 JSONL；类别/描述可以为空。按 [自有数据指南](CUSTOM_DATA.md) 直接执行 `index`，随后 `search` 或 `evaluate`。每次切换模型、权重、向量维度或图像预算必须重建索引；代码拒绝查询端与索引的配置混用。
-
-历史原文保留版完整结果见 [baseline-taiyi-clip](demo/baseline-taiyi-clip/results.json)；更早的丢失场景版本见 [baseline-lora-intent](demo/baseline-lora-intent/results.json)，3B 基座版本见 [baseline-3b](demo/baseline-3b/results.json)。
+旧流程入口：[纯 Embedding](DEMO_EMBEDDING_ONLY.md) · [Qwen / Taiyi-CLIP](DEMO_TAIYI_CLIP.md)。

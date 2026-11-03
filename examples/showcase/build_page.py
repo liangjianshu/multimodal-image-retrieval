@@ -36,29 +36,39 @@ def initial_view(report, sources, images, min_score=None):
             f'<a class="source" href="{escape(by_id[result["id"]]["source"], quote=True)}">'
             f'{escape(result["id"])} · Wikimedia / CC0 ↗</a></div></article>'
         )
-    if not visible:
+    if query.get("status") == "not_retrieval":
+        cards.append('<div class="empty">Qwen 判定这条请求不需要图片检索，已跳过向量编码和搜索。</div>')
+    elif query.get("status") == "no_category_match":
+        cards.append('<div class="empty">图库没有匹配的目标类别，未返回无关图片。</div>')
+    elif not visible:
         cards.append('<div class="empty">暂无达到当前相似度要求的结果。试试降低阈值。</div>')
     elif len(visible) < len(query["results"]):
         cards.append(f'<div class="empty">已过滤 {len(query["results"]) - len(visible)} 张低于阈值 {min_score:.2f} 的结果。</div>')
     elif len(visible) < 3:
         cards.append(f'<div class="empty">当前可用候选为 {query["candidate_count"]} 张图片。</div>')
-    note = {"text": "查询文本直接编码，不调用意图解析。", "image": "仅使用参考图向量；已排除图库中的同一张图片。", "fusion": "图片与文本向量各占 50%；已排除参考图自身。"}[query["kind"]]
+    note = {"text": "查询文本直接编码，不调用意图解析。", "image": "仅使用参考图向量；已排除图库中的同一张图片。", "fusion": "图片与文本向量各占 50%；已排除参考图自身。", "intent": "先判断是否需要图片检索。"}[query["kind"]]
     pipeline = "CLIP 图像编码 → 图像相似度排序" if query["mode"] == "clip" else "查询编码 → 类别粗筛 → 描述排序"
     if query.get("intent"):
-        note = ('实际编码文字（保留原文）：' if query.get('text') else '模型提取的图片目标：') + query['search_text'] + '。文字与参考图向量各占 50%；已排除参考图自身。'
+        note = ('实际编码文字（保留原文）：' if query.get('text') else '模型提取的图片目标：') + (query.get('search_text') or query['intent'].get('description', '')) + '。文字与参考图向量各占 50%；已排除参考图自身。'
         pipeline = "需求解析（保留用户原文）→ 图文融合 → 类别粗筛 → 描述排序"
-    direct = report.get("backend") == "embeddinggemma2"
-    if direct:
+    hybrid = report.get("backend") == "qwen-gemma2"
+    direct = report.get("backend") in ("embeddinggemma2", "qwen-gemma2")
+    if hybrid:
+        intent = query["intent"]
+        scope = "、".join(intent["candidate_categories"]) if intent["category_filter"] == "selected" else "全图库"
+        note = f'Qwen 识别目标：{intent["target_category"]}；候选类别：{scope}。原始文字与参考图直接编码。' if intent["needs_retrieval"] else "Qwen 判定：无需图片检索。已跳过向量编码和搜索。"
+        pipeline = "Qwen 意图识别 → 类别粗筛 → EmbeddingGemma 2 原图排序" if intent["needs_retrieval"] else "Qwen 意图识别 → 不触发检索"
+    elif direct:
         note = {"text": "完整文字直接编码，与图库原图向量比较。", "image": "参考图像素直接编码；已排除参考图自身。", "fusion": "完整文字与参考图联合编码；已排除参考图自身。"}[query["kind"]]
         pipeline = "原图 / 完整文字 → EmbeddingGemma 2 → 图库图像向量排序"
     return {
-        "__INITIAL_LABEL__": {"text": "TEXT → IMAGE", "image": "IMAGE → IMAGE", "fusion": "IMAGE + TEXT → IMAGE"}[query["kind"]],
+        "__INITIAL_LABEL__": {"text": "TEXT → IMAGE", "image": "IMAGE → IMAGE", "fusion": "IMAGE + TEXT → IMAGE", "intent": "QWEN → ROUTING"}[query["kind"]],
         "__INITIAL_TITLE__": escape(query["title"]),
         "__INITIAL_INPUT__": inputs,
         "__INITIAL_NOTE__": escape(note),
         "__INITIAL_PIPELINE__": pipeline,
         "__INITIAL_COUNT__": f' / {len(visible)} 张',
-        "__INITIAL_CANDIDATES__": f'图库 {report["gallery_size"]} 张 · {"图像候选" if direct or query["mode"] == "clip" else "粗筛候选"} {query["candidate_count"]} 张 · 最多 3 张',
+        "__INITIAL_CANDIDATES__": "未执行检索" if query.get("status") == "not_retrieval" else f'图库 {report["gallery_size"]} 张 · {"粗筛候选" if hybrid else "图像候选" if direct or query["mode"] == "clip" else "粗筛候选"} {query["candidate_count"]} 张 · 最多 {min(query.get("top_k") or 3, 3)} 张',
         "__INITIAL_CARDS__": "".join(cards),
     }
 
@@ -75,7 +85,7 @@ def main():
     report = json.loads(Path(args.results).read_text(encoding="utf-8"))
     if not math.isfinite(args.min_score) or not 0 <= args.min_score <= 1:
         raise ValueError("Showcase min-score must be between 0 and 1")
-    min_score = args.min_score if report.get("backend") == "embeddinggemma2" else None
+    min_score = args.min_score if report.get("backend") in ("embeddinggemma2", "qwen-gemma2") else None
     sources = json.loads((ROOT / "examples/showcase/sources.json").read_text(encoding="utf-8"))
     template = (Path(__file__).parent / "page.html").read_text(encoding="utf-8")
     output = Path(args.output)
@@ -98,8 +108,15 @@ def main():
                        "display": {"min_score": min_score}}, ensure_ascii=False).replace("<", "\\u003c")
     page = template.replace("/*__RECORDED_DATA__*/", data)
     adapted = bool(report.get("adapter_verification"))
-    direct = report.get("backend") == "embeddinggemma2"
-    if direct:
+    hybrid = report.get("backend") == "qwen-gemma2"
+    direct = report.get("backend") in ("embeddinggemma2", "qwen-gemma2")
+    if hybrid:
+        model_name = report["config"]["vl_model"].split("/")[-1].replace("-Instruct", "")
+        badge = f'<b>{html.escape(model_name)}</b> · ' + ("作者原 LoRA" if adapted else "公开基座")
+        method = "EmbeddingGemma 2 · 原图排序"
+        intro = "先判断是否需要检索，再确定候选类别。结合完整文字和参考图，在自己的图库中寻找目标。"
+        model_note = ("Qwen 原 LoRA" if adapted else "Qwen 公开基座") + "用于类别生成、意图识别与候选类别选择；EmbeddingGemma 2 负责原图排序。12 张图的定性演示不代表规模化准确率。"
+    elif direct:
         badge = "<b>EmbeddingGemma 2</b> · 原图编码"
         method = "文字 / 图片 / 图文联合编码"
         intro = "一句中文、一张参考图，或两者结合。用同一个多模态编码器，直接检索自己的图片库。"
@@ -112,16 +129,17 @@ def main():
         model_note = "已加载作者原 LoRA；小图库定性演示，不代表规模化准确率或历史 F1 收益。" if adapted else "公开基座的小图库定性演示；未加载 LoRA，不代表规模化准确率或历史 F1 收益。"
     page = page.replace("__MODEL_BADGE__", badge).replace("__METHOD_BADGE__", method)
     page = page.replace("__INTRO__", intro)
+    page = page.replace("__INTENT_TAB__", '<button role="tab" data-kind="intent">意图识别</button>' if hybrid else '')
     controls = '' if min_score is None else (
         '<div class="filter-controls" aria-label="结果相似度过滤">'
         '<label for="min-score">最低相似度</label>'
         f'<input id="min-score" type="range" min="0" max="1" step="0.01" value="{min_score:.2f}" '
         f'aria-describedby="filter-hint"><output id="min-score-value" for="min-score">{min_score:.2f}</output>'
-        '<button id="clear-filter" type="button">查看未过滤结果</button>'
+        '<button id="clear-filter" type="button">关闭分数阈值</button>'
         '<span id="filter-hint">阈值越高，返回越少；最多展示三张</span></div>'
     )
     page = page.replace("__FILTER_CONTROLS__", controls)
-    page = page.replace("__DESCRIPTION_NOTE__", "图片说明仅供阅读，不参与排序。" if direct else "点击图片可查看完整描述。")
+    page = page.replace("__DESCRIPTION_NOTE__", "Qwen 类别参与粗筛，详细说明仅供阅读。" if hybrid else "图片说明仅供阅读，不参与排序。" if direct else "点击图片可查看完整描述。")
     page = page.replace("__MODEL_NOTE__", model_note)
     page = page.replace("__GUIDE_PATH__", GUIDE_URL)
     raw = base64.b64encode(json.dumps(report, ensure_ascii=False, indent=2).encode("utf-8")).decode("ascii")

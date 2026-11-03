@@ -21,17 +21,17 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 [![中文文搜图：真实模型在 12 张图片中检索白色自行车](docs/demo/text-search.png)](https://liangjianshu.github.io/multimodal-image-retrieval/)
 
-演示图库包含 **12 张 CC0 实拍图片**，覆盖椅凳、杯子和自行车。当前默认使用 **EmbeddingGemma 2**：图库原图、用户完整文字、参考图及图文联合查询都进入同一个多模态编码器。图库离线编码，查询时扫描保存的图像向量；不再依赖图片描述或类别粗筛。
+演示图库包含 **12 张 CC0 实拍图片**，覆盖椅凳、杯子和自行车。当前采用 **微调 Qwen 意图识别与类别粗筛 + EmbeddingGemma 2 原图排序**：先判断要不要检索，再确定候选类别，最后用完整文字和参考图匹配原图向量。
 
-- **直接体验**：[在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/)，共 7 组真实结果；也可查看 [图搜图截图](docs/demo/image-search.png) · [图文融合截图](docs/demo/fusion-search.png)。
+- **直接体验**：[在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/)，包含文字、图片、图文、非检索请求和明确返回数量的真实记录。
 - **离线查看**：浏览器打开 `docs/demo/index.html`，图片已内嵌，可单独复制。页面回放实测结果，不在浏览器中运行模型。
-- **自己复跑**：[演示指南](docs/DEMO.md) 包含公开模型版本、环境、耗时和局限；无需作者私有 LoRA 权重即可复现当前流程。
+- **自己复跑**：[演示指南](docs/DEMO.md) 提供环境、权重校验、意图输出、类别归并和结果。公开基座可独立跑通流程；复现展示中的微调版本需要作者原 LoRA，权重未随仓库分发。
 
-结果没有手工重排；图片说明沿用原微调 Qwen 的描述，**仅供阅读，不参与向量生成或排序**。原 Qwen LoRA＋Taiyi/CLIP 流程及数据保留在 [历史指南](docs/DEMO_TAIYI_CLIP.md) 和 [旧结果](docs/demo/baseline-taiyi-clip/results.json)，方便对照。
+Qwen 为图库生成类别，并归并同义、上下位和相近用途的名称；每条查询都经过 Qwen，非检索请求会直接停止。类别及归并结果参与粗筛，详细图片说明仅供阅读。EmbeddingGemma 2 使用完整原文和参考图像素，不用 Qwen 摘要覆盖用户输入。
 
-演示页默认统一过滤低于 **0.66** 的分数，可以拖动滑块或点击“查看未过滤结果”。原始 JSON 保留全部原始 Top-3；该值仅在当前示例上选择，换图库需要重新评估。
+展示默认统一过滤低于 **0.66** 的分数，可拖动滑块或关闭分数阈值；关闭后仍保留 Qwen 类别粗筛。原始 JSON 不应用展示阈值。该值只在当前示例上选择，换图库需要重新评估。
 
-原图编码减少了转述造成的信息损失，但不保证所有颜色、材质、否定条件和复杂修改都能被正确排序。本演示只有 12 张图，不能据此宣称普遍准确率提升。见 [输入与编码说明](docs/INTENT_AND_EMBEDDINGS.md)。
+保留 [纯 Embedding 基线](docs/DEMO_EMBEDDING_ONLY.md) 与 [历史 Qwen / Taiyi-CLIP 流程](docs/DEMO_TAIYI_CLIP.md)。小图库演示不证明通用准确率或微调收益；同一基座切换适配器的独立对照仍需单独开展。完整输入被保留也不保证所有细粒度条件都被满足。
 
 ## 可以用在哪些场景
 
@@ -49,11 +49,11 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 - **先接数据，再决定是否训练**：支持类别文件夹和 JSONL 清单，已有图片库可先建立检索基线。
 - **图片与文字都能查**：支持纯文本、参考图，以及参考图加文字描述的融合查询。
-- **图库只需离线编码**：直接处理原图；查询时编码本次输入，不必重新编码整库。
+- **类别和图片向量离线建库**：Qwen 生成类别并统一名称，EmbeddingGemma 2 编码原图；查询时不必重新处理整库。
 - **训练和评测入口齐全**：可构造易混淆类别问答，对比微调范围，并通过自有查询集检查效果。
 - **默认在本机处理图片**：图片由运行机器上的模型处理；首次使用需下载模型权重。
 
-本项目整理自个人多模态检索实验。当前默认采用 EmbeddingGemma 2 原图检索，另保留 Qwen2.5-VL 语义建库、Taiyi-CLIP 两阶段检索和领域 SFT，适合比较不同方案在自有数据上的效果。
+本项目整理自个人多模态检索实验。当前默认将 Qwen 意图/类别判断与 EmbeddingGemma 2 原图编码组合，另保留纯 Embedding 基线、Taiyi-CLIP 历史流程和 Qwen 领域 SFT。
 
 `mmretrieval/` 是统一运行入口；`legacy/` 保存经过凭据和个人路径清理的历史源码，供追溯实验设计。**模型权重、原始 COCO / ImageNet 图片、个人训练数据与大型向量文件没有上传。**
 
@@ -62,9 +62,10 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 | 能力 | 作用 |
 | --- | --- |
 | 文搜图、图搜图、图文融合查询 | 中文描述、参考图或两者结合，返回图片 ID、路径与相似度 |
-| 离线原图建库 | EmbeddingGemma 2 直接编码图片，类别和描述可为空 |
+| 离线建库 | Qwen 生成类别及其归并关系，EmbeddingGemma 2 直接编码图片 |
 | 原生图文联合编码 | 文字与参考图在一次前向计算中生成查询向量，不使用 50/50 平均 |
-| 历史方案对照 | 显式选择 `taiyi-clip` 配置，运行 Qwen 意图解析与两阶段检索 |
+| 意图识别与类别粗筛 | 非图片检索请求不调用编码器；检索请求按模型选择的类别限定候选 |
+| 方案对照 | `embeddinggemma2` 为纯原图检索，`taiyi-clip` 为历史两阶段流程 |
 | 可替换数据与模型 | 图片清单、模型 ID / 本地路径、LoRA 适配器和阈值均可配置 |
 | 可选 Qwen 领域训练 | 对比语言侧 LoRA、MLP＋LLM、MLP＋Vision；保存训练范围与参数量 |
 
@@ -74,12 +75,17 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 ```mermaid
 flowchart LR
-    A[自有图库原图] --> B[EmbeddingGemma 2]
-    B --> C[离线图像向量索引]
-    Q[完整文字 / 参考图 / 图文联合输入] --> E[同一 EmbeddingGemma 2]
-    E --> F[余弦相似度排序]
-    C --> F
-    F --> H[排除参考图自身 → Top-K]
+    A[图库原图] --> B[Qwen 类别生成与名称归并]
+    A --> C[EmbeddingGemma 2 原图向量]
+    Q[用户完整文字 / 参考图] --> R[Qwen 意图与类别判断]
+    R -->|无需检索| N[不调用图片搜索]
+    R -->|需要检索| F[类别粗筛]
+    B --> F
+    Q --> E[保留原始输入的联合编码]
+    E --> S[候选原图相似度排序]
+    F --> S
+    C --> S
+    S --> K[数量要求 / 分数阈值]
 ```
 
 ## 1. 安装和无需模型的检查
@@ -97,15 +103,17 @@ python -m mmretrieval demo --output artifacts/demo
 
 `demo` 会生成六张几何图片，并完成清单校验、索引保存/加载、检索和训练集划分。它使用**预设的合成向量**，只检查程序连接是否正常，不下载模型，也不代表模型检索效果。
 
-运行默认的 EmbeddingGemma 2 检索：
+运行默认的 Qwen + EmbeddingGemma 2 链路：
 
 ```bash
-pip install -e '.[gemma]'
+pip install -e '.[hybrid]'
 ```
 
-此依赖组使用 Transformers **5.22.1**、Sentence Transformers **6.2.0**。先按硬件安装匹配的 PyTorch；Ascend 用户需保留匹配 CANN 的 torch / torch_npu，按 [演示指南](docs/DEMO.md) 单独安装其余依赖。仅加载文字和视觉模块，BF16 或 FP32 推理，不使用 FP16。
+`hybrid` 使用 Transformers **5.22.1**、Sentence Transformers **6.2.0**、PEFT **0.20.0** 与 qwen-vl-utils **0.0.14**。两种模型可在同一推理环境中运行，本次已验证作者原 7B LoRA。EmbeddingGemma 2 只加载文字和视觉模块，使用 BF16 或 FP32。
 
-历史 Qwen LoRA 流程和训练使用**另一个虚拟环境**安装 `pip install -e '.[models]'`（Transformers 4.57.1）。两组依赖不能混装；`.[gemma]` 不提供 Qwen SFT 所需依赖。`prepare` / `validate` / `make-sft` 不加载模型。
+先按硬件安装匹配的 PyTorch。Ascend 用户需保留匹配 CANN 的 torch / torch_npu，再单独安装其他依赖，避免 pip 替换厂商版本。
+
+仅运行纯 Embedding 基线可安装 `.[gemma]` 并使用 `configs/embeddinggemma2.json`。历史 Qwen 训练和 Taiyi-CLIP 流程使用**另一个虚拟环境**安装 `.[models]`（Transformers 4.57.1）；不要与 `hybrid` 混装。`prepare` / `validate` / `make-sft` 不加载模型。
 
 ## 2. 换成自己的数据（从这里开始）
 
@@ -129,7 +137,7 @@ python -m mmretrieval validate \
   --manifest data/catalog.jsonl --image-root data/images
 ```
 
-`category_map.json` 把目录名映射为中文标签，不限制类别数量；换业务时直接修改。也可以不传映射，保留目录名。平铺目录同样可以使用；默认原图检索不要求类别或描述。
+`category_map.json` 把目录名映射为中文标签，不限制类别数量；换业务时直接修改。也可以不传映射，保留目录名。平铺目录同样可以使用；类别和描述可以留空，默认建库会调用 Qwen 生成预测字段。
 
 你也可以直接生成 JSONL，一行一张图：
 
@@ -139,52 +147,56 @@ python -m mmretrieval validate \
 
 - `id`：唯一且稳定的字符串，用于评测关联。
 - `file_path`：相对 `--image-root` 的路径，不能使用旧服务器绝对路径。
-- `categories`：人工标签；仅检索时可以为空，训练前必须核对。
-- `description`：可选展示信息；默认原图检索不使用这个字段。
+- `categories`：人工标签；原始清单中可以为空，默认建库会生成独立预测字段；训练前必须核对人工标签。
+- `description`：可选展示信息；当前原图排序不使用这个字段。
 
 图片不会被上传到外部 API；默认模型在运行机器上推理，首次使用会从模型托管平台下载权重。完整字段、数据替换清单与 COCO 导入示例见 **[自有数据指南](docs/CUSTOM_DATA.md)**。
 
-## 3. 直接建立原图索引
+## 3. 类别与原图向量一起建库
 
 ```bash
 python -m mmretrieval --config configs/default.json index \
   --manifest data/catalog.jsonl --image-root data/images \
-  --output artifacts/index-gemma2
+  --output artifacts/index-hybrid
 ```
 
-无需先运行 `describe`。每张原图生成一个归一化的 768 维向量，类别和描述不参与排序。索引包含 `catalog.jsonl`、`features.npz` 和 `metadata.json`，记录模型版本、权重 SHA-256、维度和图像 token 预算。
+默认 `index` 会依次执行 Qwen 类别/描述生成、类别名称归并、EmbeddingGemma 2 原图编码，无需先单独运行 `describe`。每张原图对应一个归一化的 768 维向量。类别用于粗筛，详细描述不参与最终相似度计算；人工 `categories` 仍用于训练/评测标注，不替代 Qwen 预测。
 
-换编码器后必须重建图库，旧 Taiyi/CLIP 向量即使同为 768 维也不能混用。查询时会校验索引与编码器的模型版本、权重、维度及预处理参数。更换图片、模型或视觉预算时也需重新编码；本版本建库命令会全量重建，尚无增量更新命令。
+索引包含 `catalog.jsonl`、`features.npz` 和 `metadata.json`，记录编码器版本、权重哈希、维度、图像预算，以及 Qwen 类别来源与归并关系。默认配置使用公开 Qwen 基座；有自己的适配器时设置 `adapter`，并重新建库。
+
+更换图片、Qwen 权重/提示词或 Embedding 模型配置后需重建索引。旧 Taiyi/CLIP 向量同为 768 维也不能混用。当前尚无增量更新命令。
 
 ## 4. 检索
 
 ```bash
 # 中文文搜图
-python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/images \
+python -m mmretrieval search --index artifacts/index-hybrid --image-root data/images \
   --text '红色木质椅子' --top-k 5
 
 # 图搜图；参考图如果在库中，会排除它自己
-python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/images \
+python -m mmretrieval search --index artifacts/index-hybrid --image-root data/images \
   --image chair/001.jpg --top-k 5
 
 # 图文融合查询
-python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/images \
+python -m mmretrieval search --index artifacts/index-hybrid --image-root data/images \
   --image chair/001.jpg --text '类似款式的红色椅子' --top-k 5
 
 # 返回超过固定阈值的全部结果；阈值应在验证集上选择
-python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/images \
+python -m mmretrieval search --index artifacts/index-hybrid --image-root data/images \
   --text '红色椅子' --all-matches --min-score 0.25
 ```
 
-结果以 JSON 返回，可被后端或界面读取。`score` 是余弦相似度，不是概率。默认对全图库扫描，排除参考图自身后返回 Top-K；未设置阈值时，低相关性图片也可能进入结果。不要把其他模型的阈值直接沿用到新编码器。图文输入是原生联合编码，文字与参考图冲突时的优先级仍需评测。
+结果以 JSON 返回，可被后端或界面读取。`score` 是余弦相似度，不是概率。默认每条查询先调用 Qwen。非检索请求返回 `status=not_retrieval` 且不调用编码器；检索请求按类别筛选，排除参考图自身后排序。用户明确要求的返回数量会被识别，不需加 `--intent`。类别不明确或跨品类请求允许全库查找；明确目标无相关类别时返回空结果。不要把其他模型的阈值直接沿用到新编码器。图文输入是原生联合编码，文字与参考图冲突时的优先级仍需评测。
 
 ## 5. 模型和配置
 
-`--config` 必须放在子命令之前，默认配置与 `configs/embeddinggemma2.json` 相同：
+`--config` 必须放在子命令之前，默认配置与 `configs/qwen-gemma2.json` 相同：
 
 | 配置项 | 含义 |
 | --- | --- |
-| `backend` | 默认 `embeddinggemma2`；历史流程为 `taiyi-clip` |
+| `backend` | 默认 `qwen-gemma2`；纯原图基线 `embeddinggemma2`；历史流程 `taiyi-clip` |
+| `vl_model` / `adapter` | Qwen 基座与可选 LoRA；默认基座 7B，adapter 为空 |
+| `prompt_profile` / `intent_profile` | 默认原类别描述提示词 `historical` 与完整条件意图提示词 `preserve` |
 | `embedding_model` / `embedding_revision` | 官方模型 ID 与固定版本 |
 | `embedding_model_path` | 可选本地完整权重目录；官方版本会校验权重 SHA-256 |
 | `embedding_dimension` | 默认 768；也支持 512、256、128，修改后重建索引 |
@@ -192,7 +204,7 @@ python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/im
 | `embedding_batch_size` | 图库编码批量，默认 4 |
 | `device` | `auto`（CUDA 优先，否则 CPU）、`cuda:0`、`cpu` 或显式 `npu:0` |
 
-完整文字直接交给编码器；不先经过意图模型删减，也不将图片转成描述后再编码。单个查询超出 8192 token 预算时明确报错，避免静默丢失条件。768 维共享空间来自同一模型的训练，与两端是否有同一词表无关。
+Qwen 先判断意图和类别，但完整文字仍直接交给编码器，图片仍直接编码像素；摘要不会覆盖用户条件。单个查询超出 8192 token 预算时明确报错，避免静默丢失条件。768 维共享空间来自同一模型的训练，与两端是否有同一词表无关。
 
 保留的 `configs/taiyi-clip.json` 支持 Qwen `vl_model` / `adapter`、`category_ratio`、`image_weight` 等旧参数，使用独立模型环境和独立索引目录。旧流程的运行命令见 [历史指南](docs/DEMO_TAIYI_CLIP.md)。
 
@@ -223,7 +235,7 @@ MLP 指视觉连接模块 `visual.merger`，不是所有 Transformer MLP。`mlp-
 编写与当前图片 ID 对齐的查询集，格式见 `examples/queries.jsonl`，然后：
 
 ```bash
-python -m mmretrieval evaluate --index artifacts/index-gemma2 --image-root data/images \
+python -m mmretrieval evaluate --index artifacts/index-hybrid --image-root data/images \
   --queries data/queries.test.jsonl --top-k 5 --output artifacts/evaluation.json
 ```
 
@@ -234,7 +246,7 @@ python -m mmretrieval evaluate --index artifacts/index-gemma2 --image-root data/
 ## 目录与开发
 
 ```text
-mmretrieval/     原图联合编码、索引、历史两阶段检索、Qwen SFT 和 CLI
+mmretrieval/     意图/类别路由、原图联合编码、索引、历史检索、Qwen SFT 和 CLI
 configs/        模型与检索配置
 examples/       清单、查询与难负类别映射；showcase/ 含 12 张 CC0 演示图片
 tests/          数据与检索测试、微型随机 Qwen 训练/保存测试

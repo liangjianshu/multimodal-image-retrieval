@@ -48,7 +48,10 @@ def test_direct_image_ranking_ignores_caption_labels_and_excludes_reference():
     assert [r["id"] for r in index.search([1, 0], exclude_ids=["ref"])] == ["correct", "wrong"]
 
 
-def test_default_cli_builds_from_pixels_without_description_or_qwen(tmp_path, monkeypatch):
+def test_pure_cli_builds_from_pixels_without_description_or_qwen(tmp_path, monkeypatch):
+    config = tmp_path / "pure.json"
+    config.write_text('{"backend":"embeddinggemma2"}')
+    prefix = ["--config", str(config)]
     Image.new("RGB", (16, 16)).save(tmp_path / "a.jpg")
     manifest = tmp_path / "catalog.jsonl"
     write_jsonl(manifest, [{"id": "a", "file_path": "a.jpg", "categories": [], "description": ""}])
@@ -57,19 +60,19 @@ def test_default_cli_builds_from_pixels_without_description_or_qwen(tmp_path, mo
     fake.images.return_value = np.ones((1, 768))
     monkeypatch.setattr("mmretrieval.direct.GemmaEncoder", lambda *_: fake)
     output = tmp_path / "index"
-    execute(parser().parse_args(["index", "--manifest", str(manifest), "--image-root", str(tmp_path), "--output", str(output)]))
+    execute(parser().parse_args(prefix + ["index", "--manifest", str(manifest), "--image-root", str(tmp_path), "--output", str(output)]))
     fake.images.assert_called_once_with([tmp_path / "a.jpg"])
     assert ImageIndex.load(output).metadata["corpus_input"] == "image-pixels"
     fake.query.return_value = np.ones(768)
-    result = execute(parser().parse_args(["search", "--index", str(output), "--image-root", str(tmp_path),
+    result = execute(parser().parse_args(prefix + ["search", "--index", str(output), "--image-root", str(tmp_path),
                                          "--text", "不要蓝墙背景的椅子", "--top-k", "1"]))
     fake.query.assert_called_with("不要蓝墙背景的椅子", None)
     assert result["results"][0]["id"] == "a"
     queries = tmp_path / "queries.jsonl"
     write_jsonl(queries, [{"id": "q", "text": "椅子", "relevant_ids": ["a"]}])
-    report = execute(parser().parse_args(["evaluate", "--index", str(output), "--image-root", str(tmp_path),
+    report = execute(parser().parse_args(prefix + ["evaluate", "--index", str(output), "--image-root", str(tmp_path),
         "--queries", str(queries), "--top-k", "1", "--output", str(tmp_path / "evaluation.json")]))
     assert report["macro"]["f1"] == 1
     with pytest.raises(ValueError, match="target Qwen"):
-        execute(parser().parse_args(["describe", "--manifest", str(manifest), "--image-root", str(tmp_path),
+        execute(parser().parse_args(prefix + ["describe", "--manifest", str(manifest), "--image-root", str(tmp_path),
                                      "--output", str(tmp_path / "described.jsonl")]))

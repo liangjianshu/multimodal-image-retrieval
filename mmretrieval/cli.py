@@ -16,8 +16,8 @@ def load_config(path):
     if not isinstance(supplied, dict) or set(supplied) - set(DEFAULTS):
         raise ValueError("Unknown config keys; see configs/default.json")
     config = {**DEFAULTS, **supplied}
-    if config["backend"] not in ("taiyi-clip", "embeddinggemma2"):
-        raise ValueError("backend must be taiyi-clip or embeddinggemma2")
+    if config["backend"] not in ("taiyi-clip", "embeddinggemma2", "qwen-gemma2"):
+        raise ValueError("backend must be taiyi-clip, embeddinggemma2, or qwen-gemma2")
     if config["embedding_dimension"] not in (128, 256, 512, 768):
         raise ValueError("Unsupported embedding dimension")
     if config["vision_tokens"] not in (70, 140, 280, 560, 1120):
@@ -90,8 +90,13 @@ def demo(output):
 
 def execute(args):
     config = load_config(args.config)
+    if config["backend"] == "qwen-gemma2" and args.command in ("index", "search", "evaluate"):
+        from .hybrid import execute_hybrid
+        return execute_hybrid(args, config)
     if config["backend"] == "embeddinggemma2" and args.command in ("train", "describe"):
         raise ValueError("train/describe target Qwen, not EmbeddingGemma; use configs/taiyi-clip.json in a separate models environment")
+    if config["backend"] == "qwen-gemma2" and args.command == "train":
+        raise ValueError("Qwen training uses configs/taiyi-clip.json in the separate models environment")
     if config["backend"] == "embeddinggemma2" and args.command in ("index", "search", "evaluate"):
         from .direct import execute_direct
         return execute_direct(args, config)

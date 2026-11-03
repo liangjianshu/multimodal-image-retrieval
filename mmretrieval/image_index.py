@@ -41,16 +41,18 @@ class ImageIndex:
             if self.metadata.get(key) != value:
                 raise ValueError(f"Index {key} differs from the query encoder; rebuild the index")
 
-    def search(self, query, top_k=5, exclude_ids=(), min_score=None):
+    def search(self, query, top_k=5, exclude_ids=(), min_score=None, include_ids=None):
         query = normalized(query)
         if query.shape != (self.embeddings.shape[1],):
             raise ValueError("Query dimensions differ from image embeddings")
         if top_k is not None and (type(top_k) is not int or top_k < 1):
             raise ValueError("top_k must be a positive integer or None")
         excluded = set(exclude_ids)
-        scores = self.embeddings @ query
-        order = sorted((i for i, row in enumerate(self.rows) if row["id"] not in excluded),
-                       key=lambda i: (-float(scores[i]), self.rows[i]["id"]))
-        results = [{**self.rows[i], "score": float(scores[i])} for i in order
-                   if min_score is None or scores[i] >= min_score]
+        included = None if include_ids is None else set(include_ids)
+        candidates = [i for i, row in enumerate(self.rows) if row["id"] not in excluded
+                      and (included is None or row["id"] in included)]
+        scores = self.embeddings[candidates] @ query
+        order = sorted(range(len(candidates)), key=lambda j: (-float(scores[j]), self.rows[candidates[j]]["id"]))
+        results = [{**self.rows[candidates[j]], "score": float(scores[j])} for j in order
+                   if min_score is None or scores[j] >= min_score]
         return results if top_k is None else results[:top_k]

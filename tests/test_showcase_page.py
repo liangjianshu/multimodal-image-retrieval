@@ -31,7 +31,7 @@ def test_standalone_page_contains_real_initial_images(tmp_path):
     report = json.loads(results_path.read_text(encoding="utf-8"))
     first_query = report["queries"][0]
     expected_results = [r for r in first_query["results"]
-                        if report.get("backend") != "embeddinggemma2" or r["score"] >= 0.66]
+                        if report.get("backend") not in ("embeddinggemma2", "qwen-gemma2") or r["score"] >= 0.66]
     parser = StaticImages()
     parser.feed(page)
     assert len(parser.sources) == len(expected_results)

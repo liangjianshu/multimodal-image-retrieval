@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "multimodal-image-retrieval"
 version = "0.1.0"
-description = "Visual product search and private image-library retrieval with native multimodal EmbeddingGemma 2 and optional Qwen/CLIP baselines"
+description = "Visual product search with Qwen intent/category routing and native EmbeddingGemma 2 image embeddings"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -15,6 +15,7 @@ dependencies = ["numpy>=1.24,<3", "Pillow>=10,<13"]
 [project.optional-dependencies]
 models = ["torch==2.9.0", "torchvision==0.24.0", "transformers==4.57.1", "accelerate==1.11.0", "peft==0.17.1", "qwen-vl-utils==0.0.14"]
 gemma = ["torch>=2.7,<3", "torchvision>=0.22,<1", "transformers==5.22.1", "sentence-transformers==6.2.0"]
+hybrid = ["torch>=2.7,<3", "torchvision>=0.22,<1", "transformers==5.22.1", "sentence-transformers==6.2.0", "peft==0.20.0", "accelerate==1.11.0", "qwen-vl-utils==0.0.14"]
 dev = ["pytest>=8,<10"]
 
 [project.urls]

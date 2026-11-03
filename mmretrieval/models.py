@@ -4,7 +4,7 @@ import json
 import numpy as np
 
 DEFAULTS = {
-    "backend": "embeddinggemma2",
+    "backend": "qwen-gemma2",
     "embedding_model": "google/embeddinggemma-2",
     "embedding_revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
     "embedding_model_path": None, "embedding_dimension": 768,
@@ -14,8 +14,8 @@ DEFAULTS = {
     "vl_model": "Qwen/Qwen2.5-VL-7B-Instruct",
     "text_model": "Qwen/Qwen2.5-3B-Instruct",
     "adapter": None, "device": "auto", "max_pixels": 262144,
-    "max_new_tokens": 256, "category_ratio": 0.85, "image_weight": 0.5,
-    "prompt_profile": "standard",
+    "max_new_tokens": 384, "category_ratio": 0.85, "image_weight": 0.5,
+    "prompt_profile": "historical",
     "intent_profile": "preserve",
 }
 
@@ -130,19 +130,42 @@ class Qwen:
             raise ValueError("Description response requires description text")
         return result
 
-    def intent(self, text, image=None):
+    def category_groups(self, categories):
+        from .intent import CATEGORY_GROUP_PROMPT
+        mapping = extract_json(self.generate(CATEGORY_GROUP_PROMPT + json.dumps(categories, ensure_ascii=False)))
+        if not isinstance(mapping, dict) or set(mapping) != set(categories):
+            raise ValueError("Category normalization must cover every gallery label")
+        if any(not isinstance(v, str) or v not in categories for v in mapping.values()):
+            raise ValueError("Category normalization invented a label")
+        if any(mapping[v] != v for v in mapping.values()):
+            raise ValueError("Category representatives must map to themselves")
+        return mapping
+
+    def intent(self, text, image=None, *, available_categories=None, category_aliases=None):
         if self.config.get("intent_profile", "preserve") == "preserve":
-            if image is not None and not text.strip():
+            if available_categories is None and image is not None and not text.strip():
                 # An image-only request in this search tool already specifies the operation.
                 visual = self.describe(image)
                 return {"needs_retrieval": True, "target_category": "、".join(visual["categories"]),
                         "description": visual["description"], "constraints": [], "top_k": None,
                         "source": "image-description"}
-            from .intent import PRESERVE_INTENT_PROMPT
-            user_input = json.dumps({"text": text, "has_reference_image": image is not None}, ensure_ascii=False)
-            result = extract_json(self.generate(PRESERVE_INTENT_PROMPT + user_input, image))
+            from .intent import PRESERVE_INTENT_PROMPT, CATEGORY_ROUTING_PROMPT
+            payload = {"text": text, "has_reference_image": image is not None}
+            prompt = PRESERVE_INTENT_PROMPT
+            if available_categories is not None:
+                payload["available_categories"] = available_categories
+                prompt += CATEGORY_ROUTING_PROMPT + "\n用户输入（JSON 数据）：\n"
+            result = extract_json(self.generate(prompt + json.dumps(payload, ensure_ascii=False), image))
             if not isinstance(result, dict) or type(result.get("needs_retrieval")) is not bool:
                 raise ValueError("Intent response requires boolean needs_retrieval")
+            if not result["needs_retrieval"]:
+                # A negative routing decision is complete. Retrieval-only metadata
+                # may be omitted/null and must never block or trigger a search.
+                stopped = {"needs_retrieval": False, "target_category": "", "description": "",
+                           "constraints": [], "top_k": None}
+                if available_categories is not None:
+                    stopped.update(category_filter="none", candidate_categories=[], raw_response=result)
+                return stopped
             if any(not isinstance(result.get(key), str) for key in ("description", "target_category")):
                 raise ValueError("Intent response requires text description and target_category")
             constraints = result.get("constraints")
@@ -151,6 +174,33 @@ class Qwen:
             k = result.get("top_k")
             if k is not None and (type(k) is not int or not 1 <= k <= 1000):
                 raise ValueError("Intent top_k must be null or an integer from 1 to 1000")
+            if available_categories is not None:
+                # Preserve the exact model fields before schema defaults/operation rules.
+                raw_response = dict(result)
+                aliases = category_aliases or {}
+                recognized = aliases.get(result["target_category"], result["target_category"])
+                if isinstance(result.get("candidate_categories"), list):
+                    result["candidate_categories"] = [aliases.get(c, c) if isinstance(c, str) else c
+                                                      for c in result["candidate_categories"]]
+                if recognized in available_categories and (
+                    result.get("category_filter") in (None, "all") or "candidate_categories" not in result
+                ):
+                    # A known, model-recognized target supplies an unambiguous filter
+                    # if the model omits the additional routing schema. No label is invented.
+                    result.update(category_filter="selected", candidate_categories=[recognized],
+                                  category_resolution="exact-recognized-category")
+                if image is not None and not text.strip():
+                    # Visible attributes are not explicit user constraints.
+                    result["constraints"] = []
+                mode, selected = result.get("category_filter"), result.get("candidate_categories")
+                if mode not in ("selected", "all", "none") or not isinstance(selected, list):
+                    raise ValueError("Intent requires category_filter and candidate_categories")
+                if any(not isinstance(c, str) or c not in available_categories for c in selected):
+                    raise ValueError("Intent selected an unknown gallery category")
+                if mode == "none" or (mode == "all" and selected):
+                    raise ValueError("Invalid category filter for retrieval")
+                result["candidate_categories"] = list(dict.fromkeys(selected))
+                result["raw_response"] = raw_response
             return result
         if self.config.get("prompt_profile") == "historical":
             from .historical_prompts import INTENT_PROMPT
