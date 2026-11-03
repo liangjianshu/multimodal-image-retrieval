@@ -1,0 +1,22 @@
+name: 场景反馈与建议 / Use case or feature
+description: 介绍你的使用场景和希望解决的问题。
+title: '[Feature] '
+labels: ['enhancement']
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: 使用场景 / Use case
+      description: 你在处理什么图片、希望如何检索？
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 当前遇到的问题 / Problem
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议与替代方案 / Proposal

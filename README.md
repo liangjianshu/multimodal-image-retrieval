@@ -1,5 +1,10 @@
 # 图搜图 / 文搜图：拍立淘式商品搜索与私有图库检索
 
+[![Tests](https://github.com/liangjianshu/multimodal-image-retrieval/actions/workflows/tests.yml/badge.svg)](https://github.com/liangjianshu/multimodal-image-retrieval/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+[English overview](README.en.md) · [使用反馈 / Issues](https://github.com/liangjianshu/multimodal-image-retrieval/issues) · [参与贡献](CONTRIBUTING.md)
+
 **给一张图，找相似商品；写一句话，搜自己的图片库。**
 
 Visual Product Search · Text-to-Image Search · Multimodal Retrieval
@@ -34,7 +39,7 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 本项目由多模态检索课程实践及个人实验整理而来，包含 Taiyi-CLIP 图文编码、Qwen2.5-VL 语义建库、类别粗筛与描述向量排序，以及可选的领域 SFT。适合学习、验证小规模图片素材库的检索方案。
 
-当前为私有整理版。`mmretrieval/` 是统一运行入口；`legacy/` 保存经过凭据和个人路径清理的历史源码。**模型权重、原始 COCO / ImageNet 图片、个人训练数据与大型向量文件没有上传。**
+`mmretrieval/` 是统一运行入口；`legacy/` 保存经过凭据和个人路径清理的历史源码，供追溯实验设计。**模型权重、原始 COCO / ImageNet 图片、个人训练数据与大型向量文件没有上传。**
 
 ## 能做什么
 
@@ -77,7 +82,7 @@ pip install -e .
 python -m mmretrieval demo --output artifacts/demo
 ```
 
-私有仓库需要你的 GitHub 账号具有访问权限。`demo` 会生成六张几何图片，并完成清单校验、索引保存/加载、检索和训练集划分。它使用**预设的合成向量**，只检查程序连接是否正常，不下载模型，也不代表模型检索效果。
+`demo` 会生成六张几何图片，并完成清单校验、索引保存/加载、检索和训练集划分。它使用**预设的合成向量**，只检查程序连接是否正常，不下载模型，也不代表模型检索效果。
 
 运行真实检索和训练时再安装：
 
@@ -242,8 +247,12 @@ pytest -q
 
 ## 来源与许可
 
-整理说明见 [PROVENANCE](docs/PROVENANCE.md)。本仓库当前尚未为课程来源内容或整体仓库指定新的开源许可证；公开前需明确相应许可。历史 Qwen 代码保留其 Apache-2.0 许可证。依赖和模型分别遵循自身许可，数据集请从官方渠道获取。
+项目代码采用 [MIT License](LICENSE)，另有许可证声明的第三方文件除外。`legacy/project_three/Qwen3-VL/` 下的 Qwen 源码继续遵循其 Apache-2.0 许可证，详见 [第三方说明](THIRD_PARTY_NOTICES.md)。来源和整理范围见 [PROVENANCE](docs/PROVENANCE.md)。依赖和模型分别遵循自身许可，数据集请从官方渠道获取。
 
 - [Qwen2.5-VL 模型](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) / [官方代码与训练接口](https://github.com/QwenLM/Qwen3-VL)
 - [Taiyi-CLIP 中文文本编码器](https://huggingface.co/IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese) / [CLIP ViT-L/14](https://huggingface.co/openai/clip-vit-large-patch14)
 - [PEFT](https://github.com/huggingface/peft) / [COCO](https://cocodataset.org/) / [ImageNet](https://www.image-net.org/)
+
+## 反馈与参与
+
+欢迎通过 [Issue](https://github.com/liangjianshu/multimodal-image-retrieval/issues/new/choose) 分享你的接入场景、复现问题或改进建议；提交时请说明环境和最小复现步骤。贡献方式见 [CONTRIBUTING](CONTRIBUTING.md)。如果项目对你学习或接入自己的图库有帮助，欢迎 Star 收藏。

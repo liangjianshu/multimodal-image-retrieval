@@ -1,0 +1,31 @@
+name: 运行问题 / Bug report
+description: 帮助复现安装、数据处理、检索或训练错误。
+title: '[Bug] '
+labels: ['bug']
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境 / Environment
+      description: 操作系统、Python、PyTorch、Transformers 版本，以及 GPU（如使用）。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 最小复现步骤 / Reproduction
+      description: 提供完整命令和不含私人数据的最小样例。
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 预期与实际行为 / Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志 / Logs
+      description: 请先移除密钥、令牌和个人数据。
+      render: text

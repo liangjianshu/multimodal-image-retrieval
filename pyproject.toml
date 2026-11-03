@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,12 +7,18 @@ name = "multimodal-image-retrieval"
 version = "0.1.0"
 description = "Visual product search and private image-library retrieval with Chinese text/image queries, Qwen and CLIP"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.24,<3", "Pillow>=10,<13"]
 
 [project.optional-dependencies]
 models = ["torch==2.9.0", "torchvision==0.24.0", "transformers==4.57.1", "accelerate==1.11.0", "peft==0.17.1", "qwen-vl-utils==0.0.14"]
 dev = ["pytest>=8,<10"]
+
+[project.urls]
+Repository = "https://github.com/liangjianshu/multimodal-image-retrieval"
+Issues = "https://github.com/liangjianshu/multimodal-image-retrieval/issues"
 
 [project.scripts]
 mm-retrieval = "mmretrieval.cli:main"
