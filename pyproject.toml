@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "multimodal-image-retrieval"
 version = "0.1.0"
-description = "Chinese text/image retrieval with Qwen semantic indexing and optional LoRA adaptation"
+description = "Visual product search and private image-library retrieval with Chinese text/image queries, Qwen and CLIP"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.24,<3", "Pillow>=10,<13"]
