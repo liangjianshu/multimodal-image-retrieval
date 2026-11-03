@@ -27,17 +27,19 @@ def write_json(path, value):
 def audit_adapter(model, adapter_path):
     """Check the actual loaded LoRA tensors against the supplied checkpoint."""
     from safetensors import safe_open
+    from peft import get_peft_model_state_dict
     import torch
     path = Path(adapter_path)
     weights = path / "adapter_model.safetensors"
-    params = dict(model.model.named_parameters())
+    # PEFT's export mapping covers both LoRA and modules_to_save (visual merger).
+    # The latter has a different live parameter name from its checkpoint key.
+    params = get_peft_model_state_dict(model.model, adapter_name="default")
     checked, nonzero_b = 0, 0
     with safe_open(weights, framework="pt", device="cpu") as saved:
         for name in saved.keys():
-            loaded_name = name.replace(".lora_A.", ".lora_A.default.").replace(".lora_B.", ".lora_B.default.")
-            if loaded_name not in params:
+            if name not in params:
                 raise ValueError(f"Adapter tensor not loaded: {name}")
-            actual = params[loaded_name].detach().cpu()
+            actual = params[name].detach().cpu()
             expected = saved.get_tensor(name).to(actual.dtype)
             if not torch.equal(actual, expected):
                 raise ValueError(f"Loaded adapter tensor differs from checkpoint: {name}")

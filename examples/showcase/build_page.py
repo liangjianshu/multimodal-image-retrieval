@@ -124,7 +124,16 @@ def main():
         method = "路线 A · 类别 + 描述检索" if semantic else "路线 B · 原图向量检索"
         intro = "先由 Qwen 判断检索意图，再识别类别、筛选候选，按图片描述的向量排序。" if semantic else "先由 Qwen 判断检索意图，再直接编码完整文字与原图，不使用类别粗筛。"
         model_note = "路线 A：Qwen 原 LoRA 生成类别与描述，Taiyi 编码文字；图文查询结合 CLIP 参考图向量。" if semantic else ("路线 B：EmbeddingGemma 2 已完成类别对比学习试训；这组演示不证明细粒度属性提升。" if report.get('training_state') == 'finetuned' else "路线 B 对照：当前展示未微调的公开权重基线。")
-        if routed and not semantic:
+        if report.get('study_provenance'):
+            badge = "<b>Qwen2.5-VL-7B</b> · 共用意图模型"
+            model_note = ("路线 A：验证集选定的新 Qwen 生成类别与描述；Taiyi 编码描述，CLIP 编码参考图。" if semantic else
+                          "路线 B：验证集选定的新 EmbeddingGemma 2 直接编码图片与文字。" if report.get('training_state') == 'study-finetuned' else
+                          "路线 B 对照：未微调的公开 EmbeddingGemma 2。")
+            model_note += "意图识别沿用同一个原 Qwen LoRA。12 张图仅作实际输出展示，类别训练不等于细节属性训练。"
+            model_note += ' <a href="https://github.com/liangjianshu/multimodal-image-retrieval/blob/main/docs/RESTORED_STUDY.md">原图库实验说明</a>'
+            if not semantic:
+                model_note += ' · <a href="https://liangjianshu.github.io/multimodal-image-retrieval/route-b-baseline/">未微调对照</a>'
+        elif not semantic:
             model_note += ' <a href="https://liangjianshu.github.io/multimodal-image-retrieval/route-b-baseline/">微调前对照</a> · <a href="https://github.com/liangjianshu/multimodal-image-retrieval/blob/main/docs/EMBEDDING_EXPERIMENT.md">试训报告</a>'
     elif hybrid:
         model_name = report["config"]["vl_model"].split("/")[-1].replace("-Instruct", "")

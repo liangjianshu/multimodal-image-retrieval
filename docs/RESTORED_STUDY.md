@@ -89,4 +89,6 @@ python examples/training/restore_original_gallery.py \
 
 本基准用固定 15 类别名映射粗筛，以及不混入生成描述的纯参考图查询。网页使用开放类别的语义粗筛及图文融合，因此网页案例单独验收；基准指标不能直接当作整个网页自由查询的准确率。
 
+正式实验完成后的展示入口为 `examples/showcase/run_restored_winners.py`，接收 `--study-root`、`--model-root`、`--intent-adapter` 和 `--output`。它先核对正式实验和选中权重，再用新 Qwen 重新生成 12 张 CC0 图片的类别与描述，并分别运行路线 A、新 Embedding 路线 B、未微调 Embedding 对照。三者共用原 Qwen LoRA 实际生成的意图，记录意图模型、类别模型及编码器各自的哈希；不将新类别模型当作经过意图训练的模型。
+
 测试图片、训练图片及权重不作为代码仓库附件上传。最终结果尚未完成时，不以准备阶段试跑分数作为正式效果指标。

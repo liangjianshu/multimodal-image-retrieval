@@ -50,6 +50,28 @@ def test_mlp_weights_survive_adapter_save_reload(tmp_path):
     assert all(torch.allclose(p, torch.full_like(p, 0.123)) for p in weights)
 
 
+@pytest.mark.parametrize('mode', ['llm-lora', 'mlp-llm'])
+def test_showcase_audit_checks_saved_lora_and_merger_tensors(tmp_path, mode):
+    from types import SimpleNamespace
+    from examples.showcase.run import audit_adapter
+    model, _ = configure_training(tiny_model(), mode, rank=2, alpha=4)
+    with torch.no_grad():
+        for name, parameter in model.named_parameters():
+            if parameter.requires_grad:
+                parameter.fill_(.125)
+    model.save_pretrained(tmp_path / 'adapter')
+    loaded = PeftModel.from_pretrained(tiny_model(), tmp_path / 'adapter')
+    result = audit_adapter(SimpleNamespace(model=loaded), tmp_path / 'adapter')
+    assert result['verified_tensors'] > 0 and result['nonzero_lora_b_tensors'] > 0
+    # A changed merger must be detected too, not just the LoRA matrices.
+    changed = next(p for n, p in loaded.named_parameters() if
+                   ('modules_to_save.default' in n if mode == 'mlp-llm' else 'lora_B' in n))
+    with torch.no_grad():
+        changed.add_(.1)
+    with pytest.raises(ValueError, match='differs from checkpoint'):
+        audit_adapter(SimpleNamespace(model=loaded), tmp_path / 'adapter')
+
+
 def test_tiny_multimodal_training_step_updates_merger_and_lora():
     torch.manual_seed(42)
     model, trainable = configure_training(tiny_model(), "mlp-llm", rank=2, alpha=4)
