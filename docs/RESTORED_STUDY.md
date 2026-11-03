@@ -87,6 +87,8 @@ python examples/training/restore_original_gallery.py \
 
 报告入口：`examples/training/report_restored_study.py --study-root /path/to/study --output /path/to/report`。它要求 8 组完整实验及 24 个检查点、5 组最终评测全部完成，核对选择记录、数据清单、权重哈希和验证集阈值后，输出 HTML、JSON 和 CSV。逐查询差值保留退化案例，不只展示改善。
 
+在安装 `matplotlib` 的环境中，可用 `examples/training/plot_restored_study.py --report /path/to/report/report.json --output /path/to/report/figures` 导出选型曲线、固定测试结果及训练耗时图，均提供 PNG 和 PDF。图表保存源报告哈希；单个种子的结果不附未经验证的显著性结论。
+
 本基准用固定 15 类别名映射粗筛，以及不混入生成描述的纯参考图查询。网页使用开放类别的语义粗筛及图文融合，因此网页案例单独验收；基准指标不能直接当作整个网页自由查询的准确率。
 
 正式实验完成后的展示入口为 `examples/showcase/run_restored_winners.py`，接收 `--study-root`、`--model-root`、`--intent-adapter` 和 `--output`。它先核对正式实验和选中权重，再用新 Qwen 重新生成 12 张 CC0 图片的类别与描述，并分别运行路线 A、新 Embedding 路线 B、未微调 Embedding 对照。三者共用原 Qwen LoRA 实际生成的意图，记录意图模型、类别模型及编码器各自的哈希；不将新类别模型当作经过意图训练的模型。
