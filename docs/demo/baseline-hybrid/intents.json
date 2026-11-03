@@ -1,0 +1,220 @@
+{
+  "white-bicycle": {
+    "needs_retrieval": true,
+    "target_category": "自行车",
+    "description": "白色自行车",
+    "constraints": [
+      "白色"
+    ],
+    "top_k": null,
+    "category_filter": "selected",
+    "candidate_categories": [
+      "自行车"
+    ],
+    "raw_response": {
+      "needs_retrieval": true,
+      "target_category": "自行车",
+      "description": "白色自行车",
+      "constraints": [
+        "白色"
+      ],
+      "top_k": null,
+      "category_filter": "selected",
+      "candidate_categories": [
+        "自行车"
+      ]
+    }
+  },
+  "red-chair": {
+    "needs_retrieval": true,
+    "target_category": "椅子",
+    "description": "红色的椅子",
+    "constraints": [
+      "红色"
+    ],
+    "top_k": null,
+    "category_filter": "selected",
+    "candidate_categories": [
+      "椅子"
+    ],
+    "raw_response": {
+      "needs_retrieval": true,
+      "target_category": "椅子",
+      "description": "红色的椅子",
+      "constraints": [
+        "红色"
+      ],
+      "top_k": null,
+      "category_filter": "selected",
+      "candidate_categories": [
+        "椅子"
+      ]
+    }
+  },
+  "coffee": {
+    "needs_retrieval": true,
+    "target_category": "杯子",
+    "description": "咖啡杯",
+    "constraints": [],
+    "top_k": null,
+    "category_filter": "selected",
+    "candidate_categories": [
+      "杯子"
+    ],
+    "raw_response": {
+      "needs_retrieval": true,
+      "target_category": "杯子",
+      "description": "咖啡杯",
+      "constraints": [],
+      "top_k": null,
+      "category_filter": "selected",
+      "candidate_categories": [
+        "杯子"
+      ]
+    }
+  },
+  "ornate-cup": {
+    "needs_retrieval": true,
+    "target_category": "杯子",
+    "description": "粉色的杯子",
+    "constraints": [],
+    "top_k": null,
+    "category_filter": "selected",
+    "candidate_categories": [
+      "杯子"
+    ],
+    "category_resolution": "exact-recognized-category",
+    "raw_response": {
+      "needs_retrieval": true,
+      "target_category": "杯子",
+      "description": "粉色的杯子",
+      "constraints": [
+        "粉色",
+        "杯子"
+      ],
+      "top_k": null
+    }
+  },
+  "similar-chair": {
+    "needs_retrieval": true,
+    "target_category": "椅子",
+    "description": "黑色框架，编织坐垫，无扶手，四条腿，室内环境",
+    "constraints": [],
+    "top_k": null,
+    "category_filter": "selected",
+    "candidate_categories": [
+      "椅子"
+    ],
+    "category_resolution": "exact-recognized-category",
+    "raw_response": {
+      "needs_retrieval": true,
+      "target_category": "椅子",
+      "description": "黑色框架，编织坐垫，无扶手，四条腿，室内环境",
+      "constraints": [
+        "黑色框架",
+        "编织坐垫",
+        "无扶手",
+        "四条腿",
+        "室内环境"
+      ],
+      "top_k": null
+    }
+  },
+  "similar-cup": {
+    "needs_retrieval": true,
+    "target_category": "杯子",
+    "description": "白色杯子装着棕色液体",
+    "constraints": [],
+    "top_k": null,
+    "category_filter": "selected",
+    "candidate_categories": [
+      "杯子"
+    ],
+    "category_resolution": "exact-recognized-category",
+    "raw_response": {
+      "needs_retrieval": true,
+      "target_category": "杯子",
+      "description": "白色杯子装着棕色液体",
+      "constraints": [
+        "白色",
+        "棕色液体"
+      ],
+      "top_k": null
+    }
+  },
+  "bicycle-in-grass": {
+    "needs_retrieval": true,
+    "target_category": "自行车",
+    "description": "草地上的自行车",
+    "constraints": [
+      "草地上"
+    ],
+    "top_k": null,
+    "category_filter": "selected",
+    "candidate_categories": [
+      "自行车"
+    ],
+    "category_resolution": "exact-recognized-category",
+    "raw_response": {
+      "needs_retrieval": true,
+      "target_category": "自行车",
+      "description": "草地上的自行车",
+      "constraints": [
+        "草地上"
+      ],
+      "top_k": null
+    }
+  },
+  "no-retrieval-qa": {
+    "needs_retrieval": false,
+    "target_category": "",
+    "description": "",
+    "constraints": [],
+    "top_k": null,
+    "category_filter": "none",
+    "candidate_categories": [],
+    "raw_response": {
+      "needs_retrieval": false,
+      "category_filter": "none",
+      "candidate_categories": []
+    }
+  },
+  "no-retrieval-description": {
+    "needs_retrieval": false,
+    "target_category": "",
+    "description": "",
+    "constraints": [],
+    "top_k": null,
+    "category_filter": "none",
+    "candidate_categories": [],
+    "raw_response": {
+      "needs_retrieval": false,
+      "target_category": "杯子",
+      "description": "粉色的杯子，带有金色装饰的蝴蝶图案，放在粉色的碟子上，放在木质桌面上。",
+      "constraints": [],
+      "top_k": null
+    }
+  },
+  "explicit-two-cups": {
+    "needs_retrieval": true,
+    "target_category": "杯子",
+    "description": "杯子",
+    "constraints": [],
+    "top_k": 2,
+    "category_filter": "selected",
+    "candidate_categories": [
+      "杯子"
+    ],
+    "raw_response": {
+      "needs_retrieval": true,
+      "target_category": "杯子",
+      "description": "杯子",
+      "constraints": [],
+      "top_k": 2,
+      "category_filter": "selected",
+      "candidate_categories": [
+        "杯子"
+      ]
+    }
+  }
+}

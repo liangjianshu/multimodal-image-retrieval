@@ -16,8 +16,8 @@ def load_config(path):
     if not isinstance(supplied, dict) or set(supplied) - set(DEFAULTS):
         raise ValueError("Unknown config keys; see configs/default.json")
     config = {**DEFAULTS, **supplied}
-    if config["backend"] not in ("taiyi-clip", "embeddinggemma2", "qwen-gemma2"):
-        raise ValueError("backend must be taiyi-clip, embeddinggemma2, or qwen-gemma2")
+    if config["backend"] not in ("taiyi-clip", "embeddinggemma2", "qwen-gemma2", "qwen-semantic", "qwen-embedding"):
+        raise ValueError("Unsupported backend; use a supplied configuration in configs/")
     if config["embedding_dimension"] not in (128, 256, 512, 768):
         raise ValueError("Unsupported embedding dimension")
     if config["vision_tokens"] not in (70, 140, 280, 560, 1120):
@@ -90,13 +90,19 @@ def demo(output):
 
 def execute(args):
     config = load_config(args.config)
+    if args.command == "train-embedding":
+        from .embedding_training import run_embedding_training
+        return run_embedding_training(args, config)
+    if config["backend"] in ("qwen-semantic", "qwen-embedding") and args.command in ("index", "search", "evaluate"):
+        from .routes import execute_route
+        return execute_route(args, config)
     if config["backend"] == "qwen-gemma2" and args.command in ("index", "search", "evaluate"):
         from .hybrid import execute_hybrid
         return execute_hybrid(args, config)
     if config["backend"] == "embeddinggemma2" and args.command in ("train", "describe"):
         raise ValueError("train/describe target Qwen, not EmbeddingGemma; use configs/taiyi-clip.json in a separate models environment")
-    if config["backend"] == "qwen-gemma2" and args.command == "train":
-        raise ValueError("Qwen training uses configs/taiyi-clip.json in the separate models environment")
+    if config["backend"] in ("qwen-gemma2", "qwen-embedding") and args.command == "train":
+        raise ValueError("Use train-embedding for embeddings; Qwen train uses configs/taiyi-clip.json in the separate models environment")
     if config["backend"] == "embeddinggemma2" and args.command in ("index", "search", "evaluate"):
         from .direct import execute_direct
         return execute_direct(args, config)
@@ -279,6 +285,16 @@ def parser():
     train.add_argument("--learning-rate", type=float, default=2e-5)
     train.add_argument("--max-length", type=int, default=4096)
     train.add_argument("--seed", type=int, default=42)
+    emb = sub.add_parser("train-embedding", help="Fine-tune text/image embeddings with supervised triplets")
+    emb.add_argument("--train", required=True)
+    emb.add_argument("--val", required=True)
+    emb.add_argument("--image-root", required=True)
+    emb.add_argument("--output", required=True)
+    emb.add_argument("--epochs", type=float, default=1.)
+    emb.add_argument("--max-steps", type=int)
+    emb.add_argument("--grad-accum", type=int, default=4)
+    emb.add_argument("--learning-rate", type=float, default=2e-6)
+    emb.add_argument("--seed", type=int, default=42)
     return p
 
 

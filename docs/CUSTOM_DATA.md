@@ -1,9 +1,9 @@
 # 换成自己的数据
 
-## 路线 A：只做素材检索
+## 准备检索图库
 
 1. 图片保留在运行机器上，准备 `file_path` 相对同一个 `image-root` 的清单。
-2. 默认 `qwen-gemma2` 的 `index` 会调用 Qwen 生成类别、归并类别名称，再用 EmbeddingGemma 2 编码原图；原始类别和描述可以为空。
+2. 默认路线 A（`qwen-semantic`）调用 Qwen 生成类别与描述，再编码类别和描述。路线 B（`qwen-embedding`）直接编码原图。两者的每条查询都经过 Qwen 意图识别；原始类别和描述可以为空。
 3. 建立新索引，使用 `search`。这条路线不需要训练模型。
 
 建议目录：
@@ -25,9 +25,11 @@ data/
 
 参考图可以位于 `queries/`；只有写进 `catalog.jsonl` 的图片会入库。如果通过 `prepare` 递归扫描目录，目录内全部支持的图片都会入库，因此请在扫描后添加查询图片，或自行生成只包含图库图片的清单。
 
-## 路线 B：增加领域微调
+## 增加领域微调
 
-此路线针对独立的 Qwen / Taiyi-CLIP 历史分支（`configs/taiyi-clip.json`、`.[models]` 环境），不是 EmbeddingGemma 2 微调。在路线 A 的数据基础上，核对图片的主要物体标签。`make-sft` 使用 `categories` 生成训练答案，不会把 `retrieval_categories` 预测值直接当作真值。
+Embedding 路线 B 的三元组格式与训练入口见 [Embedding 训练指南](EMBEDDING_TRAINING.md)。
+
+下面针对独立的 Qwen / Taiyi-CLIP 历史分支（`configs/taiyi-clip.json`、`.[models]` 环境），不是 EmbeddingGemma 2 微调。在图库数据基础上，核对图片的主要物体标签。`make-sft` 使用 `categories` 生成训练答案，不会把 `retrieval_categories` 预测值直接当作真值。
 
 类别映射与难负类别对需要换成你的领域。例如鞋类：
 
@@ -48,7 +50,7 @@ data/
 
 ## 字段说明
 
-默认混合链路使用 Qwen 生成的 `retrieval_categories` 和 `retrieval_category_groups` 进行粗筛，EmbeddingGemma 2 直接编码原图。纯原图基线不使用类别，历史 `taiyi-clip` 还使用描述向量排序。
+路线 A 使用 Qwen 生成的 `retrieval_categories` 做类别向量粗筛，再按描述向量排序。路线 B 不读取类别或描述来排名；原混合版 `qwen-gemma2` 仍可独立复跑。
 
 | 字段 | 来源 | 用途 |
 | --- | --- | --- |
@@ -56,16 +58,16 @@ data/
 | `file_path` | 用户 | 相对 image-root 的文件位置 |
 | `categories` | 人工标签 / 分类目录 | SFT 真值；无模型元数据时也可用于素材检索 |
 | `description` | 人工描述，可为空 | 无生成描述时用于索引 |
-| `retrieval_categories` | Qwen 预测 | 原类别与类别归并的来源 |
-| `retrieval_category_groups` | Qwen 归并结果 | 当前混合检索的类别粗筛 |
-| `retrieval_description` | Qwen 预测 | 当前仅供展示；历史分支用于描述向量排序 |
+| `retrieval_categories` | Qwen 预测 | 路线 A 类别向量的来源 |
+| `retrieval_category_groups` | Qwen 归并结果 | 旧混合版本的类别粗筛 |
+| `retrieval_description` | Qwen 预测 | 路线 A 用于描述排序；路线 B 仅供展示 |
 | `retrieval_source` | `describe` 自动记录 | 模型和适配器来源追踪 |
 
 `examples/catalog.jsonl` 是格式示例，其中图片不随仓库分发。不能直接对示例文件执行真实建库，必须将它替换成现有图片对应的清单。
 
 ## 已有 COCO 格式标注
 
-无需重新下载图片。以下示例导入本地 `instances` 标注，产生相对路径清单。请根据任务人工处理多物体/背景标签；默认混合检索使用 Qwen 预测类别，不使用标注类别；评测历史语义流程时，先 `describe` 生成预测字段，以免把标注类别当作模型预测能力。
+无需重新下载图片。以下示例导入本地 `instances` 标注，产生相对路径清单。请根据任务人工处理多物体/背景标签；路线 A 使用 Qwen 预测类别，路线 B 不进行类别筛选；评测历史语义流程时，先 `describe` 生成预测字段，以免把标注类别当作模型预测能力。
 
 ```python
 import json

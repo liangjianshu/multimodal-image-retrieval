@@ -1,0 +1,2432 @@
+{
+  "encoder": {
+    "backend": "embeddinggemma2",
+    "model": "local/embeddinggemma2-finetuned",
+    "revision": "f320f2eb6b95b797744738cb51b5232ff5c99a5768c8928bb3b7a7c94dc90deb",
+    "dimension": 768,
+    "vision_tokens": 280,
+    "query_prefix": "task: search result | query: ",
+    "corpus_input": "image-pixels",
+    "fusion": "native-joint",
+    "normalized": true,
+    "weight_sha256": "f320f2eb6b95b797744738cb51b5232ff5c99a5768c8928bb3b7a7c94dc90deb"
+  },
+  "gallery_size": 297,
+  "scope": "category retrieval; same-category images are relevant; image query itself excluded",
+  "metrics": {
+    "text": {
+      "queries": 45,
+      "hit_at_1": 0.9555555555555556,
+      "macro_hit_at_1": 0.9555555555555556,
+      "precision_at_5": 0.9422222222222223,
+      "macro_precision_at_5": 0.9422222222222223,
+      "average_precision": 0.9440199401321626,
+      "macro_average_precision": 0.9440199401321626
+    },
+    "image": {
+      "queries": 297,
+      "hit_at_1": 0.9158249158249159,
+      "macro_hit_at_1": 0.9189819376026273,
+      "precision_at_5": 0.8727272727272727,
+      "macro_precision_at_5": 0.873736179529283,
+      "average_precision": 0.7871621898747555,
+      "macro_average_precision": 0.8002555349693955
+    }
+  },
+  "per_query": [
+    {
+      "query": "自行车",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "给我看看自行车",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9782732948055528
+    },
+    {
+      "query": "a photo of a bicycle",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9817857142857143
+    },
+    {
+      "query": "碗",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8529657178570222
+    },
+    {
+      "query": "给我看看碗",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8482298873010947
+    },
+    {
+      "query": "a photo of a bowl",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8945597104420634
+    },
+    {
+      "query": "猫",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "给我看看猫",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "a photo of a cat",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "椅子",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9858405483405484
+    },
+    {
+      "query": "给我看看椅子",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9782929891428032
+    },
+    {
+      "query": "a photo of a chair",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9721942793902852
+    },
+    {
+      "query": "沙发",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9958333333333333
+    },
+    {
+      "query": "给我看看沙发",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9698064353946708
+    },
+    {
+      "query": "a photo of a couch",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9888888888888889
+    },
+    {
+      "query": "杯子",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9895161290322582
+    },
+    {
+      "query": "给我看看杯子",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9935439068100358
+    },
+    {
+      "query": "a photo of a cup",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9808699178078591
+    },
+    {
+      "query": "甜甜圈",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9913888888888889
+    },
+    {
+      "query": "给我看看甜甜圈",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9866269841269841
+    },
+    {
+      "query": "a photo of a donut",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "键盘",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.980952380952381
+    },
+    {
+      "query": "给我看看键盘",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9627450980392157
+    },
+    {
+      "query": "a photo of a keyboard",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9888888888888889
+    },
+    {
+      "query": "微波炉",
+      "label": "microwave",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.2,
+      "average_precision": 0.4970910975112655
+    },
+    {
+      "query": "给我看看微波炉",
+      "label": "microwave",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.4960277995130212
+    },
+    {
+      "query": "a photo of a microwave",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.561731164797935
+    },
+    {
+      "query": "摩托车",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "给我看看摩托车",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "a photo of a motorcycle",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9771241830065359
+    },
+    {
+      "query": "橙子",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "给我看看橙子",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "a photo of a orange",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "烤箱",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9171263376721492
+    },
+    {
+      "query": "给我看看烤箱",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9187692282187676
+    },
+    {
+      "query": "a photo of a oven",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9252189773936287
+    },
+    {
+      "query": "披萨",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9698826173826175
+    },
+    {
+      "query": "给我看看披萨",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9698826173826175
+    },
+    {
+      "query": "a photo of a pizza",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.9268402893402893
+    },
+    {
+      "query": "滑板",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "给我看看滑板",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "a photo of a skateboard",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "滑雪板",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "给我看看滑雪板",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "a photo of a snowboard",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "2da97133d1c80d44de6a",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7073774936584507
+    },
+    {
+      "query": "9b9ccab8d9a503e50ca7",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.6280736321056373
+    },
+    {
+      "query": "0d3fb4c912758b8cb003",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.49016283759369883
+    },
+    {
+      "query": "2d09654a4edf3dce9509",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9030827885681704
+    },
+    {
+      "query": "c86396a3462bf9ff39dc",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7920244396959906
+    },
+    {
+      "query": "5a53b9ce91cae867f981",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9298768254018184
+    },
+    {
+      "query": "54c54a43210a93088ad0",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7345098728915597
+    },
+    {
+      "query": "f717ff0f99dc7e8d297d",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5471412210869169
+    },
+    {
+      "query": "29ddb4835d7351880266",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8351050163642277
+    },
+    {
+      "query": "e322ebd31727212ea125",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8708663043027335
+    },
+    {
+      "query": "dfbf2205278e90c06a75",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8993105792620864
+    },
+    {
+      "query": "549f5591c9e05a14070c",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8851090157536725
+    },
+    {
+      "query": "0bcce847d2f7f97b33b4",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8706631230135147
+    },
+    {
+      "query": "bfa6c71ac57dad570bcd",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.837005028129552
+    },
+    {
+      "query": "cdc7d94279dd6b44765f",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9501045744785387
+    },
+    {
+      "query": "45f1f6efd855c55b6679",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8349328673354949
+    },
+    {
+      "query": "9cdfc5b462ec94b1d27f",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8382957713277477
+    },
+    {
+      "query": "7f94c63153e15f5a5f54",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8020755035046764
+    },
+    {
+      "query": "5d20e7cdd3e79437445f",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.6892852159564768
+    },
+    {
+      "query": "904455e7f014975823ac",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7928365420272377
+    },
+    {
+      "query": "7e4368ac36990893ccbb",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9292912046865522
+    },
+    {
+      "query": "713de4b475b9a499d412",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7676292700713315
+    },
+    {
+      "query": "7ce2acbe334f2246f832",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7916471279244679
+    },
+    {
+      "query": "c31f18bf9a2f76116067",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9001757318092554
+    },
+    {
+      "query": "353e92564a1447021243",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5218856108044773
+    },
+    {
+      "query": "00944b27925aa3352373",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8002045846842234
+    },
+    {
+      "query": "cf69fafa58cdc22774f5",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9361010995445553
+    },
+    {
+      "query": "f5449eecd9cb181db059",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7792876644049913
+    },
+    {
+      "query": "14a3824f54cb2a58acb4",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8987960325469598
+    },
+    {
+      "query": "6528f2c239bf6258abd5",
+      "label": "bicycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9032978947616411
+    },
+    {
+      "query": "d0ff2155b4dbc88af04a",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.6867257663454419
+    },
+    {
+      "query": "b965af5d422a4eff0d5f",
+      "label": "bowl",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.626571939964797
+    },
+    {
+      "query": "2d451b2675affc9cbd99",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9301320528211284
+    },
+    {
+      "query": "062ba6a02df85540c310",
+      "label": "bowl",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7014483313261509
+    },
+    {
+      "query": "5cac57c21268819dff04",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8521081120620292
+    },
+    {
+      "query": "fbd8c0b382719bf6f72e",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.6977354094909813
+    },
+    {
+      "query": "407c8b49cb6f9439f698",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5010641350211111
+    },
+    {
+      "query": "ce699493ee5d3b386359",
+      "label": "bowl",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.5768336124373276
+    },
+    {
+      "query": "b432f0e162d4364af4cb",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8957999207999209
+    },
+    {
+      "query": "5d8913119ce02fd0a3b8",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8210436830558782
+    },
+    {
+      "query": "8e26c46418effc6f3cac",
+      "label": "bowl",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.44763541098386156
+    },
+    {
+      "query": "0a48a54c861842f5f721",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.5982788040435142
+    },
+    {
+      "query": "926b20e2e183ed88b8e9",
+      "label": "bowl",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.0,
+      "average_precision": 0.10763136313055603
+    },
+    {
+      "query": "ab694b4a6b1b6acfcbc1",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9095514274085703
+    },
+    {
+      "query": "24162a1f7610853feb42",
+      "label": "bowl",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9086314479171621
+    },
+    {
+      "query": "098e654f8790287655c5",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9520146520146521
+    },
+    {
+      "query": "5ccb9000661f033f1f4a",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9846415489272633
+    },
+    {
+      "query": "eb7c2dd34a04c8031b8b",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9952380952380953
+    },
+    {
+      "query": "ba623da428336388622c",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "5bca76a4546b9defe205",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9338538654328128
+    },
+    {
+      "query": "d7a49adb117e3ee0bf77",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9655939298796442
+    },
+    {
+      "query": "24eeb9f3f46ac334be6c",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8948268398268399
+    },
+    {
+      "query": "1ffed5b09caa8c80f8fb",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9901360544217688
+    },
+    {
+      "query": "bb0c10bd915215d13691",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9235119047619048
+    },
+    {
+      "query": "1439f42654d5627cfc32",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "3879eea1407ef0aa8bad",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "acb88ddafef4287c98d1",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "093692fdef123b227881",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "17cf17a48f20bcb4a277",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8826062308981564
+    },
+    {
+      "query": "5449cc72255c90188ebe",
+      "label": "cat",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9910714285714286
+    },
+    {
+      "query": "2822e3892a9c4aa97387",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7585131254261603
+    },
+    {
+      "query": "02b3d2698c068ef4b5fe",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.37120858266039675
+    },
+    {
+      "query": "d4eab85ea9e97f6555de",
+      "label": "chair",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.3282606042794197
+    },
+    {
+      "query": "0d3f32095db020412609",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7950028926445453
+    },
+    {
+      "query": "b46d1735d9b370d644ea",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.5067145628092244
+    },
+    {
+      "query": "4b00d38d5aa6f17aadb1",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.5553648869961222
+    },
+    {
+      "query": "af01e2a5dfd1fc45cd56",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7637583481531339
+    },
+    {
+      "query": "d17dcc4b6fd9a7356aaf",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8229881429688543
+    },
+    {
+      "query": "1a6a15dfbf8c6710f20a",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8096026607921715
+    },
+    {
+      "query": "d53aec54de2cb4014858",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.6977919617265921
+    },
+    {
+      "query": "ab93041e1b63aae9a860",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.4720209509478002
+    },
+    {
+      "query": "7b4b274ffe0c68ddbb74",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8027777692491136
+    },
+    {
+      "query": "66cb5d55850efdfbb253",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7252451206100882
+    },
+    {
+      "query": "f0051180d55f3ac7af7c",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7431921707570912
+    },
+    {
+      "query": "275fc10797306b21b239",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.5135081257809562
+    },
+    {
+      "query": "83694f569af9d6ea9f5f",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.6282238419132113
+    },
+    {
+      "query": "a98f588aa47a69e040b0",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.75455872300838
+    },
+    {
+      "query": "36b3873ed439bff5b789",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.6848605940474537
+    },
+    {
+      "query": "7f5a260b0ddec1354b12",
+      "label": "chair",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.7104663654626803
+    },
+    {
+      "query": "ddcedc93de62ac9c03c5",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7222887118271483
+    },
+    {
+      "query": "26956d82352d251c7132",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.6895885456520126
+    },
+    {
+      "query": "1a518d894a838aacb40c",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5380841177716433
+    },
+    {
+      "query": "7d9b738cb7da536d6931",
+      "label": "chair",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.3956077901645604
+    },
+    {
+      "query": "8692ee8833c86653678a",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.6524516508480261
+    },
+    {
+      "query": "a4af0e2936ca67d73860",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8075499391986223
+    },
+    {
+      "query": "3c50759acaf646dedd54",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.747427269127235
+    },
+    {
+      "query": "c3a997b68ba481f5263f",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7780078819329256
+    },
+    {
+      "query": "950d62db7c21490c16b3",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.6436114456865231
+    },
+    {
+      "query": "18266861d710e99d3cec",
+      "label": "chair",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.2,
+      "average_precision": 0.21304094166947646
+    },
+    {
+      "query": "dd9e001ab7e635f39689",
+      "label": "chair",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7601906338422344
+    },
+    {
+      "query": "36b25240e356c2303156",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.42459023900664505
+    },
+    {
+      "query": "6342ea3371d5258a994b",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9901360544217688
+    },
+    {
+      "query": "9b4e64f1269f2bc78ce2",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.570545573560796
+    },
+    {
+      "query": "556a1e299998bbc83e8d",
+      "label": "couch",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.4368317271481761
+    },
+    {
+      "query": "ec71129196ce36627aa5",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9408730158730159
+    },
+    {
+      "query": "e8dc4385c6752bc41bbc",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7809338887069979
+    },
+    {
+      "query": "e0dd6996902aa0d92b23",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7750025121077753
+    },
+    {
+      "query": "18cbdbe4cc9144ad3503",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "464889bfdf3ad678e8c1",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8237212766348104
+    },
+    {
+      "query": "4e03a9b60a7c2cadee09",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7470930535639727
+    },
+    {
+      "query": "60f5845a18d4f83692ff",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.565122216799267
+    },
+    {
+      "query": "fcc9a7474163f617e91a",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.6553162288022537
+    },
+    {
+      "query": "bc849c6e80063afb1a59",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9248964803312629
+    },
+    {
+      "query": "2d80f73fa9694b43beae",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8361942596698694
+    },
+    {
+      "query": "f888e74f39bf6c780566",
+      "label": "couch",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9383382907818998
+    },
+    {
+      "query": "0023211d509d1f34c40c",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7762169602609501
+    },
+    {
+      "query": "4dba49ac2747e892dd44",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8005876816129056
+    },
+    {
+      "query": "fff7554c6432a327c008",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8158944244499642
+    },
+    {
+      "query": "b73adc0f6c4aef163375",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.739347689620204
+    },
+    {
+      "query": "49174efb9dfa6d90e53c",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.7529936467235344
+    },
+    {
+      "query": "a7089742fe16e4b0dfc2",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7070478701824455
+    },
+    {
+      "query": "a7be81cc330422c70ac2",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7340846314928795
+    },
+    {
+      "query": "d18f417b95a4edea6f27",
+      "label": "cup",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.45317727888495585
+    },
+    {
+      "query": "161b3819b70c35516037",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7761919721375539
+    },
+    {
+      "query": "33dbb0d19f077e74f16b",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8744168765054938
+    },
+    {
+      "query": "afc35022683e2b0325da",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8309707794751787
+    },
+    {
+      "query": "8f190ba7e91868245a6f",
+      "label": "cup",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.2,
+      "average_precision": 0.4057879610447492
+    },
+    {
+      "query": "9ee7c43c9b27f1655386",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8346388789706614
+    },
+    {
+      "query": "b2449367b910bde6ab14",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.5628492519597299
+    },
+    {
+      "query": "f03fe59c4ea74d246bcc",
+      "label": "cup",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.4756410418172651
+    },
+    {
+      "query": "46a603ebed074c4de3b0",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.5578766763399294
+    },
+    {
+      "query": "63aad9f97c2b014ceca9",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.5980715303310925
+    },
+    {
+      "query": "ded0ae887b2942af6406",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7685756784950456
+    },
+    {
+      "query": "cb28c9f94ac4abbd4c37",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.5831322266885025
+    },
+    {
+      "query": "99acfacd799f9f228565",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.778689455483965
+    },
+    {
+      "query": "58fad1364938445df0f2",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.6913815596526474
+    },
+    {
+      "query": "d9d48ece73d863a899c0",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8663364859023023
+    },
+    {
+      "query": "f7d5199c1e3d2ab52b6c",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7928631269267885
+    },
+    {
+      "query": "11e5eb3a7a71df78bee7",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.5739344464898728
+    },
+    {
+      "query": "3f0065597799ad14d5c8",
+      "label": "cup",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.0,
+      "average_precision": 0.21051107626753338
+    },
+    {
+      "query": "e80207fd50bc61f0077e",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9570572203785436
+    },
+    {
+      "query": "13a2e469743c6c640ef0",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8023765070865597
+    },
+    {
+      "query": "1464c8369e18c6b574cc",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.6022749732083816
+    },
+    {
+      "query": "cadf2f5634f682f5e1ec",
+      "label": "cup",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.689168976113167
+    },
+    {
+      "query": "b77b4f3fff60e5ef5cad",
+      "label": "cup",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.6673164652229495
+    },
+    {
+      "query": "4fd3492652452501b533",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9952380952380953
+    },
+    {
+      "query": "66768674f3bf11a14f54",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9822929171668668
+    },
+    {
+      "query": "229e6b9622b6291c0141",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9952380952380953
+    },
+    {
+      "query": "041b9fddc0c0ec0456bc",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "aeb1540b95813ed782b0",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8534538616084392
+    },
+    {
+      "query": "a4e6b6a098e057d89ac3",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "b7057884a0f384dc3be1",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8397352230058998
+    },
+    {
+      "query": "e461cc7a33325e00af23",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9846415489272633
+    },
+    {
+      "query": "d52e66e07abdf209b960",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9596840659340659
+    },
+    {
+      "query": "86baf417c3c0698a26c9",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9901360544217688
+    },
+    {
+      "query": "19f423eca74cab4d3624",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "7de12c67e0a3289c75c8",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9735304378161521
+    },
+    {
+      "query": "ccba015144db864d74fc",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9650528043385186
+    },
+    {
+      "query": "cfdddc7219a2df6e4782",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "b6daddcbd4032fbdc49a",
+      "label": "donut",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9336469086469086
+    },
+    {
+      "query": "085a730c229b75a66a5c",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9278658841158841
+    },
+    {
+      "query": "e05956aa60392f2f437c",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8970651897122485
+    },
+    {
+      "query": "510e64120e43be42e150",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7222544073265494
+    },
+    {
+      "query": "b47820987ec7f62e7f47",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9395984200131665
+    },
+    {
+      "query": "241c70ca213ed293f083",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8143286906223659
+    },
+    {
+      "query": "ce73c3af405b51fe1d83",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9205815018315018
+    },
+    {
+      "query": "92dcdce40e9283d2373c",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9254170457992114
+    },
+    {
+      "query": "63ca27320bde03a183fb",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8830249324610226
+    },
+    {
+      "query": "5d009579a9b10b3edb48",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9056493506493506
+    },
+    {
+      "query": "4495cad925f955ed42b1",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9434300035803795
+    },
+    {
+      "query": "aed6d288bfc45531f3c6",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8343950540403938
+    },
+    {
+      "query": "6a0a7753618b09324508",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9301039445628998
+    },
+    {
+      "query": "ce5bd95fd66a90a4da69",
+      "label": "keyboard",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.39072729592036554
+    },
+    {
+      "query": "f6821cf88b8ff90e01f0",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9492673992673993
+    },
+    {
+      "query": "3cd73fc39b9a24d98904",
+      "label": "keyboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8211608565337557
+    },
+    {
+      "query": "92b5897486b767f9f55b",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.2,
+      "average_precision": 0.3687670251092295
+    },
+    {
+      "query": "c80e26e1525bc4db64db",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.597000260721191
+    },
+    {
+      "query": "77c6a1bf19fe27f2cd89",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5230455875755999
+    },
+    {
+      "query": "e7ec897760bf584bd17e",
+      "label": "microwave",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.3652289872571728
+    },
+    {
+      "query": "99d3b2ead05f284a1c54",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5337647256125517
+    },
+    {
+      "query": "1c2a723f8c854b4d3ee9",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.42296757182973305
+    },
+    {
+      "query": "951e903688cbe8bad428",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.3575680997579426
+    },
+    {
+      "query": "2f27a58e08bb0f5eb06b",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5853919237400806
+    },
+    {
+      "query": "41b655c2ad0f5ace2170",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.46934267741960045
+    },
+    {
+      "query": "2224c0a1fd897b38903f",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5343221793900865
+    },
+    {
+      "query": "1e83f671d5d1dd9592f5",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5252062502643386
+    },
+    {
+      "query": "fe22f13f40fda992ab90",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5400505488581712
+    },
+    {
+      "query": "95f155922751f9d1cc1d",
+      "label": "microwave",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.2,
+      "average_precision": 0.32355063256093
+    },
+    {
+      "query": "68b2902bf6cad77e5f34",
+      "label": "microwave",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.4489071722322343
+    },
+    {
+      "query": "e37b2caf18a319321338",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.49836553895437324
+    },
+    {
+      "query": "a96aae0f4e32e8d46217",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8047249707963994
+    },
+    {
+      "query": "0f6872172258be61793e",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8929691534733551
+    },
+    {
+      "query": "0a846720e5de78792555",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.43795328059217853
+    },
+    {
+      "query": "a38aa3d3b3de54dc8f5e",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.4775970805175512
+    },
+    {
+      "query": "20fd9b7bc8f908b45dcf",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7119693494029041
+    },
+    {
+      "query": "0955ad31e9b5f9e99456",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7613355493712637
+    },
+    {
+      "query": "15028cebfd0dda045632",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.6890439341845992
+    },
+    {
+      "query": "495c214105bf796e9317",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8227978767264482
+    },
+    {
+      "query": "e3ec82813eb604337ddc",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8413919413919414
+    },
+    {
+      "query": "cab3e6b0f6c1b9bd70dd",
+      "label": "motorcycle",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.4929547250898051
+    },
+    {
+      "query": "24796db71ef974c6c86d",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7933992594706881
+    },
+    {
+      "query": "c553613ef190e8cf5574",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.66497683997684
+    },
+    {
+      "query": "b1a38bb285fbf4db3fef",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8395549128742407
+    },
+    {
+      "query": "98770b523e4325cc2c4f",
+      "label": "motorcycle",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9293952079666364
+    },
+    {
+      "query": "5e9ec47fa5fd94d6b8f8",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "51ebfed9dc826e28fe45",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "bb7ee053d2e43c19d4fd",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "6f53103475ee2c36bb0f",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "4e1db677aa6bbea46c34",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "00f075ee781e4658e5f4",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "a3b274c973907157b03b",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "4c70929122ba11efd987",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "1e9afaa7a483f34ccb35",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "ad0b05d043e949fc3930",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "4256541bec30235d294a",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9822929171668668
+    },
+    {
+      "query": "34a6f541bccead82746a",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "80eb35fb789cd39b0b89",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "760f250083448187c781",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9841269841269842
+    },
+    {
+      "query": "3f0caf73b34799763482",
+      "label": "orange",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "a87492c01eb34a46dbfb",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7565249151891681
+    },
+    {
+      "query": "5adbdabf333a0cf8f266",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.41520870462926235
+    },
+    {
+      "query": "a2728ef1cf2afd1656e8",
+      "label": "oven",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.0,
+      "average_precision": 0.1440006809039611
+    },
+    {
+      "query": "d7bb3400fc1413888d29",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8163204398235565
+    },
+    {
+      "query": "570b09ee0ceab2505065",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7305513767415901
+    },
+    {
+      "query": "378d031d8015c3d7eab9",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7483940257916529
+    },
+    {
+      "query": "c5432d38e022c36b30b3",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.6286414864965788
+    },
+    {
+      "query": "65b20beb3adabb01e47b",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.5885754847292828
+    },
+    {
+      "query": "2f014aee6d7cc9b856f4",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7333001849846866
+    },
+    {
+      "query": "f02fa4ec407117733fe2",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7826926524501834
+    },
+    {
+      "query": "bb53a489fbcef8f6c1fe",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8543816414292421
+    },
+    {
+      "query": "b154eb8e4d874d4fde21",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.33256524631102335
+    },
+    {
+      "query": "5ac2f4fd313e1f9d7a7d",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.5728058734460361
+    },
+    {
+      "query": "9d277102c46698682cb0",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7198108332773302
+    },
+    {
+      "query": "c3e57c256329fc748ce3",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7378026771968577
+    },
+    {
+      "query": "ae2b85e66e0bafa59143",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.4820189784328024
+    },
+    {
+      "query": "0d72d86cdc75e19441fd",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7219248794221239
+    },
+    {
+      "query": "8b8f427ba83ccdac4908",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7896845832388849
+    },
+    {
+      "query": "09aaf7f9565a9ccb26f3",
+      "label": "oven",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.5591229906667969
+    },
+    {
+      "query": "355d6ec1fa7cae0376d1",
+      "label": "oven",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.4,
+      "average_precision": 0.41127237397206645
+    },
+    {
+      "query": "93aa966e332eae7519a5",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8236598802444838
+    },
+    {
+      "query": "48e4738e8d6c4abcd164",
+      "label": "oven",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.49583735969325327
+    },
+    {
+      "query": "ed67248a8eed016e21bf",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.2,
+      "average_precision": 0.5188040286887129
+    },
+    {
+      "query": "419323f4c8abff26afd8",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7444551101535828
+    },
+    {
+      "query": "99787c6fda3ad83abdd8",
+      "label": "oven",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.0,
+      "average_precision": 0.1881730017650963
+    },
+    {
+      "query": "629051f1c9093abcf085",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.7584786640126756
+    },
+    {
+      "query": "105100c737a2364738b9",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.45535406752996305
+    },
+    {
+      "query": "f481412db9ad1dcc9aa2",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.6,
+      "average_precision": 0.4600978303544617
+    },
+    {
+      "query": "d4f717bd28e55e731665",
+      "label": "oven",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.5961505721291844
+    },
+    {
+      "query": "54140a86ad3370e8eb03",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8784598338169767
+    },
+    {
+      "query": "d99522d2cbd583890fc7",
+      "label": "pizza",
+      "hit_at_1": 0.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.7821820045034331
+    },
+    {
+      "query": "6589f9264274981c4be7",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.904866760223903
+    },
+    {
+      "query": "0b285d6bb00fc429cc11",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9304496297353441
+    },
+    {
+      "query": "46b6bccd00dbc33cf97f",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8869419766741196
+    },
+    {
+      "query": "1d93193ad8ca3c2ed009",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8337335492410681
+    },
+    {
+      "query": "d3acc6ee2831f83ffb04",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.881626255024635
+    },
+    {
+      "query": "a77dfb553169ab222d1f",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9614531431301617
+    },
+    {
+      "query": "55b85f793537ac1b001b",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.732424501514506
+    },
+    {
+      "query": "72dc1d36c4569a8049df",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8871899925471354
+    },
+    {
+      "query": "cf69b85ac4d34ca3f6ee",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9070312623884053
+    },
+    {
+      "query": "b20bbd97be02a4d4f950",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9304496297353441
+    },
+    {
+      "query": "65e3a2555d9c7b1f7629",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9240271633128776
+    },
+    {
+      "query": "ad803cda63bbfa2be54d",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 0.8,
+      "average_precision": 0.8784598338169767
+    },
+    {
+      "query": "649f091e08fa35e7bc3f",
+      "label": "pizza",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.921699629735344
+    },
+    {
+      "query": "5d3f7fd92d509e709b7b",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9817765045204517
+    },
+    {
+      "query": "94104f564963109aed15",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9720574470574471
+    },
+    {
+      "query": "607c9c333a0ae779e02e",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9862129040009613
+    },
+    {
+      "query": "68178b5119c79b9e96d2",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9909274193548387
+    },
+    {
+      "query": "eaf105354f114b5427c8",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9976190476190476
+    },
+    {
+      "query": "a140ef6604e84b9b29ab",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9875415282392027
+    },
+    {
+      "query": "f772b1e5370d6b35003e",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.984704070287694
+    },
+    {
+      "query": "531997c3363eb4f5c4aa",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9854969765684051
+    },
+    {
+      "query": "7644e876a63bfab8dbbc",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.964956597297274
+    },
+    {
+      "query": "f41d0d7751d32af14d25",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9886512297226584
+    },
+    {
+      "query": "8decbff1617ccb62855c",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9749980411745118
+    },
+    {
+      "query": "4ca8631f363ed6ad5111",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9874004479840718
+    },
+    {
+      "query": "9c5bc051ae39ab855f82",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9486997905271324
+    },
+    {
+      "query": "08c01e1ef5d3725d389c",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9647502352004632
+    },
+    {
+      "query": "f2f02ebbbc4a9bea1792",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9851190476190477
+    },
+    {
+      "query": "06ab01590bf39fb3902a",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9755952380952381
+    },
+    {
+      "query": "2e11f39b19657b74fa82",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.8866635008292082
+    },
+    {
+      "query": "e375cc3e072d064be64d",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9855623100303951
+    },
+    {
+      "query": "2457159c0364737c9bc2",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9757936507936508
+    },
+    {
+      "query": "727462f76babac9eb9de",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.959869325088526
+    },
+    {
+      "query": "303c98c6b075f2f1ef5b",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9663462253321047
+    },
+    {
+      "query": "a27ec906572dd9c2e2a3",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9857323841698842
+    },
+    {
+      "query": "cd0f4f2295d7750e3dcc",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9773409363745499
+    },
+    {
+      "query": "aa321c29da484aaec8af",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9821824516946468
+    },
+    {
+      "query": "94ab6893fa0caa5268c7",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9976190476190476
+    },
+    {
+      "query": "e9f87ce78e5719a56a61",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9752397486772486
+    },
+    {
+      "query": "6ba99e4dc203d73af2e6",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9768776051534672
+    },
+    {
+      "query": "9a2e07138c048c8076d4",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9500191570881226
+    },
+    {
+      "query": "2a620423fe284feeb696",
+      "label": "skateboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9825274536438473
+    },
+    {
+      "query": "3ee8d77e21fabf4a646f",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "f81cc0c807cdfda62ec5",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9846415489272633
+    },
+    {
+      "query": "a474b16c2aa5f1f60208",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "5513e0c575897ff52a58",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9901360544217688
+    },
+    {
+      "query": "540122efda80ecc42f31",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.985969387755102
+    },
+    {
+      "query": "68cebb6faf27afed4ad5",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9778711484593838
+    },
+    {
+      "query": "9d08d337bcb8fc0eea44",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "31eb9401f35cd81036ea",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "60d22261d1622e567b51",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "aaa4bf611b5f5d2e3d45",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "1437175867ae90dd7c03",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9901360544217688
+    },
+    {
+      "query": "ca9a85ef7523f951617f",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.985969387755102
+    },
+    {
+      "query": "6a1ee829a9ac2a84cef2",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "8a42d66b529c74d8e212",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 1.0
+    },
+    {
+      "query": "4b6c1b72396cded0eb36",
+      "label": "snowboard",
+      "hit_at_1": 1.0,
+      "precision_at_5": 1.0,
+      "average_precision": 0.9673202614379085
+    }
+  ]
+}

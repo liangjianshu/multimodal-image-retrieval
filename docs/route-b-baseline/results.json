@@ -1,0 +1,1006 @@
+{
+  "created_at": "2026-11-03T10:10:59.445619+00:00",
+  "backend": "qwen-embedding",
+  "gallery_size": 12,
+  "config": {
+    "backend": "qwen-embedding",
+    "embedding_model": "google/embeddinggemma-2",
+    "embedding_revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
+    "embedding_weights_sha256": null,
+    "embedding_model_path": null,
+    "embedding_dimension": 768,
+    "vision_tokens": 280,
+    "embedding_batch_size": 4,
+    "text_encoder": "IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese",
+    "image_encoder": "openai/clip-vit-large-patch14",
+    "vl_model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "text_model": "Qwen/Qwen2.5-3B-Instruct",
+    "adapter": "models/retrieval-lora",
+    "device": "auto",
+    "max_pixels": 262144,
+    "max_new_tokens": 384,
+    "category_ratio": 0.85,
+    "image_weight": 0.5,
+    "prompt_profile": "historical",
+    "intent_profile": "preserve"
+  },
+  "training_state": "pretrained-baseline",
+  "adapter_verification": {
+    "sha256": "c3c463ca6f394ab4cc7e936bcc39cc14ec09f0b5afbc9ffb635e7a37fcb6738a",
+    "bytes": 80774016,
+    "base_model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "rank": 64,
+    "alpha": 128,
+    "verified_tensors": 224,
+    "nonzero_lora_b_tensors": 112,
+    "active_adapters": [
+      "default"
+    ]
+  },
+  "encoder": {
+    "backend": "embeddinggemma2",
+    "model": "google/embeddinggemma-2",
+    "revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
+    "dimension": 768,
+    "vision_tokens": 280,
+    "query_prefix": "task: search result | query: ",
+    "corpus_input": "image-pixels",
+    "fusion": "native-joint",
+    "normalized": true,
+    "weight_sha256": "197a32965d4b1105faf060417baa899e193fb73cd401f42ec9295234d5553d79"
+  },
+  "shared_intents": true,
+  "intent_prompt_sha256": "619f4c0e44d3d27d5c636e49498d1fdd4b17a3d9040251042cfa8b01c8ff021c",
+  "description_cache_sha256": "f9ebfbe07f00171d770c9ddcf3bfc53d9973a43fad6f5d1918f11234b1f6312f",
+  "notice": "Real recorded inference. Identical Qwen intent decisions for both retrieval routes. Small qualitative gallery.",
+  "queries": [
+    {
+      "id": "white-bicycle",
+      "kind": "text",
+      "text": "白色自行车",
+      "title": "一句中文，寻找图库里的物体",
+      "mode": "embedding",
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": true,
+        "target_category": "自行车",
+        "description": "白色的自行车",
+        "constraints": [],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": true,
+          "target_category": "自行车",
+          "description": "白色的自行车",
+          "constraints": [],
+          "top_k": null
+        }
+      },
+      "search_text": "白色自行车",
+      "top_k": 3,
+      "exclude_ids": [],
+      "candidate_count": 12,
+      "results": [
+        {
+          "id": "image-09",
+          "file_path": "images/image-09.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "自行车"
+          ],
+          "retrieval_description": "一辆白色的自行车停在蓝色的墙前，车身有“Viento”字样，轮胎较细。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "自行车"
+          ],
+          "score": 0.7079346179962158
+        },
+        {
+          "id": "image-12",
+          "file_path": "images/image-12.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "自行车"
+          ],
+          "retrieval_description": "一辆绿色的自行车停在路边，车架上有锈迹，轮胎较细。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "自行车"
+          ],
+          "score": 0.6417092680931091
+        },
+        {
+          "id": "image-10",
+          "file_path": "images/image-10.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "自行车"
+          ],
+          "retrieval_description": "一辆黄色的自行车躺在杂草丛生的地面上，车身部分被绿色植物覆盖。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "自行车"
+          ],
+          "score": 0.6387280821800232
+        }
+      ],
+      "retrieval_executed": true,
+      "timing": {
+        "intent_seconds": 6.614561001770198,
+        "encoder_load_seconds": 1.2049451470375061e-05,
+        "encoding_seconds": 0.08921696897596121,
+        "ranking_seconds": 0.00022080820053815842
+      },
+      "intent_reused": true,
+      "status": "retrieved",
+      "candidate_ids": [
+        "image-01",
+        "image-02",
+        "image-03",
+        "image-04",
+        "image-05",
+        "image-06",
+        "image-07",
+        "image-08",
+        "image-09",
+        "image-10",
+        "image-11",
+        "image-12"
+      ],
+      "elapsed_seconds": 6.7040342874825,
+      "image": null
+    },
+    {
+      "id": "red-chair",
+      "kind": "text",
+      "text": "红色的椅子",
+      "title": "红色椅子的文字检索",
+      "mode": "embedding",
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": true,
+        "target_category": "椅子",
+        "description": "红色的椅子",
+        "constraints": [],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": true,
+          "target_category": "椅子",
+          "description": "红色的椅子",
+          "constraints": [],
+          "top_k": null
+        }
+      },
+      "search_text": "红色的椅子",
+      "top_k": 3,
+      "exclude_ids": [],
+      "candidate_count": 12,
+      "results": [
+        {
+          "id": "image-01",
+          "file_path": "images/image-01.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "凳子"
+          ],
+          "retrieval_description": "一个红色的塑料凳子放在马路上，背景中可以看到几辆摩托车。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "凳子"
+          ],
+          "score": 0.7001720666885376
+        },
+        {
+          "id": "image-03",
+          "file_path": "images/image-03.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "椅子"
+          ],
+          "retrieval_description": "一张黑色的办公椅放在木质地板上，椅子靠背和坐垫为深灰色，带有扶手。背景中有一张桌子，上面放着花瓶和一些物品，旁边有一个橙色的椅子和一条粉色的毯子。窗户旁边有一台电脑显示器和键盘。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "椅子"
+          ],
+          "score": 0.6660416126251221
+        },
+        {
+          "id": "image-04",
+          "file_path": "images/image-04.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "椅子"
+          ],
+          "retrieval_description": "一张木制椅子放在白色展台上。椅子呈浅棕色，由弯曲的木板组成，椅背和椅座都呈现出流畅的曲线设计。背景中可以看到一些参观者和红色的墙壁，墙上有一个标牌写着“PROCESS 03 CNC CUTTING”。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "椅子"
+          ],
+          "score": 0.6610048413276672
+        }
+      ],
+      "retrieval_executed": true,
+      "timing": {
+        "intent_seconds": 1.715563951060176,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.0884109977632761,
+        "ranking_seconds": 0.0001733275130391121
+      },
+      "intent_reused": true,
+      "status": "retrieved",
+      "candidate_ids": [
+        "image-01",
+        "image-02",
+        "image-03",
+        "image-04",
+        "image-05",
+        "image-06",
+        "image-07",
+        "image-08",
+        "image-09",
+        "image-10",
+        "image-11",
+        "image-12"
+      ],
+      "elapsed_seconds": 1.8041673367843032,
+      "image": null
+    },
+    {
+      "id": "coffee",
+      "kind": "text",
+      "text": "咖啡杯",
+      "title": "检索不同外观的咖啡杯",
+      "mode": "embedding",
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": true,
+        "target_category": "咖啡杯",
+        "description": "咖啡杯",
+        "constraints": [],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": true,
+          "target_category": "咖啡杯",
+          "description": "咖啡杯",
+          "constraints": [],
+          "top_k": null
+        }
+      },
+      "search_text": "咖啡杯",
+      "top_k": 3,
+      "exclude_ids": [],
+      "candidate_count": 12,
+      "results": [
+        {
+          "id": "image-07",
+          "file_path": "images/image-07.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "茶杯"
+          ],
+          "retrieval_description": "一个粉色的陶瓷茶杯和碟子放在木质桌面上。茶杯上有金色的装饰图案，碟子是纯粉色的。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.6914678812026978
+        },
+        {
+          "id": "image-08",
+          "file_path": "images/image-08.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "一个银色的杯子，杯身有镂空花纹装饰，杯柄弯曲。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.6685147285461426
+        },
+        {
+          "id": "image-06",
+          "file_path": "images/image-06.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "一个白色的杯子放在红色的表面上。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.6670159101486206
+        }
+      ],
+      "retrieval_executed": true,
+      "timing": {
+        "intent_seconds": 1.6884402753785253,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.08083872683346272,
+        "ranking_seconds": 0.00015688780695199966
+      },
+      "intent_reused": true,
+      "status": "retrieved",
+      "candidate_ids": [
+        "image-01",
+        "image-02",
+        "image-03",
+        "image-04",
+        "image-05",
+        "image-06",
+        "image-07",
+        "image-08",
+        "image-09",
+        "image-10",
+        "image-11",
+        "image-12"
+      ],
+      "elapsed_seconds": 1.769455511122942,
+      "image": null
+    },
+    {
+      "id": "ornate-cup",
+      "kind": "image",
+      "mode": "embedding",
+      "image": "images/image-07.jpg",
+      "title": "一张参考图，找到更多杯子",
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": true,
+        "target_category": "茶杯",
+        "description": "粉色的茶杯，带有金色装饰的蝴蝶图案",
+        "constraints": [],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": true,
+          "target_category": "茶杯",
+          "description": "粉色的茶杯，带有金色装饰的蝴蝶图案",
+          "constraints": [],
+          "top_k": null
+        }
+      },
+      "search_text": null,
+      "top_k": 3,
+      "exclude_ids": [
+        "image-07"
+      ],
+      "candidate_count": 11,
+      "results": [
+        {
+          "id": "image-08",
+          "file_path": "images/image-08.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "一个银色的杯子，杯身有镂空花纹装饰，杯柄弯曲。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.802448570728302
+        },
+        {
+          "id": "image-06",
+          "file_path": "images/image-06.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "一个白色的杯子放在红色的表面上。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.7219737768173218
+        },
+        {
+          "id": "image-02",
+          "file_path": "images/image-02.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "椅子"
+          ],
+          "retrieval_description": "一把黑色的椅子放在灰色的地面上，靠背是弯曲的，坐垫是米色的。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "椅子"
+          ],
+          "score": 0.6539027690887451
+        }
+      ],
+      "retrieval_executed": true,
+      "timing": {
+        "intent_seconds": 2.9261393239721656,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.18194911628961563,
+        "ranking_seconds": 0.00014960765838623047
+      },
+      "intent_reused": true,
+      "status": "retrieved",
+      "candidate_ids": [
+        "image-01",
+        "image-02",
+        "image-03",
+        "image-04",
+        "image-05",
+        "image-06",
+        "image-08",
+        "image-09",
+        "image-10",
+        "image-11",
+        "image-12"
+      ],
+      "elapsed_seconds": 3.108259408734739
+    },
+    {
+      "id": "similar-chair",
+      "kind": "image",
+      "mode": "embedding",
+      "image": "images/image-02.jpg",
+      "title": "给一张椅子图，找相似素材",
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": true,
+        "target_category": "椅子",
+        "description": "黑色框架的椅子",
+        "constraints": [],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": true,
+          "target_category": "椅子",
+          "description": "黑色框架的椅子",
+          "constraints": [],
+          "top_k": null
+        }
+      },
+      "search_text": null,
+      "top_k": 3,
+      "exclude_ids": [
+        "image-02"
+      ],
+      "candidate_count": 11,
+      "results": [
+        {
+          "id": "image-03",
+          "file_path": "images/image-03.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "椅子"
+          ],
+          "retrieval_description": "一张黑色的办公椅放在木质地板上，椅子靠背和坐垫为深灰色，带有扶手。背景中有一张桌子，上面放着花瓶和一些物品，旁边有一个橙色的椅子和一条粉色的毯子。窗户旁边有一台电脑显示器和键盘。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "椅子"
+          ],
+          "score": 0.7277606129646301
+        },
+        {
+          "id": "image-01",
+          "file_path": "images/image-01.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "凳子"
+          ],
+          "retrieval_description": "一个红色的塑料凳子放在马路上，背景中可以看到几辆摩托车。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "凳子"
+          ],
+          "score": 0.7017364501953125
+        },
+        {
+          "id": "image-04",
+          "file_path": "images/image-04.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "椅子"
+          ],
+          "retrieval_description": "一张木制椅子放在白色展台上。椅子呈浅棕色，由弯曲的木板组成，椅背和椅座都呈现出流畅的曲线设计。背景中可以看到一些参观者和红色的墙壁，墙上有一个标牌写着“PROCESS 03 CNC CUTTING”。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "椅子"
+          ],
+          "score": 0.6963979005813599
+        }
+      ],
+      "retrieval_executed": true,
+      "timing": {
+        "intent_seconds": 2.3230563374236226,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.18198617547750473,
+        "ranking_seconds": 0.00015163887292146683
+      },
+      "intent_reused": true,
+      "status": "retrieved",
+      "candidate_ids": [
+        "image-01",
+        "image-03",
+        "image-04",
+        "image-05",
+        "image-06",
+        "image-07",
+        "image-08",
+        "image-09",
+        "image-10",
+        "image-11",
+        "image-12"
+      ],
+      "elapsed_seconds": 2.5052146408706903
+    },
+    {
+      "id": "similar-cup",
+      "kind": "image",
+      "mode": "embedding",
+      "image": "images/image-06.jpg",
+      "title": "用咖啡杯照片找相似图片",
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": true,
+        "target_category": "杯子",
+        "description": "白色杯子装着棕色液体",
+        "constraints": [],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": true,
+          "target_category": "杯子",
+          "description": "白色杯子装着棕色液体",
+          "constraints": [],
+          "top_k": null
+        }
+      },
+      "search_text": null,
+      "top_k": 3,
+      "exclude_ids": [
+        "image-06"
+      ],
+      "candidate_count": 11,
+      "results": [
+        {
+          "id": "image-07",
+          "file_path": "images/image-07.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "茶杯"
+          ],
+          "retrieval_description": "一个粉色的陶瓷茶杯和碟子放在木质桌面上。茶杯上有金色的装饰图案，碟子是纯粉色的。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.7231742739677429
+        },
+        {
+          "id": "image-08",
+          "file_path": "images/image-08.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "一个银色的杯子，杯身有镂空花纹装饰，杯柄弯曲。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.6878477931022644
+        },
+        {
+          "id": "image-05",
+          "file_path": "images/image-05.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "一个红色的不锈钢保温杯，带有黑色盖子。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.6799367666244507
+        }
+      ],
+      "retrieval_executed": true,
+      "timing": {
+        "intent_seconds": 2.3583921985700727,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.17896931245923042,
+        "ranking_seconds": 0.0001474078744649887
+      },
+      "intent_reused": true,
+      "status": "retrieved",
+      "candidate_ids": [
+        "image-01",
+        "image-02",
+        "image-03",
+        "image-04",
+        "image-05",
+        "image-07",
+        "image-08",
+        "image-09",
+        "image-10",
+        "image-11",
+        "image-12"
+      ],
+      "elapsed_seconds": 2.537528938613832
+    },
+    {
+      "id": "bicycle-in-grass",
+      "kind": "fusion",
+      "image": "images/image-09.jpg",
+      "text": "草地上的自行车",
+      "title": "参考图加文字，补充场景要求",
+      "mode": "embedding",
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": true,
+        "target_category": "自行车",
+        "description": "草地上的自行车",
+        "constraints": [
+          "草地上"
+        ],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": true,
+          "target_category": "自行车",
+          "description": "草地上的自行车",
+          "constraints": [
+            "草地上"
+          ],
+          "top_k": null
+        }
+      },
+      "search_text": "草地上的自行车",
+      "top_k": 3,
+      "exclude_ids": [
+        "image-09"
+      ],
+      "candidate_count": 11,
+      "results": [
+        {
+          "id": "image-10",
+          "file_path": "images/image-10.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "自行车"
+          ],
+          "retrieval_description": "一辆黄色的自行车躺在杂草丛生的地面上，车身部分被绿色植物覆盖。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "自行车"
+          ],
+          "score": 0.705420970916748
+        },
+        {
+          "id": "image-12",
+          "file_path": "images/image-12.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "自行车"
+          ],
+          "retrieval_description": "一辆绿色的自行车停在路边，车架上有锈迹，轮胎较细。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "自行车"
+          ],
+          "score": 0.7021002769470215
+        },
+        {
+          "id": "image-11",
+          "file_path": "images/image-11.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "自行车"
+          ],
+          "retrieval_description": "一辆红色的自行车靠在蓝色的墙上，车把弯曲，座椅是黑色的。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "自行车"
+          ],
+          "score": 0.6940203905105591
+        }
+      ],
+      "retrieval_executed": true,
+      "timing": {
+        "intent_seconds": 2.3217784389853477,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.1794802164658904,
+        "ranking_seconds": 0.00014582835137844086
+      },
+      "intent_reused": true,
+      "status": "retrieved",
+      "candidate_ids": [
+        "image-01",
+        "image-02",
+        "image-03",
+        "image-04",
+        "image-05",
+        "image-06",
+        "image-07",
+        "image-08",
+        "image-10",
+        "image-11",
+        "image-12"
+      ],
+      "elapsed_seconds": 2.501424763351679
+    },
+    {
+      "id": "no-retrieval-qa",
+      "kind": "intent",
+      "text": "请问中国的首都是哪里？",
+      "title": "知识问答：不触发图片检索",
+      "expected_retrieval": false,
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": false,
+        "target_category": "",
+        "description": "",
+        "constraints": [],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": false,
+          "target_category": "",
+          "description": "",
+          "constraints": [],
+          "top_k": null
+        }
+      },
+      "search_text": "请问中国的首都是哪里？",
+      "top_k": 3,
+      "exclude_ids": [],
+      "candidate_count": 0,
+      "results": [],
+      "retrieval_executed": false,
+      "timing": {
+        "intent_seconds": 1.3699753610417247,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.0,
+        "ranking_seconds": 0.0
+      },
+      "intent_reused": true,
+      "status": "not_retrieval",
+      "elapsed_seconds": 1.3699817201122642,
+      "image": null,
+      "mode": "embedding"
+    },
+    {
+      "id": "no-retrieval-description",
+      "kind": "intent",
+      "text": "只描述一下这张图片，不要帮我找其他图片。",
+      "image": "images/image-07.jpg",
+      "title": "图片描述请求：不寻找其他图片",
+      "expected_retrieval": false,
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": false,
+        "target_category": "",
+        "description": "",
+        "constraints": [],
+        "top_k": null,
+        "raw_response": {
+          "needs_retrieval": false,
+          "target_category": "",
+          "description": "",
+          "constraints": [],
+          "top_k": null
+        }
+      },
+      "search_text": "只描述一下这张图片，不要帮我找其他图片。",
+      "top_k": 3,
+      "exclude_ids": [
+        "image-07"
+      ],
+      "candidate_count": 0,
+      "results": [],
+      "retrieval_executed": false,
+      "timing": {
+        "intent_seconds": 1.8597017833963037,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.0,
+        "ranking_seconds": 0.0
+      },
+      "intent_reused": true,
+      "status": "not_retrieval",
+      "elapsed_seconds": 1.8597084730863571,
+      "mode": "embedding"
+    },
+    {
+      "id": "explicit-two-cups",
+      "kind": "text",
+      "text": "请帮我找两张杯子的图片。",
+      "title": "识别用户明确要求的返回数量",
+      "expected_retrieval": true,
+      "expected_top_k": 2,
+      "backend": "qwen-embedding",
+      "intent": {
+        "needs_retrieval": true,
+        "target_category": "杯子",
+        "description": "两张杯子的图片",
+        "constraints": [],
+        "top_k": 2,
+        "raw_response": {
+          "needs_retrieval": true,
+          "target_category": "杯子",
+          "description": "两张杯子的图片",
+          "constraints": [],
+          "top_k": 2
+        }
+      },
+      "search_text": "请帮我找两张杯子的图片。",
+      "top_k": 2,
+      "exclude_ids": [],
+      "candidate_count": 12,
+      "results": [
+        {
+          "id": "image-07",
+          "file_path": "images/image-07.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "茶杯"
+          ],
+          "retrieval_description": "一个粉色的陶瓷茶杯和碟子放在木质桌面上。茶杯上有金色的装饰图案，碟子是纯粉色的。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.621234118938446
+        },
+        {
+          "id": "image-08",
+          "file_path": "images/image-08.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "一个银色的杯子，杯身有镂空花纹装饰，杯柄弯曲。",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter": "models/retrieval-lora",
+            "prompt_profile": "historical"
+          },
+          "retrieval_category_groups": [
+            "杯子"
+          ],
+          "score": 0.6071672439575195
+        }
+      ],
+      "retrieval_executed": true,
+      "timing": {
+        "intent_seconds": 1.848273796029389,
+        "encoder_load_seconds": 0.0,
+        "encoding_seconds": 0.1073359064757824,
+        "ranking_seconds": 0.00017284788191318512
+      },
+      "intent_reused": true,
+      "status": "retrieved",
+      "candidate_ids": [
+        "image-01",
+        "image-02",
+        "image-03",
+        "image-04",
+        "image-05",
+        "image-06",
+        "image-07",
+        "image-08",
+        "image-09",
+        "image-10",
+        "image-11",
+        "image-12"
+      ],
+      "elapsed_seconds": 1.955800760537386,
+      "image": null,
+      "mode": "embedding"
+    }
+  ]
+}

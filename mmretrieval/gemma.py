@@ -55,6 +55,8 @@ class GemmaEncoder:
         if config["embedding_model"] == MODEL_ID and config["embedding_revision"] == REVISION:
             if self.weight_sha256 != WEIGHTS_SHA256:
                 raise ValueError("Local weights do not match the pinned official checkpoint")
+        if config.get("embedding_weights_sha256") and self.weight_sha256 != config["embedding_weights_sha256"]:
+            raise ValueError("Embedding checkpoint hash differs from configuration")
         dtype = torch.bfloat16 if self.device.startswith("npu") or (
             self.device.startswith("cuda") and torch.cuda.is_bf16_supported()) else torch.float32
         self.model = SentenceTransformer(str(self.location), device=self.device,

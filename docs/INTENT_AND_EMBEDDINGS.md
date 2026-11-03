@@ -1,14 +1,12 @@
 # 查询条件保留与图文向量对齐
 
-## 当前默认：恢复 Qwen 意图与类别路由
+## 两条路线共享 Qwen 意图识别
 
-当前默认链路为 `qwen-gemma2`：Qwen 生成图库类别并统一名称；每条查询都调用 Qwen 判断是否需要检索、候选类别和返回数量。非检索请求在编码与搜索之前返回，纯图片请求也经过 Qwen 路由。实现见 [hybrid.py](../mmretrieval/hybrid.py)。
+默认路线 A 为 `qwen-semantic`：Qwen 生成图库类别和描述，类别向量粗筛后按描述向量排序。路线 B 为 `qwen-embedding`：EmbeddingGemma 2 直接编码原图，不进行 Qwen 类别筛选。两者每次查询均调用 Qwen 判断是否检索和返回数量，纯图片也经过意图判断。非检索请求在向量编码前返回。实现见 [routes.py](../mmretrieval/routes.py)。
 
-保留原文的意图提示词继续使用，并补充候选类别选择规则。`category_filter=selected` 选择已有类别；`all` 用于不明确或跨品类需求；非检索为 `none`。模型不得创造类别。缺失字段可在目标类别/别名精确匹配时补全；无法补全或候选类别非法时会报错，原始响应保留供审计。类别归并同样由 Qwen 完成，并保存原始类别到代表类别的映射，避免“茶杯/杯子”等粒度差异造成直接字符串匹配漏检。
+两条路线使用 [intent.py](../mmretrieval/intent.py) 中的 `ROUTE_INTENT_PROMPT`，保留原始用户文字；Qwen 摘要不覆盖它。路线 A 分别编码目标类别和完整查询，避免把颜色等条件直接塞进类别粗筛。路线 B 把原文与参考图共同输入多模态编码器。完整输入不丢失，不等于所有属性都能被准确满足。
 
-类别粗筛后，EmbeddingGemma 2 仍直接编码原图、完整原文和参考图。Qwen 的 description 不覆盖用户文字，纯图片查询也不被替换成图片描述。无文字参考图里的可见属性不是用户约束，代码将 constraints 置为空；原始模型响应保留供审计。完整输入不丢失，不等于所有属性都会被准确满足。
-
-之前的纯 Embedding 方案作为 [基线](DEMO_EMBEDDING_ONLY.md) 保留；下方解释更早的 Qwen / Taiyi-CLIP 流程。
+旧 `qwen-gemma2` 混合版（Qwen 类别筛选＋原图向量排序）可通过 `configs/showcase-hybrid.json` 独立复跑，其类别名称归并规则仍在 [hybrid.py](../mmretrieval/hybrid.py)。它与当前 A/B 路线是不同实验，不混记效果。
 
 ## 原提示词为什么会丢细节
 

@@ -1,0 +1,77 @@
+{
+  "seed": 42,
+  "source_records": 2000,
+  "unique_images": 1995,
+  "excluded_conflicting_pixel_hashes": 2,
+  "label_source": "ImageNet category in source filename; legacy assistant answers ignored",
+  "scope": "category-level only; no attribute, instance, or joint-query claims",
+  "split": "70/15/15 approximately, stratified after decoded-pixel deduplication",
+  "qwen_comparison_limit": "Old Qwen may have trained on these images. Only pretrained-vs-finetuned embedding comparison is valid here.",
+  "splits": {
+    "train": {
+      "images": 1401,
+      "triplets": 2802,
+      "classes": {
+        "bicycle": 140,
+        "bowl": 70,
+        "cat": 70,
+        "chair": 140,
+        "couch": 70,
+        "cup": 140,
+        "donut": 70,
+        "keyboard": 70,
+        "microwave": 70,
+        "motorcycle": 70,
+        "orange": 70,
+        "oven": 140,
+        "pizza": 70,
+        "skateboard": 141,
+        "snowboard": 70
+      }
+    },
+    "val": {
+      "images": 297,
+      "triplets": 594,
+      "classes": {
+        "bicycle": 30,
+        "bowl": 15,
+        "cat": 15,
+        "chair": 30,
+        "couch": 15,
+        "cup": 30,
+        "donut": 15,
+        "keyboard": 15,
+        "microwave": 14,
+        "motorcycle": 15,
+        "orange": 15,
+        "oven": 29,
+        "pizza": 15,
+        "skateboard": 29,
+        "snowboard": 15
+      }
+    },
+    "test": {
+      "images": 297,
+      "triplets": 594,
+      "classes": {
+        "bicycle": 30,
+        "bowl": 15,
+        "cat": 15,
+        "chair": 30,
+        "couch": 15,
+        "cup": 30,
+        "donut": 15,
+        "keyboard": 15,
+        "microwave": 14,
+        "motorcycle": 15,
+        "orange": 15,
+        "oven": 29,
+        "pizza": 15,
+        "skateboard": 29,
+        "snowboard": 15
+      }
+    }
+  },
+  "decoded_pixel_overlap_between_splits": 0,
+  "source_manifest_sha256": "1a22b85f6d700dbe379872e623c89af1698a36f8f869de91e6c18789544552be"
+}

@@ -114,8 +114,8 @@ def test_known_qwen_target_recovers_missing_extra_category_fields_without_invent
     assert result["candidate_categories"] == ["杯子"] and result["raw_response"]["target_category"] == "茶杯"
 
 
-def test_default_cli_routes_nonretrieval_before_gemma_load(tmp_path, monkeypatch):
-    config = load_config(None)
+def test_hybrid_cli_routes_nonretrieval_before_gemma_load(tmp_path, monkeypatch):
+    config = load_config("configs/showcase-hybrid.json")
     assert config["backend"] == "qwen-gemma2"
     index = ImageIndex([{"id": "cup", "file_path": "a.jpg", "retrieval_categories": ["杯子"]}],
                        np.ones((1, 768)), {**signature(config), "version": 1})
@@ -125,7 +125,7 @@ def test_default_cli_routes_nonretrieval_before_gemma_load(tmp_path, monkeypatch
     monkeypatch.setattr("mmretrieval.hybrid.Qwen", lambda *args, **kwargs: model)
     factory = Mock(side_effect=AssertionError("Gemma must not load for nonretrieval"))
     monkeypatch.setattr("mmretrieval.hybrid.GemmaEncoder", factory)
-    result = execute(parser().parse_args(["search", "--index", str(tmp_path / "index"),
+    result = execute(parser().parse_args(["--config", "configs/showcase-hybrid.json", "search", "--index", str(tmp_path / "index"),
                       "--image-root", str(tmp_path), "--text", "你好"]))
     factory.assert_not_called()
     assert result["status"] == "not_retrieval"

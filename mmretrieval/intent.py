@@ -63,3 +63,23 @@ def resolve_search_text(original_text, intent, profile="preserve"):
     if not isinstance(description, str) or not description.strip():
         raise ValueError("Image-only retrieval needs a nonempty target description")
     return description
+
+ROUTE_INTENT_PROMPT = '''你是图片搜索工具的意图解析器。请结合文字和参考图片判断用户的操作。
+输出 JSON：{"needs_retrieval":true,"target_category":"目标类别","description":"完整目标描述","constraints":[],"top_k":null}。
+规则：
+- 上传参考图片且没有文字，在这个工具中明确表示找相似图片，needs_retrieval 必须为 true。
+- 图片加“草地上的自行车”等目标短语，表示按文字修改图片的检索条件，needs_retrieval 为 true。
+- 纯文字的物品名称、属性描述、“找/搜/给我图片”等请求都是检索。
+- 只有问候、知识问答、要求分析/描述图片而不寻找其他图片才是 false。
+- target_category 提取主体；description 保留颜色、材质、场景、位置、否定和修改要求。文字条件优先于参考图背景。
+- constraints 只摘录用户明确要求，图片里可见但用户没指定的属性不算约束。
+- top_k 只表示用户要求返回几张，物体数量不算返回数量，未指定为 null。
+- 非检索时文字字段为空、constraints=[]、top_k=null。只输出 JSON。
+示例输入：{"text":"","has_reference_image":true}（参考图是一只杯子）
+示例输出：{"needs_retrieval":true,"target_category":"杯子","description":"与参考图相似的杯子","constraints":[],"top_k":null}
+示例输入：{"text":"草地上的自行车","has_reference_image":true}
+示例输出：{"needs_retrieval":true,"target_category":"自行车","description":"草地上的自行车","constraints":["草地上"],"top_k":null}
+示例输入：{"text":"只描述这张图，不要找其他图片","has_reference_image":true}
+示例输出：{"needs_retrieval":false,"target_category":"","description":"","constraints":[],"top_k":null}
+用户输入（JSON）：
+'''

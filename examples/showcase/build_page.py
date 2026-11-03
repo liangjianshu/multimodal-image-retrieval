@@ -52,9 +52,15 @@ def initial_view(report, sources, images, min_score=None):
     if query.get("intent"):
         note = ('实际编码文字（保留原文）：' if query.get('text') else '模型提取的图片目标：') + (query.get('search_text') or query['intent'].get('description', '')) + '。文字与参考图向量各占 50%；已排除参考图自身。'
         pipeline = "需求解析（保留用户原文）→ 图文融合 → 类别粗筛 → 描述排序"
+    semantic = report.get("backend") == "qwen-semantic"
+    routed = report.get("backend") in ("qwen-semantic", "qwen-embedding")
     hybrid = report.get("backend") == "qwen-gemma2"
-    direct = report.get("backend") in ("embeddinggemma2", "qwen-gemma2")
-    if hybrid:
+    direct = report.get("backend") in ("embeddinggemma2", "qwen-gemma2", "qwen-embedding")
+    if routed:
+        intent = query["intent"]
+        note = "Qwen 已确认需要检索。" + (f"用户要求返回 {intent['top_k']} 张。" if intent.get('top_k') else "") if intent['needs_retrieval'] else "Qwen 判定：无需图片检索。已跳过检索。"
+        pipeline = ("Qwen 意图识别 → 类别粗筛 → 描述向量排序" if semantic else "Qwen 意图识别 → 原图向量直接排序") if intent['needs_retrieval'] else "Qwen 意图识别 → 不触发检索"
+    elif hybrid:
         intent = query["intent"]
         scope = "、".join(intent["candidate_categories"]) if intent["category_filter"] == "selected" else "全图库"
         note = f'Qwen 识别目标：{intent["target_category"]}；候选类别：{scope}。原始文字与参考图直接编码。' if intent["needs_retrieval"] else "Qwen 判定：无需图片检索。已跳过向量编码和搜索。"
@@ -86,7 +92,7 @@ def main():
     report = json.loads(Path(args.results).read_text(encoding="utf-8"))
     if args.min_score is not None and (not math.isfinite(args.min_score) or not 0 <= args.min_score <= 1):
         raise ValueError("Showcase min-score must be between 0 and 1")
-    min_score = args.min_score if report.get("backend") in ("embeddinggemma2", "qwen-gemma2") else None
+    min_score = args.min_score if report.get("backend") in ("embeddinggemma2", "qwen-gemma2", "qwen-embedding") else None
     sources = json.loads((ROOT / "examples/showcase/sources.json").read_text(encoding="utf-8"))
     template = (Path(__file__).parent / "page.html").read_text(encoding="utf-8")
     output = Path(args.output)
@@ -109,9 +115,18 @@ def main():
                        "display": {"min_score": min_score}}, ensure_ascii=False).replace("<", "\\u003c")
     page = template.replace("/*__RECORDED_DATA__*/", data)
     adapted = bool(report.get("adapter_verification"))
+    semantic = report.get("backend") == "qwen-semantic"
+    routed = report.get("backend") in ("qwen-semantic", "qwen-embedding")
     hybrid = report.get("backend") == "qwen-gemma2"
-    direct = report.get("backend") in ("embeddinggemma2", "qwen-gemma2")
-    if hybrid:
+    direct = report.get("backend") in ("embeddinggemma2", "qwen-gemma2", "qwen-embedding")
+    if routed:
+        badge = "<b>Qwen2.5-VL-7B</b> · 意图识别 / 原 LoRA"
+        method = "路线 A · 类别 + 描述检索" if semantic else "路线 B · 原图向量检索"
+        intro = "先由 Qwen 判断检索意图，再识别类别、筛选候选，按图片描述的向量排序。" if semantic else "先由 Qwen 判断检索意图，再直接编码完整文字与原图，不使用类别粗筛。"
+        model_note = "路线 A：Qwen 原 LoRA 生成类别与描述，Taiyi 编码文字；图文查询结合 CLIP 参考图向量。" if semantic else ("路线 B：EmbeddingGemma 2 已完成类别对比学习试训；这组演示不证明细粒度属性提升。" if report.get('training_state') == 'finetuned' else "路线 B 对照：当前展示未微调的公开权重基线。")
+        if routed and not semantic:
+            model_note += ' <a href="https://liangjianshu.github.io/multimodal-image-retrieval/route-b-baseline/">微调前对照</a> · <a href="https://github.com/liangjianshu/multimodal-image-retrieval/blob/main/docs/EMBEDDING_EXPERIMENT.md">试训报告</a>'
+    elif hybrid:
         model_name = report["config"]["vl_model"].split("/")[-1].replace("-Instruct", "")
         badge = f'<b>{html.escape(model_name)}</b> · ' + ("作者原 LoRA" if adapted else "公开基座")
         method = "EmbeddingGemma 2 · 原图排序"
@@ -130,7 +145,15 @@ def main():
         model_note = "已加载作者原 LoRA；小图库定性演示，不代表规模化准确率或历史 F1 收益。" if adapted else "公开基座的小图库定性演示；未加载 LoRA，不代表规模化准确率或历史 F1 收益。"
     page = page.replace("__MODEL_BADGE__", badge).replace("__METHOD_BADGE__", method)
     page = page.replace("__INTRO__", intro)
-    page = page.replace("__INTENT_TAB__", '<button role="tab" data-kind="intent">非检索请求</button>' if hybrid else '')
+    route_nav = ''
+    if routed:
+        base = 'https://liangjianshu.github.io/multimodal-image-retrieval/'
+        route_nav = ('<nav class="route-nav" aria-label="检索路线">'
+            f'<a href="{base}" aria-current="{str(semantic).lower()}">路线 A · Qwen 类别与描述</a>'
+            f'<a href="{base}route-b/" aria-current="{str(not semantic).lower()}">路线 B · 原图 Embedding</a></nav>')
+    page = page.replace('__ROUTE_NAV__', route_nav)
+
+    page = page.replace("__INTENT_TAB__", '<button role="tab" data-kind="intent">非检索请求</button>' if hybrid or routed else '')
     nonretrieval_examples = (
         '<section class="example-group" aria-labelledby="nonretrieval-examples-title">'
         '<h2 id="nonretrieval-examples-title">非检索示例</h2>'
@@ -147,7 +170,7 @@ def main():
         '<span id="filter-hint">阈值越高，返回越少；最多展示三张</span></div>'
     )
     page = page.replace("__FILTER_CONTROLS__", controls)
-    page = page.replace("__DESCRIPTION_NOTE__", "Qwen 类别参与粗筛，详细说明仅供阅读。" if hybrid else "图片说明仅供阅读，不参与排序。" if direct else "点击图片可查看完整描述。")
+    page = page.replace("__DESCRIPTION_NOTE__", "Qwen 类别用于粗筛，图片描述参与向量排序。" if semantic else "图片说明仅供阅读；类别不参与筛选。" if routed else "Qwen 类别参与粗筛，详细说明仅供阅读。" if hybrid else "图片说明仅供阅读，不参与排序。" if direct else "点击图片可查看完整描述。")
     page = page.replace("__MODEL_NOTE__", model_note)
     page = page.replace("__GUIDE_PATH__", GUIDE_URL)
     raw = base64.b64encode(json.dumps(report, ensure_ascii=False, indent=2).encode("utf-8")).decode("ascii")

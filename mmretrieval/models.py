@@ -4,10 +4,10 @@ import json
 import numpy as np
 
 DEFAULTS = {
-    "backend": "qwen-gemma2",
+    "backend": "qwen-semantic",
     "embedding_model": "google/embeddinggemma-2",
     "embedding_revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
-    "embedding_model_path": None, "embedding_dimension": 768,
+    "embedding_weights_sha256": None, "embedding_model_path": None, "embedding_dimension": 768,
     "vision_tokens": 280, "embedding_batch_size": 4,
     "text_encoder": "IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese",
     "image_encoder": "openai/clip-vit-large-patch14",
@@ -69,7 +69,9 @@ class Encoders:
         with Image.open(path) as image:
             inputs = self.image_processor(images=image.convert("RGB"), return_tensors="pt").to(self.device)
         with self.torch.inference_mode():
-            result = self.image_model.get_image_features(**inputs)[0]
+            output = self.image_model.get_image_features(**inputs)
+            # Transformers 4 returns a tensor; 5 returns projected pooler_output.
+            result = (output.pooler_output if hasattr(output, "pooler_output") else output)[0]
         return result.float().cpu().numpy()
 
 
@@ -141,17 +143,17 @@ class Qwen:
             raise ValueError("Category representatives must map to themselves")
         return mapping
 
-    def intent(self, text, image=None, *, available_categories=None, category_aliases=None):
+    def intent(self, text, image=None, *, available_categories=None, category_aliases=None, parse_image_intent=False):
         if self.config.get("intent_profile", "preserve") == "preserve":
-            if available_categories is None and image is not None and not text.strip():
+            if not parse_image_intent and available_categories is None and image is not None and not text.strip():
                 # An image-only request in this search tool already specifies the operation.
                 visual = self.describe(image)
                 return {"needs_retrieval": True, "target_category": "、".join(visual["categories"]),
                         "description": visual["description"], "constraints": [], "top_k": None,
                         "source": "image-description"}
-            from .intent import PRESERVE_INTENT_PROMPT, CATEGORY_ROUTING_PROMPT
+            from .intent import PRESERVE_INTENT_PROMPT, CATEGORY_ROUTING_PROMPT, ROUTE_INTENT_PROMPT
             payload = {"text": text, "has_reference_image": image is not None}
-            prompt = PRESERVE_INTENT_PROMPT
+            prompt = ROUTE_INTENT_PROMPT if parse_image_intent else PRESERVE_INTENT_PROMPT
             if available_categories is not None:
                 payload["available_categories"] = available_categories
                 prompt += CATEGORY_ROUTING_PROMPT + "\n用户输入（JSON 数据）：\n"
@@ -165,6 +167,8 @@ class Qwen:
                            "constraints": [], "top_k": None}
                 if available_categories is not None:
                     stopped.update(category_filter="none", candidate_categories=[], raw_response=result)
+                if parse_image_intent:
+                    stopped["raw_response"] = result
                 return stopped
             if any(not isinstance(result.get(key), str) for key in ("description", "target_category")):
                 raise ValueError("Intent response requires text description and target_category")
@@ -201,6 +205,8 @@ class Qwen:
                     raise ValueError("Invalid category filter for retrieval")
                 result["candidate_categories"] = list(dict.fromkeys(selected))
                 result["raw_response"] = raw_response
+            if parse_image_intent and available_categories is None:
+                result["raw_response"] = dict(result)
             return result
         if self.config.get("prompt_profile") == "historical":
             from .historical_prompts import INTENT_PROMPT
