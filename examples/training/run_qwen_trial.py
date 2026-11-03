@@ -19,14 +19,7 @@ from mmretrieval.training import configure_training,SFTCollator
 from mmretrieval.study_metrics import PRIMARY
 from build_restored_study import CATEGORY_PROMPT,LABELS
 
-# Fixed before test inference. Subtype names map to their parent category.
-ALIASES={
- 'chair':['椅','凳'], 'cup':['杯'], 'bicycle':['自行车','单车','脚踏车'],
- 'skateboard':['滑板'], 'oven':['烤箱','烤炉'], 'couch':['沙发'], 'bowl':['碗'],
- 'motorcycle':['摩托','电动车'], 'snowboard':['滑雪板'], 'microwave':['微波炉'],
- 'cat':['猫'], 'donut':['甜甜圈','甜圈','多纳圈'], 'keyboard':['键盘'],
- 'orange':['橙','橘','桔'], 'pizza':['披萨','比萨'],
-}
+from mmretrieval.study_categories import ALIASES,matched_categories
 
 
 def predict(model,processor,rows,root,device,batch_size=8):
@@ -48,7 +41,7 @@ def predict(model,processor,rows,root,device,batch_size=8):
                 names=extract_json(response)
                 if not isinstance(names,list) or not names or any(not isinstance(n,str) for n in names):raise ValueError('Invalid categories')
             except (ValueError,TypeError):valid=False;names=[]
-            matched=sorted(c for c,aliases in ALIASES.items() if any(any(a in name for a in aliases) for name in names))
+            matched=matched_categories(names)
             predictions.append({'id':row['id'],'truth':row['label'],'raw_response':response,'categories':names,'matched_classes':matched,'valid_json':valid})
         if start%200==0:print(json.dumps({'inference_images':min(start+batch_size,len(rows)),'total':len(rows)}),flush=True)
     perclass={}

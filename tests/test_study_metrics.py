@@ -58,3 +58,16 @@ def test_image_f1_uses_validation_threshold_and_excludes_self():
     test=evaluate_vectors(rows,np.array([[1.,0.],[0.,1.],[1.,0.],[0.,1.]]),queries,np.eye(2),val['validation_thresholds'])
     assert test['metrics']['image']['calibrated_global_threshold']==threshold
     assert test['metrics']['image']['primary_five_calibrated_f1']==0.
+
+def test_category_aliases_are_bilingual_without_bike_motorbike_collision():
+    from mmretrieval.study_categories import matched_categories
+    assert matched_categories(['咖啡杯','Cups','Mug'])==['cup']
+    assert matched_categories(['motorbike'])==['motorcycle']
+    assert matched_categories(['bikes'])==['bicycle']
+    assert matched_categories(['category'])==[]
+
+def test_category_normalizer_does_not_treat_orange_colour_as_fruit():
+    from mmretrieval.study_categories import matched_categories
+    assert matched_categories(['orange chair','橙色椅子'])==['chair']
+    assert matched_categories(['oranges','橙子'])==['orange']
+    assert matched_categories(['猫头鹰'])==[]
