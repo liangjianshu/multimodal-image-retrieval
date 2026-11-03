@@ -1,0 +1,52 @@
+[
+  {
+    "id": "white-bicycle",
+    "kind": "text",
+    "text": "白色自行车",
+    "title": "一句中文，寻找图库里的物体",
+    "mode": "semantic"
+  },
+  {
+    "id": "red-chair",
+    "kind": "text",
+    "text": "红色的椅子",
+    "title": "红色椅子的文字检索",
+    "mode": "semantic"
+  },
+  {
+    "id": "coffee",
+    "kind": "text",
+    "text": "咖啡杯",
+    "title": "检索不同外观的咖啡杯",
+    "mode": "semantic"
+  },
+  {
+    "id": "ornate-cup",
+    "kind": "image",
+    "mode": "semantic",
+    "image": "images/image-07.jpg",
+    "title": "一张参考图，找到更多杯子"
+  },
+  {
+    "id": "similar-chair",
+    "kind": "image",
+    "mode": "semantic",
+    "image": "images/image-02.jpg",
+    "title": "给一张椅子图，找相似素材"
+  },
+  {
+    "id": "similar-cup",
+    "kind": "image",
+    "mode": "semantic",
+    "image": "images/image-06.jpg",
+    "title": "用咖啡杯照片找相似图片"
+  },
+  {
+    "id": "bicycle-in-grass",
+    "kind": "fusion",
+    "image": "images/image-09.jpg",
+    "text": "草地上的自行车",
+    "title": "参考图加文字，补充场景要求",
+    "mode": "semantic"
+  }
+]

@@ -14,7 +14,10 @@ def load_config(path):
     supplied = json.loads(Path(path).read_text(encoding="utf-8")) if path else {}
     if not isinstance(supplied, dict) or set(supplied) - set(DEFAULTS):
         raise ValueError("Unknown config keys; see configs/default.json")
-    return {**DEFAULTS, **supplied}
+    config = {**DEFAULTS, **supplied}
+    if config["prompt_profile"] not in ("standard", "historical"):
+        raise ValueError("prompt_profile must be standard or historical")
+    return config
 
 
 def encode_query(encoder, text, image, weight):
@@ -116,7 +119,8 @@ def execute(args):
                 raise ValueError(f"{row['id']}: run describe or supply valid category metadata first")
             if not isinstance(description, str):
                 raise ValueError("Description must be text")
-            semantic_texts.append(("、".join(categories), description or "、".join(categories)))
+            category_text = (", " if config["prompt_profile"] == "historical" else "、").join(categories)
+            semantic_texts.append((category_text, description or category_text))
         encoder = Encoders(config)
         category, description, images = [], [], []
         for row, (cat_text, desc_text) in zip(rows, semantic_texts):

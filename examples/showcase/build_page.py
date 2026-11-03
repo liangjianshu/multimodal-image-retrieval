@@ -36,12 +36,17 @@ def initial_view(report, sources, images):
         )
     if len(query["results"]) < 3:
         cards.append(f'<div class="empty">类别粗筛只保留了 {query["candidate_count"]} 张候选图片。</div>')
+    note = {"text": "查询文本直接编码，不调用意图解析。", "image": "仅使用参考图向量；已排除图库中的同一张图片。", "fusion": "图片与文本向量各占 50%；已排除参考图自身。"}[query["kind"]]
+    pipeline = "CLIP 图像编码 → 图像相似度排序" if query["mode"] == "clip" else "查询编码 → 类别粗筛 → 描述排序"
+    if query.get("intent"):
+        note = f'模型解析目标：{query["search_text"]}。目标文字与参考图向量各占 50%；已排除参考图自身。'
+        pipeline = "微调 Qwen 目标解析 → 图文融合 → 类别粗筛 → 描述排序"
     return {
         "__INITIAL_LABEL__": {"text": "TEXT → IMAGE", "image": "IMAGE → IMAGE", "fusion": "IMAGE + TEXT → IMAGE"}[query["kind"]],
         "__INITIAL_TITLE__": escape(query["title"]),
         "__INITIAL_INPUT__": inputs,
-        "__INITIAL_NOTE__": {"text": "查询文本直接编码，不调用意图解析。", "image": "仅使用参考图向量；已排除图库中的同一张图片。", "fusion": "图片与文本向量各占 50%；已排除参考图自身。"}[query["kind"]],
-        "__INITIAL_PIPELINE__": "CLIP 图像编码 → 图像相似度排序" if query["mode"] == "clip" else "查询编码 → 类别粗筛 → 描述排序",
+        "__INITIAL_NOTE__": escape(note),
+        "__INITIAL_PIPELINE__": pipeline,
         "__INITIAL_COUNT__": f' / {len(query["results"])} 张',
         "__INITIAL_CANDIDATES__": f'图库 {report["gallery_size"]} 张 · {"图像候选" if query["mode"] == "clip" else "粗筛候选"} {query["candidate_count"]} 张 · Top-3',
         "__INITIAL_CARDS__": "".join(cards),
@@ -76,6 +81,12 @@ def main():
             images[source["file_path"]] = "images/" + image_path.name
     data = json.dumps({"report": report, "sources": sources, "images": images}, ensure_ascii=False).replace("<", "\\u003c")
     page = template.replace("/*__RECORDED_DATA__*/", data)
+    adapted = bool(report.get("adapter_verification"))
+    model_name = report["config"]["vl_model"].split("/")[-1].replace("-Instruct", "")
+    page = page.replace("__MODEL_BADGE__", f'<b>{html.escape(model_name)}</b> ' + ("作者原 LoRA" if adapted else "公开基座"))
+    page = page.replace("__METHOD_BADGE__", "目标解析 + 两阶段语义检索" if adapted else "语义检索 + CLIP 图像检索")
+    model_note = "已加载作者原 LoRA；小图库定性演示，不代表规模化准确率或历史 F1 收益。" if adapted else "公开基座的小图库定性演示；未加载 LoRA，不代表规模化准确率或历史 F1 收益。"
+    page = page.replace("__MODEL_NOTE__", model_note)
     page = page.replace("__GUIDE_PATH__", GUIDE_URL)
     raw = base64.b64encode(json.dumps(report, ensure_ascii=False, indent=2).encode("utf-8")).decode("ascii")
     page = page.replace("__RAW_RESULTS_URL__", "data:application/json;base64," + raw)

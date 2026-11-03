@@ -23,11 +23,11 @@ The index is an in-memory NumPy matrix. External vector databases, a live infere
 
 ![Real text-to-image retrieval on a 12-image CC0 gallery](docs/demo/text-search.png)
 
-Nine recorded result sets cover Chinese text search, reference-image search and fused queries, including CLIP/semantic comparisons and imperfect results. Qwen2.5-VL-3B generates the gallery metadata; Taiyi-CLIP produces real embeddings. No manual category labels or synthetic vectors are used for indexing. Reference images are excluded from their own results.
+Seven recorded result sets use **Qwen2.5-VL-7B with the author’s original LoRA adapter**. The model generates gallery metadata and parses image-query targets; Taiyi-CLIP fuses the target text and reference image before category filtering and description ranking. No manual labels, synthetic vectors or manual reranking are used. Reference images are excluded from their own results.
 
 Try the [online demo](https://liangjianshu.github.io/multimodal-image-retrieval/), or open `docs/demo/index.html` offline. Images are embedded, so the HTML works as a standalone file; its initial results also render without JavaScript. This is a replay, not browser-side model inference. See the [reproduction guide](docs/DEMO.md), [raw outputs](docs/demo/results.json) and [CC0 image credits](examples/showcase/SOURCES.md).
 
-This small-gallery qualitative demo uses base models without a domain adapter. It is not a benchmark, a fine-tuning comparison or a reproduction of historical F1 gains.
+This is a small-gallery qualitative replay, not a benchmark or a reproduction of historical F1 gains. The original adapter is required to reproduce the main showcase and is not distributed here. The earlier 3B/no-adapter outputs remain in [baseline records](docs/demo/baseline-3b/results.json). Model size, prompts and query processing also changed, so differences cannot be attributed to LoRA alone.
 
 ## Quick start without model downloads
 

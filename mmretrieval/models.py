@@ -10,6 +10,7 @@ DEFAULTS = {
     "text_model": "Qwen/Qwen2.5-3B-Instruct",
     "adapter": None, "device": "auto", "max_pixels": 262144,
     "max_new_tokens": 256, "category_ratio": 0.85, "image_weight": 0.5,
+    "prompt_profile": "standard",
 }
 
 
@@ -104,9 +105,14 @@ class Qwen:
         return self.processor.batch_decode(output[:, inputs["input_ids"].shape[1]:], skip_special_tokens=True)[0]
 
     def describe(self, path):
-        result = extract_json(self.generate(
-            '请描述图片。只返回 JSON 对象，格式为 {"categories":["主要物体类别"],'
-            '"description":"中文描述，包括可见的颜色、形状、材质和场景"}。不要猜测不可见属性。', path))
+        if self.config.get("prompt_profile") == "historical":
+            from .historical_prompts import CATEGORY_PROMPT, DESCRIPTION_PROMPT
+            result = {"categories": extract_json(self.generate(CATEGORY_PROMPT, path)),
+                      "description": self.generate(DESCRIPTION_PROMPT, path).strip()}
+        else:
+            result = extract_json(self.generate(
+                '请描述图片。只返回 JSON 对象，格式为 {"categories":["主要物体类别"],'
+                '"description":"中文描述，包括可见的颜色、形状、材质和场景"}。不要猜测不可见属性。', path))
         if not isinstance(result, dict) or not isinstance(result.get("categories"), list) or not result["categories"]:
             raise ValueError("Description response requires nonempty categories")
         if any(not isinstance(c, str) or not c.strip() for c in result["categories"]):
@@ -116,6 +122,23 @@ class Qwen:
         return result
 
     def intent(self, text, image=None):
+        if self.config.get("prompt_profile") == "historical":
+            from .historical_prompts import INTENT_PROMPT
+            raw = extract_json(self.generate(INTENT_PROMPT + "问题：" + text, image))
+            if not isinstance(raw, dict):
+                raise ValueError("Intent response must be an object")
+            def scalar(value):
+                return value[0] if isinstance(value, list) and value else value
+            needed = scalar(raw.get("是否需要图像检索"))
+            description = scalar(raw.get("检索描述", ""))
+            method = raw.get("检索方式", [])
+            if needed not in (0, 1, "0", "1") or not isinstance(description, str):
+                raise ValueError("Invalid historical intent response")
+            k = method[1] if isinstance(method, list) and len(method) > 1 and method[0] == "TopK" else None
+            if k is not None and (type(k) is not int or not 1 <= k <= 1000):
+                raise ValueError("Invalid historical intent top_k")
+            return {"needs_retrieval": needed in (1, "1"), "description": description,
+                    "top_k": k, "raw_response": raw}
         result = extract_json(self.generate(
             '将用户需求解析为图像检索请求，只返回 JSON：'
             '{"needs_retrieval":true,"description":"中文检索目标与属性","top_k":5}。'
