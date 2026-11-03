@@ -42,8 +42,12 @@
 
 ## 下一步可评估的编码器
 
-候选为 **Qwen3-VL-Embedding-2B**。官方支持文字、图片及图文混合输入，并映射到统一空间，最高 2048 维。可以让查询端直接接收“参考图＋完整修改文字”，图库端直接编码原图，或原图加商品字段。[官方模型卡](https://huggingface.co/Qwen/Qwen3-VL-Embedding-2B)
+建议对照 **EmbeddingGemma 2** 与 **Qwen3-VL-Embedding-2B**，不根据参数量或发布时间预判质量。
 
-这是待评估方案，当前展示仍用 Taiyi＋CLIP，并未声称新编码器已经在本项目胜出。切换时应同时重建查询和图库的编码流程与全部索引，不能把新的向量与旧 Taiyi/CLIP 向量直接混用。现有 Qwen2.5-VL-7B LoRA 对应不同基座，不能直接加载到该 Embedding 模型；可以继续保留它负责图库描述和属性提取。
+Google 于 2026-10-06 发布的 `google/embeddinggemma-2` 是原生多模态模型，完整模型 740M 参数，可选择加载视觉和音频模块；文字、图片及混合输入映射到统一的 768 维空间。第一代 EmbeddingGemma 是纯文本模型，应区分版本。对于本项目，第二代可以直接编码商品图片和图文联合查询，适合作为轻量候选先评估。[官方模型卡](https://ai.google.dev/gemma/docs/embeddinggemma/model_card_2?hl=en) · [发布日期](https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/)
+
+**Qwen3-VL-Embedding-2B** 可作为另一组对照。官方支持文字、图片及图文混合输入，并映射到统一空间，最高 2048 维。可以让查询端直接接收“参考图＋完整修改文字”，图库端直接编码原图，或原图加商品字段。[官方模型卡](https://huggingface.co/Qwen/Qwen3-VL-Embedding-2B)
+
+这是待评估方案，当前展示仍用 Taiyi＋CLIP，并未声称新编码器已经在本项目胜出。切换时应同时重建查询和图库的编码流程与全部索引，不能把新的向量与旧 Taiyi/CLIP 向量直接混用。即使 EmbeddingGemma 2 和旧索引同为 768 维，其学习到的坐标空间也不同，仍须重建全部向量。现有 Qwen2.5-VL-7B LoRA 对应不同基座，不能直接加载到这些 Embedding 模型；可以继续保留它负责图库描述和属性提取。
 
 评估应覆盖同类别难负例、颜色和材质差异、否定要求、背景修改、相似款与同款，并比较 Recall@K、排序指标、延迟和内存，而非只看 12 张演示图。若需要逐候选评估查询与商品图片的相关性，也可独立评估配套的 [Qwen3-VL-Reranker-2B](https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B)；本次尚未接入。
