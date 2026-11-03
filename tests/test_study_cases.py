@@ -33,7 +33,7 @@ def test_validation_replay_is_explicit_about_calibration():
     queries = [{'id': 'cup-0', 'label': 'cup'}, {'id': 'chair-0', 'label': 'chair'}]
     result = evaluate_vectors(rows, arrays['images'], queries, arrays['text'])
     cases = list(ranked_queries(rows, arrays, result))
-    assert cases[0]['threshold_fitted_on_this_query_set']
+    assert all(c['threshold_fitted_on_this_query_set'] for c in cases)
 
 
 def test_coarse_empty_and_missed_positive_are_preserved():

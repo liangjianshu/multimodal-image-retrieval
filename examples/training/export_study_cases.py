@@ -56,7 +56,7 @@ def ranked_queries(rows, arrays, result, categories=None, top_k=20):
                 'text': query.get('text'), 'average_precision': actual['average_precision'],
                 'relevant_total': actual['relevant'], 'candidate_count': len(candidates),
                 'validation_threshold': threshold,
-                'threshold_fitted_on_this_query_set': 'validation_best_f1' in query,
+                'threshold_fitted_on_this_query_set': bool(result.get('validation_thresholds')),
                 'above_threshold_count': int(np.sum(scores[candidates] >= threshold)),
                 'top_k': [{'id': rows[i]['id'], 'label': rows[i]['label'], 'score': float(scores[i]),
                            'relevant_by_class': bool(truth[i]), 'above_threshold': bool(scores[i] >= threshold)} for i in order]}
