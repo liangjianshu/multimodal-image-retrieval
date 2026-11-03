@@ -14,6 +14,8 @@ The root MIT license does not replace the license covering this directory.
 
 ## Dependencies, model weights and data
 
+The 12 photographs under `examples/showcase/images/` are CC0 works from Wikimedia Commons. Author names, original pages, download URLs and checksums are listed in [SOURCES.md](examples/showcase/SOURCES.md) and [sources.json](examples/showcase/sources.json). They remain CC0 rather than being relicensed as project code. Demo screenshots display these photographs.
+
 PyTorch, Transformers, PEFT, Qwen utilities, Taiyi-CLIP and CLIP retain their respective licenses. Consult their repositories and model cards before use. Model weights, COCO/ImageNet images and private datasets are not redistributed in this repository.
 
 Taobao / Pailitao names describe an example application category. This independent project is not affiliated with or endorsed by Alibaba or Taobao.

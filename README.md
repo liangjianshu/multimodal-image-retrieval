@@ -15,7 +15,19 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 “拍立淘式”指上传参考图寻找相似商品的应用场景。本项目是个人实践，未与淘宝或阿里建立关联，也不代表其线上技术实现。拍立淘的公开场景介绍见 [阿里云官方说明](https://www.alibabacloud.com/help/en/image-search/product-overview/scenarios)。
 
-**快速入口：** [换成自己的数据](docs/CUSTOM_DATA.md) · [领域微调](docs/TRAINING.md) · [实验与效果记录](docs/EXPERIMENTS.md) · [验证范围](docs/VERIFICATION.md)
+**快速入口：** [真实效果演示](docs/DEMO.md) · [换成自己的数据](docs/CUSTOM_DATA.md) · [领域微调](docs/TRAINING.md) · [实验与效果记录](docs/EXPERIMENTS.md)
+
+## 先看真实检索效果
+
+[![中文文搜图：真实模型在 12 张图片中检索白色自行车](docs/demo/text-search.png)](docs/DEMO.md)
+
+演示图库包含 **12 张可公开分享的 CC0 图片**，覆盖椅凳、杯子和自行车。Qwen2.5-VL-3B 从图片生成类别与描述，Taiyi-CLIP 编码并执行检索，**没有用人工类别或预设向量代替模型输出**。提供 9 组文搜图、图搜图、图文融合结果，包括 CLIP / 语义方法对照和未命中首位的困难案例。
+
+- **浏览效果**：[图搜图](docs/demo/image-search.png) · [图文融合](docs/demo/fusion-search.png)。
+- **本地交互查看**：下载仓库后打开 `docs/demo/index.html`，切换查询、查看图片描述与来源；页面回放已记录结果，不在浏览器里运行模型。
+- **自己复跑**：按 [演示与复现指南](docs/DEMO.md) 执行；图片、查询、模型配置、生成描述和原始结果均已附上。
+
+这是公开基座模型在小图库上的定性演示，未加载领域 LoRA，不代表规模化准确率，也不是历史 F1 提升的复现实验。
 
 ## 可以用在哪些场景
 
@@ -37,7 +49,7 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 - **训练和评测入口齐全**：可构造易混淆类别问答，对比微调范围，并通过自有查询集检查效果。
 - **默认在本机处理图片**：图片由运行机器上的模型处理；首次使用需下载模型权重。
 
-本项目由多模态检索课程实践及个人实验整理而来，包含 Taiyi-CLIP 图文编码、Qwen2.5-VL 语义建库、类别粗筛与描述向量排序，以及可选的领域 SFT。适合学习、验证小规模图片素材库的检索方案。
+本项目整理自个人多模态检索实验，包含 Taiyi-CLIP 图文编码、Qwen2.5-VL 语义建库、类别粗筛与描述向量排序，以及可选的领域 SFT。适合学习、验证小规模图片素材库的检索方案。
 
 `mmretrieval/` 是统一运行入口；`legacy/` 保存经过凭据和个人路径清理的历史源码，供追溯实验设计。**模型权重、原始 COCO / ImageNet 图片、个人训练数据与大型向量文件没有上传。**
 
@@ -185,7 +197,7 @@ python -m mmretrieval search --index artifacts/index --image-root data/images \
 | `vl_model` | Qwen2.5-VL 基座或完整微调模型路径，默认 7B |
 | `text_model` | 纯文本意图模型，默认 Qwen2.5-3B |
 | `adapter` | 可选 LoRA 目录，包含 `adapter_config.json` 和权重 |
-| `device` | `auto`、`cuda`、`cuda:0` 或 `cpu`；auto 优先 CUDA |
+| `device` | `auto`、`cuda`、`cuda:0`、`cpu`，或显式 `npu:0`；auto 优先 CUDA。Ascend 推理环境见 [演示指南](docs/DEMO.md) |
 | `max_pixels` / `max_new_tokens` | 控制视觉输入大小和生成长度 |
 | `category_ratio` | 类别粗筛相对阈值，默认 0.85 |
 | `image_weight` | 图文同时输入时参考图权重，默认 0.5 |
@@ -232,7 +244,7 @@ python -m mmretrieval evaluate --index artifacts/index --image-root data/images 
 ```text
 mmretrieval/     数据清单、模型封装、两阶段检索、SFT 和 CLI
 configs/        模型与检索配置
-examples/       清单、查询与难负类别映射示例（不包含第三方图片）
+examples/       清单、查询与难负类别映射；showcase/ 含 12 张 CC0 演示图片
 tests/          数据与检索测试、微型随机 Qwen 训练/保存测试
 docs/           自有数据、训练、实验记录与整理说明
 legacy/         清理后的历史实验源码和对应第三方许可证
@@ -247,7 +259,7 @@ pytest -q
 
 ## 来源与许可
 
-项目代码采用 [MIT License](LICENSE)，另有许可证声明的第三方文件除外。`legacy/project_three/Qwen3-VL/` 下的 Qwen 源码继续遵循其 Apache-2.0 许可证，详见 [第三方说明](THIRD_PARTY_NOTICES.md)。来源和整理范围见 [PROVENANCE](docs/PROVENANCE.md)。依赖和模型分别遵循自身许可，数据集请从官方渠道获取。
+项目代码采用 [MIT License](LICENSE)，另有许可证声明的第三方文件除外。`legacy/project_three/Qwen3-VL/` 下的 Qwen 源码继续遵循其 Apache-2.0 许可证，详见 [第三方说明](THIRD_PARTY_NOTICES.md)。演示照片采用 CC0，作者与原始链接见 [图片来源](examples/showcase/SOURCES.md)。来源和整理范围见 [PROVENANCE](docs/PROVENANCE.md)。依赖和模型分别遵循自身许可，原 COCO / ImageNet 数据集请从官方渠道获取。
 
 - [Qwen2.5-VL 模型](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) / [官方代码与训练接口](https://github.com/QwenLM/Qwen3-VL)
 - [Taiyi-CLIP 中文文本编码器](https://huggingface.co/IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese) / [CLIP ViT-L/14](https://huggingface.co/openai/clip-vit-large-patch14)

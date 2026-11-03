@@ -1,0 +1,134 @@
+[
+  {
+    "id": "image-01",
+    "file_path": "images/image-01.jpg",
+    "title": "Red chair.jpg",
+    "author": "Fitrah 9131",
+    "source": "https://commons.wikimedia.org/wiki/File:Red_chair.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Red_chair.jpg/960px-Red_chair.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "fd76264feccab558af24a91a5e1373dd9f1c73433fe6ad8e184e8001e66b3278"
+  },
+  {
+    "id": "image-02",
+    "file_path": "images/image-02.jpg",
+    "title": "Chair.JPG",
+    "author": "Antonio Borrillo",
+    "source": "https://commons.wikimedia.org/wiki/File:Chair.JPG",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Chair.JPG/960px-Chair.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "b7fd907f4ca6e303f02ee1a7df71cc031087422250525b72cbf33b0f6a91473f"
+  },
+  {
+    "id": "image-03",
+    "file_path": "images/image-03.jpg",
+    "title": "Office Chair.jpg",
+    "author": "Wikiediter2029",
+    "source": "https://commons.wikimedia.org/wiki/File:Office_Chair.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Office_Chair.jpg/960px-Office_Chair.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "4e7944e89a9c577d237faa387820282fc50c6a4b6968418ef0555214e4af7412"
+  },
+  {
+    "id": "image-04",
+    "file_path": "images/image-04.jpg",
+    "title": "Chair from wood veneer.jpg",
+    "author": "DeveshT",
+    "source": "https://commons.wikimedia.org/wiki/File:Chair_from_wood_veneer.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Chair_from_wood_veneer.jpg/960px-Chair_from_wood_veneer.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "6ebfc560d8fb46f54f628d514f060b3b8f140c31cb44c7e639501d40863f87b9"
+  },
+  {
+    "id": "image-05",
+    "file_path": "images/image-05.jpg",
+    "title": "Coffeecup.jpg",
+    "author": "Sprinno",
+    "source": "https://commons.wikimedia.org/wiki/File:Coffeecup.jpg",
+    "download_url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Coffeecup.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "e4a5dc848baac414f12b08ad01207ff0feddad4bfd81513f7e50fec0985671d7"
+  },
+  {
+    "id": "image-06",
+    "file_path": "images/image-06.jpg",
+    "title": "Coffee cup seen from above.jpg",
+    "author": "www.Pixel.la Free Stock Photos",
+    "source": "https://commons.wikimedia.org/wiki/File:Coffee_cup_seen_from_above.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Coffee_cup_seen_from_above.jpg/960px-Coffee_cup_seen_from_above.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "896b7e1dfba8ad579b593da099a99be973c082d8c04264d89718f1390862f693"
+  },
+  {
+    "id": "image-07",
+    "file_path": "images/image-07.jpg",
+    "title": "Coffee cup kaffe - 3.JPG",
+    "author": "Øyvind Holmstad",
+    "source": "https://commons.wikimedia.org/wiki/File:Coffee_cup_kaffe_-_3.JPG",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Coffee_cup_kaffe_-_3.JPG/960px-Coffee_cup_kaffe_-_3.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "d2a16aadd808a4f8daa785d0636adca4ec1fbc6b2eac9c2924ac50772d904519"
+  },
+  {
+    "id": "image-08",
+    "file_path": "images/image-08.jpg",
+    "title": "Coffee cup from Turkey, Ottoman period, late 19th-early 20th century, silver, porcelain.JPG",
+    "author": "Hiart",
+    "source": "https://commons.wikimedia.org/wiki/File:Coffee_cup_from_Turkey,_Ottoman_period,_late_19th-early_20th_century,_silver,_porcelain.JPG",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Coffee_cup_from_Turkey%2C_Ottoman_period%2C_late_19th-early_20th_century%2C_silver%2C_porcelain.JPG/960px-Coffee_cup_from_Turkey%2C_Ottoman_period%2C_late_19th-early_20th_century%2C_silver%2C_porcelain.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "80a2beebf3252c8535d55f7a7bd720854e032e5f5893fedfa077d3ed4bb8ca41"
+  },
+  {
+    "id": "image-09",
+    "file_path": "images/image-09.jpg",
+    "title": "White bicycle.jpg",
+    "author": "Fasalul Abid Shj",
+    "source": "https://commons.wikimedia.org/wiki/File:White_bicycle.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/White_bicycle.jpg/960px-White_bicycle.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "4be95ee0dc2d8e38f38517bfeb2b470dd4a00ac9f1659728e36c4c6d695ac33e"
+  },
+  {
+    "id": "image-10",
+    "file_path": "images/image-10.jpg",
+    "title": "A shared bicycle in the grass.jpg",
+    "author": "社会我佩奇",
+    "source": "https://commons.wikimedia.org/wiki/File:A_shared_bicycle_in_the_grass.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/A_shared_bicycle_in_the_grass.jpg/960px-A_shared_bicycle_in_the_grass.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "632c162ede973d2ac55b09a9b631728f17d31d4f01bb9d18a1cc7b20ae9b8e2d"
+  },
+  {
+    "id": "image-11",
+    "file_path": "images/image-11.jpg",
+    "title": "Rustic Bicycle Against Blue Door.jpg",
+    "author": "Nexine7657",
+    "source": "https://commons.wikimedia.org/wiki/File:Rustic_Bicycle_Against_Blue_Door.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Rustic_Bicycle_Against_Blue_Door.jpg/960px-Rustic_Bicycle_Against_Blue_Door.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "7e2fc82ff3ac1bdf919d12b0f1eca3cfbfc74ae2269b3384b7ab7ecb7bfc2610"
+  },
+  {
+    "id": "image-12",
+    "file_path": "images/image-12.jpg",
+    "title": "Bicycle 02.jpg",
+    "author": "Shams948",
+    "source": "https://commons.wikimedia.org/wiki/File:Bicycle_02.jpg",
+    "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Bicycle_02.jpg/960px-Bicycle_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "1a3b8e88c08e02acb79e01fa569fff229dba255ce91f941186a0b95a5ad0112d"
+  }
+]

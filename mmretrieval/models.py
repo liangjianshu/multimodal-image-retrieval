@@ -17,6 +17,9 @@ def resolve_device(device):
     import torch
     if device == "auto":
         return "cuda" if torch.cuda.is_available() else "cpu"
+    if device == "npu" or device.startswith("npu:"):
+        # Optional Ascend backend; install the vendor-matched torch/torch_npu pair.
+        import torch_npu  # noqa: F401
     return device
 
 
@@ -68,6 +71,8 @@ class Qwen:
         self.device = resolve_device(config["device"])
         use_cuda = self.device.startswith("cuda")
         dtype = (torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16) if use_cuda else torch.float32
+        if self.device.startswith("npu"):
+            dtype = torch.bfloat16
         model_id = config["vl_model"] if vision else config["text_model"]
         cls = Qwen2_5_VLForConditionalGeneration if vision else AutoModelForCausalLM
         self.model = cls.from_pretrained(model_id, torch_dtype=dtype, attn_implementation="sdpa").to(self.device)

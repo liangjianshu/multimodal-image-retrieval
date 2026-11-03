@@ -1,0 +1,60 @@
+[
+  {
+    "id": "white-bicycle",
+    "kind": "text",
+    "text": "白色自行车",
+    "title": "一句中文，寻找图库里的物体"
+  },
+  {
+    "id": "red-chair",
+    "kind": "text",
+    "text": "红色的椅子",
+    "title": "困难案例：颜色约束未排在首位"
+  },
+  {
+    "id": "coffee",
+    "kind": "text",
+    "text": "咖啡杯",
+    "title": "检索不同外观的咖啡杯"
+  },
+  {
+    "id": "ornate-cup-clip",
+    "kind": "image",
+    "mode": "clip",
+    "image": "images/image-07.jpg",
+    "title": "一张参考图，找到更多杯子"
+  },
+  {
+    "id": "similar-chair-clip",
+    "kind": "image",
+    "mode": "clip",
+    "image": "images/image-02.jpg",
+    "title": "给一张椅子图，找相似素材"
+  },
+  {
+    "id": "similar-cup-clip",
+    "kind": "image",
+    "mode": "clip",
+    "image": "images/image-06.jpg",
+    "title": "用咖啡杯照片找相似图片"
+  },
+  {
+    "id": "similar-chair",
+    "kind": "image",
+    "image": "images/image-02.jpg",
+    "title": "方法对照：语义粗筛漏掉部分椅子"
+  },
+  {
+    "id": "similar-cup",
+    "kind": "image",
+    "image": "images/image-06.jpg",
+    "title": "方法对照：按预测类别与描述检索"
+  },
+  {
+    "id": "bicycle-in-grass",
+    "kind": "fusion",
+    "image": "images/image-09.jpg",
+    "text": "草地上的自行车",
+    "title": "参考图加文字，补充场景要求"
+  }
+]

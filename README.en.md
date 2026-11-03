@@ -17,7 +17,17 @@ It also demonstrates components relevant to agent applications: intent parsing, 
 - **Optional adaptation:** compare language LoRA, merger + language LoRA, and full visual-tower tuning.
 - **Evaluation:** compute per-query precision, recall and F1 using explicit relevance labels.
 
-The index is an in-memory NumPy matrix. External vector databases, a web UI, server deployment and production performance benchmarks are not included.
+The index is an in-memory NumPy matrix. External vector databases, a live inference web service and production performance benchmarks are not included.
+
+## Real-model showcase
+
+![Real text-to-image retrieval on a 12-image CC0 gallery](docs/demo/text-search.png)
+
+Nine recorded result sets cover Chinese text search, reference-image search and fused queries, including CLIP/semantic comparisons and imperfect results. Qwen2.5-VL-3B generates the gallery metadata; Taiyi-CLIP produces real embeddings. No manual category labels or synthetic vectors are used for indexing. Reference images are excluded from their own results.
+
+Open `docs/demo/index.html` after downloading the repository to browse the recorded outputs offline. This is a replay, not browser-side model inference. See the [reproduction guide](docs/DEMO.md), [raw outputs](docs/demo/results.json) and [CC0 image credits](examples/showcase/SOURCES.md).
+
+This small-gallery qualitative demo uses base models without a domain adapter. It is not a benchmark, a fine-tuning comparison or a reproduction of historical F1 gains.
 
 ## Quick start without model downloads
 
@@ -72,4 +82,4 @@ Historical F1 improvements are author-reported results and have not been reprodu
 
 Try the pipeline on a small collection first. Report setup issues, use cases or reproducible errors through [Issues](https://github.com/liangjianshu/multimodal-image-retrieval/issues/new/choose). If it helps you learn or build, consider starring the project.
 
-[MIT License](LICENSE), except for separately licensed third-party files. The historical Qwen directory retains Apache-2.0; see [third-party notices](THIRD_PARTY_NOTICES.md). Model weights and third-party datasets are not included.
+[MIT License](LICENSE), except for separately licensed third-party files. The historical Qwen directory retains Apache-2.0; the bundled showcase photos are CC0. See [third-party notices](THIRD_PARTY_NOTICES.md). Model weights and the original COCO/ImageNet datasets are not included.
