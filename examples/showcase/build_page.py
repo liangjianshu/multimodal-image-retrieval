@@ -3,6 +3,7 @@ import argparse
 import base64
 import html
 import json
+import math
 from pathlib import Path
 import shutil
 
@@ -10,10 +11,11 @@ ROOT = Path(__file__).resolve().parents[2]
 GUIDE_URL = "https://github.com/liangjianshu/multimodal-image-retrieval/blob/main/docs/DEMO.md"
 
 
-def initial_view(report, sources, images):
+def initial_view(report, sources, images, min_score=None):
     """Render the first result even in previews that do not execute JavaScript."""
     escape = html.escape
     query = report["queries"][0]
+    visible = [r for r in query["results"] if min_score is None or r["score"] >= min_score]
     by_id = {source["id"]: source for source in sources}
     inputs = ""
     if query.get("image"):
@@ -21,7 +23,7 @@ def initial_view(report, sources, images):
     if query.get("text"):
         inputs += f'<div class="prompt">{escape(query["text"])}</div>'
     cards = []
-    for number, result in enumerate(query["results"], 1):
+    for number, result in enumerate(visible, 1):
         categories = escape(" · ".join(result["retrieval_categories"]))
         cards.append(
             '<article class="card"><div class="photo-wrap"><button class="photo-button" '
@@ -34,7 +36,11 @@ def initial_view(report, sources, images):
             f'<a class="source" href="{escape(by_id[result["id"]]["source"], quote=True)}">'
             f'{escape(result["id"])} · Wikimedia / CC0 ↗</a></div></article>'
         )
-    if len(query["results"]) < 3:
+    if not visible:
+        cards.append('<div class="empty">暂无达到当前相似度要求的结果。试试降低阈值。</div>')
+    elif len(visible) < len(query["results"]):
+        cards.append(f'<div class="empty">已过滤 {len(query["results"]) - len(visible)} 张低于阈值 {min_score:.2f} 的结果。</div>')
+    elif len(visible) < 3:
         cards.append(f'<div class="empty">当前可用候选为 {query["candidate_count"]} 张图片。</div>')
     note = {"text": "查询文本直接编码，不调用意图解析。", "image": "仅使用参考图向量；已排除图库中的同一张图片。", "fusion": "图片与文本向量各占 50%；已排除参考图自身。"}[query["kind"]]
     pipeline = "CLIP 图像编码 → 图像相似度排序" if query["mode"] == "clip" else "查询编码 → 类别粗筛 → 描述排序"
@@ -51,8 +57,8 @@ def initial_view(report, sources, images):
         "__INITIAL_INPUT__": inputs,
         "__INITIAL_NOTE__": escape(note),
         "__INITIAL_PIPELINE__": pipeline,
-        "__INITIAL_COUNT__": f' / {len(query["results"])} 张',
-        "__INITIAL_CANDIDATES__": f'图库 {report["gallery_size"]} 张 · {"图像候选" if direct or query["mode"] == "clip" else "粗筛候选"} {query["candidate_count"]} 张 · Top-3',
+        "__INITIAL_COUNT__": f' / {len(visible)} 张',
+        "__INITIAL_CANDIDATES__": f'图库 {report["gallery_size"]} 张 · {"图像候选" if direct or query["mode"] == "clip" else "粗筛候选"} {query["candidate_count"]} 张 · 最多 3 张',
         "__INITIAL_CARDS__": "".join(cards),
     }
 
@@ -61,10 +67,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", default="docs/demo/results.json")
     parser.add_argument("--output", default="docs/demo/index.html")
+    parser.add_argument("--min-score", type=float, default=0.66,
+                        help="Default replay threshold for the Gemma showcase; raw results are preserved")
     parser.add_argument("--image-mode", choices=("embedded", "external"), default="embedded",
                         help="Embed images for a portable file, or copy assets for fast web loading")
     args = parser.parse_args()
     report = json.loads(Path(args.results).read_text(encoding="utf-8"))
+    if not math.isfinite(args.min_score) or not 0 <= args.min_score <= 1:
+        raise ValueError("Showcase min-score must be between 0 and 1")
+    min_score = args.min_score if report.get("backend") == "embeddinggemma2" else None
     sources = json.loads((ROOT / "examples/showcase/sources.json").read_text(encoding="utf-8"))
     template = (Path(__file__).parent / "page.html").read_text(encoding="utf-8")
     output = Path(args.output)
@@ -83,7 +94,8 @@ def main():
             if target.resolve() != image_path:
                 shutil.copyfile(image_path, target)
             images[source["file_path"]] = "images/" + image_path.name
-    data = json.dumps({"report": report, "sources": sources, "images": images}, ensure_ascii=False).replace("<", "\\u003c")
+    data = json.dumps({"report": report, "sources": sources, "images": images,
+                       "display": {"min_score": min_score}}, ensure_ascii=False).replace("<", "\\u003c")
     page = template.replace("/*__RECORDED_DATA__*/", data)
     adapted = bool(report.get("adapter_verification"))
     direct = report.get("backend") == "embeddinggemma2"
@@ -100,12 +112,21 @@ def main():
         model_note = "已加载作者原 LoRA；小图库定性演示，不代表规模化准确率或历史 F1 收益。" if adapted else "公开基座的小图库定性演示；未加载 LoRA，不代表规模化准确率或历史 F1 收益。"
     page = page.replace("__MODEL_BADGE__", badge).replace("__METHOD_BADGE__", method)
     page = page.replace("__INTRO__", intro)
+    controls = '' if min_score is None else (
+        '<div class="filter-controls" aria-label="结果相似度过滤">'
+        '<label for="min-score">最低相似度</label>'
+        f'<input id="min-score" type="range" min="0" max="1" step="0.01" value="{min_score:.2f}" '
+        f'aria-describedby="filter-hint"><output id="min-score-value" for="min-score">{min_score:.2f}</output>'
+        '<button id="clear-filter" type="button">查看未过滤结果</button>'
+        '<span id="filter-hint">阈值越高，返回越少；最多展示三张</span></div>'
+    )
+    page = page.replace("__FILTER_CONTROLS__", controls)
     page = page.replace("__DESCRIPTION_NOTE__", "图片说明仅供阅读，不参与排序。" if direct else "点击图片可查看完整描述。")
     page = page.replace("__MODEL_NOTE__", model_note)
     page = page.replace("__GUIDE_PATH__", GUIDE_URL)
     raw = base64.b64encode(json.dumps(report, ensure_ascii=False, indent=2).encode("utf-8")).decode("ascii")
     page = page.replace("__RAW_RESULTS_URL__", "data:application/json;base64," + raw)
-    for marker, value in initial_view(report, sources, images).items():
+    for marker, value in initial_view(report, sources, images, min_score).items():
         page = page.replace(marker, value)
     output.write_text(page, encoding="utf-8")
     raw_target = output.parent / "results.json"

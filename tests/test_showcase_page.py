@@ -28,11 +28,14 @@ def test_standalone_page_contains_real_initial_images(tmp_path):
         "--results", str(results_path), "--output", str(output),
     ], check=True, capture_output=True)
     page = output.read_text(encoding="utf-8")
-    first_query = json.loads(results_path.read_text(encoding="utf-8"))["queries"][0]
+    report = json.loads(results_path.read_text(encoding="utf-8"))
+    first_query = report["queries"][0]
+    expected_results = [r for r in first_query["results"]
+                        if report.get("backend") != "embeddinggemma2" or r["score"] >= 0.66]
     parser = StaticImages()
     parser.feed(page)
-    assert len(parser.sources) == len(first_query["results"])
-    for src, result in zip(parser.sources, first_query["results"]):
+    assert len(parser.sources) == len(expected_results)
+    for src, result in zip(parser.sources, expected_results):
         assert src.startswith("data:image/jpeg;base64,")
         expected = (ROOT / "examples/showcase" / result["file_path"]).read_bytes()
         assert base64.b64decode(src.split(",", 1)[1]) == expected

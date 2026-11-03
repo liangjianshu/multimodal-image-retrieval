@@ -16,6 +16,8 @@ Seven fixed queries are run on 12 CC0 photographs, with reference images exclude
 
 The online demo and standalone `docs/demo/index.html` replay recorded outputs; they are not live inference services. See [results](docs/demo/results.json), [reproduction and timing](docs/DEMO.md) and [image sources](examples/showcase/SOURCES.md). No private adapter is needed for the current default pipeline.
 
+The replay defaults to a uniform cosine threshold of **0.66**. Adjust the slider or disable filtering to inspect the original Top-3. Raw JSON remains unfiltered; this display setting was selected on these examples and is not independently calibrated.
+
 This is a small qualitative example, not evidence of broad accuracy gains. The new method still returns a chair as the third result for one cup query. A changed pipeline and removal of category filtering also affect the comparison with the [old results](docs/demo/baseline-taiyi-clip/results.json).
 
 ## Use your own images

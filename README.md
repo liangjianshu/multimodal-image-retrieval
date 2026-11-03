@@ -29,6 +29,8 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 结果没有手工重排；图片说明沿用原微调 Qwen 的描述，**仅供阅读，不参与向量生成或排序**。原 Qwen LoRA＋Taiyi/CLIP 流程及数据保留在 [历史指南](docs/DEMO_TAIYI_CLIP.md) 和 [旧结果](docs/demo/baseline-taiyi-clip/results.json)，方便对照。
 
+演示页默认统一过滤低于 **0.66** 的分数，可以拖动滑块或点击“查看未过滤结果”。原始 JSON 保留全部原始 Top-3；该值仅在当前示例上选择，换图库需要重新评估。
+
 原图编码减少了转述造成的信息损失，但不保证所有颜色、材质、否定条件和复杂修改都能被正确排序。本演示只有 12 张图，不能据此宣称普遍准确率提升。见 [输入与编码说明](docs/INTENT_AND_EMBEDDINGS.md)。
 
 ## 可以用在哪些场景
