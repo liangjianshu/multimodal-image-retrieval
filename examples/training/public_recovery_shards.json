@@ -1,0 +1,95 @@
+{
+  "revision": "a23c2bbe64852ae38c386ec5fdb64767b233f4e0",
+  "classes": {
+    "n07639069": [
+      {
+        "shard": 5496,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-05496-of-07760.parquet",
+        "min": "n07628181",
+        "max": "n07639069",
+        "rows": 1695,
+        "groups": 17
+      },
+      {
+        "shard": 5497,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-05497-of-07760.parquet",
+        "min": "n07639069",
+        "max": "n07642361",
+        "rows": 1695,
+        "groups": 17
+      }
+    ],
+    "n03614007": [
+      {
+        "shard": 3501,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-03501-of-07760.parquet",
+        "min": "n03613592",
+        "max": "n03614007",
+        "rows": 1695,
+        "groups": 17
+      },
+      {
+        "shard": 3502,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-03502-of-07760.parquet",
+        "min": "n03614007",
+        "max": "n03614532",
+        "rows": 1695,
+        "groups": 17
+      }
+    ],
+    "n07747607": [
+      {
+        "shard": 5684,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-05684-of-07760.parquet",
+        "min": "n07747055",
+        "max": "n07747607",
+        "rows": 1695,
+        "groups": 17
+      },
+      {
+        "shard": 5685,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-05685-of-07760.parquet",
+        "min": "n07747607",
+        "max": "n07747951",
+        "rows": 1695,
+        "groups": 17
+      }
+    ],
+    "n07873807": [
+      {
+        "shard": 5909,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-05909-of-07760.parquet",
+        "min": "n07873464",
+        "max": "n07873807",
+        "rows": 1695,
+        "groups": 17
+      },
+      {
+        "shard": 5910,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-05910-of-07760.parquet",
+        "min": "n07873807",
+        "max": "n07874063",
+        "rows": 1695,
+        "groups": 17
+      }
+    ],
+    "n03147509": [
+      {
+        "shard": 2710,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-02710-of-07760.parquet",
+        "min": "n03147280",
+        "max": "n03147509",
+        "rows": 1695,
+        "groups": 17
+      },
+      {
+        "shard": 2711,
+        "file": "datasets/gmongaras/Imagenet21K@a23c2bbe64852ae38c386ec5fdb64767b233f4e0/data/train-02711-of-07760.parquet",
+        "min": "n03147509",
+        "max": "n03148727",
+        "rows": 1695,
+        "groups": 17
+      }
+    ]
+  }
+}

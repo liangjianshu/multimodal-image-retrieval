@@ -7,6 +7,8 @@
 原清单为 `legacy/project_one/imagenet_json.json` 对应的服务器原件，SHA-256：
 `1ff13a0b4e74bb69d7140ea38a14fdf4b2adf63fd9c6da787f8fdbd2600e7e79`。
 
+仓库提供去掉旧机器绝对路径的可移植清单：[`original_test_manifest.json`](../examples/training/original_test_manifest.json)。全部 2,000 个原文件名、类别、ID 及分组保留不变；该导出文件自身 SHA-256 为 `735c43b4547e4b8a0a3ab2e6e74a09baa74a9bf172ed16b7253abf4924b6ec0f`。图片内容不随清单分发。
+
 原脚本从 ImageNet synset tar 包抽取图片，保留原文件名。图库含 5 个目标类各 40 张、5 个混淆类及 5 个其他类各 180 张，共 2,000 张；每类 normal/fine 各半。fine 是原目标检测面积规则下的小目标分组，不是颜色或材质属性标注。
 
 已有归档恢复了 1,280 张。缺少的甜甜圈、键盘、橙子、披萨共 720 张，按原 ImageNet ID 从公开副本 [gmongaras/Imagenet21K](https://huggingface.co/datasets/gmongaras/Imagenet21K) 恢复，固定 revision：
@@ -54,6 +56,21 @@ Embedding 按验证集目标五类的文搜图与图搜图 mAP 均值选择。Qw
 ## 运行与审计文件
 
 入口：`examples/training/run_restored_study.py`。恢复脚本支持按需读取 Parquet 字节范围，不下载整个多 TB 数据集。所有 HTTP Range 响应都核对偏移与长度。
+
+缺失四类的固定分片映射保存在 [`public_recovery_shards.json`](../examples/training/public_recovery_shards.json)。例如，在安装 `huggingface_hub`、`pyarrow`、`requests` 和 `Pillow` 的环境中补齐这四类：
+
+```bash
+python examples/training/recover_hf_imagenet.py \
+  --shards examples/training/public_recovery_shards.json \
+  --output data/hf-class-pool --parallel-ranges 8 \
+  --classes n07639069 n03614007 n07747607 n07873807
+python examples/training/restore_original_gallery.py \
+  --manifest examples/training/original_test_manifest.json \
+  --archives /path/to/original-synset-archives \
+  --public-pool data/hf-class-pool --output data/original-eval
+```
+
+其余十一类仍从原 synset 归档恢复；上面的四类补图命令不等于独立下载完整图库。恢复脚本会明确列出缺失 ID，不会悄悄换成其他图片。
 
 实验目录包含：
 

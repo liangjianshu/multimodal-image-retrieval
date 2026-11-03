@@ -57,3 +57,17 @@ def test_parallel_range_reader_preserves_seek_boundaries(monkeypatch):
         file.seek(97);assert file.read(707)==content[97:804]
         file.seek(-15,2);assert file.read()==content[-15:]
         file.seek(3);assert file.read(212)==content[3:215]
+
+def test_published_historical_manifest_preserves_frozen_composition():
+    import collections
+    import hashlib
+    path=ROOT/'original_test_manifest.json'
+    assert hashlib.sha256(path.read_bytes()).hexdigest()=='735c43b4547e4b8a0a3ab2e6e74a09baa74a9bf172ed16b7253abf4924b6ec0f'
+    rows=json.loads(path.read_text())['images']
+    assert len(rows)==len({r['id'] for r in rows})==len({r['file_name'] for r in rows})==2000
+    counts=collections.Counter((r['label'],r['type']) for r in rows)
+    assert len(counts)==30
+    for (label,kind),count in counts.items():
+        assert kind in ('normal','fine')
+        assert count==(20 if label in ('chair','cup','bicycle','skateboard','oven') else 90)
+    assert all('file_path' not in r for r in rows)
