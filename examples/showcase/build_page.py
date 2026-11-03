@@ -41,10 +41,11 @@ def initial_view(report, sources, images, min_score=None):
     elif query.get("status") == "no_category_match":
         cards.append('<div class="empty">图库没有匹配的目标类别，未返回无关图片。</div>')
     elif not visible:
-        cards.append('<div class="empty">暂无达到当前相似度要求的结果。试试降低阈值。</div>')
+        cards.append('<div class="empty">当前请求没有可返回的图片。</div>' if min_score is None else
+                     '<div class="empty">暂无达到当前相似度要求的结果。试试降低阈值。</div>')
     elif len(visible) < len(query["results"]):
         cards.append(f'<div class="empty">已过滤 {len(query["results"]) - len(visible)} 张低于阈值 {min_score:.2f} 的结果。</div>')
-    elif len(visible) < 3:
+    elif len(visible) < min(query.get("top_k") or 3, 3):
         cards.append(f'<div class="empty">当前可用候选为 {query["candidate_count"]} 张图片。</div>')
     note = {"text": "查询文本直接编码，不调用意图解析。", "image": "仅使用参考图向量；已排除图库中的同一张图片。", "fusion": "图片与文本向量各占 50%；已排除参考图自身。", "intent": "先判断是否需要图片检索。"}[query["kind"]]
     pipeline = "CLIP 图像编码 → 图像相似度排序" if query["mode"] == "clip" else "查询编码 → 类别粗筛 → 描述排序"
@@ -77,13 +78,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", default="docs/demo/results.json")
     parser.add_argument("--output", default="docs/demo/index.html")
-    parser.add_argument("--min-score", type=float, default=0.66,
-                        help="Default replay threshold for the Gemma showcase; raw results are preserved")
+    parser.add_argument("--min-score", type=float, default=None,
+                        help="Optional replay threshold; disabled by default so category-filtered Top-K is shown")
     parser.add_argument("--image-mode", choices=("embedded", "external"), default="embedded",
                         help="Embed images for a portable file, or copy assets for fast web loading")
     args = parser.parse_args()
     report = json.loads(Path(args.results).read_text(encoding="utf-8"))
-    if not math.isfinite(args.min_score) or not 0 <= args.min_score <= 1:
+    if args.min_score is not None and (not math.isfinite(args.min_score) or not 0 <= args.min_score <= 1):
         raise ValueError("Showcase min-score must be between 0 and 1")
     min_score = args.min_score if report.get("backend") in ("embeddinggemma2", "qwen-gemma2") else None
     sources = json.loads((ROOT / "examples/showcase/sources.json").read_text(encoding="utf-8"))

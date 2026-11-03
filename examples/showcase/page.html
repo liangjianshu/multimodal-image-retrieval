@@ -56,7 +56,7 @@ function show(q){
  });
  if(q.status==='not_retrieval')$('cards').append(el('div','empty','Qwen 判定这条请求不需要图片检索，已跳过向量编码和搜索。'));
  else if(q.status==='no_category_match')$('cards').append(el('div','empty','图库没有匹配的目标类别，未返回无关图片。'));
- else if(!visible.length)$('cards').append(el('div','empty',q.results.length?'原始 '+q.results.length+' 张结果均低于阈值 '+minScore.toFixed(2)+'。可降低或关闭分数阈值查看。':'暂无达到当前相似度要求的结果。试试降低阈值。'));
+ else if(!visible.length)$('cards').append(el('div','empty',q.results.length?'原始 '+q.results.length+' 张结果均低于阈值 '+minScore.toFixed(2)+'。可降低或关闭分数阈值查看。':'当前请求没有可返回的图片。'));
  else if(visible.length<q.results.length)$('cards').append(el('div','empty','已过滤 '+(q.results.length-visible.length)+' 张低于阈值 '+minScore.toFixed(2)+' 的结果。'));
  else if(visible.length<Math.min(q.top_k||3,3))$('cards').append(el('div','empty',direct?'符合类别条件的可用图片不足请求数量。':'类别粗筛只保留了 '+q.candidate_count+' 张候选图片。这里不补充被筛掉的结果。'));
  try{history.replaceState(null,'','#'+q.id)}catch(e){if(e.name!=='SecurityError')throw e}
@@ -65,7 +65,7 @@ report.queries.forEach(q=>{const b=el('button',null,q.text||({image:(q.mode==='c
 document.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>show(report.queries.find(q=>q.kind===b.dataset.kind)));
 DATA.sources.forEach(s=>{const a=el('a');a.href=s.source;const im=el('img');im.loading='lazy';im.src=imageURL(s.file_path);im.alt=s.title;a.append(im,el('span',null,s.id+' · '+s.author));$('gallery').append(a)});
 $('close').onclick=()=>$('detail').close();
-if(direct){
+if(direct&&$('min-score')){
  $('min-score').oninput=e=>{minScore=Number(e.target.value);$('min-score-value').textContent=minScore.toFixed(2);show(currentQuery)};
  $('clear-filter').onclick=()=>{minScore=null;$('min-score').value='0';$('min-score-value').textContent='关闭';show(currentQuery)};
 }

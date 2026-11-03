@@ -18,7 +18,7 @@ Ten recorded requests use 12 CC0 photographs: the earlier seven searches, two no
 
 The online demo and standalone `docs/demo/index.html` replay actual outputs, not a live inference service. See [results](docs/demo/results.json), [reproduction and timing](docs/DEMO.md) and [image sources](examples/showcase/SOURCES.md). Public Qwen weights can run the workflow; reproducing the fine-tuned showcase requires the original adapter, which is not distributed here.
 
-The replay defaults to a uniform cosine threshold of **0.66**. Turning off the score threshold restores results after category filtering; it does not bypass Qwen. Raw JSON remains unfiltered by this display threshold. The threshold is selected on these examples and is not independently calibrated.
+The replay has **no score cutoff by default**. It shows the recorded Top-K after Qwen category filtering, respecting explicit quantity requests. Similarity determines ranking without discarding results using an uncalibrated fixed threshold. Nonretrieval requests, missing categories and insufficient candidates can still return fewer images or none.
 
 This small qualitative showcase does not establish general accuracy or the benefit of fine-tuning. Category routing can reduce recall; raw inputs can still contain conditions that the embedding does not rank correctly. [Pure embedding results](docs/demo/baseline-embeddinggemma2/results.json) and [historical results](docs/demo/baseline-taiyi-clip/results.json) are preserved.
 
