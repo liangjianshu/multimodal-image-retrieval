@@ -11,6 +11,7 @@ DEFAULTS = {
     "adapter": None, "device": "auto", "max_pixels": 262144,
     "max_new_tokens": 256, "category_ratio": 0.85, "image_weight": 0.5,
     "prompt_profile": "standard",
+    "intent_profile": "preserve",
 }
 
 
@@ -50,7 +51,10 @@ class Encoders:
         self.image_model = CLIPModel.from_pretrained(config["image_encoder"]).eval().to(self.device)
 
     def text(self, text):
-        inputs = self.text_tokenizer(text, return_tensors="pt", truncation=True, max_length=512).to(self.device)
+        inputs = self.text_tokenizer(text, return_tensors="pt", truncation=False)
+        if inputs["input_ids"].shape[-1] > 512:
+            raise ValueError("Text exceeds the encoder's 512-token limit; shorten it explicitly instead of silently dropping constraints")
+        inputs = inputs.to(self.device)
         with self.torch.inference_mode():
             result = self.text_model(**inputs).logits[0]
         return result.float().cpu().numpy()
@@ -122,6 +126,27 @@ class Qwen:
         return result
 
     def intent(self, text, image=None):
+        if self.config.get("intent_profile", "preserve") == "preserve":
+            if image is not None and not text.strip():
+                # An image-only request in this search tool already specifies the operation.
+                visual = self.describe(image)
+                return {"needs_retrieval": True, "target_category": "、".join(visual["categories"]),
+                        "description": visual["description"], "constraints": [], "top_k": None,
+                        "source": "image-description"}
+            from .intent import PRESERVE_INTENT_PROMPT
+            user_input = json.dumps({"text": text, "has_reference_image": image is not None}, ensure_ascii=False)
+            result = extract_json(self.generate(PRESERVE_INTENT_PROMPT + user_input, image))
+            if not isinstance(result, dict) or type(result.get("needs_retrieval")) is not bool:
+                raise ValueError("Intent response requires boolean needs_retrieval")
+            if any(not isinstance(result.get(key), str) for key in ("description", "target_category")):
+                raise ValueError("Intent response requires text description and target_category")
+            constraints = result.get("constraints")
+            if not isinstance(constraints, list) or any(not isinstance(c, str) or not c.strip() for c in constraints):
+                raise ValueError("Intent constraints must be a list of nonempty strings")
+            k = result.get("top_k")
+            if k is not None and (type(k) is not int or not 1 <= k <= 1000):
+                raise ValueError("Intent top_k must be null or an integer from 1 to 1000")
+            return result
         if self.config.get("prompt_profile") == "historical":
             from .historical_prompts import INTENT_PROMPT
             raw = extract_json(self.generate(INTENT_PROMPT + "问题：" + text, image))

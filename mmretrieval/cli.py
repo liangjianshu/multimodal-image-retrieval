@@ -7,6 +7,7 @@ import numpy as np
 from .data import (folder_catalog, image_path, make_sft, read_jsonl,
                    retrieval_metrics, validate_catalog, write_jsonl)
 from .models import DEFAULTS
+from .intent import resolve_search_text
 from .retrieval import Index, fuse_query
 
 
@@ -17,6 +18,8 @@ def load_config(path):
     config = {**DEFAULTS, **supplied}
     if config["prompt_profile"] not in ("standard", "historical"):
         raise ValueError("prompt_profile must be standard or historical")
+    if config["intent_profile"] not in ("preserve", "historical"):
+        raise ValueError("intent_profile must be preserve or historical")
     return config
 
 
@@ -145,10 +148,10 @@ def execute(args):
         k = None if args.all_matches else args.top_k
         if args.intent:
             router = Qwen(config, vision=reference is not None)
-            intent = router.intent(text or "查找相似图片", reference)
+            intent = router.intent(text or "", reference)
             if not intent["needs_retrieval"]:
                 return {"intent": intent, "results": []}
-            text = intent.get("description") or text
+            text = resolve_search_text(text, intent, config["intent_profile"])
             if not args.all_matches and intent.get("top_k") is not None:
                 k = intent["top_k"]
             del router
@@ -163,7 +166,7 @@ def execute(args):
             excluded.update(r["id"] for r in index.rows if (root / r["file_path"]).resolve() == reference)
         results = index.search(query, top_k=k, category_ratio=config["category_ratio"],
                                min_score=args.min_score, mode=args.mode, exclude_ids=excluded)
-        return {"intent": intent, "results": results}
+        return {"intent": intent, "search_text": text, "results": results}
     if args.command == "evaluate":
         from .models import Encoders
         index = checked_index(args.index, config)

@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 from mmretrieval.cli import encode_query, load_config
 from mmretrieval.data import image_path, read_jsonl, validate_catalog, write_jsonl
 from mmretrieval.models import Encoders, Qwen
+from mmretrieval.intent import resolve_search_text
 from mmretrieval.retrieval import Index
 
 
@@ -117,7 +118,8 @@ def main():
     if historical:
         for query in queries:
             if query.get("image"):
-                intent = model.intent(query.get("text") or "帮我找三张和参考图片同类的图片。",
+                fallback = "帮我找三张和参考图片同类的图片。" if config["intent_profile"] == "historical" else ""
+                intent = model.intent(query.get("text") or fallback,
                                       image_path(gallery, query["image"]))
                 intents[query["id"]] = intent
                 print("Intent", query["id"], intent, flush=True)
@@ -149,7 +151,7 @@ def main():
         started = time.perf_counter()
         reference = image_path(gallery, query["image"]) if query.get("image") else None
         intent = intents.get(query["id"])
-        search_text = (intent.get("description") or query.get("text")) if intent else query.get("text")
+        search_text = resolve_search_text(query.get("text"), intent, config["intent_profile"]) if intent and intent["needs_retrieval"] else query.get("text")
         vector = encode_query(encoder, search_text, reference, config["image_weight"])
         excluded = [r["id"] for r in rows if reference and image_path(gallery, r["file_path"]) == reference]
         mode = query.get("mode", "semantic")
@@ -170,6 +172,7 @@ def main():
         "notice": "Recorded model outputs on 12 CC0 images. No human metadata used for indexing. Not a benchmark or fine-tuning comparison.",
         "gallery_size": len(rows), "seed": 42, "config": public_config, "resolved_device": encoder.device,
         "adapter_verification": adapter_audit, "query_file_sha256": hashlib.sha256(queries_path.read_bytes()).hexdigest(),
+        "query_policy": "original-user-text" if config["intent_profile"] == "preserve" else "generated-summary",
         "python": sys.version.split()[0], "packages": packages,
         "description_seconds": round(description_seconds, 3), "descriptions_reused": args.reuse_descriptions,
         "index_seconds": round(index_seconds, 3), "queries": records}

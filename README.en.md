@@ -29,6 +29,8 @@ Try the [online demo](https://liangjianshu.github.io/multimodal-image-retrieval/
 
 This is a small-gallery qualitative replay, not a benchmark or a reproduction of historical F1 gains. The original adapter is required to reproduce the main showcase and is not distributed here. The earlier 3B/no-adapter outputs remain in [baseline records](docs/demo/baseline-3b/results.json). Model size, prompts and query processing also changed, so differences cannot be attributed to LoRA alone.
 
+Explicit user text now reaches the encoder unchanged, even if the intent model produces a shorter summary. Image-only queries still use a generated visual description. See [intent preservation and embedding alignment](docs/INTENT_AND_EMBEDDINGS.md).
+
 ## Quick start without model downloads
 
 ```bash

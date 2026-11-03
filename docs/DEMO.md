@@ -19,7 +19,7 @@
 - 基座为 `Qwen/Qwen2.5-VL-7B-Instruct`，加载原项目 `project_three/output_lora_llm` 适配器；它与 `project_one/output_lora_llm` 的权重 SHA-256 一致。
 - 适配器实际配置为 **rank 64、alpha 128、语言注意力 q/k/v/o LoRA**。这个保存产物没有额外的 `modules_to_save`，不能据此宣称加载了单独训练的视觉 merger。
 - 每个已保存 LoRA 张量与实际加载参数逐个核对，并确认 `default` 适配器处于激活状态、LoRA B 存在非零权重。见 [加载校验](demo/adapter-verification.json)。
-- 类别提取、属性描述（原 `prompt2`）、图像查询意图解析的提示词保留在 [`historical_prompts.py`](../mmretrieval/historical_prompts.py)，测试会与 `legacy/` 原代码核对。
+- 类别提取和属性描述（原 `prompt2`）继续使用 [`historical_prompts.py`](../mmretrieval/historical_prompts.py) 中的原提示词；查询端改用 [`intent.py`](../mmretrieval/intent.py) 的完整条件解析，并由代码保留用户原文。历史意图提示词仍保留用于对照。
 
 原适配器权重未随仓库分发。`configs/showcase-lora.json` 中的 `models/retrieval-lora` 是本地路径占位符；拥有该权重时可用 `--adapter-path` 指向真实目录。公开基座版本仍可独立复跑。
 
@@ -28,10 +28,10 @@
 1. 校验 12 张 Wikimedia CC0 图片的 SHA-256。人工类别与描述为空，来源见 [图片清单](../examples/showcase/SOURCES.md)。
 2. 微调后的 Qwen 分别生成类别和详细描述，写入 [模型描述](demo/catalog.described.jsonl)。随后重新编码、重建索引，不复用旧 3B 模型的描述或向量。
 3. Taiyi 编码类别与描述；CLIP ViT-L/14 编码图片。类别文本使用逗号拼接。
-4. 对参考图查询，微调后的 Qwen 先解析用户要找的目标，Taiyi 编码该目标，再与参考图的 CLIP 特征归一化融合。两者各占 50%。原始意图输出保留在 [intents.json](demo/intents.json)。
+4. 对参考图查询，微调后的 Qwen 解析类别、完整目标和用户约束。有用户文字时，Taiyi 直接编码原文，模型摘要不得覆盖它；只有图片时才编码生成的目标描述。再与参考图的 CLIP 特征各占 50% 归一化融合。原始意图输出见 [intents.json](demo/intents.json)。
 5. 对明确的文字短语直接编码；按类别向量粗筛（最高分的 0.85），再按描述向量余弦分数排序。最多展示前三张，排除参考图自身；不足三张时不补入被筛掉的图片。
 
-恢复的是原项目的微调模型、提示词与图像意图融合方法，**不是逐行执行历史交互脚本**：本展示固定 Top-3、不随机抽取阈值结果；文字示例已是目标短语，不调用历史脚本中的独立纯文本意图模型；分数展示为余弦相似度，不乘 CLIP 温度系数。硬件、图像尺寸上限与依赖版本也以当前配置为准。
+保留原项目的微调模型、建库提示词与图像融合方法，并修复意图摘要覆盖原文的问题，**不是逐行执行历史交互脚本**：本展示固定 Top-3、不随机抽取阈值结果；文字示例已是目标短语，不调用历史脚本中的独立纯文本意图模型；分数展示为余弦相似度，不乘 CLIP 温度系数。硬件、图像尺寸上限与依赖版本也以当前配置为准。
 
 ## 自己运行
 
@@ -44,7 +44,7 @@ python examples/showcase/run.py \
   --output artifacts/showcase-lora
 ```
 
-配置选择 `prompt_profile=historical`，自动使用 [`queries-lora.json`](../examples/showcase/queries-lora.json)。不要将 7B 适配器加载到 3B 基座。模型已下载时追加 `--model-root /path/to/models`，其中应包含对应的 `qwen-vl-7b/`、`taiyi/`、`clip/`。
+配置选择 `prompt_profile=historical`、`intent_profile=preserve`，自动使用 [`queries-lora.json`](../examples/showcase/queries-lora.json)。不要将 7B 适配器加载到 3B 基座。模型已下载时追加 `--model-root /path/to/models`，其中应包含对应的 `qwen-vl-7b/`、`taiyi/`、`clip/`。
 
 输出包括：
 
@@ -57,7 +57,7 @@ artifacts/showcase-lora/
 └── results.json              # 查询、排名、分数、配置、环境
 ```
 
-`--reuse-descriptions` 只用于续跑同一模型、适配器和提示词配置的结果目录。模型权重发生变化时使用新目录，重新生成描述和索引。
+`--reuse-descriptions` 只用于复用同一模型、适配器和建库提示词的描述。本次仅修改查询端，复用了前次图库描述，重新执行意图解析、编码和检索；`description_seconds` 不包含生成 12 张图库描述的耗时。模型权重发生变化时使用新目录，重新生成描述和索引。
 
 没有原适配器时，可以复跑单独的 3B 基座版本：
 
@@ -99,7 +99,7 @@ Ascend 需先配置匹配 CANN 的 PyTorch 与 torch_npu，避免直接安装会
 
 ## 与先前演示的区别
 
-此次实测中，“红色的椅子”首位为红色凳子；椅子参考图的前三名均为椅凳，两组杯子参考图的前三名均为杯子。仍有明确不足：图文融合输入“草地上的自行车”被意图模型解析为“自行车”，丢失“草地”条件，草地中的自行车排在第三。该输出原样保留，后续应检查属性约束保留、类别粒度与细粒度排序；当前类别正确不等于外观或属性匹配准确。
+原 7B 版本把“草地上的自行车”解析成“自行车”，黄色车排在第三；原始记录保存在 [修复前结果](demo/baseline-lora-intent/results.json)。当前版本修复摘要覆盖，并保留完整用户文字。新提示词和代码行为见 [条件保留说明](INTENT_AND_EMBEDDINGS.md)。原文不丢失并不保证每个属性都被排序模型正确理解，仍需要独立查询集评测。
 
 旧版 [3B 原始结果](demo/baseline-3b/results.json) 和 [图库描述](demo/baseline-3b/catalog.described.jsonl) 原样保留。它没有加载原 LoRA，图搜图的纯 CLIP 结果中出现了椅子召回杯子、杯子召回自行车，不能作为原微调项目效果的代表。
 

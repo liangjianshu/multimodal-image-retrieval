@@ -28,7 +28,7 @@ def test_prompts_preserve_original_checkpoint_inputs():
 
 def stub(*responses):
     model = object.__new__(Qwen)
-    model.config = {"prompt_profile": "historical"}
+    model.config = {"prompt_profile": "historical", "intent_profile": "historical"}
     model.generate = Mock(side_effect=responses)
     return model
 

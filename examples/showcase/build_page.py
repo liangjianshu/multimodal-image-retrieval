@@ -39,8 +39,8 @@ def initial_view(report, sources, images):
     note = {"text": "查询文本直接编码，不调用意图解析。", "image": "仅使用参考图向量；已排除图库中的同一张图片。", "fusion": "图片与文本向量各占 50%；已排除参考图自身。"}[query["kind"]]
     pipeline = "CLIP 图像编码 → 图像相似度排序" if query["mode"] == "clip" else "查询编码 → 类别粗筛 → 描述排序"
     if query.get("intent"):
-        note = f'模型解析目标：{query["search_text"]}。目标文字与参考图向量各占 50%；已排除参考图自身。'
-        pipeline = "微调 Qwen 目标解析 → 图文融合 → 类别粗筛 → 描述排序"
+        note = ('实际编码文字（保留原文）：' if query.get('text') else '模型提取的图片目标：') + query['search_text'] + '。文字与参考图向量各占 50%；已排除参考图自身。'
+        pipeline = "需求解析（保留用户原文）→ 图文融合 → 类别粗筛 → 描述排序"
     return {
         "__INITIAL_LABEL__": {"text": "TEXT → IMAGE", "image": "IMAGE → IMAGE", "fusion": "IMAGE + TEXT → IMAGE"}[query["kind"]],
         "__INITIAL_TITLE__": escape(query["title"]),

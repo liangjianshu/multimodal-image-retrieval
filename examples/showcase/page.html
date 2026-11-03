@@ -28,9 +28,9 @@ function show(q){
  $('query-title').textContent=q.title;$('query-input').replaceChildren();
  if(q.image){const im=el('img','query-photo');im.src=imageURL(q.image);im.alt='查询参考图片';$('query-input').append(im)}
  if(q.text)$('query-input').append(el('div','prompt',q.text));
- $('query-note').textContent=q.intent?'模型解析目标：'+q.search_text+'。目标文字与参考图向量各占 50%；已排除参考图自身。':q.kind==='text'?'查询文本直接编码，不调用意图解析。':q.kind==='image'?'仅使用参考图向量；已排除图库中的同一张图片。':'图片与文本向量各占 50%；已排除参考图自身。';
+ $('query-note').textContent=q.intent?(q.text?'实际编码文字（保留原文）：':'模型提取的图片目标：')+q.search_text+'。文字与参考图向量各占 50%；已排除参考图自身。':q.kind==='text'?'查询文本直接编码，不调用意图解析。':q.kind==='image'?'仅使用参考图向量；已排除图库中的同一张图片。':'图片与文本向量各占 50%；已排除参考图自身。';
  $('count').textContent=' / '+q.results.length+' 张';$('candidate-note').textContent='图库 '+report.gallery_size+' 张 · '+(q.mode==='clip'?'图像候选 ':'粗筛候选 ')+q.candidate_count+' 张 · Top-3';
- $('pipeline').textContent=q.intent?'微调 Qwen 目标解析 → 图文融合 → 类别粗筛 → 描述排序':q.mode==='clip'?'CLIP 图像编码 → 图像相似度排序':'查询编码 → 类别粗筛 → 描述排序';
+ $('pipeline').textContent=q.intent?'需求解析（保留用户原文）→ 图文融合 → 类别粗筛 → 描述排序':q.mode==='clip'?'CLIP 图像编码 → 图像相似度排序':'查询编码 → 类别粗筛 → 描述排序';
  $('cards').replaceChildren();
  q.results.forEach((r,i)=>{
   const card=el('article','card'),wrap=el('div','photo-wrap'),button=el('button','photo-button'),img=el('img');img.src=imageURL(r.file_path);img.alt=r.retrieval_categories.join('、');button.append(img);button.setAttribute('aria-label','查看 '+r.id+' 的图片描述');

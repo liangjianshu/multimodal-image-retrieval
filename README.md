@@ -29,6 +29,8 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 这是加载原适配器的小图库定性演示，不代表规模化准确率，也不是历史 F1 提升的复现实验。原先未加载适配器的 3B 演示保留在 [基线记录](docs/demo/baseline-3b/results.json)；两版还存在基座大小和查询流程差异，不能把差异单独归因于 LoRA。复跑主展示需要原适配器，权重未随仓库分发。
 
+意图解析已增加原文保留：用户提出的场景、颜色和否定条件不会再被摘要覆盖；参考图仍由 CLIP 直接编码。参见 [提示词、条件保留与编码器对齐说明](docs/INTENT_AND_EMBEDDINGS.md)。
+
 ## 可以用在哪些场景
 
 | 应用场景 | 用户怎么搜 | 接入自己的什么数据 |
@@ -197,7 +199,8 @@ python -m mmretrieval search --index artifacts/index --image-root data/images \
 | `vl_model` | Qwen2.5-VL 基座或完整微调模型路径，默认 7B |
 | `text_model` | 纯文本意图模型，默认 Qwen2.5-3B |
 | `adapter` | 可选 LoRA 目录，包含 `adapter_config.json` 和权重 |
-| `prompt_profile` | `standard` 为整理版提示词；`historical` 恢复原项目类别、描述与意图提示词 |
+| `prompt_profile` | `standard` 为整理版建库提示词；`historical` 恢复原类别与描述提示词 |
+| `intent_profile` | 默认 `preserve` 保留用户原文和完整约束；`historical` 仅用于旧流程对照 |
 | `device` | `auto`、`cuda`、`cuda:0`、`cpu`，或显式 `npu:0`；auto 优先 CUDA。Ascend 推理环境见 [演示指南](docs/DEMO.md) |
 | `max_pixels` / `max_new_tokens` | 控制视觉输入大小和生成长度 |
 | `category_ratio` | 类别粗筛相对阈值，默认 0.85 |
