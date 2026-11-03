@@ -7,5 +7,6 @@
   "max_new_tokens": 256,
   "category_ratio": 0.85,
   "image_weight": 0.5,
-  "intent_profile": "historical"
+  "intent_profile": "historical",
+  "backend": "taiyi-clip"
 }

@@ -16,6 +16,14 @@ def load_config(path):
     if not isinstance(supplied, dict) or set(supplied) - set(DEFAULTS):
         raise ValueError("Unknown config keys; see configs/default.json")
     config = {**DEFAULTS, **supplied}
+    if config["backend"] not in ("taiyi-clip", "embeddinggemma2"):
+        raise ValueError("backend must be taiyi-clip or embeddinggemma2")
+    if config["embedding_dimension"] not in (128, 256, 512, 768):
+        raise ValueError("Unsupported embedding dimension")
+    if config["vision_tokens"] not in (70, 140, 280, 560, 1120):
+        raise ValueError("Unsupported vision token budget")
+    if type(config["embedding_batch_size"]) is not int or config["embedding_batch_size"] < 1:
+        raise ValueError("embedding_batch_size must be a positive integer")
     if config["prompt_profile"] not in ("standard", "historical"):
         raise ValueError("prompt_profile must be standard or historical")
     if config["intent_profile"] not in ("preserve", "historical"):
@@ -29,6 +37,9 @@ def encode_query(encoder, text, image, weight):
 
 
 def checked_index(directory, config):
+    metadata = json.loads((Path(directory) / "metadata.json").read_text())
+    if metadata.get("backend") == "embeddinggemma2":
+        raise ValueError("This is an EmbeddingGemma index; use its encoder configuration")
     index = Index.load(directory)
     if index.metadata.get("demo"):
         raise ValueError("This is a synthetic smoke-test index. Build a model index for real queries.")
@@ -79,6 +90,13 @@ def demo(output):
 
 def execute(args):
     config = load_config(args.config)
+    if config["backend"] == "embeddinggemma2" and args.command in ("train", "describe"):
+        raise ValueError("train/describe target Qwen, not EmbeddingGemma; use configs/taiyi-clip.json in a separate models environment")
+    if config["backend"] == "embeddinggemma2" and args.command in ("index", "search", "evaluate"):
+        from .direct import execute_direct
+        return execute_direct(args, config)
+    if args.command in ("search", "evaluate") and args.mode == "auto":
+        args.mode = "semantic"
     if args.command == "demo":
         return demo(args.output)
     if args.command == "prepare":
@@ -234,7 +252,7 @@ def parser():
         command.add_argument("--top-k", type=int, default=5)
         command.add_argument("--all-matches", action="store_true")
         command.add_argument("--min-score", type=float)
-        command.add_argument("--mode", choices=["semantic", "clip"], default="semantic")
+        command.add_argument("--mode", choices=["auto", "semantic", "clip", "embedding"], default="auto")
         if name == "search":
             command.add_argument("--text")
             command.add_argument("--image", help="Path relative to image-root")

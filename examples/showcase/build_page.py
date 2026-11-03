@@ -35,12 +35,16 @@ def initial_view(report, sources, images):
             f'{escape(result["id"])} · Wikimedia / CC0 ↗</a></div></article>'
         )
     if len(query["results"]) < 3:
-        cards.append(f'<div class="empty">类别粗筛只保留了 {query["candidate_count"]} 张候选图片。</div>')
+        cards.append(f'<div class="empty">当前可用候选为 {query["candidate_count"]} 张图片。</div>')
     note = {"text": "查询文本直接编码，不调用意图解析。", "image": "仅使用参考图向量；已排除图库中的同一张图片。", "fusion": "图片与文本向量各占 50%；已排除参考图自身。"}[query["kind"]]
     pipeline = "CLIP 图像编码 → 图像相似度排序" if query["mode"] == "clip" else "查询编码 → 类别粗筛 → 描述排序"
     if query.get("intent"):
         note = ('实际编码文字（保留原文）：' if query.get('text') else '模型提取的图片目标：') + query['search_text'] + '。文字与参考图向量各占 50%；已排除参考图自身。'
         pipeline = "需求解析（保留用户原文）→ 图文融合 → 类别粗筛 → 描述排序"
+    direct = report.get("backend") == "embeddinggemma2"
+    if direct:
+        note = {"text": "完整文字直接编码，与图库原图向量比较。", "image": "参考图像素直接编码；已排除参考图自身。", "fusion": "完整文字与参考图联合编码；已排除参考图自身。"}[query["kind"]]
+        pipeline = "原图 / 完整文字 → EmbeddingGemma 2 → 图库图像向量排序"
     return {
         "__INITIAL_LABEL__": {"text": "TEXT → IMAGE", "image": "IMAGE → IMAGE", "fusion": "IMAGE + TEXT → IMAGE"}[query["kind"]],
         "__INITIAL_TITLE__": escape(query["title"]),
@@ -48,7 +52,7 @@ def initial_view(report, sources, images):
         "__INITIAL_NOTE__": escape(note),
         "__INITIAL_PIPELINE__": pipeline,
         "__INITIAL_COUNT__": f' / {len(query["results"])} 张',
-        "__INITIAL_CANDIDATES__": f'图库 {report["gallery_size"]} 张 · {"图像候选" if query["mode"] == "clip" else "粗筛候选"} {query["candidate_count"]} 张 · Top-3',
+        "__INITIAL_CANDIDATES__": f'图库 {report["gallery_size"]} 张 · {"图像候选" if direct or query["mode"] == "clip" else "粗筛候选"} {query["candidate_count"]} 张 · Top-3',
         "__INITIAL_CARDS__": "".join(cards),
     }
 
@@ -82,10 +86,21 @@ def main():
     data = json.dumps({"report": report, "sources": sources, "images": images}, ensure_ascii=False).replace("<", "\\u003c")
     page = template.replace("/*__RECORDED_DATA__*/", data)
     adapted = bool(report.get("adapter_verification"))
-    model_name = report["config"]["vl_model"].split("/")[-1].replace("-Instruct", "")
-    page = page.replace("__MODEL_BADGE__", f'<b>{html.escape(model_name)}</b> ' + ("作者原 LoRA" if adapted else "公开基座"))
-    page = page.replace("__METHOD_BADGE__", "目标解析 + 两阶段语义检索" if adapted else "语义检索 + CLIP 图像检索")
-    model_note = "已加载作者原 LoRA；小图库定性演示，不代表规模化准确率或历史 F1 收益。" if adapted else "公开基座的小图库定性演示；未加载 LoRA，不代表规模化准确率或历史 F1 收益。"
+    direct = report.get("backend") == "embeddinggemma2"
+    if direct:
+        badge = "<b>EmbeddingGemma 2</b> · 原图编码"
+        method = "文字 / 图片 / 图文联合编码"
+        intro = "一句中文、一张参考图，或两者结合。用同一个多模态编码器，直接检索自己的图片库。"
+        model_note = "使用公开编码器；图片说明沿用原微调 Qwen 的描述，仅供阅读，不参与排序。12 张图的定性演示不代表规模化准确率。"
+    else:
+        model_name = report["config"]["vl_model"].split("/")[-1].replace("-Instruct", "")
+        badge = f'<b>{html.escape(model_name)}</b> ' + ("作者原 LoRA" if adapted else "公开基座")
+        method = "目标解析 + 两阶段语义检索" if adapted else "语义检索 + CLIP 图像检索"
+        intro = "一句中文、一张参考图，或两者结合。用 Qwen 理解图片，以 Taiyi-CLIP 检索自己的图库。"
+        model_note = "已加载作者原 LoRA；小图库定性演示，不代表规模化准确率或历史 F1 收益。" if adapted else "公开基座的小图库定性演示；未加载 LoRA，不代表规模化准确率或历史 F1 收益。"
+    page = page.replace("__MODEL_BADGE__", badge).replace("__METHOD_BADGE__", method)
+    page = page.replace("__INTRO__", intro)
+    page = page.replace("__DESCRIPTION_NOTE__", "图片说明仅供阅读，不参与排序。" if direct else "点击图片可查看完整描述。")
     page = page.replace("__MODEL_NOTE__", model_note)
     page = page.replace("__GUIDE_PATH__", GUIDE_URL)
     raw = base64.b64encode(json.dumps(report, ensure_ascii=False, indent=2).encode("utf-8")).decode("ascii")

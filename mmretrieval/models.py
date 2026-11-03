@@ -4,6 +4,11 @@ import json
 import numpy as np
 
 DEFAULTS = {
+    "backend": "embeddinggemma2",
+    "embedding_model": "google/embeddinggemma-2",
+    "embedding_revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
+    "embedding_model_path": None, "embedding_dimension": 768,
+    "vision_tokens": 280, "embedding_batch_size": 4,
     "text_encoder": "IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese",
     "image_encoder": "openai/clip-vit-large-patch14",
     "vl_model": "Qwen/Qwen2.5-VL-7B-Instruct",

@@ -1,5 +1,7 @@
 # 训练范围、数据和权重使用
 
+本页针对 Qwen 语义建库分支，使用独立 `.[models]` 环境。它不会微调当前默认的 EmbeddingGemma 2。
+
 ## 三种模式
 
 | `--mode` | 更新哪些参数 | 保存形式 | 推理配置 |
@@ -27,7 +29,7 @@ MLP＋Vision 不是整个 VLM 全量微调，也不是视觉 LoRA。完整模型
 ## 一次训练
 
 ```bash
-python -m mmretrieval --config configs/default.json train \
+python -m mmretrieval --config configs/taiyi-clip.json train \
   --train data/sft/train.jsonl --val data/sft/val.jsonl \
   --image-root data/images --output checkpoints/mlp-llm \
   --mode mlp-llm --rank 64 --alpha 128 --epochs 0.5 \
@@ -43,13 +45,13 @@ python -m mmretrieval --config configs/default.json train \
 对 `mlp-llm` / `llm-lora`，复制默认配置并修改：
 
 ```json
-{"vl_model":"Qwen/Qwen2.5-VL-7B-Instruct","adapter":"checkpoints/mlp-llm/final"}
+{"backend":"taiyi-clip","vl_model":"Qwen/Qwen2.5-VL-7B-Instruct","adapter":"checkpoints/mlp-llm/final"}
 ```
 
 本项目配置允许只填写要覆盖的字段。基座必须与训练一致。对 `mlp-vision`：
 
 ```json
-{"vl_model":"checkpoints/mlp-vision/final","adapter":null}
+{"backend":"taiyi-clip","vl_model":"checkpoints/mlp-vision/final","adapter":null}
 ```
 
 随后运行：

@@ -1,0 +1,170 @@
+[
+  {
+    "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "download_source": "ModelScope / Qwen/Qwen2.5-VL-7B-Instruct",
+    "files": [
+      {
+        "name": "README.md",
+        "size": 18574,
+        "sha256": "1fa65dbb08bc9ffe0b020409c8686f08b23008c5a68554353305fd2de6f2b81e"
+      },
+      {
+        "name": "chat_template.json",
+        "size": 1050,
+        "sha256": "ad60d90252ed0b0705ba14e2d0ad0fec0beac1ea955642b54059b36052d8bc96"
+      },
+      {
+        "name": "config.json",
+        "size": 1374,
+        "sha256": "77d9ec7321cc572e3579e2c84799c9cadaded63c49ce93b101733349fc330c43"
+      },
+      {
+        "name": "configuration.json",
+        "size": 78,
+        "sha256": "4d48781a5e83989d77ec96075741c402903a81ceffbb6a265e29caec3ea1ab6d"
+      },
+      {
+        "name": "generation_config.json",
+        "size": 216,
+        "sha256": "0a3aea82869fe29f20dc95ccf3e2bcff380eca1f5ad6447a4a4b37110b08e43e"
+      },
+      {
+        "name": "merges.txt",
+        "size": 1671839,
+        "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+      },
+      {
+        "name": "model-00001-of-00005.safetensors",
+        "size": 3900233256,
+        "sha256": "e97b877e47fde53a6c6e77aafb36e58e91ee9d95c4a3eeac6f1b5c0e6a1c986e"
+      },
+      {
+        "name": "model-00002-of-00005.safetensors",
+        "size": 3864726320,
+        "sha256": "a9a300a43b4724eee2abe7c18ceb26768d0ab011eb0cad19d9bfd2476a24d024"
+      },
+      {
+        "name": "model-00003-of-00005.safetensors",
+        "size": 3864726424,
+        "sha256": "111223d173e00bbee81cba1216fad28668df3476706b7fd26f4d5b50f8b3a507"
+      },
+      {
+        "name": "model-00004-of-00005.safetensors",
+        "size": 3864733680,
+        "sha256": "ef47f634fa57d46ee134edcc09f34085a47da1e16c12a2abe0d67118be6d72ed"
+      },
+      {
+        "name": "model-00005-of-00005.safetensors",
+        "size": 1089994880,
+        "sha256": "0c859795ad3a627a9b95bcb762e059d5b768a4a36fdd4affeff269d93fdecc67"
+      },
+      {
+        "name": "model.safetensors.index.json",
+        "size": 57619,
+        "sha256": "73b333b0b16e5286ddba615d2caebcd495cf7e616f52eb217a81781393d79de9"
+      },
+      {
+        "name": "preprocessor_config.json",
+        "size": 350,
+        "sha256": "f2058c716eef96ccaed1cc1e2d0c08306b62586d535b28d9d08e691b2fab7ca0"
+      },
+      {
+        "name": "tokenizer.json",
+        "size": 7031645,
+        "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+      },
+      {
+        "name": "tokenizer_config.json",
+        "size": 5702,
+        "sha256": "4abd3520120e266da84c0864fee064d1fb10806f02225911a47253dd38dc5f56"
+      },
+      {
+        "name": "vocab.json",
+        "size": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    ]
+  },
+  {
+    "model": "IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese",
+    "download_source": "Hugging Face mirror",
+    "files": [
+      {
+        "name": "config.json",
+        "size": 35844,
+        "sha256": "52b8a569a979d13cb854d9b5512c0b511f1ab42407caf4cbbb05ac74326fdf60"
+      },
+      {
+        "name": "pytorch_model.bin",
+        "size": 1305368941,
+        "sha256": "13f50fdd2fa0e809a95d602b4d74552d2c27e3ebc08f40108a7d1cae20a7107b"
+      },
+      {
+        "name": "special_tokens_map.json",
+        "size": 112,
+        "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+      },
+      {
+        "name": "tokenizer_config.json",
+        "size": 537,
+        "sha256": "71e11b83a72e4e71cbf1c163e3171edf207b01dde4a11daeb4801f0d9c36ee76"
+      },
+      {
+        "name": "vocab.txt",
+        "size": 109540,
+        "sha256": "45bbac6b341c319adc98a532532882e91a9cefc0329aa57bac9ae761c27b291c"
+      }
+    ]
+  },
+  {
+    "model": "openai/clip-vit-large-patch14",
+    "download_source": "ModelScope / openai-mirror/clip-vit-large-patch14",
+    "files": [
+      {
+        "name": "config.json",
+        "size": 4519,
+        "sha256": "8a09b467700c58138c29d53c605b34ebc69beaadd13274a8a2af8ad2c2f4032a"
+      },
+      {
+        "name": "configuration.json",
+        "size": 88,
+        "sha256": "3c27023c83c97b0324f731af506213972ce59102c13e38bc67c15fa22c8d1769"
+      },
+      {
+        "name": "merges.txt",
+        "size": 524619,
+        "sha256": "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+      },
+      {
+        "name": "model.safetensors",
+        "size": 1710540580,
+        "sha256": "a2bf730a0c7debf160f7a6b50b3aaf3703e7e88ac73de7a314903141db026dcb"
+      },
+      {
+        "name": "preprocessor_config.json",
+        "size": 316,
+        "sha256": "910e70b3956ac9879ebc90b22fb3bc8a75b6a0677814500101a4c072bd7857bd"
+      },
+      {
+        "name": "special_tokens_map.json",
+        "size": 389,
+        "sha256": "f8c0d6c39aee3f8431078ef6646567b0aba7f2246e9c54b8b99d55c22b707cbf"
+      },
+      {
+        "name": "tokenizer.json",
+        "size": 2224003,
+        "sha256": "a83e0809aa4c3af7208b2df632a7a69668c6d48775b3c3fe4e1b1199d1f8b8f4"
+      },
+      {
+        "name": "tokenizer_config.json",
+        "size": 905,
+        "sha256": "deef455e52fa5e8151e339add0582e4235f066009601360999d3a9cda83b1129"
+      },
+      {
+        "name": "vocab.json",
+        "size": 961143,
+        "sha256": "3f0c4f7d2086b61b38487075278ea9ed04edb53a03cbb045b86c27190fa8fb69"
+      }
+    ]
+  }
+]

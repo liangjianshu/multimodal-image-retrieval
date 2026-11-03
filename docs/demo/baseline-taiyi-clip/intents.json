@@ -1,0 +1,35 @@
+{
+  "ornate-cup": {
+    "needs_retrieval": true,
+    "target_category": "茶杯",
+    "description": "一个粉色的陶瓷茶杯和碟子放在木质桌面上。茶杯上有金色的装饰图案，碟子是纯粉色的。",
+    "constraints": [],
+    "top_k": null,
+    "source": "image-description"
+  },
+  "similar-chair": {
+    "needs_retrieval": true,
+    "target_category": "椅子",
+    "description": "一把黑色的椅子放在灰色的地面上，靠背是弯曲的，坐垫是米色的。",
+    "constraints": [],
+    "top_k": null,
+    "source": "image-description"
+  },
+  "similar-cup": {
+    "needs_retrieval": true,
+    "target_category": "杯子",
+    "description": "一个白色的杯子放在红色的表面上。",
+    "constraints": [],
+    "top_k": null,
+    "source": "image-description"
+  },
+  "bicycle-in-grass": {
+    "needs_retrieval": true,
+    "target_category": "自行车",
+    "description": "草地上的自行车",
+    "constraints": [
+      "草地上"
+    ],
+    "top_k": null
+  }
+}

@@ -1,108 +1,75 @@
-# 原微调模型的检索演示与复现
+# EmbeddingGemma 2 原图检索演示
 
-主展示使用 **Qwen2.5-VL-7B-Instruct + 作者原训练 LoRA**，在 12 张 CC0 图片上运行 7 组文字、图片和图文融合查询。展示的是实测排名，没有人工调换图片顺序。
+[打开在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/) · [原始结果](demo/results.json) · [旧 Qwen LoRA / Taiyi-CLIP 流程](DEMO_TAIYI_CLIP.md)
 
-## 直接看效果
+当前展示在 12 张 CC0 图片上运行 7 组固定查询：文字 3 组、参考图 3 组、图文联合 1 组。结果由模型实际计算，没有人工重排。在线页面和离线 `docs/demo/index.html` 都是结果回放，不是实时推理服务；离线文件已内嵌图片。
 
-打开 **[在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/)**，或用浏览器打开 [`demo/index.html`](demo/index.html)。离线 HTML 已内嵌图片，单独复制也可查看；首屏不依赖 JavaScript，切换示例需要脚本支持。
+![文字检索](demo/text-search.png)
+![参考图检索](demo/image-search.png)
+![图文联合检索](demo/fusion-search.png)
 
-这是已记录结果的交互回放，不是在线推理服务。所有排名、分数、模型解析的查询目标和运行配置见 [results.json](demo/results.json)。
+## 编码流程
 
-![中文文搜图](demo/text-search.png)
+1. 校验 [图库来源清单](../examples/showcase/sources.json) 的图片 SHA-256，直接将原图输入 EmbeddingGemma 2，生成归一化的 768 维向量。
+2. 文字查询保留用户原文，添加官方搜索前缀 `task: search result | query: ` 后编码；图片查询直接编码像素。
+3. 图文查询把完整文字、`<|image|>` 标记和参考图作为一个多模态输入，单次前向生成查询向量。没有 Qwen 摘要覆盖，也没有 50/50 向量平均。
+4. 在全部图库图像向量上做余弦排序，排除参考图自身，取前三名。没有类别粗筛或描述向量排序。
+5. 页面图片说明沿用原微调 Qwen 生成的元数据，仅为阅读提供上下文，不参与查询编码、建库或排序。
 
-![参考图搜图](demo/image-search.png)
+当前编码器使用公开预训练权重，未进行本项目领域微调；原 Qwen LoRA 不是这个编码器的适配器。两条流程分别保存，不能混用向量或把旧微调的收益算到新编码器上。
 
-![图文融合](demo/fusion-search.png)
+## 实测配置
 
-## 模型与原项目的对应关系
-
-- 基座为 `Qwen/Qwen2.5-VL-7B-Instruct`，加载原项目 `project_three/output_lora_llm` 适配器；它与 `project_one/output_lora_llm` 的权重 SHA-256 一致。
-- 适配器实际配置为 **rank 64、alpha 128、语言注意力 q/k/v/o LoRA**。这个保存产物没有额外的 `modules_to_save`，不能据此宣称加载了单独训练的视觉 merger。
-- 每个已保存 LoRA 张量与实际加载参数逐个核对，并确认 `default` 适配器处于激活状态、LoRA B 存在非零权重。见 [加载校验](demo/adapter-verification.json)。
-- 类别提取和属性描述（原 `prompt2`）继续使用 [`historical_prompts.py`](../mmretrieval/historical_prompts.py) 中的原提示词；查询端改用 [`intent.py`](../mmretrieval/intent.py) 的完整条件解析，并由代码保留用户原文。历史意图提示词仍保留用于对照。
-
-原适配器权重未随仓库分发。`configs/showcase-lora.json` 中的 `models/retrieval-lora` 是本地路径占位符；拥有该权重时可用 `--adapter-path` 指向真实目录。公开基座版本仍可独立复跑。
-
-## 实际流程
-
-1. 校验 12 张 Wikimedia CC0 图片的 SHA-256。人工类别与描述为空，来源见 [图片清单](../examples/showcase/SOURCES.md)。
-2. 微调后的 Qwen 分别生成类别和详细描述，写入 [模型描述](demo/catalog.described.jsonl)。随后重新编码、重建索引，不复用旧 3B 模型的描述或向量。
-3. Taiyi 编码类别与描述；CLIP ViT-L/14 编码图片。类别文本使用逗号拼接。
-4. 对参考图查询，微调后的 Qwen 解析类别、完整目标和用户约束。有用户文字时，Taiyi 直接编码原文，模型摘要不得覆盖它；只有图片时才编码生成的目标描述。再与参考图的 CLIP 特征各占 50% 归一化融合。原始意图输出见 [intents.json](demo/intents.json)。
-5. 对明确的文字短语直接编码；按类别向量粗筛（最高分的 0.85），再按描述向量余弦分数排序。最多展示前三张，排除参考图自身；不足三张时不补入被筛掉的图片。
-
-保留原项目的微调模型、建库提示词与图像融合方法，并修复意图摘要覆盖原文的问题，**不是逐行执行历史交互脚本**：本展示固定 Top-3、不随机抽取阈值结果；文字示例已是目标短语，不调用历史脚本中的独立纯文本意图模型；分数展示为余弦相似度，不乘 CLIP 温度系数。硬件、图像尺寸上限与依赖版本也以当前配置为准。
-
-## 自己运行
-
-先按 [README](../README.md) 准备对应硬件依赖，在仓库根目录执行：
-
-```bash
-python examples/showcase/run.py \
-  --config configs/showcase-lora.json \
-  --adapter-path /path/to/output_lora_llm \
-  --output artifacts/showcase-lora
-```
-
-配置选择 `prompt_profile=historical`、`intent_profile=preserve`，自动使用 [`queries-lora.json`](../examples/showcase/queries-lora.json)。不要将 7B 适配器加载到 3B 基座。模型已下载时追加 `--model-root /path/to/models`，其中应包含对应的 `qwen-vl-7b/`、`taiyi/`、`clip/`。
-
-输出包括：
-
-```text
-artifacts/showcase-lora/
-├── adapter-verification.json  # 加载权重校验
-├── catalog.described.jsonl    # 模型生成的图库元数据
-├── intents.json              # 每个图片查询的目标解析
-├── index/                    # 图片清单、特征与索引元数据
-└── results.json              # 查询、排名、分数、配置、环境
-```
-
-`--reuse-descriptions` 只用于复用同一模型、适配器和建库提示词的描述。本次仅修改查询端，复用了前次图库描述，重新执行意图解析、编码和检索；`description_seconds` 不包含生成 12 张图库描述的耗时。模型权重发生变化时使用新目录，重新生成描述和索引。
-
-没有原适配器时，可以复跑单独的 3B 基座版本：
-
-```bash
-python examples/showcase/run.py --config configs/showcase.json --output artifacts/showcase-3b
-```
-
-它使用不同提示词，并包含纯 CLIP 对照，不等同于主展示的微调流程。
-
-生成离线单文件或轻量网站：
-
-```bash
-python examples/showcase/build_page.py \
-  --results artifacts/showcase-lora/results.json --output artifacts/showcase-lora/index.html
-python examples/showcase/build_page.py \
-  --results artifacts/showcase-lora/results.json --image-mode external --output docs/index.html
-```
-
-后一种模式同时复制图片到 `images/`，发布时需要一起上传。GitHub Pages 从 `main` 分支 `/docs` 发布；离线单文件位于 `docs/demo/index.html`。页面生成器只渲染已有结果，不执行检索或改变排名。
-
-## 运行环境与可复现边界
-
-| 项目 | 设置 |
+| 项目 | 值 |
 | --- | --- |
-| 硬件 | 单张 Ascend 910B2，显式 `npu:0` |
-| Python | 3.11.15 |
+| 模型 | `google/embeddinggemma-2` |
+| 固定版本 | `f9972ac22e696a105c482202646979e33e4b5a1e` |
+| 权重 SHA-256 | `197a32965d4b1105faf060417baa899e193fb73cd401f42ec9295234d5553d79` |
+| 加载模块 | 文字 + 视觉，关闭音频；438,760,448 参数 |
+| 维度 / 图像预算 / 批量 | 768 / 280 tokens / 4 |
+| 设备与精度 | 单张 Ascend 910B2，`npu:0`，BF16，eager attention |
 | PyTorch / torch_npu | 2.7.1 / 2.7.1 |
-| Torchvision / Transformers | 0.22.1 / 4.57.1 |
-| PEFT / qwen-vl-utils | 0.20.0 / 0.0.14 |
-| Qwen 精度 | bfloat16；贪心生成 |
-| 输入限制 | `max_pixels=262144`、`max_new_tokens=256` |
-| 视觉语言模型 | Qwen2.5-VL-7B-Instruct + 原 rank-64 LoRA |
-| 文本编码器 | IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese |
-| 图像编码器 | openai/clip-vit-large-patch14 |
+| Transformers / Sentence Transformers | 5.22.1 / 6.2.0 |
 
-模型文件哈希见 [model-files.json](demo/model-files.json)。不同设备、精度、处理器版本可能改变生成内容和排序。耗时未经重复测量，不作为性能基准。
+官方模型及多模态输入方式见 [Google 模型卡](https://huggingface.co/google/embeddinggemma-2) 与 [官方 Sentence Transformers 指南](https://ai.google.dev/gemma/docs/embeddinggemma/multimodal-embeddinggemma-with-sentence-transformers)。运行时验证官方固定版本的权重哈希。首次使用需下载完整 checkpoint；本次只加载文字和视觉模块。
 
-Ascend 需先配置匹配 CANN 的 PyTorch 与 torch_npu，避免直接安装会替换 PyTorch 的依赖组。显式传 `--device npu:0`；`auto` 只自动选择 CUDA 或 CPU。此次验证是推理，不是 NPU 训练。
+## 耗时与旧结果对照
 
-## 与先前演示的区别
+| 查询 | 旧 Taiyi/CLIP Top-3 | EmbeddingGemma 2 Top-3 | 编码中位数 |
+| --- | --- | --- | --- |
+| 白色自行车 | image-09, image-12, image-10 | image-09, image-12, image-10 | 90.0 ms |
+| 红色的椅子 | image-01, image-04, image-02 | image-01, image-03, image-04 | 90.0 ms |
+| 咖啡杯 | image-08, image-06, image-07 | image-07, image-08, image-06 | 90.7 ms |
+| 一张参考图，找到更多杯子 | image-08, image-06, image-05 | image-08, image-06, image-02 | 173.2 ms |
+| 给一张椅子图，找相似素材 | image-04, image-03, image-01 | image-03, image-01, image-04 | 187.1 ms |
+| 用咖啡杯照片找相似图片 | image-05, image-07, image-08 | image-07, image-08, image-05 | 175.3 ms |
+| 草地上的自行车 | image-10, image-12, image-11 | image-10, image-12, image-11 | 174.6 ms |
 
-原 7B 版本把“草地上的自行车”解析成“自行车”，黄色车排在第三；原始记录保存在 [修复前结果](demo/baseline-lora-intent/results.json)。当前版本修复摘要覆盖，并保留完整用户文字。新提示词和代码行为见 [条件保留说明](INTENT_AND_EMBEDDINGS.md)。原文不丢失并不保证每个属性都被排序模型正确理解，仍需要独立查询集评测。
+图库 12 张图片批量编码：**1.45 秒**。首次模型初始化（含权重哈希校验）：28.59 秒；首次单图预热：10.18 秒。这两个启动数字各测一次，不作为稳定启动延迟。
 
-旧版 [3B 原始结果](demo/baseline-3b/results.json) 和 [图库描述](demo/baseline-3b/catalog.described.jsonl) 原样保留。它没有加载原 LoRA，图搜图的纯 CLIP 结果中出现了椅子召回杯子、杯子召回自行车，不能作为原微调项目效果的代表。
+每个查询先预热，再测 5 次，表中为中位数。编码耗时包含预处理、设备传输、模型前向、归一化和返回 CPU 向量；不含加载、预热、网络与索引扫描。12 张图的 NumPy 扫描中位数均低于 0.15 ms。没有测并发、网络服务或大图库吞吐，不能线性外推生产速度。当前 CLI 每次调用都会重新加载模型；服务集成时应复用 `GemmaEncoder` 实例。
 
-两版同时改变了 **基座大小、适配器、提示词和图像查询流程**，因此结果差异不能单独归因于 LoRA。要衡量微调贡献，需要同一 7B 基座、相同提示词与查询流程下，仅切换适配器的独立对照。
+**不能宣称新模型全面胜出。** 黄色杂草自行车 `image-10` 在新旧两版都排第一，新版与第二名分差很小。花纹杯查询中，新版第三名为椅子 `image-02`，原类别粗筛版本则保留了杯子类结果。新方案取消了类别粗筛，因此比较的是完整流程变化，不是仅替换一个编码器的严格消融。跨模型余弦分数不能直接比较大小来判断优劣。
 
-本图库小且类别有限，不用于声称规模化准确率、同品牌同型号识别能力或历史 F1 收益复现。接入自己的数据后，按 [自有数据指南](CUSTOM_DATA.md) 重建索引，并用独立查询与相关性标注评测。
+图库只有 12 张，查询未建立完整的独立相关性标注；此处只报告排名与耗时，不报告准确率提升。严格同款、材质、否定要求和背景修改仍需专门评测。
+
+## 复跑与换图库
+
+在独立环境按 [README](../README.md) 安装 `.[gemma]`，然后：
+
+```bash
+python examples/showcase/run_gemma.py \
+  --config configs/embeddinggemma2.json --output artifacts/showcase-gemma2 --repeats 5
+python examples/showcase/build_page.py \
+  --results artifacts/showcase-gemma2/results.json --output artifacts/showcase-gemma2/index.html
+python examples/showcase/build_page.py \
+  --results artifacts/showcase-gemma2/results.json --image-mode external --output docs/index.html
+```
+
+本地已有权重可传 `--model-path /path/to/embeddinggemma-2`；Ascend 需传 `--device npu:0`。运行脚本输出持久化索引和含环境、每次耗时、排名的结果 JSON；HTML 生成器只渲染，不改变排序。
+
+Ascend 请先安装厂商匹配的 torch / torch_npu / torchvision 和 CANN，再在独立环境安装 `transformers==5.22.1 sentence-transformers==6.2.0` 及本项目基础依赖，检查 pip 解析结果不要替换已有 torch。不要在原 Qwen 的 Transformers 4.57.1 环境中直接升级。
+
+自己的图库只需图片文件和包含 `id`、`file_path` 的 JSONL；类别/描述可以为空。按 [自有数据指南](CUSTOM_DATA.md) 直接执行 `index`，随后 `search` 或 `evaluate`。每次切换模型、权重、向量维度或图像预算必须重建索引；代码拒绝查询端与索引的配置混用。
+
+历史原文保留版完整结果见 [baseline-taiyi-clip](demo/baseline-taiyi-clip/results.json)；更早的丢失场景版本见 [baseline-lora-intent](demo/baseline-lora-intent/results.json)，3B 基座版本见 [baseline-3b](demo/baseline-3b/results.json)。

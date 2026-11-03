@@ -6,11 +6,11 @@
 </style></head><body><main class="shell">
 <nav class="brand"><div class="logo"><span class="mark" aria-hidden="true">⌕</span> MULTIMODAL IMAGE RETRIEVAL</div><a href="https://github.com/liangjianshu/multimodal-image-retrieval">GitHub ↗</a></nav>
 <p class="eyebrow">VISUAL SEARCH · PRIVATE IMAGE LIBRARY</p><h1>以图找图，以文找物。</h1>
-<p class="intro">一句中文、一张参考图，或两者结合。用 Qwen 理解图片，以 Taiyi-CLIP 检索自己的图库。</p>
+<p class="intro">__INTRO__</p>
 <div class="facts"><span class="pill"><b>12 张</b> CC0 实拍图片</span><span class="pill">__MODEL_BADGE__</span><span class="pill"><b>真实向量</b> · 无人工标签建库</span><span class="pill">__METHOD_BADGE__</span></div>
 <div class="toolbar"><div class="tabs" role="tablist" aria-label="检索方式"><button role="tab" data-kind="text">文字检索</button><button role="tab" data-kind="image">图片检索</button><button role="tab" data-kind="fusion">图文融合</button></div><span class="replay">已记录结果回放 · 无需在浏览器加载模型</span></div>
 <noscript><style>.tabs,.presets,details{display:none}.photo-button{cursor:default}</style><p class="intro">当前预览未启用脚本，下面展示第一组真实结果。用浏览器打开本文件或<a href="https://liangjianshu.github.io/multimodal-image-retrieval/">在线演示</a>可切换全部示例。</p></noscript>
-<section class="workspace" aria-live="polite"><aside class="query"><span class="label" id="query-label">__INITIAL_LABEL__</span><h2 id="query-title">__INITIAL_TITLE__</h2><div id="query-input">__INITIAL_INPUT__</div><small id="query-note">__INITIAL_NOTE__</small><div class="pipeline"><div class="query-rule"></div><span id="pipeline">__INITIAL_PIPELINE__</span></div></aside><div><div class="results-head"><h2>检索结果 <span id="count">__INITIAL_COUNT__</span></h2><span id="candidate-note">__INITIAL_CANDIDATES__</span></div><div class="cards" id="cards">__INITIAL_CARDS__</div><p class="result-note">相似度为余弦分数，不是概率。点击图片可查看完整描述。</p></div></section>
+<section class="workspace" aria-live="polite"><aside class="query"><span class="label" id="query-label">__INITIAL_LABEL__</span><h2 id="query-title">__INITIAL_TITLE__</h2><div id="query-input">__INITIAL_INPUT__</div><small id="query-note">__INITIAL_NOTE__</small><div class="pipeline"><div class="query-rule"></div><span id="pipeline">__INITIAL_PIPELINE__</span></div></aside><div><div class="results-head"><h2>检索结果 <span id="count">__INITIAL_COUNT__</span></h2><span id="candidate-note">__INITIAL_CANDIDATES__</span></div><div class="cards" id="cards">__INITIAL_CARDS__</div><p class="result-note">相似度为余弦分数，不是概率。__DESCRIPTION_NOTE__</p></div></section>
 <div class="presets" id="presets"><span class="label">切换示例</span></div>
 <footer class="footer"><p>__MODEL_NOTE__页面按模型输出顺序展示，图片查询排除参考图自身。</p><span><a href="__RAW_RESULTS_URL__" download="results.json">原始结果</a> · <a href="__GUIDE_PATH__">复现说明</a></span></footer>
 <details><summary>查看全部 12 张图库图片与来源</summary><div class="gallery" id="gallery"></div></details>
@@ -18,6 +18,7 @@
 <script>
 const DATA=/*__RECORDED_DATA__*/;
 const report=DATA.report, sources=new Map(DATA.sources.map(s=>[s.id,s]));
+const direct=report.backend==='embeddinggemma2';
 const imageURL=p=>DATA.images[p];
 const $=id=>document.getElementById(id);
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
@@ -29,15 +30,19 @@ function show(q){
  if(q.image){const im=el('img','query-photo');im.src=imageURL(q.image);im.alt='查询参考图片';$('query-input').append(im)}
  if(q.text)$('query-input').append(el('div','prompt',q.text));
  $('query-note').textContent=q.intent?(q.text?'实际编码文字（保留原文）：':'模型提取的图片目标：')+q.search_text+'。文字与参考图向量各占 50%；已排除参考图自身。':q.kind==='text'?'查询文本直接编码，不调用意图解析。':q.kind==='image'?'仅使用参考图向量；已排除图库中的同一张图片。':'图片与文本向量各占 50%；已排除参考图自身。';
- $('count').textContent=' / '+q.results.length+' 张';$('candidate-note').textContent='图库 '+report.gallery_size+' 张 · '+(q.mode==='clip'?'图像候选 ':'粗筛候选 ')+q.candidate_count+' 张 · Top-3';
+ $('count').textContent=' / '+q.results.length+' 张';$('candidate-note').textContent='图库 '+report.gallery_size+' 张 · '+(direct||q.mode==='clip'?'图像候选 ':'粗筛候选 ')+q.candidate_count+' 张 · Top-3';
  $('pipeline').textContent=q.intent?'需求解析（保留用户原文）→ 图文融合 → 类别粗筛 → 描述排序':q.mode==='clip'?'CLIP 图像编码 → 图像相似度排序':'查询编码 → 类别粗筛 → 描述排序';
+ if(direct){
+  $('query-note').textContent={text:'完整文字直接编码，与图库原图向量比较。',image:'参考图像素直接编码；已排除参考图自身。',fusion:'完整文字与参考图联合编码；已排除参考图自身。'}[q.kind];
+  $('pipeline').textContent='原图 / 完整文字 → EmbeddingGemma 2 → 图库图像向量排序';
+ }
  $('cards').replaceChildren();
  q.results.forEach((r,i)=>{
   const card=el('article','card'),wrap=el('div','photo-wrap'),button=el('button','photo-button'),img=el('img');img.src=imageURL(r.file_path);img.alt=r.retrieval_categories.join('、');button.append(img);button.setAttribute('aria-label','查看 '+r.id+' 的图片描述');
   button.onclick=()=>{$('detail-image').src=img.src;$('detail-image').alt=img.alt;$('detail-text').textContent=r.retrieval_description;$('detail').showModal()};wrap.append(button,el('span','rank',String(i+1).padStart(2,'0')));
   const body=el('div','card-body');body.append(el('div','card-title',r.retrieval_categories.join(' · ')));const score=el('div','score');score.append(el('span',null,'余弦相似度'),el('b',null,r.score.toFixed(3)));body.append(score,el('p','description',r.retrieval_description));const src=el('a','source',r.id+' · Wikimedia / CC0 ↗');src.href=sources.get(r.id).source;body.append(src);card.append(wrap,body);$('cards').append(card);
  });
- if(q.results.length<3)$('cards').append(el('div','empty','类别粗筛只保留了 '+q.candidate_count+' 张候选图片。这里不补充被筛掉的结果。'));
+ if(q.results.length<3)$('cards').append(el('div','empty',direct?'可用图片不足三张。':'类别粗筛只保留了 '+q.candidate_count+' 张候选图片。这里不补充被筛掉的结果。'));
  try{history.replaceState(null,'','#'+q.id)}catch(e){if(e.name!=='SecurityError')throw e}
 }
 report.queries.forEach(q=>{const b=el('button',null,q.text||({image:(q.mode==='clip'?'CLIP · ':'图搜图 · ')+(q.id.includes('chair')?'椅子':q.id.startsWith('ornate-cup')?'花纹杯':'咖啡杯')})[q.kind]);b.dataset.query=q.id;b.onclick=()=>show(q);$('presets').append(b)});

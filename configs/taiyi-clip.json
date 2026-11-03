@@ -1,0 +1,14 @@
+{
+  "text_encoder": "IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese",
+  "image_encoder": "openai/clip-vit-large-patch14",
+  "vl_model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "text_model": "Qwen/Qwen2.5-3B-Instruct",
+  "adapter": null,
+  "device": "auto",
+  "max_pixels": 262144,
+  "max_new_tokens": 256,
+  "category_ratio": 0.85,
+  "image_weight": 0.5,
+  "intent_profile": "preserve",
+  "backend": "taiyi-clip"
+}

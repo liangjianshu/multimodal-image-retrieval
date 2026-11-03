@@ -11,7 +11,7 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 **也适合个人学习多模态与 Agent 应用相关技术栈**：从图文编码、意图解析、检索流程和模型调用入手，进一步实践 LoRA / SFT 微调与效果评测。
 
-面向**电商商品搜索、图片素材库、设计参考图和企业图片资料检索**，支持中文文搜图、参考图搜图和图文融合查询。将自己的图片及元数据接入后，即可建立独立图库并运行检索；需要适配细分领域时，可进一步进行 LoRA / SFT 微调。
+面向**电商商品搜索、图片素材库、设计参考图和企业图片资料检索**，支持中文文搜图、参考图搜图和图文融合查询。将自己的图片及元数据接入后，即可建立独立图库并运行检索；另提供 Qwen 语义建库分支的 LoRA / SFT 微调实践。
 
 “拍立淘式”指上传参考图寻找相似商品的应用场景。本项目是个人实践，未与淘宝或阿里建立关联，也不代表其线上技术实现。拍立淘的公开场景介绍见 [阿里云官方说明](https://www.alibabacloud.com/help/en/image-search/product-overview/scenarios)。
 
@@ -21,15 +21,15 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 [![中文文搜图：真实模型在 12 张图片中检索白色自行车](docs/demo/text-search.png)](https://liangjianshu.github.io/multimodal-image-retrieval/)
 
-演示图库包含 **12 张可公开分享的 CC0 图片**，覆盖椅凳、杯子和自行车。使用 **Qwen2.5-VL-7B + 作者原训练 LoRA** 生成类别与描述；图搜图先由微调模型解析目标，再融合文字与图片特征，执行类别粗筛和描述排序。提供 7 组真实结果，**没有用人工标签建库或手工重排**。
+演示图库包含 **12 张 CC0 实拍图片**，覆盖椅凳、杯子和自行车。当前默认使用 **EmbeddingGemma 2**：图库原图、用户完整文字、参考图及图文联合查询都进入同一个多模态编码器。图库离线编码，查询时扫描保存的图像向量；不再依赖图片描述或类别粗筛。
 
-- **直接体验**：[打开在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/)，无需下载仓库或模型。也可查看 [图搜图截图](docs/demo/image-search.png) · [图文融合截图](docs/demo/fusion-search.png)。
-- **本地交互查看**：用浏览器打开 `docs/demo/index.html`，切换查询、查看图片描述与来源。图片已内嵌，单独复制这个 HTML 也能显示；禁用脚本的预览可查看首组结果。页面回放已记录结果，不在浏览器里运行模型。
-- **自己复跑**：按 [演示与复现指南](docs/DEMO.md) 执行；图片、查询、模型配置、生成描述和原始结果均已附上。
+- **直接体验**：[在线演示](https://liangjianshu.github.io/multimodal-image-retrieval/)，共 7 组真实结果；也可查看 [图搜图截图](docs/demo/image-search.png) · [图文融合截图](docs/demo/fusion-search.png)。
+- **离线查看**：浏览器打开 `docs/demo/index.html`，图片已内嵌，可单独复制。页面回放实测结果，不在浏览器中运行模型。
+- **自己复跑**：[演示指南](docs/DEMO.md) 包含公开模型版本、环境、耗时和局限；无需作者私有 LoRA 权重即可复现当前流程。
 
-这是加载原适配器的小图库定性演示，不代表规模化准确率，也不是历史 F1 提升的复现实验。原先未加载适配器的 3B 演示保留在 [基线记录](docs/demo/baseline-3b/results.json)；两版还存在基座大小和查询流程差异，不能把差异单独归因于 LoRA。复跑主展示需要原适配器，权重未随仓库分发。
+结果没有手工重排；图片说明沿用原微调 Qwen 的描述，**仅供阅读，不参与向量生成或排序**。原 Qwen LoRA＋Taiyi/CLIP 流程及数据保留在 [历史指南](docs/DEMO_TAIYI_CLIP.md) 和 [旧结果](docs/demo/baseline-taiyi-clip/results.json)，方便对照。
 
-意图解析已增加原文保留：用户提出的场景、颜色和否定条件不会再被摘要覆盖；参考图仍由 CLIP 直接编码。参见 [提示词、条件保留与编码器对齐说明](docs/INTENT_AND_EMBEDDINGS.md)。
+原图编码减少了转述造成的信息损失，但不保证所有颜色、材质、否定条件和复杂修改都能被正确排序。本演示只有 12 张图，不能据此宣称普遍准确率提升。见 [输入与编码说明](docs/INTENT_AND_EMBEDDINGS.md)。
 
 ## 可以用在哪些场景
 
@@ -47,11 +47,11 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 - **先接数据，再决定是否训练**：支持类别文件夹和 JSONL 清单，已有图片库可先建立检索基线。
 - **图片与文字都能查**：支持纯文本、参考图，以及参考图加文字描述的融合查询。
-- **图片描述离线生成**：Qwen 提取类别和属性后建立向量索引，普通查询不必逐张调用大模型。
+- **图库只需离线编码**：直接处理原图；查询时编码本次输入，不必重新编码整库。
 - **训练和评测入口齐全**：可构造易混淆类别问答，对比微调范围，并通过自有查询集检查效果。
 - **默认在本机处理图片**：图片由运行机器上的模型处理；首次使用需下载模型权重。
 
-本项目整理自个人多模态检索实验，包含 Taiyi-CLIP 图文编码、Qwen2.5-VL 语义建库、类别粗筛与描述向量排序，以及可选的领域 SFT。适合学习、验证小规模图片素材库的检索方案。
+本项目整理自个人多模态检索实验。当前默认采用 EmbeddingGemma 2 原图检索，另保留 Qwen2.5-VL 语义建库、Taiyi-CLIP 两阶段检索和领域 SFT，适合比较不同方案在自有数据上的效果。
 
 `mmretrieval/` 是统一运行入口；`legacy/` 保存经过凭据和个人路径清理的历史源码，供追溯实验设计。**模型权重、原始 COCO / ImageNet 图片、个人训练数据与大型向量文件没有上传。**
 
@@ -60,11 +60,11 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 | 能力 | 作用 |
 | --- | --- |
 | 文搜图、图搜图、图文融合查询 | 中文描述、参考图或两者结合，返回图片 ID、路径与相似度 |
-| 离线语义建库 | 用 Qwen 提取类别与属性描述，预先编码，查询时不必逐张调用大模型 |
-| 两阶段检索 | 按类别向量筛选，再按描述向量排序；提供 CLIP 图像向量基线 |
-| 可选意图解析 | 把自然语言请求转换为是否检索、检索描述和返回数量 |
+| 离线原图建库 | EmbeddingGemma 2 直接编码图片，类别和描述可为空 |
+| 原生图文联合编码 | 文字与参考图在一次前向计算中生成查询向量，不使用 50/50 平均 |
+| 历史方案对照 | 显式选择 `taiyi-clip` 配置，运行 Qwen 意图解析与两阶段检索 |
 | 可替换数据与模型 | 图片清单、模型 ID / 本地路径、LoRA 适配器和阈值均可配置 |
-| 可选领域训练 | 对比语言侧 LoRA、MLP＋LLM、MLP＋Vision；保存训练范围与参数量 |
+| 可选 Qwen 领域训练 | 对比语言侧 LoRA、MLP＋LLM、MLP＋Vision；保存训练范围与参数量 |
 
 检索目前使用 **NumPy 内存向量矩阵**，没有接入独立向量数据库，也没有跨编码器精排模型。大规模索引、在线服务、权限管理与并发调度需要进一步开发。
 
@@ -72,20 +72,17 @@ Visual Product Search · Text-to-Image Search · Multimodal Retrieval
 
 ```mermaid
 flowchart LR
-    A[自有图片与清单] --> B[Qwen 类别和属性描述 / 人工元数据]
-    B --> C[Taiyi 文本向量 + CLIP 图像向量]
-    C --> D[离线索引]
-    Q[中文描述 / 参考图片] --> R[可选 Qwen 意图解析]
-    R --> E[查询向量与图文融合]
-    E --> F[类别粗筛]
-    D --> F
-    F --> G[描述向量排序]
-    G --> H[Top-K / 相似度阈值结果]
+    A[自有图库原图] --> B[EmbeddingGemma 2]
+    B --> C[离线图像向量索引]
+    Q[完整文字 / 参考图 / 图文联合输入] --> E[同一 EmbeddingGemma 2]
+    E --> F[余弦相似度排序]
+    C --> F
+    F --> H[排除参考图自身 → Top-K]
 ```
 
 ## 1. 安装和无需模型的检查
 
-Python 3.10+。建议在 Linux CUDA 环境运行真实模型；本地 CPU 可执行数据处理和流程测试。
+Python 3.10+。真实模型已在单张 Ascend 910B2 验证；其他硬件请安装匹配的 PyTorch。CPU 可运行数据处理和流程测试，推理速度需要实测。
 
 ```bash
 git clone https://github.com/liangjianshu/multimodal-image-retrieval.git
@@ -98,13 +95,15 @@ python -m mmretrieval demo --output artifacts/demo
 
 `demo` 会生成六张几何图片，并完成清单校验、索引保存/加载、检索和训练集划分。它使用**预设的合成向量**，只检查程序连接是否正常，不下载模型，也不代表模型检索效果。
 
-运行真实检索和训练时再安装：
+运行默认的 EmbeddingGemma 2 检索：
 
 ```bash
-pip install -e '.[models]'
+pip install -e '.[gemma]'
 ```
 
-CUDA 用户应先按 [PyTorch 安装说明](https://pytorch.org/get-started/locally/) 安装匹配硬件的 PyTorch。依赖采用 Transformers 4.57.1、PEFT 0.17.1；不要直接升级到 Transformers 5.x 后假定接口兼容。模型按命令需要加载；`prepare` / `validate` / `make-sft` 不加载模型。
+此依赖组使用 Transformers **5.22.1**、Sentence Transformers **6.2.0**。先按硬件安装匹配的 PyTorch；Ascend 用户需保留匹配 CANN 的 torch / torch_npu，按 [演示指南](docs/DEMO.md) 单独安装其余依赖。仅加载文字和视觉模块，BF16 或 FP32 推理，不使用 FP16。
+
+历史 Qwen LoRA 流程和训练使用**另一个虚拟环境**安装 `pip install -e '.[models]'`（Transformers 4.57.1）。两组依赖不能混装；`.[gemma]` 不提供 Qwen SFT 所需依赖。`prepare` / `validate` / `make-sft` 不加载模型。
 
 ## 2. 换成自己的数据（从这里开始）
 
@@ -128,7 +127,7 @@ python -m mmretrieval validate \
   --manifest data/catalog.jsonl --image-root data/images
 ```
 
-`category_map.json` 把目录名映射为中文标签，不限制类别数量；换业务时直接修改。也可以不传映射，保留目录名。平铺图片目录不会自动猜测类别，后续可运行 `describe` 生成检索元数据。
+`category_map.json` 把目录名映射为中文标签，不限制类别数量；换业务时直接修改。也可以不传映射，保留目录名。平铺目录同样可以使用；默认原图检索不要求类别或描述。
 
 你也可以直接生成 JSONL，一行一张图：
 
@@ -139,78 +138,65 @@ python -m mmretrieval validate \
 - `id`：唯一且稳定的字符串，用于评测关联。
 - `file_path`：相对 `--image-root` 的路径，不能使用旧服务器绝对路径。
 - `categories`：人工标签；仅检索时可以为空，训练前必须核对。
-- `description`：可选人工描述；没有描述时可先运行下一步。
+- `description`：可选展示信息；默认原图检索不使用这个字段。
 
 图片不会被上传到外部 API；默认模型在运行机器上推理，首次使用会从模型托管平台下载权重。完整字段、数据替换清单与 COCO 导入示例见 **[自有数据指南](docs/CUSTOM_DATA.md)**。
 
-## 3. 生成语义描述并建立索引
+## 3. 直接建立原图索引
 
 ```bash
-python -m mmretrieval --config configs/default.json describe \
-  --manifest data/catalog.jsonl --image-root data/images \
-  --output data/catalog.described.jsonl
-
 python -m mmretrieval --config configs/default.json index \
-  --manifest data/catalog.described.jsonl --image-root data/images \
-  --output artifacts/index
+  --manifest data/catalog.jsonl --image-root data/images \
+  --output artifacts/index-gemma2
 ```
 
-`describe` 单独保存 `retrieval_categories` 和 `retrieval_description`，不会覆盖人工标签。若已有可用元数据，可以跳过描述生成，把 `data/catalog.jsonl` 直接传给 `index`。
+无需先运行 `describe`。每张原图生成一个归一化的 768 维向量，类别和描述不参与排序。索引包含 `catalog.jsonl`、`features.npz` 和 `metadata.json`，记录模型版本、权重 SHA-256、维度和图像 token 预算。
 
-索引目录包含 `catalog.jsonl`、`features.npz` 和 `metadata.json`。**改变图片、类别/描述、编码器或用于生成描述的微调模型后，需要重建对应的描述和索引。** 更换数据并不是只改一个路径、继续复用旧向量。
+换编码器后必须重建图库，旧 Taiyi/CLIP 向量即使同为 768 维也不能混用。查询时会校验索引与编码器的模型版本、权重、维度及预处理参数。更换图片、模型或视觉预算时也需重新编码；本版本建库命令会全量重建，尚无增量更新命令。
 
 ## 4. 检索
 
 ```bash
 # 中文文搜图
-python -m mmretrieval search --index artifacts/index --image-root data/images \
+python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/images \
   --text '红色木质椅子' --top-k 5
 
 # 图搜图；参考图如果在库中，会排除它自己
-python -m mmretrieval search --index artifacts/index --image-root data/images \
+python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/images \
   --image chair/001.jpg --top-k 5
 
 # 图文融合查询
-python -m mmretrieval search --index artifacts/index --image-root data/images \
+python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/images \
   --image chair/001.jpg --text '类似款式的红色椅子' --top-k 5
 
-# 可选：用 Qwen 解析返回数量和目标
-python -m mmretrieval search --index artifacts/index --image-root data/images \
-  --text '帮我找三张红色椅子的图片' --intent
-
-# 原始 CLIP 图像向量基线
-python -m mmretrieval search --index artifacts/index --image-root data/images \
-  --text '红色椅子' --mode clip --top-k 5
-
 # 返回超过固定阈值的全部结果；阈值应在验证集上选择
-python -m mmretrieval search --index artifacts/index --image-root data/images \
+python -m mmretrieval search --index artifacts/index-gemma2 --image-root data/images \
   --text '红色椅子' --all-matches --min-score 0.25
 ```
 
-结果以 JSON 返回，可被后端或界面读取。`score` 是余弦相似度，不是概率。Top-K 是候选集中的上限，类别粗筛后不足 K 个时不会补入无关图片。
+结果以 JSON 返回，可被后端或界面读取。`score` 是余弦相似度，不是概率。默认对全图库扫描，排除参考图自身后返回 Top-K；未设置阈值时，低相关性图片也可能进入结果。不要把其他模型的阈值直接沿用到新编码器。图文输入是原生联合编码，文字与参考图冲突时的优先级仍需评测。
 
 ## 5. 模型和配置
 
-复制 `configs/default.json` 修改即可，`--config` 必须放在子命令之前：
+`--config` 必须放在子命令之前，默认配置与 `configs/embeddinggemma2.json` 相同：
 
 | 配置项 | 含义 |
 | --- | --- |
-| `text_encoder` / `image_encoder` | Taiyi 文本侧与其配套 CLIP ViT-L/14 图像侧；应保持对齐的特征空间 |
-| `vl_model` | Qwen2.5-VL 基座或完整微调模型路径，默认 7B |
-| `text_model` | 纯文本意图模型，默认 Qwen2.5-3B |
-| `adapter` | 可选 LoRA 目录，包含 `adapter_config.json` 和权重 |
-| `prompt_profile` | `standard` 为整理版建库提示词；`historical` 恢复原类别与描述提示词 |
-| `intent_profile` | 默认 `preserve` 保留用户原文和完整约束；`historical` 仅用于旧流程对照 |
-| `device` | `auto`、`cuda`、`cuda:0`、`cpu`，或显式 `npu:0`；auto 优先 CUDA。Ascend 推理环境见 [演示指南](docs/DEMO.md) |
-| `max_pixels` / `max_new_tokens` | 控制视觉输入大小和生成长度 |
-| `category_ratio` | 类别粗筛相对阈值，默认 0.85 |
-| `image_weight` | 图文同时输入时参考图权重，默认 0.5 |
+| `backend` | 默认 `embeddinggemma2`；历史流程为 `taiyi-clip` |
+| `embedding_model` / `embedding_revision` | 官方模型 ID 与固定版本 |
+| `embedding_model_path` | 可选本地完整权重目录；官方版本会校验权重 SHA-256 |
+| `embedding_dimension` | 默认 768；也支持 512、256、128，修改后重建索引 |
+| `vision_tokens` | 每张图的 token 预算，默认 280；70 / 140 / 560 / 1120 可另做对照 |
+| `embedding_batch_size` | 图库编码批量，默认 4 |
+| `device` | `auto`（CUDA 优先，否则 CPU）、`cuda:0`、`cpu` 或显式 `npu:0` |
 
-显存不足可降低 `max_pixels`，或将 `vl_model` 改为 `Qwen/Qwen2.5-VL-3B-Instruct`；这属于新配置，效果需要重新评估。不同编码器即使维度相同也不一定对齐，不建议只替换其中一端。当前实现没有提供 4-bit 量化或多卡训练配置。
+完整文字直接交给编码器；不先经过意图模型删减，也不将图片转成描述后再编码。单个查询超出 8192 token 预算时明确报错，避免静默丢失条件。768 维共享空间来自同一模型的训练，与两端是否有同一词表无关。
+
+保留的 `configs/taiyi-clip.json` 支持 Qwen `vl_model` / `adapter`、`category_ratio`、`image_weight` 等旧参数，使用独立模型环境和独立索引目录。旧流程的运行命令见 [历史指南](docs/DEMO_TAIYI_CLIP.md)。
 
 ## 6. 领域微调
 
-如果只想接入自己的图片库，**不必先微调**。先建立基线，只有明确发现领域识别问题时再准备训练数据。
+如果只想接入自己的图片库，**不必先微调**。以下训练针对历史 Qwen 语义建库分支，使用独立 `.[models]` 环境；不是 EmbeddingGemma 2 的微调接口，也不会直接更新新编码器。
 
 ```bash
 python -m mmretrieval make-sft \
@@ -218,7 +204,7 @@ python -m mmretrieval make-sft \
   --hard-negatives examples/hard_negatives.json \
   --output data/sft --val-ratio 0.2 --seed 42
 
-python -m mmretrieval --config configs/default.json train \
+python -m mmretrieval --config configs/taiyi-clip.json train \
   --train data/sft/train.jsonl --val data/sft/val.jsonl \
   --image-root data/images --output checkpoints/mlp-llm \
   --mode mlp-llm --rank 64 --alpha 128 --epochs 0.5 --grad-accum 4
@@ -235,7 +221,7 @@ MLP 指视觉连接模块 `visual.merger`，不是所有 Transformer MLP。`mlp-
 编写与当前图片 ID 对齐的查询集，格式见 `examples/queries.jsonl`，然后：
 
 ```bash
-python -m mmretrieval evaluate --index artifacts/index --image-root data/images \
+python -m mmretrieval evaluate --index artifacts/index-gemma2 --image-root data/images \
   --queries data/queries.test.jsonl --top-k 5 --output artifacts/evaluation.json
 ```
 
@@ -246,7 +232,7 @@ python -m mmretrieval evaluate --index artifacts/index --image-root data/images 
 ## 目录与开发
 
 ```text
-mmretrieval/     数据清单、模型封装、两阶段检索、SFT 和 CLI
+mmretrieval/     原图联合编码、索引、历史两阶段检索、Qwen SFT 和 CLI
 configs/        模型与检索配置
 examples/       清单、查询与难负类别映射；showcase/ 含 12 张 CC0 演示图片
 tests/          数据与检索测试、微型随机 Qwen 训练/保存测试
@@ -265,6 +251,7 @@ pytest -q
 
 项目代码采用 [MIT License](LICENSE)，另有许可证声明的第三方文件除外。`legacy/project_three/Qwen3-VL/` 下的 Qwen 源码继续遵循其 Apache-2.0 许可证，详见 [第三方说明](THIRD_PARTY_NOTICES.md)。演示照片采用 CC0，作者与原始链接见 [图片来源](examples/showcase/SOURCES.md)。来源和整理范围见 [PROVENANCE](docs/PROVENANCE.md)。依赖和模型分别遵循自身许可，原 COCO / ImageNet 数据集请从官方渠道获取。
 
+- [EmbeddingGemma 2](https://huggingface.co/google/embeddinggemma-2) / [官方多模态使用说明](https://ai.google.dev/gemma/docs/embeddinggemma/multimodal-embeddinggemma-with-sentence-transformers)
 - [Qwen2.5-VL 模型](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) / [官方代码与训练接口](https://github.com/QwenLM/Qwen3-VL)
 - [Taiyi-CLIP 中文文本编码器](https://huggingface.co/IDEA-CCNL/Taiyi-CLIP-Roberta-large-326M-Chinese) / [CLIP ViT-L/14](https://huggingface.co/openai/clip-vit-large-patch14)
 - [PEFT](https://github.com/huggingface/peft) / [COCO](https://cocodataset.org/) / [ImageNet](https://www.image-net.org/)

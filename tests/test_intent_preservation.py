@@ -35,7 +35,9 @@ def test_cli_encodes_user_conditions_even_when_model_drops_them(tmp_path, monkey
     monkeypatch.setattr("mmretrieval.cli.checked_index", lambda *_: idx)
     monkeypatch.setattr("mmretrieval.models.Encoders", lambda *_: enc)
     monkeypatch.setattr("mmretrieval.models.Qwen", lambda *_, **kw: model)
-    args = parser().parse_args(["search", "--index", "unused", "--image-root", str(tmp_path),
+    config = tmp_path / "legacy.json"
+    config.write_text('{"backend":"taiyi-clip"}')
+    args = parser().parse_args(["--config", str(config), "search", "--index", "unused", "--image-root", str(tmp_path),
                                "--image", "ref.jpg", "--text", original, "--intent"])
     result = execute(args)
     assert result["intent"]["description"] == "自行车"  # Deliberately lossy model output.
