@@ -281,6 +281,7 @@ def parser():
     train.add_argument("--rank", type=int, default=64)
     train.add_argument("--alpha", type=int, default=128)
     train.add_argument("--epochs", type=float, default=0.5)
+    train.add_argument("--max-steps", type=int)
     train.add_argument("--grad-accum", type=int, default=4)
     train.add_argument("--learning-rate", type=float, default=2e-5)
     train.add_argument("--max-length", type=int, default=4096)

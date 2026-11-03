@@ -67,3 +67,35 @@ def test_tiny_multimodal_training_step_updates_merger_and_lora():
     changed = [n for n, p in model.named_parameters() if n in before and not torch.equal(before[n], p)]
     assert any("merger" in n for n in changed)
     assert any("lora_" in n for n in changed)
+
+
+def test_batched_collator_masks_each_prompt_and_padding(tmp_path,monkeypatch):
+    import sys
+    import types
+    from mmretrieval.training import SFTCollator
+    from PIL import Image
+    for name in ['a.png','b.png']:Image.new('RGB',(16,16)).save(tmp_path/name)
+    captured=[]
+    def vision(messages):
+        captured.extend(messages)
+        return [m[0]['content'][0]['image'] for m in messages],None
+    monkeypatch.setitem(sys.modules,'qwen_vl_utils',types.SimpleNamespace(process_vision_info=vision))
+    class Processor:
+        tokenizer=types.SimpleNamespace(padding_side='right')
+        def apply_chat_template(self,messages,tokenize=False,add_generation_prompt=False):
+            prefix=messages[0]['content'][1]['text']+'|'
+            return prefix if len(messages)==1 else prefix+messages[1]['content'][0]['text']+'!'
+        def __call__(self,text,images,padding,return_tensors):
+            assert len(images)==len(text)==2
+            tokens=[[ord(c) for c in s] for s in text];width=max(map(len,tokens))
+            return {'input_ids':torch.tensor([t+[0]*(width-len(t)) for t in tokens]),
+                    'attention_mask':torch.tensor([[1]*len(t)+[0]*(width-len(t)) for t in tokens])}
+    result=SFTCollator(Processor(),tmp_path)([
+        {'file_path':'a.png','prompt':'short','answer':'A'},
+        {'file_path':'b.png','prompt':'longer prompt','answer':'B'}])
+    assert len(captured)==2
+    assert result['labels'][0,:6].tolist()==[-100]*6
+    assert result['labels'][0,6:8].tolist()==[ord('A'),ord('!')]
+    assert (result['labels'][0,8:]==-100).all()
+    assert result['labels'][1,:14].tolist()==[-100]*14
+    assert result['labels'][1,14:].tolist()==[ord('B'),ord('!')]
