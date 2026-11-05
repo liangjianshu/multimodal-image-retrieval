@@ -16,10 +16,21 @@
 | 你想做什么 | 入口 |
 |---|---|
 | 先看看项目能做什么 | [项目介绍与技术栈](https://liangjianshu.github.io/multimodal-image-retrieval/overview/) · [两张杯子的真实结果](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/#explicit-two-cups) |
+| 在自己电脑上打开演示 | [零模型依赖快速开始](docs/QUICKSTART.md)：含 12 张示例图，以及真实模型运行步骤 |
 | 系统地学习这些技术 | [学习路线：从演示到训练](docs/LEARNING_PATH.md) |
 | 搜自己的商品图或素材库 | [换数据、建索引与检索](docs/CUSTOM_DATA.md) |
 | 做 Qwen 微调或对比学习 | [Qwen SFT / LoRA](docs/TRAINING.md) · [Embedding 训练](docs/EMBEDDING_TRAINING.md) |
 | 看模型真的提升了多少 | [固定图库报告](https://liangjianshu.github.io/multimodal-image-retrieval/study/) · [格式与类别消融](docs/QWEN_CONTROLS.md) |
+
+### 本地打开演示：三条命令
+
+```bash
+git clone https://github.com/liangjianshu/multimodal-image-retrieval.git
+cd multimodal-image-retrieval
+python3 examples/quickstart.py
+```
+
+打开终端显示的网址。只需 Python 3.10+，无需 GPU、模型下载或 API Key；这是**已记录结果的交互回放**。想输入自己的请求、实际运行模型？继续看[快速开始第 2 步](docs/QUICKSTART.md#2-有模型运行环境用这-12-张图实际检索)。
 
 ## 技术栈：在这里能练到什么？
 

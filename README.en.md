@@ -8,6 +8,16 @@ Learn the path from model inference to **intent recognition, prompt engineering,
 
 [![Project overview and learning entry points](docs/overview/preview.png)](https://liangjianshu.github.io/multimodal-image-retrieval/overview/)
 
+## Local preview (no model installation)
+
+```bash
+git clone https://github.com/liangjianshu/multimodal-image-retrieval.git
+cd multimodal-image-retrieval
+python3 examples/quickstart.py
+```
+
+Open the printed local URL. Requires Python 3.10+ only; no GPU, API key or model download. This is an interactive replay of recorded results, **not live inference**. Twelve CC0 images are included. See the [quickstart guide (中文)](docs/QUICKSTART.md) for running public base models on these images and replacing the gallery.
+
 | Learn / build | Implementation |
 |---|---|
 | Multimodal retrieval | Text, reference-image and image-text queries |
