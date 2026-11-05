@@ -1,8 +1,23 @@
-# Multimodal Image Retrieval: Two Retrieval Routes, Shared Qwen Intent Parsing
+# Multimodal Retrieval Lab: Qwen LoRA × Contrastive Embedding Training
 
-[Route A demo](https://liangjianshu.github.io/multimodal-image-retrieval/) · [Route B demo](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/) · [中文](README.md)
+[Project overview](https://liangjianshu.github.io/multimodal-image-retrieval/overview/) · [Route A demo](https://liangjianshu.github.io/multimodal-image-retrieval/) · [Route B demo](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/) · [Learning path (中文)](docs/LEARNING_PATH.md) · [中文](README.md)
 
 Search a private image library using text, a reference image, or both. **Both routes use Qwen to decide whether retrieval is needed and to parse explicit result counts.** Nonretrieval requests stop before search.
+
+Learn the path from model inference to **Qwen-VL LoRA / SFT, EmbeddingGemma 2, multi-positive InfoNCE, and controlled retrieval evaluation**. The repository includes recorded demos, custom-data instructions, training code and fixed-gallery results. Author-trained weights are not distributed; public configurations use base models and you can train your own.
+
+[![Project overview and learning entry points](docs/overview/preview.png)](https://liangjianshu.github.io/multimodal-image-retrieval/overview/)
+
+| Learn / build | Implementation |
+|---|---|
+| Multimodal intent routing | Text / image requests, retrieval decisions and result counts |
+| Qwen-VL adaptation | Correct category-JSON SFT with PEFT LoRA; descriptions generated at inference |
+| Direct image embeddings | EmbeddingGemma 2, 768-dimensional normalized vectors and cosine ranking |
+| Contrastive learning | Text-image / image-image training with multi-positive class InfoNCE |
+| Reliable evaluation | Validation-selected checkpoints and thresholds, F1 / mAP, format and category controls |
+| Multimodal RAG / Agent extension | A retrieval component that can supply images and metadata; answer generation, citations and full agent orchestration are not implemented |
+
+Start with the [demo](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/), then [use your own images](docs/CUSTOM_DATA.md), [fine-tune Qwen](docs/TRAINING.md) or [train embeddings](docs/EMBEDDING_TRAINING.md), and inspect the [evaluation](docs/RESTORED_STUDY.md).
 
 | | Route A: Qwen semantic retrieval | Route B: direct image embeddings |
 | --- | --- | --- |

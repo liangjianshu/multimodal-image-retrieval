@@ -1,11 +1,39 @@
-# 图搜图 / 文搜图：Qwen 语义检索与多模态 Embedding 微调
+# 多模态检索实战：Qwen LoRA × Embedding 对比学习
 
 [![Tests](https://github.com/liangjianshu/multimodal-image-retrieval/actions/workflows/tests.yml/badge.svg)](https://github.com/liangjianshu/multimodal-image-retrieval/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-[路线 A 演示](https://liangjianshu.github.io/multimodal-image-retrieval/) · [路线 B 演示](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/) · [English](README.en.md) · [自有数据](docs/CUSTOM_DATA.md) · [实验记录](docs/EXPERIMENTS.md)
+[项目主页 / HTML 展示](https://liangjianshu.github.io/multimodal-image-retrieval/overview/) · [真实检索演示](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/) · [学习路线](docs/LEARNING_PATH.md) · [实验报告](https://liangjianshu.github.io/multimodal-image-retrieval/study/) · [English](README.en.md)
 
-**给一张图，找相似商品；写一句话，搜自己的图片库。** 适合学习多模态检索、Qwen 微调、意图解析及 Agent 应用中的检索工具开发。
+**给一张图，找相似商品；写一句话，搜自己的图片库。** 从 Qwen 意图识别与 LoRA 微调，到 EmbeddingGemma 2 原图编码、多正样本 InfoNCE 对比学习，再到可复核的训练与评测。
+
+这是一个适合学习**多模态检索、模型微调，以及 RAG / Agent 检索组件开发**的开源实践项目。可以先看结果，再换自己的数据，最后训练和验证模型。页面无需算力；自有数据接入与模型训练有独立指南。
+
+[![项目介绍、真实检索与学习入口](docs/overview/preview.png)](https://liangjianshu.github.io/multimodal-image-retrieval/overview/)
+
+## 从这里开始
+
+| 你想做什么 | 入口 |
+|---|---|
+| 先看看项目能做什么 | [项目介绍与技术栈](https://liangjianshu.github.io/multimodal-image-retrieval/overview/) · [两张杯子的真实结果](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/#explicit-two-cups) |
+| 系统地学习这些技术 | [学习路线：从演示到训练](docs/LEARNING_PATH.md) |
+| 搜自己的商品图或素材库 | [换数据、建索引与检索](docs/CUSTOM_DATA.md) |
+| 做 Qwen 微调或对比学习 | [Qwen SFT / LoRA](docs/TRAINING.md) · [Embedding 训练](docs/EMBEDDING_TRAINING.md) |
+| 看模型真的提升了多少 | [固定图库报告](https://liangjianshu.github.io/multimodal-image-retrieval/study/) · [格式与类别消融](docs/QWEN_CONTROLS.md) |
+
+## 技术栈：在这里能练到什么？
+
+| 技术 | 本项目中的实践 |
+|---|---|
+| **多模态 + 意图识别** | 解析文字／参考图，识别是否检索、目标和返回数量，保留用户条件。 |
+| **Qwen2.5-VL + LoRA / SFT** | 用正确类别 JSON 做监督微调；推理时生成类别与描述，构建语义索引。类别训练与描述生成的作用分别记录。 |
+| **EmbeddingGemma 2** | 原图像素与查询直接编码，使用 768 维归一化向量与余弦相似度；具体模型和版本固定在配置中。 |
+| **对比学习 / 多正样本 InfoNCE** | 文图／图图训练、困难负例、同类批内多正例；全参数微调与验证选参。 |
+| **PyTorch / Transformers / PEFT** | 训练与推理、LoRA 适配器、混合精度、梯度检查点、模型保存与加载。 |
+| **F1 / mAP + 消融实验** | 区分返回集合与排序质量，拆解格式恢复、类别筛选和描述排序带来的变化。 |
+| **多模态 RAG / Agent 接入方向** | 已实现图片检索与意图路由，可作为检索组件或工具；回答生成、引用和完整 Agent 编排属于扩展方向。 |
+
+当前不是完整的 RAG 问答系统。[这里解释如何从检索组件继续扩展](docs/LEARNING_PATH.md#多模态-rag-与-agent如何接上去)。作者微调权重尚未分发；默认配置可使用公开基座，复现微调版需要自行训练。
 
 ## 两条检索路线，共用 Qwen 意图识别
 
@@ -32,7 +60,7 @@ flowchart LR
 
 两条路线都默认不设分数阈值。页面分别展示检索与非检索示例，保留实际分数、排序与失败案例；页面是已记录结果回放，不是实时模型服务。
 
-[![路线 A 的实际结果](docs/demo/text-search.png)](https://liangjianshu.github.io/multimodal-image-retrieval/)
+[路线 A：类别与描述演示](https://liangjianshu.github.io/multimodal-image-retrieval/) · [路线 B：微调演示](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/) · [路线 B：基座对照](https://liangjianshu.github.io/multimodal-image-retrieval/route-b-baseline/)
 
 ## 原始 2,000 张图库：正式测试结果
 
@@ -157,3 +185,7 @@ python -m mmretrieval demo --output artifacts/demo
 ## 来源与许可
 
 个人多模态检索实践，未与淘宝或阿里建立关联。“商品图搜图”是应用场景，不代表其线上实现。项目代码使用 [MIT](LICENSE)，第三方代码及模型适用各自许可，详见 [来源](docs/PROVENANCE.md) 与 [第三方说明](THIRD_PARTY_NOTICES.md)。
+
+## 交流与贡献
+
+如果项目帮你理解了多模态检索或模型训练，欢迎 **Star 留作学习索引**。欢迎通过 [Issues](https://github.com/liangjianshu/multimodal-image-retrieval/issues) 分享可复现的失败案例、数据接入问题和带对照实验的改进；建议附上模型版本、请求、预期与实际结果。

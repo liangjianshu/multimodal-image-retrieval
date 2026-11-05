@@ -158,6 +158,7 @@ def main():
     if routed:
         base = 'https://liangjianshu.github.io/multimodal-image-retrieval/'
         route_nav = ('<nav class="route-nav" aria-label="检索路线">'
+            f'<a href="{base}overview/">项目介绍与学习路线</a>'
             f'<a href="{base}" aria-current="{str(semantic).lower()}">路线 A · Qwen 类别与描述</a>'
             f'<a href="{base}route-b/" aria-current="{str(not semantic).lower()}">路线 B · 原图 Embedding</a></nav>')
     page = page.replace('__ROUTE_NAV__', route_nav)
