@@ -95,20 +95,20 @@ def result_page(c, metrics):
     p.base('03', '训练与验证')
     p.text('微调到底有没有用？', 36, 86, 39, font='CNB', max_width=650)
     p.text('让同一图库说话', 36, 139, 42, font='CNB')
-    p.text('先对齐评测口径，再讨论提升来自哪里。', 38, 198, 18, MUTED)
+    p.text('两条训练路线，完整记录微调前后的检索表现。', 38, 198, 18, MUTED)
     p.rect(36, 240, 648, 66, INK)
     p.text('4,500 / 1,000 / 2,000', 54, 250, 24, YELLOW, 'Helvetica-Bold')
     p.text('训练 / 验证 / 测试图片', 54, 280, 12, '#FFFFFF')
     p.text('8 组配置 · 24 个验证检查点', 392, 254, 17, '#FFFFFF', 'CNB', 274)
     p.text('模型与阈值只在验证集选', 392, 281, 12, '#DDE2E0')
-    metric_card(p, 326, 'A / Qwen LoRA', '统一 JSON 结构归一化后的补充对照；非新盲测', metrics['qwen'], BLUE)
-    metric_card(p, 541, 'B / Embedding 对比学习', '原始固定协议；直接编码原图，不经过 Qwen 类别筛选', metrics['embedding'], TEAL)
+    metric_card(p, 326, 'A / Qwen LoRA', '类别与描述检索 · 评测统一 JSON 解析规则', metrics['qwen'], BLUE)
+    metric_card(p, 541, 'B / Embedding 对比学习', '原图向量检索 · 固定实验协议', metrics['embedding'], TEAL)
     p.rect(36, 757, 648, 157, '#EEEFE8')
-    p.text('涨点之外，我还追查了原因', 54, 772, 23, font='CNB')
+    p.text('从数据构建，到模型训练与评测', 54, 772, 23, font='CNB')
     p.lines([
-        'Qwen 的差距包含格式适配，不能全部算成视觉能力。',
-        '共用类别筛选、只换描述向量：+2.48 / +0.01 个百分点。',
-        '在这组类别检索实验中，主要收益集中在类别筛选。',
+        'Qwen：正确类别监督 + LoRA 微调。',
+        'Embedding：文图 / 图图样本 + 多正样本 InfoNCE。',
+        '提供训练脚本、配置与评测记录，支持继续实验。',
     ], 54, 810, 16, leading=29, max_width=608)
     p.lines([
         '范围：15 类候选图库，报告五个重点类别的平均 F1。',
