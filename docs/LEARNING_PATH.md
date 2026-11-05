@@ -10,6 +10,7 @@
 |---|---|---|---|
 | 多模态检索 | 用文字、图片或两者一起找图片 | 文搜图、图搜图、图文组合查询 | [两条路线](../README.md#两条检索路线共用-qwen-意图识别) |
 | Qwen 意图识别 | 先判断用户是不是在找图片 | 提取目标、要求与数量；非检索请求不搜索 | [意图与向量](INTENT_AND_EMBEDDINGS.md) |
+| Prompt 工程 | 把模糊请求变成明确任务和输出格式 | 设计结构化字段与示例，保留否定／修改条件，区分物体数量与返回数量 | [提示词实践](INTENT_AND_EMBEDDINGS.md#prompt-工程从自然语言到可执行查询) |
 | Qwen-VL + LoRA / SFT | 教模型按任务要求输出类别 | 类别 JSON 监督微调；推理时生成可读描述并建库 | [Qwen 训练](TRAINING.md) |
 | 多模态 Embedding | 把文字和原图放到可比较的向量空间 | 使用 EmbeddingGemma 2；原图直接编码与余弦排序 | [Embedding 接入与训练](EMBEDDING_TRAINING.md) |
 | 对比学习 / InfoNCE | 让相关样本更靠近，让不相关样本分开 | 文图／图图训练、困难负样本、同类多正例 | [正式训练代码](../examples/training/run_embedding_trial.py)、[损失函数](../mmretrieval/study_metrics.py) |

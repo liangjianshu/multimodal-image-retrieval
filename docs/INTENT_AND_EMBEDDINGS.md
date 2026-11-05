@@ -8,6 +8,29 @@
 
 旧 `qwen-gemma2` 混合版（Qwen 类别筛选＋原图向量排序）可通过 `configs/showcase-hybrid.json` 独立复跑，其类别名称归并规则仍在 [hybrid.py](../mmretrieval/hybrid.py)。它与当前 A/B 路线是不同实验，不混记效果。
 
+## Prompt 工程：从自然语言到可执行查询
+
+本项目的 Prompt 工程包含任务拆分、字段定义、输出约束与示例引导，并由程序保留输入、校验结果。它与 LoRA 权重训练分别负责不同环节。
+
+| 设计点 | 项目中的具体做法 |
+|---|---|
+| 意图边界 | 区分图片检索、知识问答与只描述图片；结合参考图判断相似图片检索。 |
+| 结构化输出 | 定义 `needs_retrieval`、`target_category`、`description`、`constraints`、`top_k`，要求 JSON，并在代码中校验字段。 |
+| 数量消歧 | `top_k` 只表示返回几张图片；“三张有两只猫的图片”应返回 3 张，两只猫属于内容条件。 |
+| 条件保留 | 保留颜色、材质、场景、否定和修改要求；不把完整需求缩成一个类别。程序始终优先编码用户原文。 |
+| 图文冲突处理 | 用户要求的文字条件优先于参考图背景，例如参考图靠蓝墙，查询“草地上的自行车”仍保留草地条件。 |
+| 阶段专用提示词 | 类别提示词用于生成类别列表，描述提示词覆盖物体类型、颜色、材质、形状和场景；不把所有任务合并成同一个输出。 |
+
+例如，“找三张有两只猫的图片”的字段设计示意为：
+
+```json
+{"needs_retrieval":true,"target_category":"猫","description":"有两只猫的图片","constraints":["两只猫"],"top_k":3}
+```
+
+这是格式说明，不是新增模型实测结果。提示词约束不能保证模型始终遵循，也不能保证检索满足全部属性，因此保留了[条件保留与输出校验测试](../tests/test_intent_preservation.py)、非检索示例和[格式归一化对照](QWEN_CONTROLS.md)。前期意图识别 95%／91% 是独立历史实测，不能全部归因于本次提示词整理。
+
+源码入口：[`intent.py`](../mmretrieval/intent.py) 中的 `ROUTE_INTENT_PROMPT`（当前双路线）和 `PRESERVE_INTENT_PROMPT`（条件保留实现），以及 [`historical_prompts.py`](../mmretrieval/historical_prompts.py) 中的类别／描述提示词。新类别训练使用 [`build_restored_study.py`](../examples/training/build_restored_study.py) 的 `CATEGORY_PROMPT`，各实验的提示词口径分别记录。
+
 ## 原提示词为什么会丢细节
 
 原意图提示词保存在 [`historical_prompts.py`](../mmretrieval/historical_prompts.py)。它要求“用简短的语句描述用户想要检索的目标物体”，并把“和这张图片风格相似的椅子图片”示例简化为“椅子”。这会鼓励摘要化；旧代码随后用摘要替换了用户原文。

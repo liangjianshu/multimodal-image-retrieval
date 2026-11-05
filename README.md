@@ -5,7 +5,7 @@
 
 [项目主页 / HTML 展示](https://liangjianshu.github.io/multimodal-image-retrieval/overview/) · [真实检索演示](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/) · [学习路线](docs/LEARNING_PATH.md) · [实验报告](https://liangjianshu.github.io/multimodal-image-retrieval/study/) · [English](README.en.md)
 
-**给一张图，找相似商品；写一句话，搜自己的图片库。** 从 Qwen 意图识别与 LoRA 微调，到 EmbeddingGemma 2 原图编码、多正样本 InfoNCE 对比学习，再到可复核的训练与评测。
+**给一张图，找相似商品；写一句话，搜自己的图片库。** 从意图识别、Prompt 工程与 Qwen LoRA 微调，到 EmbeddingGemma 2 原图编码、多正样本 InfoNCE 对比学习，再到可复核的训练与评测。
 
 这是一个适合学习**多模态检索、模型微调，以及 RAG / Agent 检索组件开发**的开源实践项目。可以先看结果，再换自己的数据，最后训练和验证模型。页面无需算力；自有数据接入与模型训练有独立指南。
 
@@ -25,7 +25,9 @@
 
 | 技术 | 本项目中的实践 |
 |---|---|
-| **多模态 + 意图识别** | 解析文字／参考图，识别是否检索、目标和返回数量，保留用户条件。 |
+| **多模态检索** | 支持文字、参考图及图文组合查询，对比语义描述与原图向量两条路线。 |
+| **意图识别与路由** | Qwen 判断是否检索，提取主体、完整条件和返回数量；区分普通问答、图片描述与检索请求。 |
+| **Prompt 工程** | 任务与字段定义、JSON 输出约束、示例引导；保留颜色／否定／修改条件，区分“返回几张”和“图里几个物体”，分别设计意图、类别与描述提示词。[实现与案例](docs/INTENT_AND_EMBEDDINGS.md#prompt-工程从自然语言到可执行查询) |
 | **Qwen2.5-VL + LoRA / SFT** | 用正确类别 JSON 做监督微调；推理时生成类别与描述，构建语义索引。类别训练与描述生成的作用分别记录。 |
 | **EmbeddingGemma 2** | 原图像素与查询直接编码，使用 768 维归一化向量与余弦相似度；具体模型和版本固定在配置中。 |
 | **对比学习 / 多正样本 InfoNCE** | 文图／图图训练、困难负例、同类批内多正例；全参数微调与验证选参。 |

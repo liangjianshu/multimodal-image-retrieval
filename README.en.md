@@ -4,13 +4,15 @@
 
 Search a private image library using text, a reference image, or both. **Both routes use Qwen to decide whether retrieval is needed and to parse explicit result counts.** Nonretrieval requests stop before search.
 
-Learn the path from model inference to **Qwen-VL LoRA / SFT, EmbeddingGemma 2, multi-positive InfoNCE, and controlled retrieval evaluation**. The repository includes recorded demos, custom-data instructions, training code and fixed-gallery results. Author-trained weights are not distributed; public configurations use base models and you can train your own.
+Learn the path from model inference to **intent recognition, prompt engineering, Qwen-VL LoRA / SFT, EmbeddingGemma 2, multi-positive InfoNCE, and controlled retrieval evaluation**. The repository includes recorded demos, custom-data instructions, training code and fixed-gallery results. Author-trained weights are not distributed; public configurations use base models and you can train your own.
 
 [![Project overview and learning entry points](docs/overview/preview.png)](https://liangjianshu.github.io/multimodal-image-retrieval/overview/)
 
 | Learn / build | Implementation |
 |---|---|
-| Multimodal intent routing | Text / image requests, retrieval decisions and result counts |
+| Multimodal retrieval | Text, reference-image and image-text queries |
+| Intent recognition and routing | Retrieval decisions, target and constraint extraction, explicit result counts |
+| Prompt engineering | Task-specific intent/category/description prompts, structured JSON, examples, negation and condition preservation, object-count vs. result-count disambiguation |
 | Qwen-VL adaptation | Correct category-JSON SFT with PEFT LoRA; descriptions generated at inference |
 | Direct image embeddings | EmbeddingGemma 2, 768-dimensional normalized vectors and cosine ranking |
 | Contrastive learning | Text-image / image-image training with multi-positive class InfoNCE |
