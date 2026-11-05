@@ -4,6 +4,8 @@
 
 ## 正式结果
 
+2026-11-05 补充：README 与简历统一使用检索 F1。原始固定协议下，新 Qwen 文／图 F1 为 **86.76%／81.86%**，新 Embedding 为 **88.84%／83.40%**。后续[格式归一化与类别筛选对照](QWEN_CONTROLS.md)独立记录，不覆盖下表与正式报告：统一归一化后，Qwen 基座 F1 为 76.07%／63.90%，对应新微调增益为 10.69／17.96 个百分点，仍应解释为链路收益。
+
 [完整交互报告与 CSV](study/index.html) · [选型曲线](study/figures/validation-selection.png) · [测试对比图](study/figures/fixed-test-comparison.png) · [逐查询结果](study/cases/cases-manifest.json)
 
 下表为原始 2,000 张图库上五个重点类别的宏平均 mAP，所有检查点和阈值均在测试前用验证集选定。文搜图共有 45 条固定类别查询，图搜图使用 2,000 张图片逐一查询并排除自身。

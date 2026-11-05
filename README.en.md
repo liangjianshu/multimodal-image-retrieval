@@ -16,7 +16,23 @@ Route A is the default. The original project used Qwen for both category recogni
 
 ## Completed fixed-gallery evaluation
 
-Eight configurations and 24 checkpoints were evaluated. Checkpoints and thresholds were selected using validation only. On the original 2,000-image gallery, primary-five category mAP is **0.9355 text / 0.8557 image** for the new Embedding model (base: 0.6563 / 0.3827) and **0.8061 / 0.7731** for the new Qwen retrieval pipeline (base: 0.4723 / 0.2687; old LoRA: 0.4124 / 0.2020). These are category-relevance results, not attribute or instance-retrieval accuracy. One seed; no statistical-significance claim.
+Eight configurations and 24 checkpoints were evaluated with 4,500 training, 1,000 validation and 2,000 test images. Checkpoints and thresholds were selected using validation only. Both routes now report primary-five **retrieval F1** below. These are category-relevance results, not attribute or instance-retrieval accuracy. One seed; no statistical-significance claim.
+
+| Version (original frozen protocol) | Text F1 | Image F1 |
+|---|---:|---:|
+| Qwen base pipeline | 60.62% | 35.64% |
+| New Qwen LoRA pipeline | **86.76%** | **81.86%** |
+| Old Qwen LoRA pipeline | 51.59% | 28.92% |
+| Embedding base | 61.68% | 31.85% |
+| Fine-tuned Embedding | **88.84%** | **83.40%** |
+
+**Qwen attribution control:** prompts, category aliases and generation settings were already identical. However, strict JSON parsing rejects some otherwise recoverable category outputs. Applying the same structural normalization to both models and recalibrating thresholds on validation only gives **76.07% / 63.90%** for the base and **86.76% / 81.86%** for the fine-tuned pipeline: **+10.69 / +17.96 percentage points**. This post-hoc control is separate from the frozen test; it does not establish pure visual-capability gains. Fixed-filter controls localize most of this task's benefit to category filtering. See [controls and reproduction](docs/QWEN_CONTROLS.md).
+
+Embedding F1 gains in the frozen protocol are **+27.16 / +51.55 percentage points**, with no Qwen category-output parsing. Both routes also retain mAP in the full report.
+
+**Training:** Qwen uses correct category-JSON SFT and language-attention LoRA (`rank=64, alpha=128`), with a separate visual-merger joint-training comparison. Validation selected `lr=1e-5, epoch=1, LLM LoRA`. Embedding uses full-parameter, multi-positive class InfoNCE for text-image and image-image queries; same-class in-batch candidates are positives, not false negatives. Validation selected `lr=2e-6, temperature=0.1, epoch=1`.
+
+**Earlier intent measurements:** text / image-text accuracy **95% / 91%**, retained from the author's earlier intent experiment. Intent was not re-evaluated in this fixed-category retrieval study. Historical retrieval F1 85% / 81% and +6 / +7-point gains remain separate historical records.
 
 [Full report and CSV](https://liangjianshu.github.io/multimodal-image-retrieval/study/) · [Protocol and recovery](docs/RESTORED_STUDY.md). The earlier 297-image pilot remains a separate historical experiment. Current demos use the new validation-selected models and shared original-Qwen intent decisions. Weights are not distributed.
 
@@ -53,6 +69,6 @@ Historical Qwen training uses `.[models]` in a separate environment. See [Qwen t
 
 The 12-image, 10-request showcase replays actual server outputs; it is not a live inference service. Both routes share the same recorded Qwen decisions. Retrieval and nonretrieval examples are displayed separately. There is no default score cutoff, and reference images are excluded from their own results. Raw outputs, limitations and reproduction are in [DEMO.md](docs/DEMO.md).
 
-The prior Qwen-category + direct-embedding hybrid is retained as an [experimental record](docs/demo/baseline-hybrid/results.json). Current baselines do not establish general accuracy, fine-tuning gains, production throughput or the superiority of either architecture. Qwen descriptions and generated labels are not human ground truth.
+The prior Qwen-category + direct-embedding hybrid is retained as an [experimental record](docs/demo/baseline-hybrid/results.json). The fixed-gallery study establishes gains only under its documented category-relevance protocol, not general accuracy, production throughput or universal architectural superiority. Qwen descriptions and generated labels are not human ground truth.
 
 The project uses NumPy indexes, with no production server or vector database. Dataset images, private training data and model weights are not published. Code is [MIT](LICENSE), with separately licensed third-party components; see [notices](THIRD_PARTY_NOTICES.md).
