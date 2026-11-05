@@ -17,6 +17,7 @@
 |---|---|
 | 先看看项目能做什么 | [项目介绍与技术栈](https://liangjianshu.github.io/multimodal-image-retrieval/overview/) · [两张杯子的真实结果](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/#explicit-two-cups) |
 | 在自己电脑上打开演示 | [零模型依赖快速开始](docs/QUICKSTART.md)：含 12 张示例图，以及真实模型运行步骤 |
+| 看清完整管线与训练分工 | [框架图与详细技术说明](docs/ARCHITECTURE.md) · [实验 / 上手分享图与 PDF](docs/social/README.md) |
 | 系统地学习这些技术 | [学习路线：从演示到训练](docs/LEARNING_PATH.md) |
 | 搜自己的商品图或素材库 | [换数据、建索引与检索](docs/CUSTOM_DATA.md) |
 | 做 Qwen 微调或对比学习 | [Qwen SFT / LoRA](docs/TRAINING.md) · [Embedding 训练](docs/EMBEDDING_TRAINING.md) |
@@ -74,6 +75,12 @@ flowchart LR
 两条路线都默认不设分数阈值。页面分别展示检索与非检索示例，保留实际分数、排序与失败案例；页面是已记录结果回放，不是实时模型服务。
 
 [路线 A：类别与描述演示](https://liangjianshu.github.io/multimodal-image-retrieval/) · [路线 B：微调演示](https://liangjianshu.github.io/multimodal-image-retrieval/route-b/) · [路线 B：基座对照](https://liangjianshu.github.io/multimodal-image-retrieval/route-b-baseline/)
+
+### 技术框架与代码导读
+
+<a href="docs/ARCHITECTURE.md"><img src="docs/assets/retrieval-architecture.png" alt="共享 Qwen 意图入口、两条独立检索路线与离线训练流程" width="640"></a>
+
+[详细说明](docs/ARCHITECTURE.md)解释离线建库、在线查询、类别粗筛、向量融合、SFT 与 InfoNCE 的分工，并逐项链接到代码。框架图为逻辑概览；[Mermaid 源文件](docs/assets/retrieval-architecture.mmd)可编辑。
 
 ## 原始 2,000 张图库：正式测试结果
 

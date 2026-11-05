@@ -41,6 +41,10 @@ Start with the [demo](https://liangjianshu.github.io/multimodal-image-retrieval/
 
 Route A is the default. The original project used Qwen for both category recognition and fine-grained descriptions, not only filtering. An audit found mislabeled negative answers in the preserved historical SFT generator and data. These cannot establish effective hard-negative training, and the exact dataset revision used by the old adapter remains unverified. The supported SFT builder retains correct answers for difficult examples. Route B is an alternative that directly optimizes retrieval vectors. Neither is assumed to outperform the other without a fixed evaluation.
 
+## Architecture and shareable guides
+
+The [architecture guide (中文)](docs/ARCHITECTURE.md) explains shared intent parsing, offline indexing, both online retrieval routes, training objectives, evaluation limits and source-code entry points. Download the [diagram](docs/assets/retrieval-architecture.png), its [editable Mermaid source](docs/assets/retrieval-architecture.mmd), and the [results / quickstart pages (PNG and PDF)](docs/social/README.md).
+
 ## Completed fixed-gallery evaluation
 
 Eight configurations and 24 checkpoints were evaluated with 4,500 training, 1,000 validation and 2,000 test images. Checkpoints and thresholds were selected using validation only. Both routes now report primary-five **retrieval F1** below. These are category-relevance results, not attribute or instance-retrieval accuracy. One seed; no statistical-significance claim.

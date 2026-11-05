@@ -1,0 +1,36 @@
+flowchart TB
+  U[用户文字 / 参考图 / 图文组合] --> I[Qwen 意图识别 + Prompt 工程]
+  I -->|无需检索| N[不执行图片搜索]
+  I -->|需要检索：保留原文、目标类别与数量| C{按配置选择路线}
+  subgraph A[路线 A：类别粗筛 + 描述排序]
+    GA[图库原图] --> QA[Qwen 生成类别与描述]
+    QA --> TA[Taiyi 编码]
+    TA --> CA[(类别向量)]
+    TA --> DA[(描述向量)]
+    AC[目标类别经 Taiyi 编码] --> FILTER[类别向量相似度粗筛]
+    CA --> FILTER
+    AT[原文经 Taiyi 编码；纯图查询用 Qwen 描述] --> FUSE[融合并归一化]
+    AI[可选参考图经 CLIP 编码] --> FUSE
+    FUSE --> RANKA[对候选描述向量打分排序]
+    DA --> RANKA
+    FILTER --> RANKA
+  end
+  C -->|A| AC
+  C -->|A| AT
+  C -->|A：有参考图| AI
+  subgraph B[路线 B：原图 Embedding]
+    GB[图库原图] --> EB[EmbeddingGemma 2 图像编码]
+    EB --> IDX[(独立原图向量索引)]
+    QB[原文 / 参考图 / 图文联合编码] --> RANKB[全图库向量相似度排序；无 Qwen 类别粗筛]
+    IDX --> RANKB
+  end
+  C -->|B| QB
+  RANKA --> OUT[按请求数量返回图片、ID、相似度；排除参考图自身]
+  RANKB --> OUT
+  subgraph T[离线训练与验证，与在线查询分开]
+    S[按原图划分训练 / 验证 / 测试] --> QT[正确类别 JSON 监督 + Qwen LoRA]
+    S --> ET[Embedding 多正样本 InfoNCE]
+    QT --> V[验证集选参]
+    ET --> V
+    V --> E[固定测试集：F1 / mAP；独立补充消融]
+  end

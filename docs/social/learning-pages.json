@@ -1,0 +1,35 @@
+{
+  "source_sha256": {
+    "docs/study/comparison.csv": "c5856e27d7d5d90b66614d349e9bfcfd21b0432b8e8a30ad3bea4d9e913a5d94",
+    "docs/study/controls/qwen-controls.json": "52b12d8c136cbf17b4bdf139a736e24d38e85e6e9cb291af147ed49b16325e30"
+  },
+  "displayed_percentages": {
+    "qwen": {
+      "text": [
+        76.06945701589066,
+        86.7595444125913
+      ],
+      "image": [
+        63.89996510354335,
+        81.85828039310636
+      ]
+    },
+    "embedding": {
+      "text": [
+        61.680807089009136,
+        88.83628509416668
+      ],
+      "image": [
+        31.846991318364825,
+        83.40130686524938
+      ]
+    }
+  },
+  "qwen_protocol": "post-hoc normalized; validation-calibrated; not a new blind test",
+  "embedding_protocol": "original frozen protocol",
+  "scope": "primary five category mean retrieval F1; 2000-image gallery; single seed",
+  "pages": [
+    "03 results",
+    "04 quickstart"
+  ]
+}
