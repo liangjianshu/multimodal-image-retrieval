@@ -9,10 +9,16 @@ Search a private image library using text, a reference image, or both. **Both ro
 | Gallery | Qwen predicts categories and descriptions; Taiyi embeds the generated text | EmbeddingGemma 2 embeds original pixels |
 | Retrieval | Category-vector filtering, followed by description-vector ranking | Direct image-vector ranking; no Qwen category filter |
 | Reference input | Qwen describes the target; query vectors can include CLIP image features | Original reference pixels and full text are encoded jointly |
-| Training | Qwen supervised fine-tuning with category/description examples | Contrastive query/positive-image/hard-negative-image fine-tuning |
-| Public showcase | Author's original Qwen LoRA | **64-step category-contrastive pilot, with a retained pretrained control** |
+| Training | Qwen category-JSON supervised fine-tuning; descriptions generated at inference | Contrastive query/positive-image/hard-negative-image fine-tuning |
+| Public showcase | Validation-selected new Qwen LoRA | **Completed original 2,000-image evaluation, with pretrained control** |
 
 Route A is the default. The original project used Qwen for both category recognition and fine-grained descriptions, not only filtering. An audit found mislabeled negative answers in the preserved historical SFT generator and data. These cannot establish effective hard-negative training, and the exact dataset revision used by the old adapter remains unverified. The supported SFT builder retains correct answers for difficult examples. Route B is an alternative that directly optimizes retrieval vectors. Neither is assumed to outperform the other without a fixed evaluation.
+
+## Completed fixed-gallery evaluation
+
+Eight configurations and 24 checkpoints were evaluated. Checkpoints and thresholds were selected using validation only. On the original 2,000-image gallery, primary-five category mAP is **0.9355 text / 0.8557 image** for the new Embedding model (base: 0.6563 / 0.3827) and **0.8061 / 0.7731** for the new Qwen retrieval pipeline (base: 0.4723 / 0.2687; old LoRA: 0.4124 / 0.2020). These are category-relevance results, not attribute or instance-retrieval accuracy. One seed; no statistical-significance claim.
+
+[Full report and CSV](https://liangjianshu.github.io/multimodal-image-retrieval/study/) · [Protocol and recovery](docs/RESTORED_STUDY.md). The earlier 297-image pilot remains a separate historical experiment. Current demos use the new validation-selected models and shared original-Qwen intent decisions. Weights are not distributed.
 
 ## Run either route
 

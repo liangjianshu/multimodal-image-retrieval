@@ -1,0 +1,12 @@
+{
+  "sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505",
+  "bytes": 161514344,
+  "base_model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "rank": 64,
+  "alpha": 128,
+  "verified_tensors": 224,
+  "nonzero_lora_b_tensors": 112,
+  "active_adapters": [
+    "default"
+  ]
+}

@@ -14,11 +14,11 @@ Qwen 先判断是否需要图片检索、提取需求和返回数量。知识问
 | | 路线 A：Qwen 类别与描述 | 路线 B：原图 Embedding |
 | --- | --- | --- |
 | 意图识别 | Qwen | Qwen |
-| 图库处理 | 微调 Qwen 生成类别与细粒度描述，Taiyi 编码这些文字 | EmbeddingGemma 2 直接编码原图 |
+| 图库处理 | 新微调 Qwen 生成类别与描述，Taiyi 编码这些文字 | EmbeddingGemma 2 直接编码原图 |
 | 检索 | 类别向量粗筛，再按描述向量排序 | 全图库原图向量直接排序，不做 Qwen 类别粗筛 |
 | 参考图 | Qwen 提取目标描述；查询向量可融合 CLIP 参考图特征 | 参考图像素与完整文字联合编码 |
-| 训练对象 | Qwen 的类别/描述监督微调 | Embedding 的查询、正样本、困难负样本对比学习 |
-| 当前展示 | 作者原 Qwen LoRA 实跑 | **64 步类别对比学习试训；保留微调前对照** |
+| 训练对象 | Qwen 类别 JSON 监督微调；描述为推理生成 | Embedding 的查询、正样本、困难负样本对比学习 |
+| 当前展示 | 验证集选定的新 Qwen LoRA | **原始 2,000 张图库正式实验；保留微调前对照** |
 
 ```mermaid
 flowchart LR
@@ -33,6 +33,18 @@ flowchart LR
 两条路线都默认不设分数阈值。页面分别展示检索与非检索示例，保留实际分数、排序与失败案例；页面是已记录结果回放，不是实时模型服务。
 
 [![路线 A 的实际结果](docs/demo/text-search.png)](https://liangjianshu.github.io/multimodal-image-retrieval/)
+
+## 原始 2,000 张图库：正式测试结果
+
+完成 8 组配置、24 个验证检查点，模型和阈值只通过验证集选择。以下是五个重点类别的宏平均 mAP；监督与评测均为类别相关性，不证明任意商品细节的匹配准确率。
+
+| 检索版本 | 文搜图 | 图搜图 |
+|---|---:|---:|
+| Embedding 基座 → 新微调 | 0.656 → **0.936** | 0.383 → **0.856** |
+| Qwen 基座链路 → 新微调链路 | 0.472 → **0.806** | 0.269 → **0.773** |
+| 旧 Qwen LoRA 链路 | 0.412 | 0.202 |
+
+[完整报告与 CSV](https://liangjianshu.github.io/multimodal-image-retrieval/study/) · [数据恢复、协议与限制](docs/RESTORED_STUDY.md)。最佳 Embedding 为 `lr=2e-6, temperature=0.1, epoch=1`；最佳 Qwen 为 `lr=1e-5, LLM LoRA, epoch=1`。本轮增加 merger 训练未超过仅 LLM 的最佳配置。旧 LoRA 在本协议下未超过基座，保留真实结果。
 
 ## 为什么路线 A 使用 Qwen
 
@@ -89,7 +101,7 @@ python -m mmretrieval --config configs/route-b-embedding.json search   --index a
 
 无需 `--intent`，两条路线每次查询都由 Qwen 解析。可添加 `--image queries/reference.jpg`。路线 B 建库不调用 Qwen，查询时的 Qwen 判断不用于类别过滤。
 
-默认配置仍加载公开基座；作者试训权重未随仓库分发。[试训报告](docs/EMBEDDING_EXPERIMENT.md)记录了固定 297 张测试图库上的前后对照，不能当作细粒度条件检索收益。
+默认配置仍加载公开基座；作者训练权重未随仓库分发。[试训报告](docs/EMBEDDING_EXPERIMENT.md)记录了固定 297 张测试图库上的前后对照，不能当作细粒度条件检索收益。
 
 **路线 B 微调：** 按 [训练指南](docs/EMBEDDING_TRAINING.md)准备三元组后运行 `train-embedding`，加载保存的 `inference-config.json` 并重建索引。微调分支与未微调基线明确区分，不把基线展示标成训练收益。
 

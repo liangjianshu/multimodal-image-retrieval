@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-11-03T10:10:58.339609+00:00",
+  "created_at": "2026-11-04T21:10:55.878200+00:00",
   "backend": "qwen-semantic",
   "gallery_size": 12,
   "config": {
@@ -15,7 +15,7 @@
     "image_encoder": "openai/clip-vit-large-patch14",
     "vl_model": "Qwen/Qwen2.5-VL-7B-Instruct",
     "text_model": "Qwen/Qwen2.5-3B-Instruct",
-    "adapter": "models/retrieval-lora",
+    "adapter": "models/study-qwen-best",
     "device": "auto",
     "max_pixels": 262144,
     "max_new_tokens": 384,
@@ -24,10 +24,34 @@
     "prompt_profile": "historical",
     "intent_profile": "preserve"
   },
-  "training_state": "qwen-original-lora",
+  "training_state": "study-finetuned",
   "adapter_verification": {
     "sha256": "c3c463ca6f394ab4cc7e936bcc39cc14ec09f0b5afbc9ffb635e7a37fcb6738a",
     "bytes": 80774016,
+    "base_model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "rank": 64,
+    "alpha": 128,
+    "verified_tensors": 224,
+    "nonzero_lora_b_tensors": 112,
+    "active_adapters": [
+      "default"
+    ]
+  },
+  "intent_adapter_verification": {
+    "sha256": "c3c463ca6f394ab4cc7e936bcc39cc14ec09f0b5afbc9ffb635e7a37fcb6738a",
+    "bytes": 80774016,
+    "base_model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "rank": 64,
+    "alpha": 128,
+    "verified_tensors": 224,
+    "nonzero_lora_b_tensors": 112,
+    "active_adapters": [
+      "default"
+    ]
+  },
+  "category_adapter_verification": {
+    "sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505",
+    "bytes": 161514344,
     "base_model": "Qwen/Qwen2.5-VL-7B-Instruct",
     "rank": 64,
     "alpha": 128,
@@ -43,8 +67,19 @@
   },
   "shared_intents": true,
   "intent_prompt_sha256": "619f4c0e44d3d27d5c636e49498d1fdd4b17a3d9040251042cfa8b01c8ff021c",
-  "description_cache_sha256": "f9ebfbe07f00171d770c9ddcf3bfc53d9973a43fad6f5d1918f11234b1f6312f",
-  "notice": "Real recorded inference. Identical Qwen intent decisions for both retrieval routes. Small qualitative gallery.",
+  "description_cache_sha256": "ceea9583d777708a9b3abc580fdcec9c3c0938d98326988f859d2134e4af969c",
+  "study_provenance": {
+    "selection_sha256": "20cc9f4e4a58b0f221382028fda9b5d0fabe794a0723a88802749053146b32cc",
+    "gallery_sources_sha256": "584b71518ca485bde61801fa977be356780c099ee98bcc63f3a0e02e57cbf254",
+    "queries_sha256": "4cb3e952dffd97fc6632e4507736d19d4b2aa92b2c9530cb52ffb40f29bafab9",
+    "intent_adapter_sha256": "c3c463ca6f394ab4cc7e936bcc39cc14ec09f0b5afbc9ffb635e7a37fcb6738a",
+    "intent_prompt_sha256": "619f4c0e44d3d27d5c636e49498d1fdd4b17a3d9040251042cfa8b01c8ff021c",
+    "category_prompt_sha256": "c934fd8ab105067b60837d664f95494d3df2afddf107841e79ac21c54575b639",
+    "description_prompt_sha256": "8222e690f3ccfc75ca5085569a87035871bd8eca11e9b8c57b8d44d962ebae9d",
+    "qwen_weight_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505",
+    "embedding_weight_sha256": "7fbf0224edbc3c0394fc948afa461451fd2ffb8e22a067509962def0e2a28654"
+  },
+  "notice": "Validation-selected retrieval models; common frozen Qwen intent model. Real inference on 12 CC0 images, not a benchmark. No manual reranking.",
   "queries": [
     {
       "id": "white-bicycle",
@@ -73,25 +108,6 @@
       "candidate_count": 4,
       "results": [
         {
-          "id": "image-09",
-          "file_path": "images/image-09.jpg",
-          "categories": [],
-          "description": "",
-          "retrieval_categories": [
-            "自行车"
-          ],
-          "retrieval_description": "一辆白色的自行车停在蓝色的墙前，车身有“Viento”字样，轮胎较细。",
-          "retrieval_source": {
-            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
-          },
-          "retrieval_category_groups": [
-            "自行车"
-          ],
-          "score": 0.357918381690979
-        },
-        {
           "id": "image-12",
           "file_path": "images/image-12.jpg",
           "categories": [],
@@ -99,16 +115,29 @@
           "retrieval_categories": [
             "自行车"
           ],
-          "retrieval_description": "一辆绿色的自行车停在路边，车架上有锈迹，轮胎较细。",
+          "retrieval_description": "一辆绿色的自行车停在路边，车架上有锈迹，轮胎较细。背景中有绿色的灌木和橙色的栏杆，地面是灰色的水泥路面。",
+          "raw_category_response": "[\"自行车\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
+          "score": 0.2653135061264038
+        },
+        {
+          "id": "image-09",
+          "file_path": "images/image-09.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
             "自行车"
           ],
-          "score": 0.3435288369655609
+          "retrieval_description": "一辆白色的自行车停靠在蓝色的墙前，车身有“Viento”字样，轮胎较细。背景中有一个写着“NO PARKING”的标志牌，旁边有一株带有红色花朵的小树。",
+          "raw_category_response": "[\"自行车\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.24096623063087463
         },
         {
           "id": "image-10",
@@ -118,24 +147,22 @@
           "retrieval_categories": [
             "自行车"
           ],
-          "retrieval_description": "一辆黄色的自行车躺在杂草丛生的地面上，车身部分被绿色植物覆盖。",
+          "retrieval_description": "一辆黄色和黑色相间的自行车躺在杂草丛生的地面上，周围是绿色的植物和一些枯枝。地面由砖块铺成的小路与泥土混合而成，旁边有一条白色的石质边沿。",
+          "raw_category_response": "[\"自行车\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
-            "自行车"
-          ],
-          "score": 0.2496604025363922
+          "score": 0.17220242321491241
         }
       ],
       "retrieval_executed": true,
       "timing": {
-        "intent_seconds": 6.614561001770198,
-        "encoder_load_seconds": 1.0784715414047241e-06,
-        "encoding_seconds": 0.046198111958801746,
-        "ranking_seconds": 0.036373076029121876
+        "intent_seconds": 9.397044777870178e-07,
+        "encoder_load_seconds": 9.397044777870178e-07,
+        "encoding_seconds": 0.045274061150848866,
+        "ranking_seconds": 0.00036011170595884323,
+        "cached_intent_original_seconds": 2.37368855625391
       },
       "intent_reused": true,
       "status": "retrieved",
@@ -145,7 +172,7 @@
         "image-11",
         "image-12"
       ],
-      "elapsed_seconds": 6.697166368365288,
+      "elapsed_seconds": 0.04566668439656496,
       "image": null
     },
     {
@@ -172,45 +199,23 @@
       "search_text": "红色的椅子",
       "top_k": 3,
       "exclude_ids": [],
-      "candidate_count": 3,
+      "candidate_count": 4,
       "results": [
         {
-          "id": "image-04",
-          "file_path": "images/image-04.jpg",
+          "id": "image-01",
+          "file_path": "images/image-01.jpg",
           "categories": [],
           "description": "",
           "retrieval_categories": [
             "椅子"
           ],
-          "retrieval_description": "一张木制椅子放在白色展台上。椅子呈浅棕色，由弯曲的木板组成，椅背和椅座都呈现出流畅的曲线设计。背景中可以看到一些参观者和红色的墙壁，墙上有一个标牌写着“PROCESS 03 CNC CUTTING”。",
+          "retrieval_description": "一个红色的塑料凳子放在街道上。凳子四四方方，表面有凹凸不平的纹理。背景中可以看到几辆摩托车和部分人的腿。地面是灰色的水泥路面。",
+          "raw_category_response": "[\"椅子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
-            "椅子"
-          ],
-          "score": 0.3607329726219177
-        },
-        {
-          "id": "image-02",
-          "file_path": "images/image-02.jpg",
-          "categories": [],
-          "description": "",
-          "retrieval_categories": [
-            "椅子"
-          ],
-          "retrieval_description": "一把黑色的椅子放在灰色的地面上，靠背是弯曲的，坐垫是米色的。",
-          "retrieval_source": {
-            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
-          },
-          "retrieval_category_groups": [
-            "椅子"
-          ],
-          "score": 0.3285382390022278
+          "score": 0.36796849966049194
         },
         {
           "id": "image-03",
@@ -220,33 +225,48 @@
           "retrieval_categories": [
             "椅子"
           ],
-          "retrieval_description": "一张黑色的办公椅放在木质地板上，椅子靠背和坐垫为深灰色，带有扶手。背景中有一张桌子，上面放着花瓶和一些物品，旁边有一个橙色的椅子和一条粉色的毯子。窗户旁边有一台电脑显示器和键盘。",
+          "retrieval_description": "一张黑色的办公椅放在木质地板上，椅子有扶手和轮子。背景中有一张桌子，桌子上放着一个花瓶和一些物品。桌子旁边有一个橙色的椅子，椅子后面挂着一条粉色的毯子。窗户旁边有一台电脑键盘和显示器。窗外可以看到一些绿色植物和红色的布料。整个房间光线充足，显得很明亮。",
+          "raw_category_response": "[\"椅子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
+          "score": 0.3447117805480957
+        },
+        {
+          "id": "image-02",
+          "file_path": "images/image-02.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
             "椅子"
           ],
-          "score": 0.28301236033439636
+          "retrieval_description": "一张黑色的椅子放在灰色的地面上，背景是白色的墙壁。椅子的靠背由多根弯曲的木条组成，形成一个圆形的框架。椅子的坐垫是浅色的编织材料，可能是藤编或竹编。椅子的腿是直立的，呈三角形支撑结构。",
+          "raw_category_response": "[\"椅子\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.3345486521720886
         }
       ],
       "retrieval_executed": true,
       "timing": {
-        "intent_seconds": 1.715563951060176,
+        "intent_seconds": 4.10713255405426e-07,
         "encoder_load_seconds": 0.0,
-        "encoding_seconds": 0.043766459450125694,
-        "ranking_seconds": 0.00012120790779590607
+        "encoding_seconds": 0.04569268226623535,
+        "ranking_seconds": 0.00010344106703996658,
+        "cached_intent_original_seconds": 1.8929620226845145
       },
       "intent_reused": true,
       "status": "retrieved",
       "candidate_ids": [
+        "image-01",
         "image-02",
         "image-03",
         "image-04"
       ],
-      "elapsed_seconds": 1.7594767389819026,
+      "elapsed_seconds": 0.04581972397863865,
       "image": null
     },
     {
@@ -276,25 +296,6 @@
       "candidate_count": 4,
       "results": [
         {
-          "id": "image-08",
-          "file_path": "images/image-08.jpg",
-          "categories": [],
-          "description": "",
-          "retrieval_categories": [
-            "杯子"
-          ],
-          "retrieval_description": "一个银色的杯子，杯身有镂空花纹装饰，杯柄弯曲。",
-          "retrieval_source": {
-            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
-          },
-          "retrieval_category_groups": [
-            "杯子"
-          ],
-          "score": 0.38890624046325684
-        },
-        {
           "id": "image-06",
           "file_path": "images/image-06.jpg",
           "categories": [],
@@ -302,16 +303,13 @@
           "retrieval_categories": [
             "杯子"
           ],
-          "retrieval_description": "一个白色的杯子放在红色的表面上。",
+          "retrieval_description": "一个白色的杯子放在红色的表面上。杯子里面装着棕色的液体，可能是咖啡或茶。杯子的把手朝向左上角。杯子和杯子的影子都清晰地投射在红色的表面上。",
+          "raw_category_response": "[\"杯子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
-            "杯子"
-          ],
-          "score": 0.3494657576084137
+          "score": 0.43182578682899475
         },
         {
           "id": "image-07",
@@ -319,26 +317,40 @@
           "categories": [],
           "description": "",
           "retrieval_categories": [
-            "茶杯"
-          ],
-          "retrieval_description": "一个粉色的陶瓷茶杯和碟子放在木质桌面上。茶杯上有金色的装饰图案，碟子是纯粉色的。",
-          "retrieval_source": {
-            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
-          },
-          "retrieval_category_groups": [
             "杯子"
           ],
-          "score": 0.3442584276199341
+          "retrieval_description": "一个粉色的陶瓷杯子放在粉色的陶瓷碟子上。杯子和碟子表面光滑，带有金色的装饰图案。杯子的把手是白色的，杯子和碟子都放在木质桌面上。",
+          "raw_category_response": "[\"杯子\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.37479889392852783
+        },
+        {
+          "id": "image-08",
+          "file_path": "images/image-08.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "图片中是一个精美的金属杯子。杯子主体为银色，表面有复杂的镂空花纹装饰，图案包括卷曲的线条和花卉设计。杯子边缘有一圈金色的边框，增加了其华丽感。杯子的手柄弯曲且细长，整体造型优雅。背景是纯白色的，突显了杯子的细节和光泽。",
+          "raw_category_response": "[\"杯子\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.3023751974105835
         }
       ],
       "retrieval_executed": true,
       "timing": {
-        "intent_seconds": 1.6884402753785253,
+        "intent_seconds": 3.7997961044311523e-07,
         "encoder_load_seconds": 0.0,
-        "encoding_seconds": 0.043842218816280365,
-        "ranking_seconds": 0.00011764839291572571
+        "encoding_seconds": 0.04409582540392876,
+        "ranking_seconds": 0.00011396128684282303,
+        "cached_intent_original_seconds": 1.8232367718592286
       },
       "intent_reused": true,
       "status": "retrieved",
@@ -348,7 +360,7 @@
         "image-07",
         "image-08"
       ],
-      "elapsed_seconds": 1.7324303220957518,
+      "elapsed_seconds": 0.044232236221432686,
       "image": null
     },
     {
@@ -387,35 +399,13 @@
           "retrieval_categories": [
             "杯子"
           ],
-          "retrieval_description": "一个银色的杯子，杯身有镂空花纹装饰，杯柄弯曲。",
+          "retrieval_description": "图片中是一个精美的金属杯子。杯子主体为银色，表面有复杂的镂空花纹装饰，图案包括卷曲的线条和花卉设计。杯子边缘有一圈金色的边框，增加了其华丽感。杯子的手柄弯曲且细长，整体造型优雅。背景是纯白色的，突显了杯子的细节和光泽。",
+          "raw_category_response": "[\"杯子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
-            "杯子"
-          ],
-          "score": 0.5302997827529907
-        },
-        {
-          "id": "image-05",
-          "file_path": "images/image-05.jpg",
-          "categories": [],
-          "description": "",
-          "retrieval_categories": [
-            "杯子"
-          ],
-          "retrieval_description": "一个红色的不锈钢保温杯，带有黑色盖子。",
-          "retrieval_source": {
-            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
-          },
-          "retrieval_category_groups": [
-            "杯子"
-          ],
-          "score": 0.3931952118873596
+          "score": 0.5143122673034668
         },
         {
           "id": "image-06",
@@ -425,24 +415,38 @@
           "retrieval_categories": [
             "杯子"
           ],
-          "retrieval_description": "一个白色的杯子放在红色的表面上。",
+          "retrieval_description": "一个白色的杯子放在红色的表面上。杯子里面装着棕色的液体，可能是咖啡或茶。杯子的把手朝向左上角。杯子和杯子的影子都清晰地投射在红色的表面上。",
+          "raw_category_response": "[\"杯子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
+          "score": 0.423736572265625
+        },
+        {
+          "id": "image-05",
+          "file_path": "images/image-05.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
             "杯子"
           ],
-          "score": 0.3912949562072754
+          "retrieval_description": "一个红色的不锈钢保温杯，杯子上有黑色的盖子，杯子的形状是圆柱形，杯子放在白色背景上。",
+          "raw_category_response": "[\"杯子\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.3952133357524872
         }
       ],
       "retrieval_executed": true,
       "timing": {
-        "intent_seconds": 2.9261393239721656,
+        "intent_seconds": 5.19677996635437e-07,
         "encoder_load_seconds": 0.0,
-        "encoding_seconds": 0.07947561237961054,
-        "ranking_seconds": 0.00012710969895124435
+        "encoding_seconds": 0.07712777890264988,
+        "ranking_seconds": 0.00011671055108308792,
+        "cached_intent_original_seconds": 3.1432759324088693
       },
       "intent_reused": true,
       "status": "retrieved",
@@ -451,7 +455,7 @@
         "image-06",
         "image-08"
       ],
-      "elapsed_seconds": 3.0057686753571033
+      "elapsed_seconds": 0.07727030012756586
     },
     {
       "id": "similar-chair",
@@ -479,7 +483,7 @@
       "exclude_ids": [
         "image-02"
       ],
-      "candidate_count": 2,
+      "candidate_count": 3,
       "results": [
         {
           "id": "image-04",
@@ -489,16 +493,13 @@
           "retrieval_categories": [
             "椅子"
           ],
-          "retrieval_description": "一张木制椅子放在白色展台上。椅子呈浅棕色，由弯曲的木板组成，椅背和椅座都呈现出流畅的曲线设计。背景中可以看到一些参观者和红色的墙壁，墙上有一个标牌写着“PROCESS 03 CNC CUTTING”。",
+          "retrieval_description": "图片中展示了一把木制椅子。椅子的颜色是浅棕色，材质看起来像是木材，表面光滑。椅子的设计非常独特，椅背和椅座部分由几块弯曲的木板拼接而成，形成了一个流畅的曲线。背景是一个展览空间，墙壁是红色的，上面有一些文字和图案。椅子放在一个白色的展台上，旁边有一个透明的展示柜。",
+          "raw_category_response": "[\"椅子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
-            "椅子"
-          ],
-          "score": 0.23585933446884155
+          "score": 0.20495879650115967
         },
         {
           "id": "image-03",
@@ -508,32 +509,47 @@
           "retrieval_categories": [
             "椅子"
           ],
-          "retrieval_description": "一张黑色的办公椅放在木质地板上，椅子靠背和坐垫为深灰色，带有扶手。背景中有一张桌子，上面放着花瓶和一些物品，旁边有一个橙色的椅子和一条粉色的毯子。窗户旁边有一台电脑显示器和键盘。",
+          "retrieval_description": "一张黑色的办公椅放在木质地板上，椅子有扶手和轮子。背景中有一张桌子，桌子上放着一个花瓶和一些物品。桌子旁边有一个橙色的椅子，椅子后面挂着一条粉色的毯子。窗户旁边有一台电脑键盘和显示器。窗外可以看到一些绿色植物和红色的布料。整个房间光线充足，显得很明亮。",
+          "raw_category_response": "[\"椅子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
+          "score": 0.20412151515483856
+        },
+        {
+          "id": "image-01",
+          "file_path": "images/image-01.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
             "椅子"
           ],
-          "score": 0.2320648729801178
+          "retrieval_description": "一个红色的塑料凳子放在街道上。凳子四四方方，表面有凹凸不平的纹理。背景中可以看到几辆摩托车和部分人的腿。地面是灰色的水泥路面。",
+          "raw_category_response": "[\"椅子\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.17894384264945984
         }
       ],
       "retrieval_executed": true,
       "timing": {
-        "intent_seconds": 2.3230563374236226,
+        "intent_seconds": 4.200264811515808e-07,
         "encoder_load_seconds": 0.0,
-        "encoding_seconds": 0.08915754966437817,
-        "ranking_seconds": 0.0001254575327038765
+        "encoding_seconds": 0.08639340475201607,
+        "ranking_seconds": 0.0001171305775642395,
+        "cached_intent_original_seconds": 2.387789581902325
       },
       "intent_reused": true,
       "status": "retrieved",
       "candidate_ids": [
+        "image-01",
         "image-03",
         "image-04"
       ],
-      "elapsed_seconds": 2.4123679557815194
+      "elapsed_seconds": 0.08653710503131151
     },
     {
       "id": "similar-cup",
@@ -561,27 +577,8 @@
       "exclude_ids": [
         "image-06"
       ],
-      "candidate_count": 2,
+      "candidate_count": 3,
       "results": [
-        {
-          "id": "image-08",
-          "file_path": "images/image-08.jpg",
-          "categories": [],
-          "description": "",
-          "retrieval_categories": [
-            "杯子"
-          ],
-          "retrieval_description": "一个银色的杯子，杯身有镂空花纹装饰，杯柄弯曲。",
-          "retrieval_source": {
-            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
-          },
-          "retrieval_category_groups": [
-            "杯子"
-          ],
-          "score": 0.2634977102279663
-        },
         {
           "id": "image-05",
           "file_path": "images/image-05.jpg",
@@ -590,32 +587,63 @@
           "retrieval_categories": [
             "杯子"
           ],
-          "retrieval_description": "一个红色的不锈钢保温杯，带有黑色盖子。",
+          "retrieval_description": "一个红色的不锈钢保温杯，杯子上有黑色的盖子，杯子的形状是圆柱形，杯子放在白色背景上。",
+          "raw_category_response": "[\"杯子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
+          "score": 0.25593888759613037
+        },
+        {
+          "id": "image-07",
+          "file_path": "images/image-07.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
             "杯子"
           ],
-          "score": 0.19888710975646973
+          "retrieval_description": "一个粉色的陶瓷杯子放在粉色的陶瓷碟子上。杯子和碟子表面光滑，带有金色的装饰图案。杯子的把手是白色的，杯子和碟子都放在木质桌面上。",
+          "raw_category_response": "[\"杯子\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.25225070118904114
+        },
+        {
+          "id": "image-08",
+          "file_path": "images/image-08.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
+            "杯子"
+          ],
+          "retrieval_description": "图片中是一个精美的金属杯子。杯子主体为银色，表面有复杂的镂空花纹装饰，图案包括卷曲的线条和花卉设计。杯子边缘有一圈金色的边框，增加了其华丽感。杯子的手柄弯曲且细长，整体造型优雅。背景是纯白色的，突显了杯子的细节和光泽。",
+          "raw_category_response": "[\"杯子\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.2170688658952713
         }
       ],
       "retrieval_executed": true,
       "timing": {
-        "intent_seconds": 2.3583921985700727,
+        "intent_seconds": 4.796311259269714e-07,
         "encoder_load_seconds": 0.0,
-        "encoding_seconds": 0.07568284776061773,
-        "ranking_seconds": 0.00011360924690961838
+        "encoding_seconds": 0.07420466654002666,
+        "ranking_seconds": 0.00012006144970655441,
+        "cached_intent_original_seconds": 2.475643909536302
       },
       "intent_reused": true,
       "status": "retrieved",
       "candidate_ids": [
         "image-05",
+        "image-07",
         "image-08"
       ],
-      "elapsed_seconds": 2.434224994853139
+      "elapsed_seconds": 0.07434956636279821
     },
     {
       "id": "bicycle-in-grass",
@@ -651,25 +679,6 @@
       "candidate_count": 3,
       "results": [
         {
-          "id": "image-10",
-          "file_path": "images/image-10.jpg",
-          "categories": [],
-          "description": "",
-          "retrieval_categories": [
-            "自行车"
-          ],
-          "retrieval_description": "一辆黄色的自行车躺在杂草丛生的地面上，车身部分被绿色植物覆盖。",
-          "retrieval_source": {
-            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
-          },
-          "retrieval_category_groups": [
-            "自行车"
-          ],
-          "score": 0.37814661860466003
-        },
-        {
           "id": "image-12",
           "file_path": "images/image-12.jpg",
           "categories": [],
@@ -677,16 +686,29 @@
           "retrieval_categories": [
             "自行车"
           ],
-          "retrieval_description": "一辆绿色的自行车停在路边，车架上有锈迹，轮胎较细。",
+          "retrieval_description": "一辆绿色的自行车停在路边，车架上有锈迹，轮胎较细。背景中有绿色的灌木和橙色的栏杆，地面是灰色的水泥路面。",
+          "raw_category_response": "[\"自行车\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
+          "score": 0.382840633392334
+        },
+        {
+          "id": "image-10",
+          "file_path": "images/image-10.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
             "自行车"
           ],
-          "score": 0.36099714040756226
+          "retrieval_description": "一辆黄色和黑色相间的自行车躺在杂草丛生的地面上，周围是绿色的植物和一些枯枝。地面由砖块铺成的小路与泥土混合而成，旁边有一条白色的石质边沿。",
+          "raw_category_response": "[\"自行车\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.3287515938282013
         },
         {
           "id": "image-11",
@@ -696,24 +718,22 @@
           "retrieval_categories": [
             "自行车"
           ],
-          "retrieval_description": "一辆红色的自行车靠在蓝色的墙上，车把弯曲，座椅是黑色的。",
+          "retrieval_description": "一辆红色的自行车靠在蓝色的墙上，车把是弯曲的金属材质，座椅是黑色的。背景是一面旧墙，墙面有些许剥落和锈迹。",
+          "raw_category_response": "[\"自行车\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
-            "自行车"
-          ],
-          "score": 0.30287402868270874
+          "score": 0.2802271246910095
         }
       ],
       "retrieval_executed": true,
       "timing": {
-        "intent_seconds": 2.3217784389853477,
+        "intent_seconds": 5.19677996635437e-07,
         "encoder_load_seconds": 0.0,
-        "encoding_seconds": 0.0786189828068018,
-        "ranking_seconds": 0.00011292938143014908
+        "encoding_seconds": 0.07795588672161102,
+        "ranking_seconds": 0.00011979043483734131,
+        "cached_intent_original_seconds": 2.413913480937481
       },
       "intent_reused": true,
       "status": "retrieved",
@@ -722,7 +742,7 @@
         "image-11",
         "image-12"
       ],
-      "elapsed_seconds": 2.4005342414602637
+      "elapsed_seconds": 0.07809928804636002
     },
     {
       "id": "no-retrieval-qa",
@@ -752,14 +772,15 @@
       "results": [],
       "retrieval_executed": false,
       "timing": {
-        "intent_seconds": 1.3699753610417247,
+        "intent_seconds": 5.504116415977478e-07,
         "encoder_load_seconds": 0.0,
         "encoding_seconds": 0.0,
-        "ranking_seconds": 0.0
+        "ranking_seconds": 0.0,
+        "cached_intent_original_seconds": 1.4219216452911496
       },
       "intent_reused": true,
       "status": "not_retrieval",
-      "elapsed_seconds": 1.3699838509783149,
+      "elapsed_seconds": 9.129755198955536e-06,
       "image": null,
       "mode": "semantic"
     },
@@ -794,14 +815,15 @@
       "results": [],
       "retrieval_executed": false,
       "timing": {
-        "intent_seconds": 1.8597017833963037,
+        "intent_seconds": 3.296881914138794e-07,
         "encoder_load_seconds": 0.0,
         "encoding_seconds": 0.0,
-        "ranking_seconds": 0.0
+        "ranking_seconds": 0.0,
+        "cached_intent_original_seconds": 1.8703618049621582
       },
       "intent_reused": true,
       "status": "not_retrieval",
-      "elapsed_seconds": 1.8597090831026435,
+      "elapsed_seconds": 7.2605907917022705e-06,
       "mode": "semantic"
     },
     {
@@ -829,27 +851,8 @@
       "search_text": "请帮我找两张杯子的图片。",
       "top_k": 2,
       "exclude_ids": [],
-      "candidate_count": 3,
+      "candidate_count": 4,
       "results": [
-        {
-          "id": "image-08",
-          "file_path": "images/image-08.jpg",
-          "categories": [],
-          "description": "",
-          "retrieval_categories": [
-            "杯子"
-          ],
-          "retrieval_description": "一个银色的杯子，杯身有镂空花纹装饰，杯柄弯曲。",
-          "retrieval_source": {
-            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
-          },
-          "retrieval_category_groups": [
-            "杯子"
-          ],
-          "score": 0.7318919897079468
-        },
         {
           "id": "image-05",
           "file_path": "images/image-05.jpg",
@@ -858,33 +861,48 @@
           "retrieval_categories": [
             "杯子"
           ],
-          "retrieval_description": "一个红色的不锈钢保温杯，带有黑色盖子。",
+          "retrieval_description": "一个红色的不锈钢保温杯，杯子上有黑色的盖子，杯子的形状是圆柱形，杯子放在白色背景上。",
+          "raw_category_response": "[\"杯子\"]",
           "retrieval_source": {
             "model": "Qwen/Qwen2.5-VL-7B-Instruct",
-            "adapter": "models/retrieval-lora",
-            "prompt_profile": "historical"
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
           },
-          "retrieval_category_groups": [
+          "score": 0.6681961417198181
+        },
+        {
+          "id": "image-06",
+          "file_path": "images/image-06.jpg",
+          "categories": [],
+          "description": "",
+          "retrieval_categories": [
             "杯子"
           ],
-          "score": 0.6437129974365234
+          "retrieval_description": "一个白色的杯子放在红色的表面上。杯子里面装着棕色的液体，可能是咖啡或茶。杯子的把手朝向左上角。杯子和杯子的影子都清晰地投射在红色的表面上。",
+          "raw_category_response": "[\"杯子\"]",
+          "retrieval_source": {
+            "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+            "adapter_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505"
+          },
+          "score": 0.6493096351623535
         }
       ],
       "retrieval_executed": true,
       "timing": {
-        "intent_seconds": 1.848273796029389,
+        "intent_seconds": 3.7997961044311523e-07,
         "encoder_load_seconds": 0.0,
-        "encoding_seconds": 0.04666986595839262,
-        "ranking_seconds": 0.00026593729853630066
+        "encoding_seconds": 0.045601535588502884,
+        "ranking_seconds": 0.00014579109847545624,
+        "cached_intent_original_seconds": 1.8960303459316492
       },
       "intent_reused": true,
       "status": "retrieved",
       "candidate_ids": [
         "image-05",
         "image-06",
+        "image-07",
         "image-08"
       ],
-      "elapsed_seconds": 1.8952318681403995,
+      "elapsed_seconds": 0.04576670750975609,
       "image": null,
       "mode": "semantic"
     }

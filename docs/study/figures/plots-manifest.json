@@ -1,0 +1,13 @@
+{
+  "source_report_sha256": "e1e6bb1e14504ae0beee4d4c282cf07c47d5c54d5aa04d9eea7581e3c13ffcdb",
+  "matplotlib_version": "3.10.6",
+  "figures": {
+    "validation-selection.png": "7702bce326a6149e553f1e8b1323f4c79a608e9b31aaac9560f127216e0b6e17",
+    "validation-selection.pdf": "318a537c56a2ad504756696e42c3bee70165c95d74ba6d0d7b8f555016dc7a6f",
+    "fixed-test-comparison.png": "5ca70059303ae916fd80c352fa3dd06092c7895b87ad40aa2df161d7170efb4f",
+    "fixed-test-comparison.pdf": "f95dbdb71a8ddc4f77855ba438fbb703680a11e08500c97c0b6eb5430a0e2b00",
+    "training-cost.png": "ca8664ff92bd70654cfa048260c6d91d6d1127b7284b2c7817473c57c6ed2525",
+    "training-cost.pdf": "7d8e380ca06ed7aa848aee07f002d95993e8da076a8995db6e7bb777118642ed"
+  },
+  "note": "Single-seed descriptive comparison; no significance or confidence-interval claim."
+}

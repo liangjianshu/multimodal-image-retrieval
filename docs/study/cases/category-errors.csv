@@ -1,0 +1,5087 @@
+variant,image_id,truth,valid_json,missing_truth,extra_categories,predicted_categories,raw_response
+qwen-base,n03001627_792,chair,True,True,couch,couch,"```json
+[""沙发""]
+```"
+qwen-base,n03001627_5048,chair,True,True,,,"```json
+[""花盆""]
+```"
+qwen-base,n03001627_11865,chair,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n03001627_1193,chair,True,True,couch,couch,"```json
+[""沙发""]
+```"
+qwen-base,n03001627_9573,chair,True,True,,,"```json
+[""拼布""]
+```"
+qwen-base,n03001627_9085,chair,False,True,,,"```json
+[
+	{""bbox_2d"": [65, 243, 219, 440], ""主要物体的类别"": ""椅子""},
+	{""bbox_2d"": [2"
+qwen-base,n03001627_2684,chair,True,True,,,"```json
+[""火车""]
+```"
+qwen-base,n03001627_5111,chair,False,True,,,"```json
+[
+	{""类别"": ""壁炉""}
+]
+```"
+qwen-base,n03001627_1797,chair,False,True,,,"```json
+[
+	{""类别"": ""桌子""}
+]
+```"
+qwen-base,n03001627_10703,chair,True,True,couch,couch,"```json
+[""沙发""]
+```"
+qwen-base,n03001627_559,chair,True,True,,,"```json
+[""灯泡""]
+```"
+qwen-base,n03147509_11618,cup,False,True,,,"```json
+[
+	{""类别"": ""杯子""}
+]
+```"
+qwen-base,n03147509_20561,cup,True,True,,,"```json
+[""咖啡机""]
+```"
+qwen-base,n03147509_11875,cup,True,True,,,"```json
+[""烟灰缸""]
+```"
+qwen-base,n03147509_20972,cup,True,True,,,"```json
+[""银器""]
+```"
+qwen-base,n03147509_5048,cup,True,True,,,"```json
+[""人""]
+```"
+qwen-base,n03147509_20663,cup,False,True,,,"```json
+[
+	{""类别"": ""茶杯""}
+]
+```"
+qwen-base,n03147509_17441,cup,True,False,bowl,bowl|cup,"```json
+[""玻璃瓶"", ""陶瓷碗"", ""陶瓷杯"", ""陶瓷花瓶""]
+```"
+qwen-base,n03147509_17845,cup,False,True,,,"```json
+[
+	{""类别"": ""杯子""}
+]
+```"
+qwen-base,n03147509_16749,cup,False,True,,,"```json
+[
+	{""类别"": ""咖啡杯""}
+]
+```"
+qwen-base,n03147509_1784,cup,False,True,,,"```json
+[
+	{""类别"": ""茶杯""}
+]
+```"
+qwen-base,n03147509_19159,cup,True,True,pizza,pizza,"```json
+[""披萨""]
+```"
+qwen-base,n03147509_5714,cup,True,True,,,"```json
+[""咖啡豆""]
+```"
+qwen-base,n03147509_22907,cup,True,True,,,"```json
+[""咖啡豆""]
+```"
+qwen-base,n03147509_5550,cup,True,True,,,"```json
+[""巧克力""]
+```"
+qwen-base,n02834778_9345,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_11443,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_1985,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_9061,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_8890,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_7078,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_6586,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_17153,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_3002,bicycle,True,True,,,"```json
+[
+    ""废品""
+]
+```"
+qwen-base,n02834778_728,bicycle,False,True,,,"```json
+[
+	{""bbox_2d"": [183, 49, 437, 256], ""category_name"": ""自行车""}
+]
+```"
+qwen-base,n02834778_1556,bicycle,False,True,,,"```json
+[
+	{""bbox_2d"": [103, 204, 156, 367], ""主要物体类别"": ""自行车赛选手""}
+]
+```"
+qwen-base,n02834778_4250,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_4640,bicycle,False,True,,,"```json
+[
+	{""类别"": ""骑自行车的人""}
+]
+```"
+qwen-base,n02834778_12089,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-base,n02834778_5634,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n02834778_1832,bicycle,True,True,,,"```json
+[""羊""]
+```"
+qwen-base,n02834778_5383,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车赛""}
+]
+```"
+qwen-base,n02834778_98,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-base,n04225987_3383,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_1602,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [354, 80, 504, 179], ""category"": ""鞋子""}
+]
+```"
+qwen-base,n04225987_3838,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_3635,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [147, 259, 243, 318], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_3706,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_316,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_5128,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_5215,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_4942,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_3212,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_483,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_4165,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_1815,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_2184,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [345, 109, 426, 167], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_4933,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_4643,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_1393,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_4050,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_388,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [230, 150, 284, 216], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_2882,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_6011,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_2600,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [96, 7
+
+ addCriterion(""主要物体类别"", ""{""bbox_2d"": [96, 7
+ addCriterion(""主要物体类别"", """
+qwen-base,n04225987_5927,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_11183,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [154, 189, 193, 267], ""category"": ""滑板}
+]
+```"
+qwen-base,n04225987_14233,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_2620,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n04225987_3292,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-base,n03862676_11605,oven,True,True,microwave,microwave,"```json
+[""微波炉""]
+```"
+qwen-base,n03862676_3918,oven,True,True,microwave,microwave,"```json
+[""微波炉""]
+```"
+qwen-base,n03862676_13333,oven,True,True,,,"```json
+[""炉灶""]
+```"
+qwen-base,n03862676_3543,oven,True,False,microwave,microwave|oven,"```json
+[""烤箱"", ""微波炉""]
+```"
+qwen-base,n03862676_17941,oven,True,True,,,"```json
+[""炉灶""]
+```"
+qwen-base,n03862676_5204,oven,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-base,n03862676_13004,oven,True,True,,,"```json
+[""老鼠""]
+```"
+qwen-base,n03862676_6517,oven,False,True,,,"```json
+[
+	{""类别"": ""冰箱""}
+]
+```"
+qwen-base,n03862676_11511,oven,False,True,,,"```json
+[
+	{""类别"": ""披萨炉""}
+]
+```"
+qwen-base,n03862676_10040,oven,True,True,,,"```json
+[
+    ""冰箱""
+]
+```"
+qwen-base,n03862676_15962,oven,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03862676_8028,oven,True,True,,,"```json
+[""厨房""]
+```"
+qwen-base,n03862676_2036,oven,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03862676_11755,oven,True,True,,,"```json
+[""厨房""]
+```"
+qwen-base,n03862676_18969,oven,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03862676_15850,oven,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03862676_8789,oven,True,True,,,"```json
+[""炉子""]
+```"
+qwen-base,n03862676_9499,oven,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03862676_11466,oven,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 128, 146, 150], ""category"": ""牛奶}
+]
+```"
+qwen-base,n03862676_7769,oven,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-base,n03862676_6507,oven,True,True,,,"```json
+[""火炉""]
+```"
+qwen-base,n04256520_42523,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_17621,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_908,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_3424,couch,True,True,,,"```json
+[""浴袍""]
+```"
+qwen-base,n04256520_1467,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_1542,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_872,couch,False,True,,,"```json
+[
+	{""类别"": ""人""}
+]
+```"
+qwen-base,n04256520_38585,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_18313,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_4078,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_6725,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_30243,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_987,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_12974,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_14400,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_40269,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_792,couch,True,True,,,"```json
+[""藤蔓植物""]
+```"
+qwen-base,n04256520_1414,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_5620,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_14696,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_34852,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_23341,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_38553,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_2768,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_21959,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_331,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_24989,couch,False,True,,,"```json
+[
+	{""类别"": ""客厅""}
+]
+```"
+qwen-base,n04256520_929,couch,False,True,,,"```json
+[
+	{""类别"": ""婴儿""}
+]
+```"
+qwen-base,n04256520_4308,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_30210,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [48, 7
+
+ addCriterion
+
+ addCriterion
+
+
+ addCriterion
+
+
+ addCriterion
+
+
+ addCriterion
+
+
+"
+qwen-base,n04256520_22429,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_23073,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_509,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [94, 116, 135, 137], ""category"": ""书""}
+]
+```"
+qwen-base,n04256520_165,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_815,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_21966,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_15295,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_1536,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_1366,couch,True,True,chair,chair,"```json
+[""扶手椅""]
+```"
+qwen-base,n04256520_4791,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_3683,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n04256520_26625,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-base,n02881193_3978,bowl,True,True,,,"```json
+[""筷子""]
+```"
+qwen-base,n02881193_6127,bowl,True,True,,,"```json
+[""鸡蛋""]
+```"
+qwen-base,n02881193_6583,bowl,True,True,,,"[""无""]]"
+qwen-base,n02881193_4462,bowl,True,True,,,"```json
+[""鸡蛋""]
+```"
+qwen-base,n02881193_3524,bowl,True,True,cup,cup,"```json
+[""茶杯""]
+```"
+qwen-base,n02881193_1593,bowl,True,True,,,"```json
+[""锅""]
+```"
+qwen-base,n02881193_2125,bowl,True,True,,,"```json
+[""花盆""]
+```"
+qwen-base,n02881193_4423,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-base,n02881193_7326,bowl,True,True,,,"```json
+[""水槽""]
+```"
+qwen-base,n02881193_4385,bowl,True,True,,,"```json
+[""陶瓷器""]
+```"
+qwen-base,n02881193_12096,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-base,n02881193_9634,bowl,True,True,,,"```json
+[""纽扣""]
+```"
+qwen-base,n02881193_1990,bowl,False,True,,,"```json
+[
+	{""类别"": ""洗手盆""}
+]
+```"
+qwen-base,n02881193_8227,bowl,True,True,,,"```json
+[""泳帽""]
+```"
+qwen-base,n02881193_6220,bowl,True,True,cup,cup,"```json
+[""茶杯""]
+```"
+qwen-base,n02881193_695,bowl,True,True,,,"```json
+[""水槽""]
+```"
+qwen-base,n02881193_6228,bowl,True,True,,,"```json
+[""蝴蝶""]
+```"
+qwen-base,n02881193_1618,bowl,True,True,,,"```json
+[""贝壳""]
+```"
+qwen-base,n02881193_4591,bowl,True,True,,,"```json
+[""苹果""]
+```"
+qwen-base,n02881193_8371,bowl,True,True,cup,cup,"```json
+[""茶杯"", ""茶壶""]
+```"
+qwen-base,n02881193_598,bowl,True,True,,,"[""玻璃容器""]"
+qwen-base,n02881193_1722,bowl,True,True,,,"```json
+[""陶瓷""]
+```"
+qwen-base,n02881193_5176,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-base,n02881193_2927,bowl,True,True,,,"```json
+[""鸡蛋""]
+```"
+qwen-base,n02881193_8326,bowl,True,False,cup,bowl|cup,"```json
+[""碗"", ""杯子""]
+```"
+qwen-base,n02881193_4776,bowl,True,True,,,"[""木罐""]"
+qwen-base,n02881193_11143,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-base,n02881193_2122,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-base,n02881193_1078,bowl,True,True,,,"```json
+[""狗粮""]
+```"
+qwen-base,n02881193_3319,bowl,True,True,cup,cup,"```json
+[""玻璃杯""]
+```"
+qwen-base,n02881193_10076,bowl,True,True,,,"[""陶瓷""]"
+qwen-base,n02881193_11971,bowl,True,True,,,"```json
+[
+    ""陶艺""
+]
+```"
+qwen-base,n02881193_3164,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-base,n02881193_4503,bowl,True,True,cup,cup,"```json
+[""杯子""]
+```"
+qwen-base,n02881193_2898,bowl,True,True,cup,cup,"```json
+[
+    ""陶瓷杯""
+]
+```"
+qwen-base,n02881193_2476,bowl,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n02881193_9976,bowl,True,True,,,"```json
+[""木制容器""]
+```"
+qwen-base,n02881193_1957,bowl,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-base,n02881193_4968,bowl,True,True,,,"[""洗手盆""]"
+qwen-base,n02881193_3131,bowl,True,True,,,"```json
+[""燕麦粥""]
+```"
+qwen-base,n02881193_277,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-base,n02881193_1037,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-base,n02881193_3594,bowl,True,True,cup,cup,"```json
+[""玻璃杯""]
+```"
+qwen-base,n02881193_7228,bowl,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-base,n02881193_2323,bowl,True,True,,,"```json
+[""洗手池""]
+```"
+qwen-base,n02881193_11176,bowl,True,True,,,"```json
+[""布丁""]
+```"
+qwen-base,n02881193_4824,bowl,True,True,,,"```json
+[
+    ""玻璃瓶""
+]
+```"
+qwen-base,n02881193_2868,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-base,n02881193_11871,bowl,True,True,,,"```json
+[""金属容器""]
+```"
+qwen-base,n02881193_3628,bowl,True,True,,,"```json
+[""电话""]
+```"
+qwen-base,n02881193_5862,bowl,True,True,,,"```json
+[""调味瓶"", ""调味瓶"", ""调味瓶"", ""调味瓶"", ""调味瓶"", ""调味瓶""]
+```"
+qwen-base,n02881193_7691,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-base,n02881193_4175,bowl,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-base,n02881193_4860,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-base,n02881193_4031,bowl,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-base,n02881193_32,bowl,True,True,,,"```json
+[""陶瓷器皿""]
+```"
+qwen-base,n02881193_3345,bowl,True,True,,,"```json
+[""贝壳""]
+```"
+qwen-base,n02881193_4641,bowl,True,True,,,"```json
+[""茶壶""]
+```"
+qwen-base,n02881193_63,bowl,True,True,,,"```json
+[""苹果""]
+```"
+qwen-base,n02881193_9794,bowl,True,True,,,"```json
+[""木盘""]
+```"
+qwen-base,n02881193_269,bowl,True,True,,,"```json
+[""花盆""]
+```"
+qwen-base,n02881193_4314,bowl,True,True,orange,orange,"```json
+[""茶壶"", ""橙子""]
+```"
+qwen-base,n02881193_4330,bowl,True,True,cup,cup,"```json
+[""杯子""]
+```"
+qwen-base,n02881193_4222,bowl,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n02881193_6185,bowl,True,True,cat,cat,"```json
+[""猫""]
+```"
+qwen-base,n02881193_722,bowl,True,True,cat,cat,"```json
+[""猫""]
+```"
+qwen-base,n02881193_882,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-base,n02881193_430,bowl,True,True,,,"[""花盆""]"
+qwen-base,n02881193_3624,bowl,True,True,,,"```json
+[""陶罐""]
+```"
+qwen-base,n02881193_872,bowl,True,True,,,"[""陶瓷""]"
+qwen-base,n02881193_855,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-base,n02881193_5883,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-base,n02881193_8843,bowl,True,True,,,"```json
+[""手镯""]
+```"
+qwen-base,n02881193_9609,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-base,n02881193_9860,bowl,True,True,,,"[""水槽""]"
+qwen-base,n02881193_10196,bowl,True,True,,,"```json
+[""玻璃容器""]
+```"
+qwen-base,n02881193_10500,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-base,n02881193_3035,bowl,True,False,cup,bowl|cup,"```json
+[""杯子"", ""碗""]
+```"
+qwen-base,n02881193_473,bowl,True,True,cup,cup,"```json
+[""玻璃杯""]
+```"
+qwen-base,n02881193_3716,bowl,True,True,cup,cup,"[""茶杯""]"
+qwen-base,n03790512_4210,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_18905,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [35, 87, 421, 310], ""类别名称>
+]
+```"
+qwen-base,n03790512_11817,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [150, 94, 468, 320], ""类别名称"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_8344,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [108, 0, 252, 168], ""label"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_5309,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_11358,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 109, 478, 376], ""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_4645,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 194, 205, 504], ""category"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_11788,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_13920,motorcycle,True,True,,,"```json
+[""三轮车""]
+```"
+qwen-base,n03790512_13214,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_21377,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_6003,motorcycle,True,True,,,"```json
+[""救护车""]
+```"
+qwen-base,n03790512_24878,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_8474,motorcycle,True,True,,,"```json
+[""踏板车""]
+```"
+qwen-base,n03790512_7775,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_6771,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""出租车""}
+]
+```"
+qwen-base,n03790512_1543,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_2441,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_3446,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_1410,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""汽车""},
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_10050,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_12415,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_13666,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [119, 134, 280, 376], ""category"": ""摩托车""},
+	{""bbox_2d"": [450"
+qwen-base,n03790512_156,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [10, 87, 223, 254], ""主要物体类别"": ""摩托车""},
+	{""bbox_2d"": [226"
+qwen-base,n03790512_14208,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_5632,motorcycle,True,True,,,"```json
+[
+    ""马车""
+]
+```"
+qwen-base,n03790512_5962,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""警察""}
+]
+```"
+qwen-base,n03790512_6431,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_13786,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_3998,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 245, 233, 302], ""category"": ""摩托车}
+]
+```"
+qwen-base,n03790512_9748,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_39543,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [19, 114, 420, 336], ""主要物体类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_2832,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_25665,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 100, 304, 385], ""category_name"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_8982,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""警察""}
+]
+```"
+qwen-base,n03790512_14668,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n03790512_10899,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-base,n04251791_8152,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_1843,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_4341,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [126, 95, 243, 187], ""category"": ""滑雪者}
+]
+```"
+qwen-base,n04251791_7231,snowboard,True,True,skateboard,skateboard,"```json
+[""滑板""]
+```"
+qwen-base,n04251791_5495,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_10015,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_4470,snowboard,True,True,skateboard,skateboard,"```json
+[""滑板""]
+```"
+qwen-base,n04251791_8199,snowboard,True,True,,,"```json
+[""店铺""]
+```"
+qwen-base,n04251791_6958,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_5280,snowboard,True,True,,,"```json
+[""冲浪板""]
+```"
+qwen-base,n04251791_4868,snowboard,True,True,motorcycle,motorcycle,"```json
+[""雪地摩托""]
+```"
+qwen-base,n04251791_34,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [103, 289, 324, 336], ""类别名称"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_11381,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [169, 157, 264, 428], ""category"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_3123,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 0, 336, 504], ""category"": ""户外场景}
+]
+```"
+qwen-base,n04251791_2822,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_6215,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_3559,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_7969,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [120, 378, 264, 400], ""主要物体的类别""滑雪板""},
+	{""bbox_2d"": ["
+qwen-base,n04251791_10070,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_747,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [106, 158, 283, 347], ""category"": ""滑雪板}
+]
+```"
+qwen-base,n04251791_4151,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_8922,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_2553,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_10730,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_4175,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [17, 130, 456, 415], ""主要物体的类别"": ""雪地""}
+]
+```"
+qwen-base,n04251791_8009,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_10373,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_9419,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_10577,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_8939,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_2393,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [89, 304, 145, 357], ""category_name"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_3171,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [84, 115, 120, 359], ""类别名称"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_490,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [69, 301, 317, 345], ""category: ""滑雪板""}
+]
+```"
+qwen-base,n04251791_9130,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [53, 387, 330, 416], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_8773,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_5790,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [180, 35, 254, 127], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_11155,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [109, 53, 164, 127], ""category"": ""滑雪者""}
+]
+```"
+qwen-base,n04251791_8617,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_9974,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_7866,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_9454,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_2435,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_2759,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [135, 24, 160, 48], ""label"": ""滑雪头套""}
+]
+```"
+qwen-base,n04251791_7804,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_8712,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_7104,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_7886,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_1895,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [154, 26, 300, 252], ""主要物体的类别"": ""滑雪者""},
+	{""bbox_2d"": ["
+qwen-base,n04251791_6220,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [63, 135, 204, 150], ""类别名称>滑雪板
+]
+```"
+qwen-base,n04251791_4310,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 202, 222, 390], ""category"": ""滑雪者}
+]
+```"
+qwen-base,n04251791_3776,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_4574,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_6885,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_7319,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_10886,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [194, 156, 423, 360], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_749,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [19, 430, 221, 480], ""category"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_7732,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_8778,snowboard,False,True,,,"```json
+[
+	{""类别"": ""雪地""}
+]
+```"
+qwen-base,n04251791_10530,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 1, 504, 308], ""category"": ""滑雪比赛}
+]
+```"
+qwen-base,n04251791_8415,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_3636,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 119, 228, 316], ""category"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_8167,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_5993,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_11365,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_10666,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [109, 130, 345, 276], ""类别"": ""滑雪者""},
+	{""bbox_2d"": [28"
+qwen-base,n04251791_7593,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_5336,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [17, 324, 269, 358], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_624,snowboard,True,True,,,"```json
+[
+    ""雪橇""
+]
+```"
+qwen-base,n04251791_10047,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_9002,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_2485,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_7764,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_898,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_2151,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_3092,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-base,n04251791_7404,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [153, 106, 327, 178], ""类别名称"": ""滑雪板""}
+]
+```"
+qwen-base,n03761084_4805,microwave,False,True,,,"```json
+[
+	{""类别"": ""冰箱""}
+]
+```"
+qwen-base,n03761084_5014,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_5097,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_311,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_2916,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_6151,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_3634,microwave,True,True,oven,oven,"```json
+[""电烤箱""]
+```"
+qwen-base,n03761084_212,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_2596,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_6238,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_5935,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_5545,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-base,n03761084_6304,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_2532,microwave,False,True,,,"```json
+[
+	{""类别"": ""冰箱""}
+]
+```"
+qwen-base,n03761084_11952,microwave,False,True,,,"```json
+[
+	{""类别"": ""冰箱""}
+]
+```"
+qwen-base,n03761084_17942,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_2048,microwave,False,True,,,"```json
+[
+	{""类别"": ""冰箱""}
+]
+```"
+qwen-base,n03761084_8980,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_26204,microwave,False,True,,,"```json
+[
+	{""类别"": ""微波炉""}
+]
+```"
+qwen-base,n03761084_12808,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_12460,microwave,True,True,,,"```json
+[""冰箱""]
+```"
+qwen-base,n03761084_17172,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [30, 7
+
+ addCriterion
+
+ addCriterion
+
+ addCriterion
+
+ addCriterion
+
+ addCriterion
+
+ addCriterion
+
+ addCriterion
+
+"
+qwen-base,n03761084_1881,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-base,n03761084_8911,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_5690,microwave,True,True,oven,oven,"```json
+[
+    ""烤箱""
+]
+```"
+qwen-base,n03761084_15576,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-base,n03761084_6607,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_5509,microwave,True,True,,,"```json
+[
+    ""厨房""
+]
+```"
+qwen-base,n03761084_12674,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_16010,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 1, 420, 332], ""category"": ""厨房}
+]
+```"
+qwen-base,n03761084_8938,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-base,n03761084_13568,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_12970,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-base,n03761084_13340,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_23164,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-base,n03761084_977,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_15921,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [17, 69, 103, 245], ""category"": ""烤箱""},
+	{""bbox_2d"": [108,"
+qwen-base,n03761084_15107,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_10637,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_14376,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_43050,microwave,True,True,,,"```json
+[
+    ""笔记本电脑""
+]
+```"
+qwen-base,n03761084_25328,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-base,n03761084_2616,microwave,True,False,oven,microwave|oven,"```json
+[""微波炉"", ""烤箱"", ""洗衣机""]
+```"
+qwen-base,n03761084_3484,microwave,True,False,oven,microwave|oven,"```json
+[""微波炉"", ""烤箱""]
+```"
+qwen-base,n03761084_40830,microwave,True,True,oven,oven,"```json
+[
+    ""烤箱""
+]
+```"
+qwen-base,n03761084_2845,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_1756,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_12665,microwave,True,False,oven,microwave|oven,"```json
+[""微波炉"", ""冰箱"", ""烤箱""]
+```"
+qwen-base,n03761084_6558,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-base,n03761084_2278,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_13766,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_47385,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_25053,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_9944,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_8965,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_698,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [165, 309, 451, 387], ""category_name"": ""烤箱""},
+	{""bbox_2d"": [1"
+qwen-base,n03761084_9715,microwave,True,False,oven,microwave|oven,"```json
+[
+    ""烤箱"",
+    ""微波炉"",
+    ""咖啡机""
+]
+```"
+qwen-base,n03761084_771,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-base,n03761084_11033,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_2471,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_2025,microwave,True,True,oven,oven,"```json
+[
+    ""烤箱""
+]
+```"
+qwen-base,n03761084_26102,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_1855,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_40980,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-base,n03761084_24847,microwave,False,True,,,"```json
+[
+	{""类别"": ""冰箱""}
+]
+```"
+qwen-base,n03761084_5937,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_9372,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_12812,microwave,True,True,oven,oven,"```json
+[
+    ""烤箱""
+]
+```"
+qwen-base,n03761084_16804,microwave,True,False,oven,microwave|oven,"```json
+[
+    ""烤箱"",
+    ""微波炉"",
+    ""冰箱"",
+    ""橱柜"",
+    ""台面""
+]
+```"
+qwen-base,n03761084_1577,microwave,True,True,,,"```json
+[
+    ""厨房""
+]
+```"
+qwen-base,n03761084_11926,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_3876,microwave,True,True,,,"```json
+[
+    ""冰箱""
+]
+```"
+qwen-base,n03761084_10934,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_9445,microwave,False,True,,,"```json
+[
+	{""类别"": ""人""}
+]
+```"
+qwen-base,n03761084_13992,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_3387,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_10304,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_11551,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-base,n03761084_2113,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-base,n03761084_15606,microwave,True,True,oven,oven,"```json
+[
+    ""烤箱""
+]
+```"
+qwen-base,n03761084_6999,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-base,n03761084_11489,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-base,n03761084_11012,microwave,False,True,,,"```json
+[
+	{""类别"": ""冰箱""}
+]
+```"
+qwen-base,n03761084_12490,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房用具""}
+]
+```"
+qwen-base,n03761084_42297,microwave,True,True,oven,oven,"```json
+[
+    ""烤箱"",
+    ""冰箱"",
+    ""橱柜""
+]
+```"
+qwen-base,n02121620_7864,cat,False,True,,,"```json
+[
+	{""类别"": ""婴儿车""}
+]
+```"
+qwen-base,n02121620_31256,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 19, 304, 364], ""category"": ""狗""},
+	{""bbox_2d"": [252, 1"
+qwen-base,n02121620_23335,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 48, 195, 615], ""label"": ""猫""}
+]
+```"
+qwen-base,n02121620_3837,cat,True,True,,,"```json
+[""狮子""]
+```"
+qwen-base,n02121620_13005,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [97, 54, 120, 86], ""label"": ""猫""}
+]
+```"
+qwen-base,n02121620_15504,cat,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-base,n02121620_4078,cat,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-base,n02121620_12058,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [183, 104, 256, 147], ""category"": ""相机""}
+]
+```"
+qwen-base,n02121620_34554,cat,True,True,,,"```json
+[""狗""]
+```"
+qwen-base,n02121620_3453,cat,True,True,,,"```json
+[""狗""]
+```"
+qwen-base,n02121620_32023,cat,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-base,n07639069_8132,donut,True,True,,,"```json
+[""霓虹灯""]
+```"
+qwen-base,n07639069_11086,donut,True,True,,,"```json
+[""巧克力""]
+```"
+qwen-base,n07639069_11202,donut,True,True,,,"```json
+[""糕点""]
+```"
+qwen-base,n07639069_3874,donut,True,True,,,"```json
+[""三明治""]
+```"
+qwen-base,n07639069_33727,donut,True,True,,,"```json
+[""标志牌""]
+```"
+qwen-base,n07639069_34034,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈店""}
+]
+```"
+qwen-base,n07639069_5147,donut,True,True,,,"```json
+[""毛绒玩具""]
+```"
+qwen-base,n07639069_2390,donut,True,True,,,"```json
+[""面包""]
+```"
+qwen-base,n07639069_33933,donut,True,True,,,"```json
+[""面粉"", ""牛奶"", ""糖"", ""黄油"", ""鸡蛋"", ""面包屑""]
+```"
+qwen-base,n07639069_33749,donut,True,True,,,"```json
+[""雕塑""]
+```"
+qwen-base,n07639069_11342,donut,True,True,,,"```json
+[""巧克力蛋糕""]
+```"
+qwen-base,n07639069_3679,donut,True,True,,,"```json
+[""甜点""]
+```"
+qwen-base,n07639069_10814,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_30260,donut,True,True,,,"```json
+[""蛋糕""]
+```"
+qwen-base,n07639069_16504,donut,False,True,,,"```json
+[
+	{""类别"": ""宇航员""}
+]
+```"
+qwen-base,n07639069_10369,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_33815,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""},
+	{""类别"": ""橙子""},
+	{""类别"": ""苹果""},
+	{""类别"": ""香蕉""},
+	{""类别"": ""李子""}
+]
+```"
+qwen-base,n07639069_7520,donut,False,True,,,"```json
+[
+	{""类别"": ""咖啡杯""}
+]
+```"
+qwen-base,n07639069_26598,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_23551,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_9426,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""},
+	{""类别"": ""咖啡""}
+]
+```"
+qwen-base,n07639069_12642,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_16869,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_33128,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_11788,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_3360,donut,True,True,cup,cup,"```json
+[""纸杯蛋糕""]
+```"
+qwen-base,n07639069_9517,donut,False,True,,,"```json
+[
+	{""类别"": ""炸油条""}
+]
+```"
+qwen-base,n07639069_26420,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_4175,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_17257,donut,True,True,,,"```json
+[""甜点""]
+```"
+qwen-base,n07639069_12617,donut,True,False,cup,cup|donut,"```json
+[""甜甜圈"", ""纸杯蛋糕""]
+```"
+qwen-base,n07639069_36308,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_12757,donut,False,True,,,"```json
+[
+	{""类别"": ""甜点""}
+]
+```"
+qwen-base,n07639069_11783,donut,True,True,,,"```json
+[
+    ""饼干""
+]
+```"
+qwen-base,n07639069_19319,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_7963,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_23835,donut,False,True,,,"```json
+[
+	{""类别"": ""咖啡""},
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_3184,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-base,n07639069_33911,donut,True,True,,,"```json
+[
+    ""面包""
+]
+```"
+qwen-base,n03614007_9987,keyboard,True,True,,,"```json
+[""钢琴键""]
+```"
+qwen-base,n03614007_3990,keyboard,True,True,,,"```json
+[""笔记本电脑""]
+```"
+qwen-base,n03614007_5123,keyboard,True,True,,,"```json
+[""电子琴""]
+```"
+qwen-base,n03614007_2076,keyboard,True,True,,,"```json
+[""折纸""]
+```"
+qwen-base,n03614007_10966,keyboard,True,True,,,"```json
+[""电话""]
+```"
+qwen-base,n03614007_21630,keyboard,True,True,,,"```json
+[""钢琴键""]
+```"
+qwen-base,n03614007_1710,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-base,n03614007_8040,keyboard,True,True,,,"```json
+[""笔记本电脑""]
+```"
+qwen-base,n03614007_5357,keyboard,True,True,,,"```json
+[""计算器""]
+```"
+qwen-base,n03614007_28105,keyboard,True,True,,,"```json
+[
+    ""手机""
+]
+```"
+qwen-base,n03614007_28878,keyboard,True,True,,,"```json
+[""钢琴键""]
+```"
+qwen-base,n03614007_23360,keyboard,True,True,,,"```json
+[
+    ""笔记本电脑""
+]
+```"
+qwen-base,n03614007_23638,keyboard,True,True,,,"```json
+[""笔记本电脑""]
+```"
+qwen-base,n03614007_4384,keyboard,False,True,,,"```json
+[
+	{""类别"": ""键盘""}
+]
+```"
+qwen-base,n03614007_26066,keyboard,True,True,,,"```json
+[""合成器""]
+```"
+qwen-base,n03614007_3067,keyboard,True,True,,,"```json
+[""计算器""]
+```"
+qwen-base,n03614007_25584,keyboard,True,True,,,"```json
+[
+    ""笔记本电脑""
+]
+```"
+qwen-base,n03614007_993,keyboard,False,True,,,"```json
+[
+	{""类别"": ""键盘""}
+]
+```"
+qwen-base,n03614007_320,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-base,n03614007_2671,keyboard,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-base,n03614007_5598,keyboard,False,True,,,"```json
+[
+	{""类别"": ""键盘""}
+]
+```"
+qwen-base,n03614007_28877,keyboard,False,True,,,"```json
+[
+	{""类别"": ""显示器""}
+]
+```"
+qwen-base,n03614007_8486,keyboard,True,True,,,"```json
+[
+    ""电脑""
+]
+```"
+qwen-base,n03614007_18610,keyboard,False,True,,,"```json
+[
+	{""类别"": ""键盘""}
+]
+```"
+qwen-base,n03614007_2333,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-base,n03614007_3007,keyboard,True,True,chair,chair,"```json
+[""电脑"", ""椅子""]
+```"
+qwen-base,n03614007_527,keyboard,True,True,,,"```json
+[""台式电脑""]
+```"
+qwen-base,n03614007_6222,keyboard,True,True,,,"```json
+[""笔记本电脑""]
+```"
+qwen-base,n03614007_7980,keyboard,True,True,,,"```json
+[""电子琴""]
+```"
+qwen-base,n03614007_25443,keyboard,True,True,,,"```json
+[""笔记本电脑""]
+```"
+qwen-base,n03614007_25216,keyboard,True,True,cat,cat,"```json
+[""猫爪""]
+```"
+qwen-base,n03614007_27516,keyboard,True,True,,,"```json
+[
+    ""笔记本电脑""
+]
+```"
+qwen-base,n03614007_3090,keyboard,True,True,,,"```json
+[""风琴""]
+```"
+qwen-base,n03614007_8260,keyboard,True,True,,,"```json
+[""电子琴""]
+```"
+qwen-base,n03614007_29234,keyboard,True,True,,,"```json
+[""戒指""]
+```"
+qwen-base,n07747607_19786,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07747607_34010,orange,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-base,n07747607_15938,orange,True,True,,,"```json
+[""柠檬"", ""苹果""]
+```"
+qwen-base,n07747607_21826,orange,False,True,,,"```json
+[
+	{""类别"": ""水果""}
+]
+```"
+qwen-base,n07747607_28253,orange,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-base,n07747607_3723,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07747607_21851,orange,True,True,,,"```json
+[""网状物""]
+```"
+qwen-base,n07747607_28065,orange,True,True,,,"```json
+[""蜗牛""]
+```"
+qwen-base,n07747607_19866,orange,True,True,,,"```json
+[""水果沙拉""]
+```"
+qwen-base,n07747607_19628,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07747607_18812,orange,True,True,,,"```json
+[""榴莲""]
+```"
+qwen-base,n07747607_28321,orange,True,True,,,"```json
+[""姜""]
+```"
+qwen-base,n07747607_17158,orange,True,True,,,"```json
+[""柠檬"", ""青柠""]
+```"
+qwen-base,n07747607_28748,orange,True,True,,,"```json
+[""篮子""]
+```"
+qwen-base,n07747607_22653,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07747607_9209,orange,False,True,,,"```json
+[
+	""橙子""
+}
+```"
+qwen-base,n07747607_2730,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07747607_4283,orange,True,True,,,"```json
+[
+    ""水果摊""
+]
+```"
+qwen-base,n07747607_19598,orange,True,True,bowl,bowl,"```json
+[""碗""]
+```"
+qwen-base,n07747607_3517,orange,True,True,,,"```json
+[""金桔""]
+```"
+qwen-base,n07747607_15770,orange,True,True,,,"```json
+[""沙拉""]
+```"
+qwen-base,n07747607_644,orange,False,True,,,"```json
+[
+	{""类别"": ""水果""}
+]
+```"
+qwen-base,n07747607_16280,orange,False,True,,,"```json
+[
+	{""类别"": ""糖果""},
+	{""类别"": ""玩具""},
+	{""类别"": ""手工制品""},
+	{""类别"": ""食物""},
+	{""类别"": ""手工制品""},
+	{""类别"": ""手工制品"
+qwen-base,n07747607_29700,orange,True,True,,,"```json
+[""水果摊""]
+```"
+qwen-base,n07747607_11066,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07747607_4726,orange,True,True,,,"```json
+[
+    ""水果""
+]
+```"
+qwen-base,n07747607_9452,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07747607_12768,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07747607_12237,orange,True,True,,,"```json
+[""南瓜""]
+```"
+qwen-base,n07747607_16833,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-base,n07873807_3809,pizza,True,True,,,"```json
+[""墨西哥玉米饼""]
+```"
+qwen-base,n07873807_9413,pizza,False,True,,,"```json
+[
+	{""bbox_2d"": [61, 179, 458, 330], ""主要物体的类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_11678,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_12726,pizza,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 67, 420, 415], ""label"": ""披萨""}
+]
+```"
+qwen-base,n07873807_7312,pizza,True,True,,,"```json
+[""蛋糕""]
+```"
+qwen-base,n07873807_11533,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_8571,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_1192,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_9510,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_10777,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_2401,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_7226,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_2561,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-base,n07873807_10221,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n03001627_368,chair,True,True,couch,couch,"```json
+[""沙发""]
+```"
+qwen-old,n03001627_792,chair,True,True,couch,couch,"```json
+[""沙发""]
+```"
+qwen-old,n03001627_5048,chair,True,True,,,"```json
+[""花盆""]
+```"
+qwen-old,n03001627_11865,chair,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n03001627_1193,chair,True,True,couch,couch,"```json
+[""沙发""]
+```"
+qwen-old,n03001627_9421,chair,False,True,,,"```json
+[
+	{""bbox_2d"": [103, 242, 225, 364], ""category"": ""椅子}
+]
+```"
+qwen-old,n03001627_3248,chair,False,True,,,"```json
+[
+	""椅子""
+}
+```"
+qwen-old,n03001627_9573,chair,True,True,,,"```json
+[""床单""]
+```"
+qwen-old,n03001627_9085,chair,False,True,,,"```json
+[
+	{""bbox_2d"": [65, 243, 219, 440], ""主要物体的类别"": ""椅子""}
+]
+```"
+qwen-old,n03001627_2684,chair,True,True,,,"```json
+[""火车""]
+```"
+qwen-old,n03001627_5111,chair,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n03001627_1746,chair,False,True,,,"```json
+[
+	""椅子""
+}
+```"
+qwen-old,n03001627_1797,chair,False,True,,,"```json
+[
+	{""类别"": ""桌子""}
+]
+```"
+qwen-old,n03001627_10703,chair,True,True,couch,couch,"```json
+[""沙发""]
+```"
+qwen-old,n03001627_2901,chair,False,True,,,"```json
+[
+	""椅子""
+}
+```"
+qwen-old,n03001627_559,chair,True,True,,,"```json
+[""灯泡""]
+```"
+qwen-old,n03147509_11618,cup,False,True,,,"```json
+[
+	{""类别"": ""杯子""}
+]
+```"
+qwen-old,n03147509_20561,cup,True,True,,,"```json
+[""咖啡机""]
+```"
+qwen-old,n03147509_11875,cup,True,True,,,"```json
+[""烟灰缸""]
+```"
+qwen-old,n03147509_802,cup,False,True,,,"```json
+[
+	""咖啡杯""
+}
+```"
+qwen-old,n03147509_5048,cup,True,True,,,"```json
+[""人""]
+```"
+qwen-old,n03147509_20663,cup,False,True,,,"```json
+[
+	{""bbox_2d"": [108, 395, 294, 437], ""category"": ""盘子}
+]
+```"
+qwen-old,n03147509_17441,cup,True,False,bowl,bowl|cup,"```json
+[""花瓶"", ""茶杯"", ""碗""]
+```"
+qwen-old,n03147509_17845,cup,False,True,,,"```json
+[
+	{""类别"": ""杯子""}
+]
+```"
+qwen-old,n03147509_16749,cup,False,True,,,"```json
+[
+	{""类别"": ""咖啡杯""}
+]
+```"
+qwen-old,n03147509_1784,cup,False,True,,,"```json
+[
+	{""类别"": ""茶杯""}
+]
+```"
+qwen-old,n03147509_19159,cup,True,True,pizza,pizza,"```json
+[""披萨""]
+```"
+qwen-old,n03147509_5714,cup,True,True,,,"```json
+[""咖啡豆""]
+```"
+qwen-old,n03147509_22907,cup,True,True,,,"```json
+[""咖啡豆""]
+```"
+qwen-old,n03147509_5550,cup,True,True,,,"```json
+[""巧克力""]
+```"
+qwen-old,n02834778_9345,bicycle,False,True,,,"```json
+[
+	{""类别"": ""自行车""}
+]
+```"
+qwen-old,n02834778_1985,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_9061,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_1895,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_9077,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_8890,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_7078,bicycle,False,True,,,"```json
+[
+	{""bbox_2d"": [156, 214, 493, 478], ""label"": ""自行车""}
+]
+```"
+qwen-old,n02834778_6586,bicycle,False,True,,,"```json
+[
+	{""bbox_2d"": [71, 48, 395, 336], ""category_name"": ""自行车""}
+]
+```"
+qwen-old,n02834778_17153,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_3002,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_1278,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_1396,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_728,bicycle,False,True,,,"```json
+[
+	{""bbox_2d"": [183, 49, 437, 256], ""category_name"": ""自行车""}
+]
+```"
+qwen-old,n02834778_4250,bicycle,False,True,,,"```json
+[
+	{""bbox_2d"": [74, 165, 180, 283], ""主要物体类别"": ""自行车""}
+]
+```"
+qwen-old,n02834778_4640,bicycle,False,True,,,"```json
+[
+	{""bbox_2d"": [58, 179, 153, 336], ""主要物体的类别"": ""自行车""}
+]
+```"
+qwen-old,n02834778_12089,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_5634,bicycle,False,True,,,"```json
+[
+	{""bbox_2d"": [234, 110, 390, 245], ""label"": ""自行车""}
+]
+```"
+qwen-old,n02834778_1832,bicycle,True,True,,,"```json
+[""羊""]
+```"
+qwen-old,n02834778_5383,bicycle,False,True,,,"```json
+[
+	""自行车赛""
+}
+```"
+qwen-old,n02834778_98,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n02834778_10841,bicycle,False,True,,,"```json
+[
+	""自行车""
+}
+```"
+qwen-old,n04225987_6226,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 3, 204, 587], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_3383,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_3838,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_3635,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [147, 259, 243, 318], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_3706,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_316,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_5128,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_2297,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [189, 107, 234, 145], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_202,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [70, 368, 140, 504], ""label: 滑板}
+]
+```"
+qwen-old,n04225987_5215,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [249, 53, 417, 268], ""label"": ""滑板的人""}
+]
+```"
+qwen-old,n04225987_4942,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_3212,skateboard,False,True,,,"```json
+[
+	""滑板""
+}
+```"
+qwen-old,n04225987_483,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_4165,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [119, 204, 157, 238], ""main_category"": ""滑板""}
+]
+```"
+qwen-old,n04225987_1815,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [73, 36, 345, 408], ""label: 滑板}
+]
+```"
+qwen-old,n04225987_6004,skateboard,False,True,,,"```json
+[
+	""滑板""
+}
+```"
+qwen-old,n04225987_2184,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [345, 109, 426, 167], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_4933,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [174, 250, 326, 338], ""main_object_name"": ""楼梯""}
+]
+```"
+qwen-old,n04225987_4643,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [135, 289, 264, 370], ""main_object_name"": ""滑板""}
+]
+```"
+qwen-old,n04225987_1393,skateboard,False,True,,,"```json
+[
+	""滑板""
+}
+```"
+qwen-old,n04225987_4050,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_388,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [230, 150, 284, 216], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_2201,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板车""}
+]
+```"
+qwen-old,n04225987_2882,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [168, 230, 245, 407], ""category"": ""滑板}
+]
+```"
+qwen-old,n04225987_6011,skateboard,False,True,,,"```json
+[
+	""滑板""
+}
+```"
+qwen-old,n04225987_2600,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [96, 7
+
+ addCriterion
+
+ addCriterion
+
+
+ addCriterion
+
+
+ addCriterion
+
+
+ addCriterion
+
+
+"
+qwen-old,n04225987_5927,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [89, 196, 194, 250], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_11183,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [153, 160, 209, 247], ""label"": ""人""}
+]
+```"
+qwen-old,n04225987_14233,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_2620,skateboard,False,True,,,"```json
+[
+	{""类别"": ""滑板""}
+]
+```"
+qwen-old,n04225987_3292,skateboard,False,True,,,"```json
+[
+	{""bbox_2d"": [118, 179, 165, 194], ""主要物体的类别"": ""脚""},
+	{""bbox_2d"": ["
+qwen-old,n03862676_11605,oven,True,True,microwave,microwave,"```json
+[""微波炉""]
+```"
+qwen-old,n03862676_16681,oven,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03862676_3918,oven,True,True,microwave,microwave,"```json
+[""微波炉""]
+```"
+qwen-old,n03862676_13333,oven,False,True,,,"```json
+[
+	""烤箱""
+}
+```"
+qwen-old,n03862676_17941,oven,True,True,,,"```json
+[""炉灶""]
+```"
+qwen-old,n03862676_5204,oven,False,True,,,"```json
+[
+	""烤箱""
+}
+```"
+qwen-old,n03862676_13004,oven,True,True,,,"```json
+[""老鼠""]
+```"
+qwen-old,n03862676_6517,oven,False,True,,,"```json
+[
+	""冰箱""
+}
+```"
+qwen-old,n03862676_11511,oven,False,True,,,"```json
+[
+	{""类别"": ""披萨炉""}
+]
+```"
+qwen-old,n03862676_10040,oven,True,True,,,"```json
+[
+	""冰箱""
+]
+```"
+qwen-old,n03862676_15962,oven,False,True,,,"```json
+[
+	{""bbox_2d"": [346, 120, 353, 137], ""category"": ""钟表""}
+]
+```"
+qwen-old,n03862676_8028,oven,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03862676_2036,oven,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03862676_11755,oven,True,True,,,"```json
+[""厨房""]
+```"
+qwen-old,n03862676_18969,oven,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03862676_15850,oven,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03862676_838,oven,False,True,,,"```json
+[
+	""烤箱""
+}
+```"
+qwen-old,n03862676_8789,oven,True,True,,,"```json
+[""炉子""]
+```"
+qwen-old,n03862676_17927,oven,False,True,,,"```json
+[
+	""烤箱""
+}
+```"
+qwen-old,n03862676_9499,oven,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03862676_11466,oven,True,True,,,"```json
+[""厨房""]
+```"
+qwen-old,n03862676_7769,oven,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03862676_6507,oven,True,True,,,"```json
+[""火""]
+```"
+qwen-old,n04256520_42523,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_17621,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_34868,couch,False,True,,,"```json
+[
+	""沙发""
+}
+```"
+qwen-old,n04256520_1467,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [189, 190, 224, 235], ""category"": ""向
+ addCriterion
+"
+qwen-old,n04256520_1542,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_872,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [318, 124, 504, 360], ""category"": ""沙发""}
+]
+```"
+qwen-old,n04256520_18313,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 104, 504, 300], ""主要物体的类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_4078,couch,False,True,,,"```json
+[
+	""沙发""
+}
+```"
+qwen-old,n04256520_6725,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [80, 164, 425, 297], ""category_name"": ""沙发""}
+]
+```"
+qwen-old,n04256520_30243,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_987,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_40269,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_792,couch,True,True,,,"```json
+[""藤蔓植物""]
+```"
+qwen-old,n04256520_1414,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_855,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_5620,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_14696,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_34852,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_23341,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [47, 35, 116, 108], ""category"": ""画框""},
+	{""bbox_2d"": [47, "
+qwen-old,n04256520_38553,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_21959,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_331,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_24989,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_929,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [137, 184, 269, 370], ""category"": ""条纹连衣裙}
+]
+```"
+qwen-old,n04256520_29307,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_4286,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_23073,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_10229,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [17, 96, 208, 359], ""主要物体的类别"": ""人""}
+]
+```"
+qwen-old,n04256520_509,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [94, 116, 135, 137], ""category"": ""书""}
+]
+```"
+qwen-old,n04256520_165,couch,False,True,,,"```json
+[
+	""沙发""
+}
+```"
+qwen-old,n04256520_815,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_21966,couch,False,True,,,"```json
+[
+	""沙发""
+}
+```"
+qwen-old,n04256520_1536,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_1366,couch,True,True,chair,chair,"```json
+[""扶手椅""]
+```"
+qwen-old,n04256520_4791,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n04256520_3683,couch,False,True,,,"```json
+[
+	{""bbox_2d"": [61, 107, 514, 379], ""category"": ""沙发}
+]
+```"
+qwen-old,n04256520_26625,couch,False,True,,,"```json
+[
+	{""类别"": ""沙发""}
+]
+```"
+qwen-old,n02881193_3978,bowl,True,True,,,"```json
+[""筷子""]
+```"
+qwen-old,n02881193_6127,bowl,True,True,,,"```json
+[""鸡蛋""]
+```"
+qwen-old,n02881193_6583,bowl,True,True,,,"```json
+[""无图""]
+```"
+qwen-old,n02881193_3524,bowl,True,True,cup,cup,"```json
+[""茶杯""]
+```"
+qwen-old,n02881193_1593,bowl,True,True,,,"```json
+[""锅""]
+```"
+qwen-old,n02881193_2125,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_4423,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_7326,bowl,True,True,,,"```json
+[""水槽""]
+```"
+qwen-old,n02881193_4385,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_12096,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-old,n02881193_9634,bowl,True,True,,,"```json
+[""纽扣""]
+```"
+qwen-old,n02881193_1990,bowl,True,True,,,"```json
+[""水槽""]
+```"
+qwen-old,n02881193_8227,bowl,True,True,,,"```json
+[""雨伞""]
+```"
+qwen-old,n02881193_6220,bowl,True,True,cup,cup,"```json
+[""茶杯""]
+```"
+qwen-old,n02881193_695,bowl,True,True,,,"```json
+[""水槽""]
+```"
+qwen-old,n02881193_6228,bowl,True,True,,,"```json
+[""蝴蝶""]
+```"
+qwen-old,n02881193_1618,bowl,True,True,,,"```json
+[""贝壳""]
+```"
+qwen-old,n02881193_4591,bowl,True,True,,,"```json
+[""苹果""]
+```"
+qwen-old,n02881193_8371,bowl,True,True,cup,cup,"```json
+[""茶杯""]
+```"
+qwen-old,n02881193_598,bowl,True,True,cup,cup,"```json
+[""玻璃杯""]
+```"
+qwen-old,n02881193_1722,bowl,True,True,,,"```json
+[""陶瓷""]
+```"
+qwen-old,n02881193_5176,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-old,n02881193_2927,bowl,True,True,,,"```json
+[""鸡蛋""]
+```"
+qwen-old,n02881193_8326,bowl,True,False,cup,bowl|cup,"```json
+[""碗"", ""杯子""]
+```"
+qwen-old,n02881193_4776,bowl,True,True,,,"```json
+[""木罐""]
+```"
+qwen-old,n02881193_11143,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_2122,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-old,n02881193_1078,bowl,True,True,,,"```json
+[""狗粮""]
+```"
+qwen-old,n02881193_3319,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-old,n02881193_10076,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-old,n02881193_11971,bowl,False,True,,,"```json
+[
+	{""类别"": ""桌子""}
+]
+```"
+qwen-old,n02881193_3164,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-old,n02881193_4503,bowl,True,True,cup,cup,"```json
+[""杯子""]
+```"
+qwen-old,n02881193_2898,bowl,True,True,cup,cup,"```json
+[""杯子""]
+```"
+qwen-old,n02881193_2476,bowl,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n02881193_9976,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_1957,bowl,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-old,n02881193_4968,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-old,n02881193_3131,bowl,True,True,,,"```json
+[""燕麦粥""]
+```"
+qwen-old,n02881193_277,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-old,n02881193_1037,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-old,n02881193_3594,bowl,True,True,,,"```json
+[""灯泡""]
+```"
+qwen-old,n02881193_7228,bowl,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-old,n02881193_2323,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_11176,bowl,True,True,,,"```json
+[""布丁""]
+```"
+qwen-old,n02881193_4824,bowl,True,True,,,"```json
+[""玻璃瓶""]
+```"
+qwen-old,n02881193_2868,bowl,True,True,,,"```json
+[""盘子""]
+```"
+qwen-old,n02881193_5815,bowl,False,True,,,"```json
+[
+	""碗""
+}
+```"
+qwen-old,n02881193_11871,bowl,True,True,,,"```json
+[""金属容器""]
+```"
+qwen-old,n02881193_3628,bowl,True,True,,,"```json
+[""电话""]
+```"
+qwen-old,n02881193_5862,bowl,True,True,,,"```json
+[""调味瓶""]
+```"
+qwen-old,n02881193_7691,bowl,False,True,,,"```json
+[
+	{""bbox_2d"": [10, 0, 234, 198], ""主要物体的类别"": ""地图""}
+]
+```"
+qwen-old,n02881193_4175,bowl,False,True,,,"```json
+[
+	{""bbox_2d"": [174, 56, 330, 218], ""主要物体的类别"": ""猫""}
+]
+```"
+qwen-old,n02881193_4860,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_4031,bowl,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-old,n02881193_32,bowl,True,True,,,"```json
+[""陶瓷""]
+```"
+qwen-old,n02881193_3345,bowl,True,True,,,"```json
+[""贝壳""]
+```"
+qwen-old,n02881193_4641,bowl,True,True,,,"```json
+[""茶壶""]
+```"
+qwen-old,n02881193_63,bowl,True,True,,,"```json
+[""苹果""]
+```"
+qwen-old,n02881193_269,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_4314,bowl,True,True,,,"```json
+[""茶壶""]
+```"
+qwen-old,n02881193_4330,bowl,True,True,cup,cup,"```json
+[""杯子""]
+```"
+qwen-old,n02881193_4222,bowl,False,True,,,"```json
+[
+	""水果""
+}
+```"
+qwen-old,n02881193_6185,bowl,True,True,cat,cat,"```json
+[""猫""]
+```"
+qwen-old,n02881193_722,bowl,True,True,cat,cat,"```json
+[""猫""]
+```"
+qwen-old,n02881193_430,bowl,True,True,,,"```json
+[""花盆""]
+```"
+qwen-old,n02881193_3624,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_8373,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_872,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-old,n02881193_855,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-old,n02881193_5883,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_8843,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_9609,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n02881193_9860,bowl,True,True,,,"```json
+[""水槽""]
+```"
+qwen-old,n02881193_10196,bowl,True,True,cup,cup,"```json
+[""玻璃杯""]
+```"
+qwen-old,n02881193_10500,bowl,True,True,,,"```json
+[""洗手盆""]
+```"
+qwen-old,n02881193_3243,bowl,True,True,cup,cup,"```json
+[""玻璃杯""]
+```"
+qwen-old,n02881193_3035,bowl,True,True,cup,cup,"```json
+[""杯子""]
+```"
+qwen-old,n02881193_473,bowl,True,True,,,"```json
+[""花瓶""]
+```"
+qwen-old,n03790512_4210,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_972,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_11817,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [150, 94, 468, 320], ""主要物体的类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_9354,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_5309,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_11358,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 109, 478, 376], ""主要物体的类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_4645,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 194, 205, 504], ""主要物体的类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_5888,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_32053,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_13338,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_2128,motorcycle,False,True,,,"```json
+[
+	""摩托车""
+}
+```"
+qwen-old,n03790512_2991,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 69, 314, 504], ""category"": ""摩托车}
+]
+```"
+qwen-old,n03790512_13920,motorcycle,True,True,,,"```json
+[""三轮车""]
+```"
+qwen-old,n03790512_13214,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_7067,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_21377,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [67, 115, 450, 387], ""category"": ""摩托车}
+]
+```"
+qwen-old,n03790512_14487,motorcycle,False,True,,,"```json
+[
+	""摩托车""
+}
+```"
+qwen-old,n03790512_13346,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_6003,motorcycle,True,True,,,"```json
+[""救护车""]
+```"
+qwen-old,n03790512_24878,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [18, 139, 324, 346], ""主要物体的类别"": ""摩托车""},
+	{""bbox_2d"": [3"
+qwen-old,n03790512_7775,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [94, 0, 461, 364], ""category_name"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_6771,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""出租车""}
+]
+```"
+qwen-old,n03790512_1543,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [164, 59, 345, 280], ""主要物体的类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_2441,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_3446,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [119, 153, 216, 208], ""category"": ""摩托车}
+]
+```"
+qwen-old,n03790512_1410,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""汽车""}
+]
+```"
+qwen-old,n03790512_10050,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [103, 148, 235, 320], ""主要物体的类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_2278,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_12415,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [31, 127, 220, 346], ""主要物体的类别"": ""摩托车""},
+	{""bbox_2d"": [2"
+qwen-old,n03790512_5461,motorcycle,False,True,,,"```json
+[
+	""摩托车""
+}
+```"
+qwen-old,n03790512_14208,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_5632,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""马车""}
+]
+```"
+qwen-old,n03790512_5962,motorcycle,False,True,,,"```json
+[
+	""警察""
+}
+```"
+qwen-old,n03790512_6431,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_13786,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [245, 147, 439, 256], ""category"": ""摩托车}
+]
+```"
+qwen-old,n03790512_3998,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 245, 233, 302], ""category"": ""摩托车}
+]
+```"
+qwen-old,n03790512_9748,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [165, 87, 409, 213], ""主要物体的类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_5492,motorcycle,False,True,,,"```json
+[
+	""摩托车""
+}
+```"
+qwen-old,n03790512_13641,motorcycle,False,True,,,"```json
+[
+	""摩托车""
+}
+```"
+qwen-old,n03790512_2832,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_6401,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_11723,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_9711,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [19, 83, 486, 287], ""category"": ""摩托车}
+]
+```"
+qwen-old,n03790512_14668,motorcycle,False,True,,,"```json
+[
+	{""bbox_2d"": [19, 280, 483, 496], ""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_10899,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_8721,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n03790512_12001,motorcycle,False,True,,,"```json
+[
+	{""类别"": ""摩托车""}
+]
+```"
+qwen-old,n04251791_5448,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [113, 50, 400, 364], ""category"": ""滑雪板}
+]
+```"
+qwen-old,n04251791_8152,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_1843,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7186,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_4341,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [126, 93, 240, 187], ""主要物体的类别"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_7231,snowboard,True,True,skateboard,skateboard,"```json
+[""滑板""]
+```"
+qwen-old,n04251791_5495,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_10015,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [86, 35, 423, 351], ""主要物体的类别"": ""人""}
+]
+```"
+qwen-old,n04251791_11046,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_4470,snowboard,True,True,skateboard,skateboard,"```json
+[""滑板""]
+```"
+qwen-old,n04251791_8199,snowboard,True,True,,,"```json
+[""商店""]
+```"
+qwen-old,n04251791_6958,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [150, 14, 300, 497], ""主要物体的类别"": ""滑雪板""},
+	{""bbox_2d"": ["
+qwen-old,n04251791_3787,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7587,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [73, 214, 365, 308], ""label: 滑雪板}
+]
+```"
+qwen-old,n04251791_5280,snowboard,True,True,,,"```json
+[""冲浪板""]
+```"
+qwen-old,n04251791_9273,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7855,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_4868,snowboard,True,True,motorcycle,motorcycle,"```json
+[""雪地摩托""]
+```"
+qwen-old,n04251791_34,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_9776,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [283, 96, 371, 145], ""bbox_2d"": [""滑雪板""]}
+]
+```"
+qwen-old,n04251791_3123,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 0, 336, 504], ""category"": ""户外场景}
+]
+```"
+qwen-old,n04251791_2822,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [156, 260, 324, 300], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_6215,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [160, 127, 358, 309], ""label"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_3559,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [17, 158, 483, 319], ""主要物体的类别"": ""雪地""}
+]
+```"
+qwen-old,n04251791_7969,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [120, 378, 264, 400], ""主要物体的类别"": ""滑雪板""},
+	{""bbox_2d"":"
+qwen-old,n04251791_10070,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_747,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [105, 158, 283, 347], ""category"": ""滑雪板}
+]
+```"
+qwen-old,n04251791_4151,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [27, 30, 485, 416], ""主要物体为""滑雪板""}
+]
+```"
+qwen-old,n04251791_8922,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_2553,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_10730,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [185, 143, 300, 236], ""label"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_8009,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 52, 216, 141], ""主要物体的类别"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_10373,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [119, 35, 308, 224], ""category"": ""滑雪者}
+]
+```"
+qwen-old,n04251791_9419,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_10577,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [361, 59, 387, 149], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_8939,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_2393,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [89, 304, 145, 357], ""category"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_3171,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [84, 115, 120, 359], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_490,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [69, 301, 317, 345], ""category: ""滑雪板}
+]
+```"
+qwen-old,n04251791_8512,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_9130,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [53, 387, 330, 416], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_8773,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [103, 131, 249, 250], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_4325,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [95, 308, 267, 497], ""category"": ""滑雪板}
+]
+```"
+qwen-old,n04251791_5790,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [180, 35, 254, 127], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_8617,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_9974,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [170, 89, 306, 214], ""主要物体的类别"": ""滑雪板运动员""}
+]
+```"
+qwen-old,n04251791_5591,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7866,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 345, 196, 360], ""主要物体的类别"": ""滑板""}
+]
+```"
+qwen-old,n04251791_9454,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [158, 83, 309, 276], ""category"": ""滑雪者}
+]
+```"
+qwen-old,n04251791_2435,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7804,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [164, 217, 338, 279], ""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_8712,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7104,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [134, 115, 243, 206], ""label"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7886,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [109, 167, 273, 208], ""label"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_1,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_1895,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [154, 26, 300, 250], ""主要物体的类别"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_4310,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 202, 222, 390], ""主要物体的类别"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_3776,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [168, 77, 279, 230], ""label"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_4574,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [149, 68, 322, 257], ""category"": ""人}
+]
+```"
+qwen-old,n04251791_6885,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [139, 86, 354, 270], ""主要物体的类别"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_7319,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 45, 392, 581], ""label"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_9908,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_10886,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [194, 156, 423, 360], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_749,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 0, 336, 504], ""category"": ""滑雪板}
+]
+```"
+qwen-old,n04251791_7732,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [165, 109, 340, 189], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7428,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_8778,snowboard,False,True,,,"```json
+[
+	{""类别"": ""雪橇""}
+]
+```"
+qwen-old,n04251791_10530,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 0, 504, 308], ""category"": ""滑雪板}
+]
+```"
+qwen-old,n04251791_7954,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [163, 140, 292, 312], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_3290,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_8415,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [43, 248, 215, 293], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_9496,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_3636,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 119, 228, 316], ""category"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_8167,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_5993,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [148, 50, 326, 200], ""主要物体的类别"": ""滑雪者""}
+]
+```"
+qwen-old,n04251791_11365,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7593,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_5336,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [17, 324, 268, 359], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_624,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [103, 67, 354, 258], ""category_name"": ""雪橇小孩""}
+]
+```"
+qwen-old,n04251791_9002,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [150, 60, 330, 267], ""category}: 滑雪板
+}
+```"
+qwen-old,n04251791_2485,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [108, 193, 274, 415], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_7764,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_898,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_2151,snowboard,False,True,,,"```json
+[
+	{""类别"": ""滑雪板""}
+]
+```"
+qwen-old,n04251791_3092,snowboard,False,True,,,"```json
+[
+	{""bbox_2d"": [190, 268, 400, 313], ""主要物体的类别"": ""滑雪板""}
+]
+```"
+qwen-old,n03761084_4805,microwave,True,True,,,"```json
+[""冰箱""]
+```"
+qwen-old,n03761084_2662,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_5014,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_5097,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_311,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_2916,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_16198,microwave,False,True,,,"```json
+[
+	""微波炉""
+}
+```"
+qwen-old,n03761084_6151,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_3634,microwave,True,True,,,"```json
+[""电饭煲""]
+```"
+qwen-old,n03761084_212,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_110,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_20369,microwave,False,True,,,"```json
+[
+	""微波炉""
+}
+```"
+qwen-old,n03761084_2596,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_6238,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_5935,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_6483,microwave,False,True,,,"```json
+[
+	""微波炉""
+}
+```"
+qwen-old,n03761084_5545,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_19910,microwave,False,True,,,"```json
+[
+	{""类别"": ""微波炉""}
+]
+```"
+qwen-old,n03761084_6304,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_2532,microwave,True,False,bowl|oven,bowl|microwave|oven,"```json
+[
+	""冰箱"",
+	""烤箱"",
+	""微波炉"",
+	""洗碗机""
+]
+```"
+qwen-old,n03761084_11952,microwave,False,True,,,"```json
+[
+	""冰箱""
+}
+```"
+qwen-old,n03761084_17942,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_2048,microwave,True,True,,,"```json
+[
+	""冰箱""
+]
+```"
+qwen-old,n03761084_8980,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_26204,microwave,False,True,,,"```json
+[
+	{""类别"": ""微波炉""}
+]
+```"
+qwen-old,n03761084_12808,microwave,True,False,oven,microwave|oven,"```json
+[
+	""烤箱"",
+	""微波炉"",
+	""冰箱"",
+	""电饭煲"",
+	""厨房""
+]
+```"
+qwen-old,n03761084_12460,microwave,True,True,,,"```json
+[""冰箱""]
+```"
+qwen-old,n03761084_17172,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [105, 83, 156, 197], ""category"": ""烤箱}
+]
+```"
+qwen-old,n03761084_1881,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-old,n03761084_8911,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_5690,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_15576,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [36, 17, 218, 459], ""category"": ""烤箱}
+]
+```"
+qwen-old,n03761084_6607,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_5509,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_12674,microwave,True,True,oven,oven,"```json
+[
+	""烤箱""
+]
+```"
+qwen-old,n03761084_16010,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 1, 420, 336], ""label"": ""厨房""}
+]
+```"
+qwen-old,n03761084_8938,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_13568,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_12970,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_13340,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_23164,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_977,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_15921,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [17, 69, 103, 245], ""category"": ""烤箱}
+]
+```"
+qwen-old,n03761084_15107,microwave,True,True,oven,oven,"```json
+[
+	""烤箱""
+]
+```"
+qwen-old,n03761084_10637,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_14376,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_43050,microwave,False,True,,,"```json
+[
+	{""类别"": ""笔记本电脑""}
+]
+```"
+qwen-old,n03761084_25328,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_3484,microwave,True,False,oven,microwave|oven,"```json
+[""微波炉"", ""烤箱""]
+```"
+qwen-old,n03761084_40830,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [346, 170, 458, 190], ""main_object_name"": ""咖啡机""}
+]
+```"
+qwen-old,n03761084_2845,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_1756,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_6558,microwave,True,True,,,"```json
+[""冰箱""]
+```"
+qwen-old,n03761084_26606,microwave,False,True,,,"```json
+[
+	{""类别"": ""微波炉""}
+]
+```"
+qwen-old,n03761084_2278,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_13766,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_47385,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_25053,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_9944,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_8965,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_698,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_9715,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_771,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-old,n03761084_11033,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_2471,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [58, 10, 213, 90], ""main_object_name"": ""微波炉""}
+]
+```"
+qwen-old,n03761084_2025,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_26102,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_1855,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_40980,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-old,n03761084_24847,microwave,True,False,oven,microwave|oven,"```json
+[
+	""冰箱"",
+	""烤箱"",
+	""微波炉""
+]
+```"
+qwen-old,n03761084_5937,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_9372,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_12812,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_16804,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_1577,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n03761084_11926,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_3876,microwave,True,True,,,"```json
+[
+	""冰箱""
+]
+```"
+qwen-old,n03761084_10934,microwave,False,True,,,"```json
+[
+	""烤箱""
+}
+```"
+qwen-old,n03761084_9445,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_13992,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_3387,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-old,n03761084_10304,microwave,False,True,,,"```json
+[
+	{""类别"": ""厨房""}
+]
+```"
+qwen-old,n03761084_11551,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-old,n03761084_2113,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_15606,microwave,True,True,,,"```json
+[""厨房""]
+```"
+qwen-old,n03761084_6999,microwave,False,True,,,"```json
+[
+	{""类别"": ""烤箱""}
+]
+```"
+qwen-old,n03761084_11489,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [91, 174, 275, 203], ""category"": ""橱柜}
+]
+```"
+qwen-old,n03761084_11012,microwave,False,True,,,"```json
+[
+	{""类别"": ""冰箱""}
+]
+```"
+qwen-old,n03761084_12490,microwave,False,True,,,"```json
+[
+	{""bbox_2d"": [93, 101, 178, 145], ""category"": ""红色的搅拌机}
+]
+```"
+qwen-old,n03761084_123,microwave,True,True,oven,oven,"```json
+[""烤箱""]
+```"
+qwen-old,n03761084_42297,microwave,False,True,,,"```json
+[
+	""厨房""
+}
+```"
+qwen-old,n02121620_6535,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [63, 104, 275, 478], ""category_name"": ""猫""}
+]
+```"
+qwen-old,n02121620_14644,cat,False,True,,,"```json
+[
+	""猫""
+}
+```"
+qwen-old,n02121620_10760,cat,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-old,n02121620_3409,cat,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-old,n02121620_7864,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [130, 357, 328, 489], ""category"": ""猫}
+]
+```"
+qwen-old,n02121620_31256,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 19, 304, 364], ""主要物体的类别"": ""狗""},
+	{""bbox_2d"": [252"
+qwen-old,n02121620_23335,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 48, 195, 615], ""label"": ""猫""}
+]
+```"
+qwen-old,n02121620_3739,cat,False,True,,,"```json
+[
+	""猫""
+}
+```"
+qwen-old,n02121620_3837,cat,True,True,,,"```json
+[""狮子""]
+```"
+qwen-old,n02121620_15504,cat,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-old,n02121620_22032,cat,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-old,n02121620_12058,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [183, 104, 256, 147], ""category"": ""相机}
+]
+```"
+qwen-old,n02121620_5326,cat,False,True,,,"```json
+[
+	{""bbox_2d"": [135, 179, 392, 380], ""category"": ""绳子}
+]
+```"
+qwen-old,n02121620_34554,cat,True,True,,,"```json
+[""狗""]
+```"
+qwen-old,n02121620_3453,cat,True,True,,,"```json
+[""狗""]
+```"
+qwen-old,n02121620_32023,cat,False,True,,,"```json
+[
+	{""类别"": ""猫""}
+]
+```"
+qwen-old,n07639069_8132,donut,True,True,,,"```json
+[""霓虹灯""]
+```"
+qwen-old,n07639069_8035,donut,True,True,,,"```json
+[""蛋糕"", ""饼干""]
+```"
+qwen-old,n07639069_30342,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_21642,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_11086,donut,True,True,,,"```json
+[""巧克力""]
+```"
+qwen-old,n07639069_8222,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_11202,donut,True,True,,,"```json
+[""蛋糕""]
+```"
+qwen-old,n07639069_3874,donut,True,True,,,"```json
+[""三明治""]
+```"
+qwen-old,n07639069_33727,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_34034,donut,False,True,,,"```json
+[
+	{""类别"": ""面包店""}
+]
+```"
+qwen-old,n07639069_5147,donut,False,True,,,"```json
+[
+	{""类别"": ""毛绒玩具""}
+]
+```"
+qwen-old,n07639069_2390,donut,True,True,,,"```json
+[""面包""]
+```"
+qwen-old,n07639069_3002,donut,True,True,,,"```json
+[""面包""]
+```"
+qwen-old,n07639069_33933,donut,True,True,,,"```json
+[""面粉"", ""牛奶"", ""鸡蛋"", ""黄油"", ""糖""]
+```"
+qwen-old,n07639069_33749,donut,False,True,,,"```json
+[
+	{""类别"": ""雕塑""}
+]
+```"
+qwen-old,n07639069_34020,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_11342,donut,True,True,,,"```json
+[""巧克力蛋糕""]
+```"
+qwen-old,n07639069_17217,donut,True,True,,,"```json
+[""蛋糕""]
+```"
+qwen-old,n07639069_3679,donut,True,True,,,"```json
+[""甜点""]
+```"
+qwen-old,n07639069_30260,donut,True,True,,,"```json
+[""蛋糕""]
+```"
+qwen-old,n07639069_16504,donut,False,True,,,"```json
+[
+	{""bbox_2d"": [170, 108, 354, 356], ""label"": ""主要物体""}
+]
+```"
+qwen-old,n07639069_21814,donut,False,True,,,"```json
+[
+	{""类别"": ""面包""}
+]
+```"
+qwen-old,n07639069_33839,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_10369,donut,False,True,,,"```json
+[
+	{""bbox_2d"": [198, 163, 305, 224], ""category"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_33815,donut,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07639069_20304,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_7520,donut,False,True,,,"```json
+[
+	{""类别"": ""咖啡杯""}
+]
+```"
+qwen-old,n07639069_26598,donut,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 67, 504, 332], ""label"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_27411,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_24567,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_23551,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_17330,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_9426,donut,False,True,,,"```json
+[
+	{""类别"": ""咖啡""}
+]
+```"
+qwen-old,n07639069_12642,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_16871,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_23783,donut,True,True,,,"```json
+[
+	""传送带""
+]
+```"
+qwen-old,n07639069_16869,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_33128,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_23211,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_11788,donut,False,True,,,"```json
+[
+	{""类别"": ""甜点""}
+]
+```"
+qwen-old,n07639069_819,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_3360,donut,True,True,,,"```json
+[""蛋糕""]
+```"
+qwen-old,n07639069_9517,donut,False,True,,,"```json
+[
+	{""类别"": ""炸油条""}
+]
+```"
+qwen-old,n07639069_26420,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_4175,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_3641,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_17257,donut,True,True,,,"```json
+[""甜点""]
+```"
+qwen-old,n07639069_9344,donut,True,True,,,"```json
+[""冰箱""]
+```"
+qwen-old,n07639069_36308,donut,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 68, 336, 485], ""category_name"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_12757,donut,False,True,,,"```json
+[
+	{""类别"": ""蛋糕""}
+]
+```"
+qwen-old,n07639069_3294,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_11783,donut,False,True,,,"```json
+[
+	""巧克力饼干""
+}
+```"
+qwen-old,n07639069_19319,donut,False,True,,,"```json
+[
+	{""类别"": ""传送带""}
+]
+```"
+qwen-old,n07639069_7963,donut,False,True,,,"```json
+[
+	{""bbox_2d"": [63, 145, 237, 280], ""主要物体的类别"": ""甜甜圈""},
+	{""bbox_2d"": ["
+qwen-old,n07639069_22312,donut,True,True,,,"```json
+[""传送带""]
+```"
+qwen-old,n07639069_11879,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_1078,donut,False,True,,,"```json
+[
+	{""类别"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_26909,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_3184,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_33911,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n07639069_17223,donut,True,True,,,"```json
+[""蛋糕""]
+```"
+qwen-old,n07639069_4064,donut,False,True,,,"```json
+[
+	{""bbox_2d"": [173, 130, 340, 268], ""label"": ""甜甜圈""}
+]
+```"
+qwen-old,n07639069_22705,donut,False,True,,,"```json
+[
+	""甜甜圈""
+}
+```"
+qwen-old,n03614007_9987,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-old,n03614007_3990,keyboard,True,True,,,"```json
+[""笔记本电脑""]
+```"
+qwen-old,n03614007_28716,keyboard,True,True,,,"```json
+[
+    ""手""
+]
+```"
+qwen-old,n03614007_5123,keyboard,True,True,,,"```json
+[""电子琴""]
+```"
+qwen-old,n03614007_2076,keyboard,True,True,,,"```json
+[""折纸""]
+```"
+qwen-old,n03614007_10966,keyboard,True,True,,,"```json
+[""电话""]
+```"
+qwen-old,n03614007_21630,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-old,n03614007_9038,keyboard,False,True,,,"```json
+[
+	""键盘""
+}
+```"
+qwen-old,n03614007_1710,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-old,n03614007_8040,keyboard,True,True,,,"```json
+[""笔记本电脑""]
+```"
+qwen-old,n03614007_5357,keyboard,True,True,,,"```json
+[""计算器""]
+```"
+qwen-old,n03614007_28105,keyboard,True,True,,,"```json
+[""手机""]
+```"
+qwen-old,n03614007_28878,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-old,n03614007_23360,keyboard,False,True,,,"```json
+[
+	""笔记本电脑""
+}
+```"
+qwen-old,n03614007_23638,keyboard,True,True,,,"```json
+[""笔记本电脑""]
+```"
+qwen-old,n03614007_4384,keyboard,False,True,,,"```json
+[
+	""键盘""
+}
+```"
+qwen-old,n03614007_3067,keyboard,True,True,,,"```json
+[""计算器""]
+```"
+qwen-old,n03614007_25584,keyboard,False,True,,,"```json
+[
+	""笔记本电脑""
+}
+```"
+qwen-old,n03614007_993,keyboard,False,True,,,"```json
+[
+	{""类别"": ""键盘""}
+]
+```"
+qwen-old,n03614007_5762,keyboard,True,True,,,"```json
+[""电脑""]
+```"
+qwen-old,n03614007_320,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-old,n03614007_2671,keyboard,True,True,cat,cat,"```json
+[
+	""猫""
+]
+```"
+qwen-old,n03614007_5598,keyboard,False,True,,,"```json
+[
+	""键盘""
+}
+```"
+qwen-old,n03614007_28877,keyboard,False,True,,,"```json
+[
+	{""类别"": ""桌子""}
+]
+```"
+qwen-old,n03614007_8486,keyboard,False,True,,,"```json
+[
+	""电脑""
+}
+```"
+qwen-old,n03614007_18610,keyboard,False,True,,,"```json
+[
+	{""类别"": ""键盘""}
+]
+```"
+qwen-old,n03614007_2333,keyboard,True,True,,,"```json
+[""钢琴""]
+```"
+qwen-old,n03614007_25226,keyboard,False,True,,,"```json
+[
+	""键盘""
+}
+```"
+qwen-old,n03614007_3007,keyboard,True,True,,,"```json
+[""桌子""]
+```"
+qwen-old,n03614007_527,keyboard,True,True,,,"```json
+[""电脑""]
+```"
+qwen-old,n03614007_7980,keyboard,True,True,,,"```json
+[""电子琴""]
+```"
+qwen-old,n03614007_25216,keyboard,True,True,cat,cat,"```json
+[""猫""]
+```"
+qwen-old,n03614007_8260,keyboard,True,True,,,"```json
+[""电子琴""]
+```"
+qwen-old,n03614007_23648,keyboard,False,True,,,"```json
+[
+	""键盘""
+}
+```"
+qwen-old,n03614007_29234,keyboard,False,True,,,"```json
+[
+	""计算机键盘""
+}
+```"
+qwen-old,n03614007_979,keyboard,False,True,,,"```json
+[
+	""键盘""
+}
+```"
+qwen-old,n03614007_316,keyboard,False,True,,,"```json
+[
+	""键盘""
+}
+```"
+qwen-old,n07747607_19786,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_1557,orange,False,True,,,"```json
+[
+	""橙子""
+}
+```"
+qwen-old,n07747607_34010,orange,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-old,n07747607_15938,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_10110,orange,True,True,,,"```json
+[""苹果""]
+```"
+qwen-old,n07747607_28253,orange,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-old,n07747607_3723,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_891,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_3508,orange,True,True,,,"```json
+[""橄榄""]
+```"
+qwen-old,n07747607_21851,orange,True,True,,,"```json
+[""网""]
+```"
+qwen-old,n07747607_28065,orange,True,True,,,"```json
+[""蜗牛""]
+```"
+qwen-old,n07747607_20075,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_23980,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_27028,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_2551,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_19866,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_19628,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_18812,orange,True,True,,,"```json
+[""榴莲""]
+```"
+qwen-old,n07747607_28321,orange,True,True,,,"```json
+[""姜""]
+```"
+qwen-old,n07747607_14852,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_17158,orange,True,True,,,"```json
+[""柠檬""]
+```"
+qwen-old,n07747607_28748,orange,True,True,,,"```json
+[""篮子""]
+```"
+qwen-old,n07747607_18556,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_22653,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_9209,orange,False,True,,,"```json
+[
+	""橙子""
+}
+```"
+qwen-old,n07747607_2730,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_4283,orange,False,True,,,"```json
+[
+	""水果摊""
+}
+```"
+qwen-old,n07747607_19598,orange,True,True,bowl,bowl,"```json
+[""碗""]
+```"
+qwen-old,n07747607_3517,orange,True,True,,,"```json
+[""金桔""]
+```"
+qwen-old,n07747607_15770,orange,True,True,,,"```json
+[""沙拉""]
+```"
+qwen-old,n07747607_18630,orange,True,True,,,"```json
+[""水果盘""]
+```"
+qwen-old,n07747607_644,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_16280,orange,False,True,,,"```json
+[
+	{""类别"": ""拼贴画""}
+]
+```"
+qwen-old,n07747607_16744,orange,True,True,,,"```json
+[""沙拉""]
+```"
+qwen-old,n07747607_29700,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_11066,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_6856,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_4726,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_9452,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_3903,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_12768,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07747607_12237,orange,True,True,,,"```json
+[""南瓜""]
+```"
+qwen-old,n07747607_16833,orange,True,True,,,"```json
+[""水果""]
+```"
+qwen-old,n07873807_5980,pizza,False,True,,,"```json
+[
+	""披萨""
+}
+```"
+qwen-old,n07873807_3809,pizza,True,True,,,"```json
+[""墨西哥卷饼""]
+```"
+qwen-old,n07873807_9413,pizza,False,True,,,"```json
+[
+	{""bbox_2d"": [61, 178, 459, 330], ""主要物体的类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_7785,pizza,False,True,,,"```json
+[
+	""披萨""
+}
+```"
+qwen-old,n07873807_11678,pizza,False,True,,,"```json
+[
+	{""bbox_2d"": [0, 147, 504, 329], ""主要物体的类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_12726,pizza,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 67, 420, 415], ""label"": ""披萨""}
+]
+```"
+qwen-old,n07873807_7312,pizza,True,True,,,"```json
+[""蛋糕""]
+```"
+qwen-old,n07873807_8571,pizza,False,True,,,"```json
+[
+	{""bbox_2d"": [135, 204, 326, 359], ""主要物体的类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_1192,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_6903,pizza,False,True,,,"```json
+[
+	""披萨""
+}
+```"
+qwen-old,n07873807_10777,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_2401,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_7226,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_7526,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_6109,pizza,False,True,,,"```json
+[
+	{""bbox_2d"": [1, 394, 205, 497], ""主要物体的类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_2561,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_5918,pizza,False,True,,,"```json
+[
+	""披萨""
+}
+```"
+qwen-old,n07873807_7613,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_13020,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_5409,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-old,n07873807_10221,pizza,False,True,,,"```json
+[
+	{""类别"": ""披萨""}
+]
+```"
+qwen-best,n03001627_2684,chair,True,True,,,"[""火车""]"
+qwen-best,n03001627_5111,chair,True,True,couch,couch,"[""沙发""]"
+qwen-best,n03001627_559,chair,True,True,cup,cup,"[""杯子""]"
+qwen-best,n03147509_19159,cup,True,True,pizza,pizza,"[""披萨""]"
+qwen-best,n03862676_11605,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_3918,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_3543,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_6517,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_10040,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_8028,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_2036,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_18969,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_15850,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_9499,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n03862676_11466,oven,True,True,microwave,microwave,"[""微波炉""]"
+qwen-best,n04256520_792,couch,True,True,chair,chair,"[""椅子""]"
+qwen-best,n04256520_14696,couch,True,True,chair,chair,"[""椅子""]"
+qwen-best,n04256520_1366,couch,True,True,chair,chair,"[""椅子""]"
+qwen-best,n02881193_6583,bowl,True,True,cat,cat,"[""猫""]"
+qwen-best,n02881193_3524,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_1593,bowl,True,True,,,"[""锅""]"
+qwen-best,n02881193_6220,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_4591,bowl,True,True,orange,orange,"[""橙子""]"
+qwen-best,n02881193_8371,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_598,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_8326,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_11143,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_3319,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_11971,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_4503,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_2898,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_1957,bowl,True,True,orange,orange,"[""橙子""]"
+qwen-best,n02881193_3594,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_7228,bowl,True,True,cat,cat,"[""猫""]"
+qwen-best,n02881193_2323,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_11176,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_4824,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_4175,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_4860,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_4031,bowl,True,True,orange,orange,"[""橙子""]"
+qwen-best,n02881193_4641,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_4314,bowl,True,True,orange,orange,"[""橙子""]"
+qwen-best,n02881193_4330,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n02881193_4222,bowl,True,True,orange,orange,"[""橙子""]"
+qwen-best,n02881193_3035,bowl,True,True,cup,cup,"[""杯子""]"
+qwen-best,n03790512_6003,motorcycle,True,True,,,"[""救护车""]"
+qwen-best,n04251791_7231,snowboard,True,True,skateboard,skateboard,"[""滑板""]"
+qwen-best,n04251791_4470,snowboard,True,True,skateboard,skateboard,"[""滑板""]"
+qwen-best,n03761084_5014,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_5097,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_311,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_2916,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_6151,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_212,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_2596,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_6238,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_5935,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_6304,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_15107,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_10934,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n03761084_9445,microwave,True,True,oven,oven,"[""烤箱""]"
+qwen-best,n02121620_3837,cat,True,True,,,"[""狮子""]"
+qwen-best,n02121620_12058,cat,True,True,,,"[""相机""]"
+qwen-best,n02121620_3453,cat,True,True,,,"[""狗""]"
+qwen-best,n02121620_29395,cat,True,True,,,"[""钢琴""]"
+qwen-best,n07639069_3874,donut,True,True,,,"[""三明治""]"
+qwen-best,n07639069_33933,donut,True,True,cup,cup,"[""杯子""]"
+qwen-best,n07639069_3679,donut,True,True,cup,cup,"[""杯子""]"
+qwen-best,n03614007_3007,keyboard,True,True,chair,chair,"[""椅子""]"
+qwen-best,n07747607_16280,orange,True,True,donut,donut,"[""甜甜圈""]"
+qwen-best,n07873807_7312,pizza,True,True,donut,donut,"[""甜甜圈""]"

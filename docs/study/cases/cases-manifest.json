@@ -1,0 +1,44 @@
+{
+  "top_k": 20,
+  "gallery_size": 2000,
+  "variants": {
+    "embedding-base": {
+      "queries": 2045,
+      "filename": "embedding-base-top20.jsonl.gz",
+      "sha256": "0c422f1ae18d641db6597cb1e313849e0388ded2145b108891d9204e8cac0664",
+      "source_vectors_sha256": "29be872bb59e9c40d1be925f6ad4bdc33a799a6a4623b1e8198ee99ca1dedd5b",
+      "source_results_sha256": "bc53056a3ff245c41443cc8d3fa8976ee787d41c75ecad8320ef01ceb34ccf9a"
+    },
+    "embedding-best": {
+      "queries": 2045,
+      "filename": "embedding-best-top20.jsonl.gz",
+      "sha256": "d94c840ec4aa720e27cc11df28d83da16e7edae914d1c90de86b748b58fbb7f2",
+      "source_vectors_sha256": "1c16bc65878d3e836da88adb661f9f17b5a960063b739b2dece66f304a99a306",
+      "source_results_sha256": "e440fd025d780d5fdc4ac92e0433cbb1a4981e2e5836fab6e98f6386dc42443a"
+    },
+    "qwen-base": {
+      "queries": 2045,
+      "filename": "qwen-base-top20.jsonl.gz",
+      "sha256": "22cceefd250fc2159832f0d84806ee775a78c963f14bfb70b5c00ee10499de87",
+      "source_vectors_sha256": "219abed9535d9620fbcc8798e05ce6fd6004e1de7d1d1ecad11a37d46a29abcd",
+      "source_results_sha256": "df2aae8e84f43709db0204cfa356eb970c008b3da54cbe2f755846766e0f8285"
+    },
+    "qwen-old": {
+      "queries": 2045,
+      "filename": "qwen-old-top20.jsonl.gz",
+      "sha256": "eec700c360d067d97374f5bc5c5cd4a43bc7d6cfe5fd8da7663c7db133afeb8a",
+      "source_vectors_sha256": "f97ea75c3af43c1538420453b8deade711a08ed90a48dca74338cdd2dd527bde",
+      "source_results_sha256": "6e7306044d252465e30d15c40ac3beba969d2f082969cb5bf651d235a9fedb44"
+    },
+    "qwen-best": {
+      "queries": 2045,
+      "filename": "qwen-best-top20.jsonl.gz",
+      "sha256": "2845af848a590b8764bcbe1fd4595cb62b34a525aac8654e0ac7492c8d993c40",
+      "source_vectors_sha256": "feb1a2e5a20e84f031bedbbce9ad950db90067d6843bd9918ae5b385800bb3e1",
+      "source_results_sha256": "35c0400db8349a5c2662c167ed40b72582952eb795b456254d611e2066a0e856"
+    }
+  },
+  "relevance": "Single ImageNet synset label; not instance or attribute relevance",
+  "selection_sha256": "20cc9f4e4a58b0f221382028fda9b5d0fabe794a0723a88802749053146b32cc",
+  "category_error_rows": 1235
+}

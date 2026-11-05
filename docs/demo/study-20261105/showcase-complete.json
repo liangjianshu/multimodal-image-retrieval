@@ -1,0 +1,11 @@
+{
+  "selection_sha256": "20cc9f4e4a58b0f221382028fda9b5d0fabe794a0723a88802749053146b32cc",
+  "gallery_sources_sha256": "584b71518ca485bde61801fa977be356780c099ee98bcc63f3a0e02e57cbf254",
+  "queries_sha256": "4cb3e952dffd97fc6632e4507736d19d4b2aa92b2c9530cb52ffb40f29bafab9",
+  "intent_adapter_sha256": "c3c463ca6f394ab4cc7e936bcc39cc14ec09f0b5afbc9ffb635e7a37fcb6738a",
+  "intent_prompt_sha256": "619f4c0e44d3d27d5c636e49498d1fdd4b17a3d9040251042cfa8b01c8ff021c",
+  "category_prompt_sha256": "c934fd8ab105067b60837d664f95494d3df2afddf107841e79ac21c54575b639",
+  "description_prompt_sha256": "8222e690f3ccfc75ca5085569a87035871bd8eca11e9b8c57b8d44d962ebae9d",
+  "qwen_weight_sha256": "ed83781bd5f1080b19745ccc618b932b827f886ddaced92e3be2cc3b2f151505",
+  "embedding_weight_sha256": "7fbf0224edbc3c0394fc948afa461451fd2ffb8e22a067509962def0e2a28654"
+}
