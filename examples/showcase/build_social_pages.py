@@ -143,19 +143,29 @@ def start_page(c):
     p.text('Qwen LoRA   ×   Embedding InfoNCE', 56, 690, 23, BLUE, 'CNB', 610)
     p.text('验证集选参数，固定测试集报告 F1 / mAP。', 56, 734, 14, MUTED)
     p.rect(36, 794, 648, 206, INK)
-    p.text('代码、数据接入、训练指南都在这里', 55, 814, 21, '#FFFFFF', 'CNB', 590)
-    p.text('GitHub 搜索：', 55, 853, 14, '#CED6D6')
-    p.text('liangjianshu', 55, 878, 21, YELLOW, 'Helvetica-Bold')
-    p.text('multimodal-image-retrieval', 55, 911, 18, '#FFFFFF', 'Helvetica-Bold')
-    p.text('阅读顺序：QUICKSTART → ARCHITECTURE → TRAINING', 55, 955, 12, '#CED6D6', max_width=467)
+    p.text('手机扫码，或点击链接直接打开', 55, 814, 23, '#FFFFFF', 'CNB', 590)
     url = 'https://github.com/liangjianshu/multimodal-image-retrieval'
+    demo_url = 'https://liangjianshu.github.io/multimodal-image-retrieval/overview/'
+    for label, link, y in (
+        ('GitHub 仓库 · 代码与文档', url, 855),
+        ('在线演示 · 无需安装', demo_url, 913),
+    ):
+        p.text(label, 55, y, 16, YELLOW, 'CNB')
+        p.text(link, 55, y+27, 11.5, '#FFFFFF', 'Helvetica', 475)
+        width = pdfmetrics.stringWidth(link, 'Helvetica', 11.5)
+        c.setStrokeColor(HexColor('#CED6D6'))
+        c.setLineWidth(0.5)
+        c.line(55,H-y-41,55+width,H-y-41)
+        c.linkURL(link,(51,H-y-45,55+width+4,H-y+3),relative=0)
+    p.text('PDF 内可点击链接；图片请扫码打开。', 55, 975, 12, '#CED6D6')
     p.rect(543, 851, 118, 118, '#FFFFFF', 5)
     qr = QrCodeWidget(url)
     x0,y0,x1,y1 = qr.getBounds()
     drawing = Drawing(108,108,transform=[108/(x1-x0),0,0,108/(y1-y0),0,0])
     drawing.add(qr)
     renderPDF.draw(drawing,c,548,H-856-108)
-    c.linkURL(url,(36,H-1000,684,H-794),relative=0)
+    p.text('扫码进入 GitHub', 550, 975, 12, '#CED6D6')
+    c.linkURL(url,(543,H-969,661,H-851),relative=0)
     c.showPage()
 
 
